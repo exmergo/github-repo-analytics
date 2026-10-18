@@ -1,0 +1,7 @@
+# Import a public example without a token. See docs/setup.md to collect your projects.
+repositories:
+  - repository: exmergo/dex
+    mode: import
+    data_repository: exmergo/dex
+    data_branch: github-repo-stats
+    expected_refresh_hours: 24
