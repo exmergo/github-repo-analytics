@@ -1,0 +1,38 @@
+# Python environments, caches, and build output
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Local source data, DuckDB databases, and dbt output
+warehouse/
+.data/
+.data-branch/
+*.duckdb
+*.duckdb.wal
+target/
+logs/
+dbt_packages/
+
+# Generated Dex state (keep .dex/config.yml and .dex/README.md)
+.dex/cache.json
+.dex/snapshot.json
+.dex/drift.json
+.dex/plans/
+.dex/*.jsonl
+
+# Local credentials (allow a checked-in example)
+.env
+.env.*
+!.env.example
+
+# Local editor and OS files
+.idea/
+.DS_Store
+*.swp
+*.swo
