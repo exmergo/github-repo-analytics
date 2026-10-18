@@ -1,0 +1,143 @@
+name: Collect and validate repository analytics
+on:
+  schedule:
+    - cron: '25 4 * * *'
+  workflow_dispatch:
+    inputs:
+      accept_baseline:
+        description: Accept reviewed structural/metric changes after a successful build
+        type: boolean
+        default: false
+      live_smoke:
+        description: Also run the token-free external example smoke test
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: repository-analytics
+  cancel-in-progress: false
+jobs:
+  configuration:
+    if: vars.ANALYTICS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.sources.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1"
+      - run: bash scripts/bootstrap.sh
+      - id: sources
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          matrix=$(uv run --frozen oss-analytics matrix --verify-public | python -c 'import json,sys; print(json.dumps(json.load(sys.stdin)["data"]))')
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+  collect:
+    needs: configuration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.configuration.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1"
+      - run: bash scripts/bootstrap.sh
+      - name: Preserve traffic using the existing action
+        if: matrix.mode == 'collect'
+        uses: jgehrcke/github-repo-stats@306db38ad131cab2aa5f2cd3062bf6f8aa78c1aa # v1.4.2
+        with:
+          repository: ${{ matrix.repository }}
+          databranch: github-repo-stats
+          ghtoken: ${{ secrets.GHRS_TOKEN }}
+      - name: Prepare raw data checkout
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin github-repo-stats >/dev/null; then
+            git fetch origin github-repo-stats
+            git worktree add .data-branch FETCH_HEAD
+          else
+            git worktree add --detach .data-branch
+            git -C .data-branch switch --orphan github-repo-stats
+            git -C .data-branch rm -rf --ignore-unmatch .
+          fi
+      - name: Import and supplement
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TRACKED_REPOSITORY: ${{ matrix.repository }}
+        run: uv run --frozen oss-analytics stage --repository "$TRACKED_REPOSITORY" --destination .data-branch
+      - name: Persist raw history before validation
+        env:
+          TRACKED_REPOSITORY: ${{ matrix.repository }}
+        run: |
+          git -C .data-branch config user.name github-actions[bot]
+          git -C .data-branch config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C .data-branch add -- "$TRACKED_REPOSITORY"
+          if ! git -C .data-branch diff --cached --quiet; then
+            git -C .data-branch commit -m "Collect repository analytics"
+            git -C .data-branch push origin HEAD:github-repo-stats
+          fi
+  validate-and-publish:
+    needs: collect
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1"
+      - run: bash scripts/bootstrap.sh
+      - name: Pin raw candidate and restore previous baseline
+        id: candidate
+        run: |
+          git fetch origin github-repo-stats
+          candidate=$(git rev-parse FETCH_HEAD)
+          echo "sha=$candidate" >> "$GITHUB_OUTPUT"
+          git worktree add .data-branch "$candidate"
+          if test -f .data-branch/analytics-state/snapshot.json; then
+            cp .data-branch/analytics-state/snapshot.json .dex/snapshot.json
+          fi
+      - name: Import pinned candidate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CANDIDATE_SHA: ${{ steps.candidate.outputs.sha }}
+          DATA_REPOSITORY: ${{ github.repository }}
+        # An internal candidate can contain multiple projects; each uses this same commit.
+        run: uv run --frozen oss-analytics sync-candidate --revision "$CANDIDATE_SHA" --data-repository "$DATA_REPOSITORY"
+      - run: uv run --frozen oss-analytics build
+      - name: Establish or explicitly accept maintenance baseline
+        env:
+          ACCEPT_BASELINE: ${{ inputs.accept_baseline || false }}
+        run: |
+          if ! test -f .dex/snapshot.json || test "$ACCEPT_BASELINE" = true; then
+            uv run --frozen oss-analytics baseline
+          fi
+      - name: Check model and metric contracts
+        run: |
+          uv run --frozen oss-analytics check
+          uv run --frozen oss-analytics status --require-fresh
+      - name: Optional external example smoke test
+        if: inputs.live_smoke
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: uv run --frozen pytest -q tests/test_live.py --live
+      - name: Promote validated revision
+        env:
+          CANDIDATE_SHA: ${{ steps.candidate.outputs.sha }}
+          CODE_SHA: ${{ github.sha }}
+        run: |
+          uv run --frozen oss-analytics publish --destination .data-branch --data-commit "$CANDIDATE_SHA" --code-commit "$CODE_SHA"
+          git -C .data-branch config user.name github-actions[bot]
+          git -C .data-branch config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C .data-branch add published.json analytics-state
+          git -C .data-branch commit -m "Publish validated analytics revision"
+          git -C .data-branch push origin HEAD:github-repo-stats
