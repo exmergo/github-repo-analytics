@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "data": {
+    "ready": true,
+    "reason": null,
+    "built_at": "2026-10-18T22:39:19.594647+00:00",
+    "checked_at": "2026-10-18T22:40:28.191581+00:00",
+    "code_digest": "e0f3f166633597676aff4af479e07d74a869ab54b9e8a2e2e8de3246fca5d8a2",
+    "synced_at": "2026-10-18T15:47:10.872313+00:00",
+    "warnings": [],
+    "expected_unavailable_fields": {
+      "main.annotations.url": "Annotation URLs are optional and none were supplied",
+      "main.dim_event.url": "No event source supplied a URL",
+      "main.fct_observations.forks_net_change": "No consecutive daily source captures exist",
+      "main.fct_observations.observation_gap_days": "No repository has two daily captures yet",
+      "main.fct_observations.stars_net_change": "No consecutive daily source captures exist"
+    },
+    "repositories": [
+      {
+        "repository": "exmergo/dex",
+        "source_revision": "031e95d61f01fc469c35299f5fa7c1b55e229d5a",
+        "source_data_repository": "exmergo/dex",
+        "first_traffic_date": "2026-06-23",
+        "last_traffic_date": "2026-10-16",
+        "latest_eligible_date": "2026-10-16",
+        "missing_traffic_dates": [],
+        "observed_traffic_days": 116,
+        "traffic_lag_days": 2,
+        "last_observed_totals_at": null,
+        "latest_snapshots": {
+          "paths": "2026-10-18 06:35:05+02:00",
+          "referrers": "2026-10-18 06:35:05+02:00"
+        },
+        "endpoint_age_hours": {
+          "paths": 18.1,
+          "referrers": 18.1
+        },
+        "freshness": "fresh",
+        "collection_age_hours": 18.1
+      }
+    ]
+  }
+}

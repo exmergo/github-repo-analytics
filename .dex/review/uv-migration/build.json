@@ -1,0 +1,1364 @@
+{
+  "status": "ok",
+  "data": {
+    "built_at": "2026-10-18T22:39:19.594647+00:00",
+    "code_digest": "e0f3f166633597676aff4af479e07d74a869ab54b9e8a2e2e8de3246fca5d8a2",
+    "inputs": {
+      "directory": ".data/inputs/97dd99b1560444af8c7e1b67695d2c7f",
+      "sources": [
+        {
+          "data_repository": "exmergo/dex",
+          "expected_refresh_hours": 24,
+          "files": {
+            "exmergo/dex/ghrs-data/forks.csv": "168e8aca58caf2c407e07ed3984f1f2cf0360e8b3e194e404b3cf21d448aa794",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_referrers_snapshot.csv": "0bcbe1bd40984dc839e8dab6920a3fd41ca0e924b39baea235f1aa4d5255ae0b",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-09_054815_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-09_054815_top_referrers_snapshot.csv": "0bcbe1bd40984dc839e8dab6920a3fd41ca0e924b39baea235f1aa4d5255ae0b",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-10_054620_top_paths_snapshot.csv": "e65f688a696075ad24fe443adc50fb9b115e079121f65cb9731555fac82a8ad6",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-10_054620_top_referrers_snapshot.csv": "63e09afa83f7dff7434d1bd2e1e01de92d7b22b7f56abf7fcd3f001457081db4",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-11_052524_top_paths_snapshot.csv": "924e3586c724baabf5908f433b3367070b496f42161c0b083dc46f38430a36bc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-11_052524_top_referrers_snapshot.csv": "5ed30a3f7e02fb1ff14c9e38466b19c430df385d134793551e6759c4b78bc3cc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-12_053633_top_paths_snapshot.csv": "da4e458758a3931269bad9b6b957dfd5b434261bf7f1503f9e6b6c8a8d50eaa1",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-12_053633_top_referrers_snapshot.csv": "89708b6573214467f42da08c709b8cb5dc50bdba5abf44b1ba290371f6bece41",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-13_053859_top_paths_snapshot.csv": "da4e458758a3931269bad9b6b957dfd5b434261bf7f1503f9e6b6c8a8d50eaa1",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-13_053859_top_referrers_snapshot.csv": "89708b6573214467f42da08c709b8cb5dc50bdba5abf44b1ba290371f6bece41",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-14_051643_top_paths_snapshot.csv": "3deed916682edc267a06d7970ba384bc369de00858507cf518cd292940bf4361",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-14_051643_top_referrers_snapshot.csv": "75e37f6b6a5ba03e4465a4e8102ec5b4d818cf2cff8c64e97e33d05cfd31184f",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-15_051736_top_paths_snapshot.csv": "2593ef29ab80096ad2cc3928faedcfea9396a78196a2f82227a90c33082ea9de",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-15_051736_top_referrers_snapshot.csv": "9b28728c15232034f04eb09f8bb1d457c629e306764997f040969021ab19273a",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-16_052449_top_paths_snapshot.csv": "a6e8419110104a82c178f04497a6d6512a1afbb79c04eca96971693b3a7abb80",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-16_052449_top_referrers_snapshot.csv": "44d7621124733f560f6d7ce4960a4c9f95f5e1162edc836ad00d221c17736e6d",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-17_052547_top_paths_snapshot.csv": "f09e1e2d3cd68f6bba7f8d1b30c71aebc28ddac8d4d586e2ad30ef987bbea345",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-17_052547_top_referrers_snapshot.csv": "7f3d52b5fc6c79675677b89f553f71b4773e57147efbd06d93a7591a0a7bc0de",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-18_224713_top_paths_snapshot.csv": "901375602be92fd66770cbb631cabd377c97a21dfcdbbb71cae627048cbfdb3a",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-18_224713_top_referrers_snapshot.csv": "79d39841431400268ef9db99132da258304cf1c1c434db5a1a3b57b0c4e64be6",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-19_053153_top_paths_snapshot.csv": "901375602be92fd66770cbb631cabd377c97a21dfcdbbb71cae627048cbfdb3a",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-19_053153_top_referrers_snapshot.csv": "79d39841431400268ef9db99132da258304cf1c1c434db5a1a3b57b0c4e64be6",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-19_230523_top_paths_snapshot.csv": "cdde6ba08cab118cbfd77fd0d70bdb8a5667f9eb2b077ed839025e3a2e2236fc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-19_230523_top_referrers_snapshot.csv": "47cbeff4de83f73547afcef9b75089fb3ceeddcca789cac12fd36129cdc53559",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-20_053931_top_paths_snapshot.csv": "cdde6ba08cab118cbfd77fd0d70bdb8a5667f9eb2b077ed839025e3a2e2236fc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-20_053931_top_referrers_snapshot.csv": "47cbeff4de83f73547afcef9b75089fb3ceeddcca789cac12fd36129cdc53559",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-21_053058_top_paths_snapshot.csv": "7eb5177cadd4040582e7a7ef2a2039a9cc9f53c67aaf71a7ac4946c63c133578",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-21_053058_top_referrers_snapshot.csv": "17b6d80de6c2ec7432c5108a0b5b3e7782f1f4390491f00ab620a9eccdd7d666",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-22_053024_top_paths_snapshot.csv": "7eb5177cadd4040582e7a7ef2a2039a9cc9f53c67aaf71a7ac4946c63c133578",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-22_053024_top_referrers_snapshot.csv": "17b6d80de6c2ec7432c5108a0b5b3e7782f1f4390491f00ab620a9eccdd7d666",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-23_053357_top_paths_snapshot.csv": "11a91a1efd2a81b3bc0efe72ff9f59a6ee247d19b0c30c5b64653238871f567e",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-23_053357_top_referrers_snapshot.csv": "2172217b75588d91a870149c98b0170e07e328c437cb0ad4657dcf1a4d86d6e6",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-24_053033_top_paths_snapshot.csv": "50fe9f2b1674a2b36858d44ceb622f566b96fe903af776134d0de6b82dff4bfc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-24_053033_top_referrers_snapshot.csv": "c640ee709bc22fb8e9d438bbb68f5dd252256d66f4dcd012e3c4610a7a17ca08",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-24_075746_top_paths_snapshot.csv": "50fe9f2b1674a2b36858d44ceb622f566b96fe903af776134d0de6b82dff4bfc",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-24_075746_top_referrers_snapshot.csv": "c640ee709bc22fb8e9d438bbb68f5dd252256d66f4dcd012e3c4610a7a17ca08",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-25_052625_top_paths_snapshot.csv": "8159f077ae715178d32809588176eb24e081f9ef919ce4a23cc42f5f82a97e14",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-25_052625_top_referrers_snapshot.csv": "e45d6c8760238617ed6e4e64a0ab8d742ee5ffe513518212179ab74339440b9f",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-26_053809_top_paths_snapshot.csv": "1f130e04ae7075361d91f5ee6fdf44cef64f21304185be971959ba2b73c96853",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-26_053809_top_referrers_snapshot.csv": "b989ab61914ca4637645e0dbefc8db78aa8b665be83519cf525d01344c27fc71",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-27_054056_top_paths_snapshot.csv": "48c4ddfcb4b0615ac7186b6b0929bb38bff1f216a3532e23ea828af0e06e1461",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-27_054056_top_referrers_snapshot.csv": "9aebdb2d68f1fdbb1f0b490be9e02e526edf3de55ec0361218a5f2a6ade91a8e",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-28_052723_top_paths_snapshot.csv": "f3a874422a00f5565c6a784c7788522093178d0b422bd480236cf7ae5b03ae4a",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-28_052723_top_referrers_snapshot.csv": "f8de79cf9730e5e2c9cb045663e91e1baa960b2c3e6352fb6876f9d3a2b452ec",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-29_053141_top_paths_snapshot.csv": "f52609f94bb010ba4281739b6fe5627d15188dd179e7f6626b6a98ca28061d56",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-29_053141_top_referrers_snapshot.csv": "94c3367ba7c9b42da616b40c3288318f8a9edb521974d687ee32e5382ec5b83e",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-30_052355_top_paths_snapshot.csv": "556c60b89d831417c099c03d75164c9955f02401e51eb87f3b2d16fd7cce677f",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-30_052355_top_referrers_snapshot.csv": "06509bd7eed05f5d56346208e4412eaff6642da67f5df5e761db8413b16efe1d",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-31_053838_top_paths_snapshot.csv": "556c60b89d831417c099c03d75164c9955f02401e51eb87f3b2d16fd7cce677f",
+            "exmergo/dex/ghrs-data/snapshots/2026-07-31_053838_top_referrers_snapshot.csv": "06509bd7eed05f5d56346208e4412eaff6642da67f5df5e761db8413b16efe1d",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-01_053500_top_paths_snapshot.csv": "efe30d4796f9424442023f382edd98bd5f3ddb546b6fcfa2c4dc736584de38b6",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-01_053500_top_referrers_snapshot.csv": "dc8a649c45317fbf13cc56edd196c098a0789b3cca0974af8aa3aa8209e46b98",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-02_053533_top_paths_snapshot.csv": "5cc27e4ecbe20af31a4f5bb5dbaed4158aca342ad6d321c29ab2d58506028472",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-02_053533_top_referrers_snapshot.csv": "a2c5f42e30c88f7726953be0a40b8dfd5449d8ecac5c0c494ade75192994def7",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-03_053954_top_paths_snapshot.csv": "5cc27e4ecbe20af31a4f5bb5dbaed4158aca342ad6d321c29ab2d58506028472",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-03_053954_top_referrers_snapshot.csv": "a2c5f42e30c88f7726953be0a40b8dfd5449d8ecac5c0c494ade75192994def7",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-04_052721_top_paths_snapshot.csv": "5cc27e4ecbe20af31a4f5bb5dbaed4158aca342ad6d321c29ab2d58506028472",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-04_052721_top_referrers_snapshot.csv": "a2c5f42e30c88f7726953be0a40b8dfd5449d8ecac5c0c494ade75192994def7",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-05_052713_top_paths_snapshot.csv": "c9fb8b7103dd6c1337f004e2ccae14f0cd834bbb8c0e38d79c9e3375a0de78e6",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-05_052713_top_referrers_snapshot.csv": "66a55d6ac7eca428212105d5c4a4cc60b7626148b755791459c193e28728c13e",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-06_070904_top_paths_snapshot.csv": "e69776c700d890a28f95e32e926eefefa48a26a86a4d44c85cce0b7d4437e029",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-06_070904_top_referrers_snapshot.csv": "bd639caf3508a920c13969677eb53b6bda12d61cbfa0ba48b23127fa7ecbb953",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-07_055454_top_paths_snapshot.csv": "e69776c700d890a28f95e32e926eefefa48a26a86a4d44c85cce0b7d4437e029",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-07_055454_top_referrers_snapshot.csv": "bd639caf3508a920c13969677eb53b6bda12d61cbfa0ba48b23127fa7ecbb953",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-08_051230_top_paths_snapshot.csv": "a43bcf81c13dc5a5de5839b41c154a0c3daef6240a95145ffb2b7bc3ad787c92",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-08_051230_top_referrers_snapshot.csv": "f5ba26ec9062fa75a31fb006c26b6ff3f14fb3c147414920991b2c7844279a09",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-09_052651_top_paths_snapshot.csv": "95f4b84f5dc0316a39e1845fee78406fe1ed79c2ef3877e1c3c5b0ee9037a3bd",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-09_052651_top_referrers_snapshot.csv": "97aca1aa4c98b8a6a2fefea61916a0cd04d55180c899ca547bed939a11643720",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-10_055019_top_paths_snapshot.csv": "42cf0e7e2867febec4ba8446f2463627ca401c26c14b9416e4c763465146ce9e",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-10_055019_top_referrers_snapshot.csv": "9666ec19d15e921ddfee9f7bd27f1b1cd45959761d94832f5e4d8caecfa2afa2",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-11_053154_top_paths_snapshot.csv": "6ef83fd254b2ae4905e8c5b48415f139f9e6478568ac5bdb7f3a41d72acd1604",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-11_053154_top_referrers_snapshot.csv": "54e0d40078650f75761f2cf3566d80953c423856059ea719d642337bf5be6999",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-12_055015_top_paths_snapshot.csv": "106664c9975c0ef17065276a381b204e4d6d0941fbb2834c83868371a01c95fa",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-12_055015_top_referrers_snapshot.csv": "feb960c86c5e3798dc3f2c8c0e109a9fb6da0ac4992c2038f5678e5cff47f1ef",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-13_055216_top_paths_snapshot.csv": "e2afa78a46f93712ec7a92e519db37cc89062f1dfc19113bd53ce9ecb468eb44",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-13_055216_top_referrers_snapshot.csv": "329c16b46243558b5b272a47df110900f357852e8d2384fdc31ae5b603c64660",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-14_055031_top_paths_snapshot.csv": "e2afa78a46f93712ec7a92e519db37cc89062f1dfc19113bd53ce9ecb468eb44",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-14_055031_top_referrers_snapshot.csv": "329c16b46243558b5b272a47df110900f357852e8d2384fdc31ae5b603c64660",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-15_045152_top_paths_snapshot.csv": "89de6981143711ba365465de18d0e883876507df7373262faf0cfd54c75ae4b9",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-15_045152_top_referrers_snapshot.csv": "9f47b4553af9a458c684ddc972c92a7f7d9e53a02175b96513c27e7c0f08da46",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-16_045452_top_paths_snapshot.csv": "067326b5b00dab2749716204166f63130ac885acb85fc374a8a6b13e720be3fa",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-16_045452_top_referrers_snapshot.csv": "eb730c7bb07ce05e601cd149e83306782e16ddc601cc2e868765f6dba0541fb8",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-17_050306_top_paths_snapshot.csv": "a47668d5114f5203bef558b0dd0dbe6ea3fa6a97315794d8226b3c5d6f16c66a",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-17_050306_top_referrers_snapshot.csv": "9ee0172491b483635d9446207e86974b4c1879ee1241d082690996c9395cc0c9",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-18_045649_top_paths_snapshot.csv": "a47668d5114f5203bef558b0dd0dbe6ea3fa6a97315794d8226b3c5d6f16c66a",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-18_045649_top_referrers_snapshot.csv": "9ee0172491b483635d9446207e86974b4c1879ee1241d082690996c9395cc0c9",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-19_045709_top_paths_snapshot.csv": "9d35c9c25f3de900a728c4e55d40684eb354ab0aa91e8a98aa4b89d7162dfa81",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-19_045709_top_referrers_snapshot.csv": "e5c3db1b3155be9bdd0e95d3473f5a914bf327faa4024bbb05fffd8454cd0a5f",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-20_045830_top_paths_snapshot.csv": "9d35c9c25f3de900a728c4e55d40684eb354ab0aa91e8a98aa4b89d7162dfa81",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-20_045830_top_referrers_snapshot.csv": "e5c3db1b3155be9bdd0e95d3473f5a914bf327faa4024bbb05fffd8454cd0a5f",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-21_045904_top_paths_snapshot.csv": "b7b6f4abcca6ccd8efc9472e44d78668a6448ef87ff440e185bbf5f53670d902",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-21_045904_top_referrers_snapshot.csv": "236a11360eb062935c92788fea37145189a4feb3d4df8b3e4804998fa968ada7",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-22_045447_top_paths_snapshot.csv": "ce45922cc4618d6e2175114a42d8c85604e975e861204e7c615f8a4000fe1b7a",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-22_045447_top_referrers_snapshot.csv": "af5188d03b8489cce629dfa8c0c9303fd24310ef4e84ab44ea5ce9830b0852b7",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-23_045716_top_paths_snapshot.csv": "612058d647ff14c810af2fc0d674e3f1cd0708143dbdc5a43cf94fd6e511b292",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-23_045716_top_referrers_snapshot.csv": "09abe966eb155dd0be5b8d5ef494eae55c8b5fd5926753774b6ebc3cf7f8db32",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-24_050638_top_paths_snapshot.csv": "43d2273259fa36955e1fa4a973a12b85416aa172c2aff909c7cfb350d75de355",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-24_050638_top_referrers_snapshot.csv": "279e37e7ddde72757a4bba7b40197f30ced2b286503786bea8c8c14fa109ede2",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-25_045939_top_paths_snapshot.csv": "6c292744a8b39c5c7b024a775812f06782b6f3b616d7d1f3f1075228729ea135",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-25_045939_top_referrers_snapshot.csv": "1c2ec1df5b1653193d3ab682c51c720c2d2627a295fad5777f8bcf153364cbf4",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-26_050030_top_paths_snapshot.csv": "1d5dec467a8eaf3e1b3d35d976c4baa381eae0fd61dd3097ad035c6dcbe360fe",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-26_050030_top_referrers_snapshot.csv": "46965f654fae127f3021fce1db110afdbfb45545aab4b20d2b774668f43d060b",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-27_152044_top_paths_snapshot.csv": "d4b7c49a499905b0fa4e6402824ad28fa8e9fe0d1f0b02d69a1f4783b86651ac",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-27_152044_top_referrers_snapshot.csv": "f60bc885fe83985e2f309f3560d1efc86d4140563a9e4f61d53a884f621e3db5",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-28_164421_top_paths_snapshot.csv": "c68ed0836412dff9e529009e2ef83b5691c7ce0253a9e784f9fda503bff7c761",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-28_164421_top_referrers_snapshot.csv": "0343f081db9050794f93f913bbf3f12ff693c5d22a82c24b28193cef5ebb99ed",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-29_111213_top_paths_snapshot.csv": "c68ed0836412dff9e529009e2ef83b5691c7ce0253a9e784f9fda503bff7c761",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-29_111213_top_referrers_snapshot.csv": "0343f081db9050794f93f913bbf3f12ff693c5d22a82c24b28193cef5ebb99ed",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-30_100029_top_paths_snapshot.csv": "f804a209835350a9f9512a1be40db1c4354acc6890d28da64c69768effa7b7ee",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-30_100029_top_referrers_snapshot.csv": "8c8d556a52d4bd0195ed98d728d9a55d2018ce0765c71f9d4c9c8be5e35fdcd3",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-31_110334_top_paths_snapshot.csv": "e840ac5ce0242cbac57556f92d8c7d84894dd0c9c05886697587996c44479812",
+            "exmergo/dex/ghrs-data/snapshots/2026-08-31_110334_top_referrers_snapshot.csv": "5b9feaa762a05b266448f753128d86f0f6da0ec52359faef46c6587e3d48ce59",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-01_092933_top_paths_snapshot.csv": "bb310fe5f70038b12e49f95ab0dccf9a599b19c0a1409286d90fc89842d74657",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-01_092933_top_referrers_snapshot.csv": "5d0a2a54895efeb1eea3a29ece16f46e7dba85579add8f6c5094cc8cc217a50c",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-02_085146_top_paths_snapshot.csv": "139169f39685cfc7811bfb93c81bb09eb40402948d25270ba849c86a2fb5fd2d",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-02_085146_top_referrers_snapshot.csv": "38febd205b549cccb38d930ab78f5f6a6e5b572e68503ba88f7b767b03d4a3b8",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-03_090107_top_paths_snapshot.csv": "32f7e3e948767012cfb27cd9cdf2f88d0de879c758526a13054bc0c743515279",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-03_090107_top_referrers_snapshot.csv": "520090992776c0b33520f05b0f853b2eb61e85a55f79f31e0ac42e49c7dad024",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-04_085505_top_paths_snapshot.csv": "bf3d9cd386371f079679ad7f6256a091d8ac351d2f55be1b1046c55caf6f4223",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-04_085505_top_referrers_snapshot.csv": "8787a8836ac2e113cff8bc86a35bf6ff534c7a658296275b03f4c325f0a1a567",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-05_082603_top_paths_snapshot.csv": "f600e237898352757a3549bc6c21fd5a59db774b9adaa86194c36464c9b06410",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-05_082603_top_referrers_snapshot.csv": "bd66340d5ca1ed1793ba5c4a36b3927691158230fd1456b4ccf175837c0c37f1",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-06_084418_top_paths_snapshot.csv": "b0980d34e0f0efb9cc08f8a99548a52df30233fd472b03c526a832c5052130db",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-06_084418_top_referrers_snapshot.csv": "043db0a80c46a22defef5efcf780ed29a142967e39d3709cf7a02f63045a264e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-07_043700_top_paths_snapshot.csv": "b0980d34e0f0efb9cc08f8a99548a52df30233fd472b03c526a832c5052130db",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-07_043700_top_referrers_snapshot.csv": "043db0a80c46a22defef5efcf780ed29a142967e39d3709cf7a02f63045a264e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-08_043359_top_paths_snapshot.csv": "b0980d34e0f0efb9cc08f8a99548a52df30233fd472b03c526a832c5052130db",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-08_043359_top_referrers_snapshot.csv": "043db0a80c46a22defef5efcf780ed29a142967e39d3709cf7a02f63045a264e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-09_043437_top_paths_snapshot.csv": "523d51b9076eaa93b7e5409e497b69d98d57615a464e56f5645baf340d1a9a6f",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-09_043437_top_referrers_snapshot.csv": "9d5db5b1305c154dbe7c0860d9f40e361d14891d59332b9069671c0dc5365aa4",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-10_043428_top_paths_snapshot.csv": "f1b890a72e701d2cc0cca2167b195d614ee7781849d257eb9c38e31d535c6e10",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-10_043428_top_referrers_snapshot.csv": "061d97a410ad06e3d365b80719069508a4620e92759d614ac8ddab513eb92780",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-11_043438_top_paths_snapshot.csv": "00f5f2ca7cf643e1b73abc4e81afdee5a5427b343fcf2903b74cf336ca86269e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-11_043438_top_referrers_snapshot.csv": "7d312e7578b1861ba1ac23e2586eb902f479102013f719102fe935144afcb0f6",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-12_043243_top_paths_snapshot.csv": "b8cb67569627cf88321878216d8c95ebc13bbeec421cdbfe1f50fbddb0dc8bb0",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-12_043243_top_referrers_snapshot.csv": "8622951f04619e840e9d045525c32e62b748e0b9bd9e205415805021334e7a97",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-13_043335_top_paths_snapshot.csv": "640f099fa057b696cd8e96c73b08134dd07dd123922af4c38d082d07a555b6d1",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-13_043335_top_referrers_snapshot.csv": "cc3395f654a977c91ec46cc594a99d197064009d94841b6f4050a9dd5ddf20f5",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-14_043826_top_paths_snapshot.csv": "7eb1d4a1750c35e692ba64026b7932e6e217a1ea3ebbe4588447eed577ae479b",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-14_043826_top_referrers_snapshot.csv": "07ae7123dfcdd10d59a4b32ab1291349dca4c82ac768938053ae312b79c7afb8",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-15_043526_top_paths_snapshot.csv": "63c980aacebb829b66681c4e2bae027be23f99c4fe607babe906b6c195539f39",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-15_043526_top_referrers_snapshot.csv": "55229a1f0b9fd96f77413963c9733f1723bcd77f4a6bf50af95575226b796d41",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-16_043511_top_paths_snapshot.csv": "f6ff68627c0254bae380a491ded5c9fa9f85509e59d9ed707cce22107ed3dfcc",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-16_043511_top_referrers_snapshot.csv": "9a1063ffec1af6535e2b84bb489b97957f41c4a180f5a5ab05f9be5edda4bda4",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-17_043521_top_paths_snapshot.csv": "5b0f9119d8fafde665ed126ff3e58272f8c559f60da3575d1a6d0462d8b8bf17",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-17_043521_top_referrers_snapshot.csv": "4452e2de74cc7b0b2adc156321076eaa77444ef3ea8b168450170fe63c2c0bd6",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-18_043438_top_paths_snapshot.csv": "5a16a3eab9e04ab7b6c63537bcae0a68178994672aecbc826c87ea0e13fc2811",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-18_043438_top_referrers_snapshot.csv": "ed46ca99b61ce72366329e7365f6b882f8f2cdbb6dbd14601ce53aac8d9b3828",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-19_043329_top_paths_snapshot.csv": "ebaefaee29e45757a484b4fa064bc23bad9c8ef263f74804d710e210a46c83df",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-19_043329_top_referrers_snapshot.csv": "e8fd15367825b60801eaec98f1f93169110ec84ecc5c95e13751a9e6536d337f",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-20_043425_top_paths_snapshot.csv": "154fa147a88fb4402763b6a3afd914a677f96763ad5e3da6ac46fa3805c3881a",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-20_043425_top_referrers_snapshot.csv": "d84cc43f92b3c1aab1e78a443f4273da73f0df4388460d1311d3674b5dcbc7b5",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-21_043903_top_paths_snapshot.csv": "c2a341feeea617891990501c52b97f9186744aea23012560025a81f13e080c89",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-21_043903_top_referrers_snapshot.csv": "688c721fd19fb3bbed075c6280f0f3206e49a007136bacdb362f79d2b1600e6d",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-22_043506_top_paths_snapshot.csv": "78604f637d4a9173b550a8eb0ccb78c605157c0c560f3858797a768c3a736872",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-22_043506_top_referrers_snapshot.csv": "bf04b927770c7448388b0ce261fbc7968a701d0826bd2e5d3915c1e67efc2cec",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-23_043554_top_paths_snapshot.csv": "199e29e4f0af2b3613243056ddbf05f0844255f60d17d286c055075480c47693",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-23_043554_top_referrers_snapshot.csv": "83a4a741ef5fedb14ace83549fad8fc600d572d92aa28eb1f949640dd0ddd0ac",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-24_043554_top_paths_snapshot.csv": "e9a1541d16c8bed6a65facd31df759fd7c5daa49f8518df98d9c612beb48fa7a",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-24_043554_top_referrers_snapshot.csv": "fe99410813e8314bf82855623998a35cc5cec1b28048daf282f25dbfdf521fc7",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-25_043657_top_paths_snapshot.csv": "8f9f33903831423d4e2386765ad81539f47fc4041cb9d418eb9ce0a903f83425",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-25_043657_top_referrers_snapshot.csv": "c687ee3e83546a4eb34dc28b86c7c8277a7ff8f990fdb32cc7a97f831de7f32e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-26_043503_top_paths_snapshot.csv": "8f9f33903831423d4e2386765ad81539f47fc4041cb9d418eb9ce0a903f83425",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-26_043503_top_referrers_snapshot.csv": "c687ee3e83546a4eb34dc28b86c7c8277a7ff8f990fdb32cc7a97f831de7f32e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-27_043633_top_paths_snapshot.csv": "8f9f33903831423d4e2386765ad81539f47fc4041cb9d418eb9ce0a903f83425",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-27_043633_top_referrers_snapshot.csv": "c687ee3e83546a4eb34dc28b86c7c8277a7ff8f990fdb32cc7a97f831de7f32e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-28_044132_top_paths_snapshot.csv": "8f9f33903831423d4e2386765ad81539f47fc4041cb9d418eb9ce0a903f83425",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-28_044132_top_referrers_snapshot.csv": "c687ee3e83546a4eb34dc28b86c7c8277a7ff8f990fdb32cc7a97f831de7f32e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-29_043826_top_paths_snapshot.csv": "8f9f33903831423d4e2386765ad81539f47fc4041cb9d418eb9ce0a903f83425",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-29_043826_top_referrers_snapshot.csv": "c687ee3e83546a4eb34dc28b86c7c8277a7ff8f990fdb32cc7a97f831de7f32e",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-30_043857_top_paths_snapshot.csv": "9778af90739242cf8676a8fa66f30bce324661dcc53598c0d269c15d29dff3b5",
+            "exmergo/dex/ghrs-data/snapshots/2026-09-30_043857_top_referrers_snapshot.csv": "d483bf1f668113fecee3c34f400ef8549f951cea8cd04959afb9c413f32546ce",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-01_043856_top_paths_snapshot.csv": "4873d3ada45544396b03679dbb15e904b2c165c1b1864b29890349554185340e",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-01_043856_top_referrers_snapshot.csv": "4746231e285d4a423d68b54af3700dd13a5c663e2b062d940247ef7e92ddd938",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-02_043822_top_paths_snapshot.csv": "751607e63256931505491117651f91902e131041a09857140417df09aed0d187",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-02_043822_top_referrers_snapshot.csv": "27fa6bd77a037dfb2dabaf9b5f0817571736f9b8458633f06e379711a3d95c01",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-03_043934_top_paths_snapshot.csv": "943aa3b7dfc662c75fdf938509cab66ee715694ccf6b4a54e0b830fa177bcf6e",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-03_043934_top_referrers_snapshot.csv": "e25e74291e9c3932b1b635baa88d5de40832a0d41842fa440e2a88323e984ed5",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-04_060253_top_paths_snapshot.csv": "098e9c5b94ea123fc1e5bcdf4755bd4f45f2659adc61484d611b95f734dc1bd7",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-04_060253_top_referrers_snapshot.csv": "b36debc004c1d7ceeb6d82092e112381535382485ff5135fb794a086efb849ab",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-05_050019_top_paths_snapshot.csv": "20c96b6cc3b249e1a051fef14c4800134018aa32609a72cedf46167496ced42f",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-05_050019_top_referrers_snapshot.csv": "0cc76811cd82ba5937f7c201312e0b73cc5e6f2f8fa019560bf68784f52181fe",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-06_043900_top_paths_snapshot.csv": "2f87b164c00e61a67dcf4eeb6d491763ff99d395ed9c64cd96b8109ddfa37daf",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-06_043900_top_referrers_snapshot.csv": "c709a8e511f2259bf23bc872b8fa0275931943cd25c9d000eb76d514e0c41a3f",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-07_043958_top_paths_snapshot.csv": "7a09bcd8373876ffc51bcea6ee06af92b8d13abcaae9ebff2e1872732f49a227",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-07_043958_top_referrers_snapshot.csv": "87a86ee2ecbcb204bff050fe71d3845b3c6ad84e0fbd9137e2261cd715754804",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-08_044028_top_paths_snapshot.csv": "cd11c6b3cabb88cb25ddaa7e02632551242a74ea970fbf464be843f7baf4ba55",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-08_044028_top_referrers_snapshot.csv": "c421f2c610eb97f67239b7b663c70c8e4737591fad6e9424b51238973492a0d2",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-09_044113_top_paths_snapshot.csv": "d431349bd6079aaa80271c841be11fd00c5d3eead4a415d0e6e8a5603f8b00ee",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-09_044113_top_referrers_snapshot.csv": "0ad880cc416df305c679a292c7bb51f72cc326d40d88bac09a3789d412d2f938",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-10_043831_top_paths_snapshot.csv": "fbca1b56a4d8ca37620719fbd14a959df23714c5febc6113b6641d7bf086d5c7",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-10_043831_top_referrers_snapshot.csv": "a8384658889a8a9bb550f76eace9d31f8f51cf46a2f83242eeef8f893f6a3332",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-11_043952_top_paths_snapshot.csv": "7e8692c6a6c15706998a5ea3379e89e54903f2e5dff58d51960c88e32932d566",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-11_043952_top_referrers_snapshot.csv": "7d495b63ec1fba0c03d37d66e1e37cce5bebde07e5f1df5b22283b0ff1b93930",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-12_045022_top_paths_snapshot.csv": "378cb657e98a4d3b84fee625fe254839f1338bcacc0431943008252b6a9da9a5",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-12_045022_top_referrers_snapshot.csv": "793c90ac60a8dabe7c649f7c5a94d30e67947a0a0fee24652934ba4c74716fc3",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-13_044441_top_paths_snapshot.csv": "c2b8e14b3111434de375254c346f8cf38e2afc1aef1e1b987c583fbed80e3419",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-13_044441_top_referrers_snapshot.csv": "9d762ac2758d19c1520323c8adc160f6d56ede9aa3e1bc38c4edb4fa0ff3619e",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-14_043803_top_paths_snapshot.csv": "86a609334c8b1e8c3ccb17e436c5f20ae13ad41c9aad4419934378df086d1bc8",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-14_043803_top_referrers_snapshot.csv": "972492953a1f6f0d2c692f5ebbe3c03fc89ffe584ae9593c704c3bbf74470c13",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-15_043545_top_paths_snapshot.csv": "012efd3492632e825ff6926e29d8ed2d7520a4df5eb9d580e9389b16ee128127",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-15_043545_top_referrers_snapshot.csv": "9f2b46330e70699b732ba96e590833d9e673f580b750b6008070e522640aba1a",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-16_043555_top_paths_snapshot.csv": "f93fd2af6f8f4d836eb5def4f47ed697cd6589293d83297aef16d2b3b542a6a6",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-16_043555_top_referrers_snapshot.csv": "b16b1aee1d176848c8281af46e4a25fc278864e11c6790eef36f022e487e0f9a",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-17_043432_top_paths_snapshot.csv": "512ae67883e0e5c09ad945498222475e27e2e4d7aa510b703032aaa251693dc9",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-17_043432_top_referrers_snapshot.csv": "74e5d11746199b0d4dd5b0592699dd0da64b0a467485f344b4d98c2a8ff83aee",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-18_043505_top_paths_snapshot.csv": "05195e353d7a3eb8bc8bae894e7b2518e17438ab49f5bd1190993eac3f7fc266",
+            "exmergo/dex/ghrs-data/snapshots/2026-10-18_043505_top_referrers_snapshot.csv": "ec04f7808ff602825c4b9673038178079f7cbe7e470bb717107e12d4f2f2ac87",
+            "exmergo/dex/ghrs-data/stargazers.csv": "3896642fb926ff9ea203a47141f177c08f11ff84596b4ad92f04cc8187258a4d",
+            "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "2961fade8e4b71e7ff53aac647568dd65bbdd73ed46bdd6612d9bb56c52e0f56"
+          },
+          "publication": null,
+          "repository": "exmergo/dex",
+          "source_head": "031e95d61f01fc469c35299f5fa7c1b55e229d5a",
+          "source_revision": "031e95d61f01fc469c35299f5fa7c1b55e229d5a"
+        }
+      ],
+      "synced_at": "2026-10-18T15:47:10.872313+00:00",
+      "transport": "local cached Git branch; live HTTP smoke not run",
+      "version": 1
+    },
+    "warnings": [],
+    "build": {
+      "status": "ok",
+      "data": {
+        "outcome": "validated",
+        "target": "dev",
+        "success": true,
+        "returncode": 0,
+        "nodes": [
+          {
+            "name": "stg_discovery",
+            "unique_id": "model.oss_analytics.stg_discovery",
+            "status": "success",
+            "execution_time": 0.03091716766357422
+          },
+          {
+            "name": "stg_legacy",
+            "unique_id": "model.oss_analytics.stg_legacy",
+            "status": "success",
+            "execution_time": 0.015643835067749023
+          },
+          {
+            "name": "stg_observations",
+            "unique_id": "model.oss_analytics.stg_observations",
+            "status": "success",
+            "execution_time": 0.01243901252746582
+          },
+          {
+            "name": "stg_releases",
+            "unique_id": "model.oss_analytics.stg_releases",
+            "status": "success",
+            "execution_time": 0.013664960861206055
+          },
+          {
+            "name": "stg_repositories",
+            "unique_id": "model.oss_analytics.stg_repositories",
+            "status": "success",
+            "execution_time": 0.012115240097045898
+          },
+          {
+            "name": "stg_snapshots",
+            "unique_id": "model.oss_analytics.stg_snapshots",
+            "status": "success",
+            "execution_time": 0.012494802474975586
+          },
+          {
+            "name": "stg_traffic",
+            "unique_id": "model.oss_analytics.stg_traffic",
+            "status": "success",
+            "execution_time": 0.05127120018005371
+          },
+          {
+            "name": "annotations",
+            "unique_id": "seed.oss_analytics.annotations",
+            "status": "success",
+            "execution_time": 0.02393794059753418
+          },
+          {
+            "name": "not_null_stg_discovery_discovery_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_discovery_discovery_source_key.0504574b78",
+            "status": "pass",
+            "execution_time": 0.017067909240722656
+          },
+          {
+            "name": "unique_stg_discovery_discovery_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_discovery_discovery_source_key.9f79150df6",
+            "status": "pass",
+            "execution_time": 0.011796951293945312
+          },
+          {
+            "name": "not_null_stg_legacy_legacy_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_legacy_legacy_source_key.4005af8564",
+            "status": "pass",
+            "execution_time": 0.0071179866790771484
+          },
+          {
+            "name": "unique_stg_legacy_legacy_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_legacy_legacy_source_key.5c9878946a",
+            "status": "pass",
+            "execution_time": 0.00832676887512207
+          },
+          {
+            "name": "not_null_stg_observations_observation_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_observations_observation_source_key.0a9b5efec2",
+            "status": "pass",
+            "execution_time": 0.008584976196289062
+          },
+          {
+            "name": "unique_stg_observations_observation_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_observations_observation_source_key.71d4525f0e",
+            "status": "pass",
+            "execution_time": 0.007910966873168945
+          },
+          {
+            "name": "not_null_stg_releases_release_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_releases_release_source_key.561fb2c05f",
+            "status": "pass",
+            "execution_time": 0.0075871944427490234
+          },
+          {
+            "name": "unique_stg_releases_release_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_releases_release_source_key.c705203b11",
+            "status": "pass",
+            "execution_time": 0.008323192596435547
+          },
+          {
+            "name": "not_null_stg_repositories_repository",
+            "unique_id": "test.oss_analytics.not_null_stg_repositories_repository.7004f81c82",
+            "status": "pass",
+            "execution_time": 0.007256031036376953
+          },
+          {
+            "name": "unique_stg_repositories_repository",
+            "unique_id": "test.oss_analytics.unique_stg_repositories_repository.69d0beee76",
+            "status": "pass",
+            "execution_time": 0.007462024688720703
+          },
+          {
+            "name": "not_null_stg_snapshots_snapshot_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_snapshots_snapshot_source_key.964042a59e",
+            "status": "pass",
+            "execution_time": 0.0074961185455322266
+          },
+          {
+            "name": "unique_stg_snapshots_snapshot_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_snapshots_snapshot_source_key.0ca883b0c1",
+            "status": "pass",
+            "execution_time": 0.007772207260131836
+          },
+          {
+            "name": "not_null_stg_traffic_traffic_source_key",
+            "unique_id": "test.oss_analytics.not_null_stg_traffic_traffic_source_key.f8f3ee00fc",
+            "status": "pass",
+            "execution_time": 0.008474111557006836
+          },
+          {
+            "name": "unique_stg_traffic_traffic_source_key",
+            "unique_id": "test.oss_analytics.unique_stg_traffic_traffic_source_key.71f63f903e",
+            "status": "pass",
+            "execution_time": 0.0076138973236083984
+          },
+          {
+            "name": "fct_legacy",
+            "unique_id": "model.oss_analytics.fct_legacy",
+            "status": "success",
+            "execution_time": 0.026607036590576172
+          },
+          {
+            "name": "fct_observations",
+            "unique_id": "model.oss_analytics.fct_observations",
+            "status": "success",
+            "execution_time": 0.014045000076293945
+          },
+          {
+            "name": "dim_event",
+            "unique_id": "model.oss_analytics.dim_event",
+            "status": "success",
+            "execution_time": 0.01366877555847168
+          },
+          {
+            "name": "dim_repository",
+            "unique_id": "model.oss_analytics.dim_repository",
+            "status": "success",
+            "execution_time": 0.013840913772583008
+          },
+          {
+            "name": "fct_snapshot_status",
+            "unique_id": "model.oss_analytics.fct_snapshot_status",
+            "status": "success",
+            "execution_time": 0.01639723777770996
+          },
+          {
+            "name": "fct_traffic",
+            "unique_id": "model.oss_analytics.fct_traffic",
+            "status": "success",
+            "execution_time": 0.014145135879516602
+          },
+          {
+            "name": "not_null_fct_legacy_legacy_key",
+            "unique_id": "test.oss_analytics.not_null_fct_legacy_legacy_key.cd1a8ddfd7",
+            "status": "pass",
+            "execution_time": 0.00897216796875
+          },
+          {
+            "name": "not_null_fct_legacy_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_legacy_repository.eefeff28f0",
+            "status": "pass",
+            "execution_time": 0.0072100162506103516
+          },
+          {
+            "name": "unique_fct_legacy_legacy_key",
+            "unique_id": "test.oss_analytics.unique_fct_legacy_legacy_key.0c547999b1",
+            "status": "pass",
+            "execution_time": 0.007424116134643555
+          },
+          {
+            "name": "not_null_fct_observations_observation_key",
+            "unique_id": "test.oss_analytics.not_null_fct_observations_observation_key.674964e9d4",
+            "status": "pass",
+            "execution_time": 0.007256031036376953
+          },
+          {
+            "name": "not_null_fct_observations_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_observations_repository.bfc9386302",
+            "status": "pass",
+            "execution_time": 0.007742881774902344
+          },
+          {
+            "name": "unique_fct_observations_observation_key",
+            "unique_id": "test.oss_analytics.unique_fct_observations_observation_key.67f8c65d58",
+            "status": "pass",
+            "execution_time": 0.008340120315551758
+          },
+          {
+            "name": "not_null_dim_event_event_id",
+            "unique_id": "test.oss_analytics.not_null_dim_event_event_id.0c6d51b179",
+            "status": "pass",
+            "execution_time": 0.006971120834350586
+          },
+          {
+            "name": "not_null_dim_event_repository",
+            "unique_id": "test.oss_analytics.not_null_dim_event_repository.08cc61bfe8",
+            "status": "pass",
+            "execution_time": 0.006960868835449219
+          },
+          {
+            "name": "unique_dim_event_event_id",
+            "unique_id": "test.oss_analytics.unique_dim_event_event_id.2b7d146c7c",
+            "status": "pass",
+            "execution_time": 0.007547855377197266
+          },
+          {
+            "name": "not_null_dim_repository_repository",
+            "unique_id": "test.oss_analytics.not_null_dim_repository_repository.54eee3ce05",
+            "status": "pass",
+            "execution_time": 0.007379770278930664
+          },
+          {
+            "name": "relationships_dim_event_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_dim_event_repository__repository__ref_dim_repository_.412f2fb58c",
+            "status": "pass",
+            "execution_time": 0.008579015731811523
+          },
+          {
+            "name": "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_legacy_repository__repository__ref_dim_repository_.f12a19ab61",
+            "status": "pass",
+            "execution_time": 0.009706974029541016
+          },
+          {
+            "name": "relationships_fct_observations_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_observations_repository__repository__ref_dim_repository_.c08f4ee287",
+            "status": "pass",
+            "execution_time": 0.007948160171508789
+          },
+          {
+            "name": "unique_dim_repository_repository",
+            "unique_id": "test.oss_analytics.unique_dim_repository_repository.3bad728b11",
+            "status": "pass",
+            "execution_time": 0.007105827331542969
+          },
+          {
+            "name": "not_null_fct_snapshot_status_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_repository.d3b7cbbc68",
+            "status": "pass",
+            "execution_time": 0.007122993469238281
+          },
+          {
+            "name": "not_null_fct_snapshot_status_snapshot_key",
+            "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_snapshot_key.5dc1b3bcc0",
+            "status": "pass",
+            "execution_time": 0.00767207145690918
+          },
+          {
+            "name": "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_snapshot_status_repository__repository__ref_dim_repository_.f42b2ac446",
+            "status": "pass",
+            "execution_time": 0.01041412353515625
+          },
+          {
+            "name": "unique_fct_snapshot_status_snapshot_key",
+            "unique_id": "test.oss_analytics.unique_fct_snapshot_status_snapshot_key.d1bf4a46f8",
+            "status": "pass",
+            "execution_time": 0.0074961185455322266
+          },
+          {
+            "name": "not_null_fct_traffic_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_traffic_repository.df3e944ebf",
+            "status": "pass",
+            "execution_time": 0.007481813430786133
+          },
+          {
+            "name": "not_null_fct_traffic_traffic_key",
+            "unique_id": "test.oss_analytics.not_null_fct_traffic_traffic_key.4d87115ef7",
+            "status": "pass",
+            "execution_time": 0.007323741912841797
+          },
+          {
+            "name": "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_traffic_repository__repository__ref_dim_repository_.c515931e45",
+            "status": "pass",
+            "execution_time": 0.007561922073364258
+          },
+          {
+            "name": "traffic_source_contract",
+            "unique_id": "test.oss_analytics.traffic_source_contract",
+            "status": "pass",
+            "execution_time": 0.008914947509765625
+          },
+          {
+            "name": "unique_fct_traffic_traffic_key",
+            "unique_id": "test.oss_analytics.unique_fct_traffic_traffic_key.731ee52571",
+            "status": "pass",
+            "execution_time": 0.0076448917388916016
+          },
+          {
+            "name": "fct_path",
+            "unique_id": "model.oss_analytics.fct_path",
+            "status": "success",
+            "execution_time": 0.019993066787719727
+          },
+          {
+            "name": "fct_referrer",
+            "unique_id": "model.oss_analytics.fct_referrer",
+            "status": "success",
+            "execution_time": 0.01958775520324707
+          },
+          {
+            "name": "metricflow_time_spine",
+            "unique_id": "model.oss_analytics.metricflow_time_spine",
+            "status": "success",
+            "execution_time": 0.014377832412719727
+          },
+          {
+            "name": "not_null_fct_path_path_key",
+            "unique_id": "test.oss_analytics.not_null_fct_path_path_key.450c1416ad",
+            "status": "pass",
+            "execution_time": 0.0070650577545166016
+          },
+          {
+            "name": "not_null_fct_path_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_path_repository.dec0a98de0",
+            "status": "pass",
+            "execution_time": 0.007288217544555664
+          },
+          {
+            "name": "relationships_fct_path_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_path_repository__repository__ref_dim_repository_.c202ee9a6e",
+            "status": "pass",
+            "execution_time": 0.009869098663330078
+          },
+          {
+            "name": "unique_fct_path_path_key",
+            "unique_id": "test.oss_analytics.unique_fct_path_path_key.dad82dccb7",
+            "status": "pass",
+            "execution_time": 0.008765935897827148
+          },
+          {
+            "name": "discovery_grid",
+            "unique_id": "test.oss_analytics.discovery_grid",
+            "status": "pass",
+            "execution_time": 0.009779930114746094
+          },
+          {
+            "name": "not_null_fct_referrer_referrer_key",
+            "unique_id": "test.oss_analytics.not_null_fct_referrer_referrer_key.0af57f67a0",
+            "status": "pass",
+            "execution_time": 0.008006095886230469
+          },
+          {
+            "name": "not_null_fct_referrer_repository",
+            "unique_id": "test.oss_analytics.not_null_fct_referrer_repository.59dbd5981d",
+            "status": "pass",
+            "execution_time": 0.007982015609741211
+          },
+          {
+            "name": "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+            "unique_id": "test.oss_analytics.relationships_fct_referrer_repository__repository__ref_dim_repository_.ef981f0ab1",
+            "status": "pass",
+            "execution_time": 0.010081052780151367
+          },
+          {
+            "name": "unique_fct_referrer_referrer_key",
+            "unique_id": "test.oss_analytics.unique_fct_referrer_referrer_key.6f0d6b0846",
+            "status": "pass",
+            "execution_time": 0.008951187133789062
+          },
+          {
+            "name": "not_null_metricflow_time_spine_date_day",
+            "unique_id": "test.oss_analytics.not_null_metricflow_time_spine_date_day.54acf49e8d",
+            "status": "pass",
+            "execution_time": 0.0075719356536865234
+          },
+          {
+            "name": "unique_metricflow_time_spine_date_day",
+            "unique_id": "test.oss_analytics.unique_metricflow_time_spine_date_day.ddb41ceac8",
+            "status": "pass",
+            "execution_time": 0.007505178451538086
+          }
+        ],
+        "counts": {
+          "success": 17,
+          "pass": 48
+        },
+        "evidence": {
+          "outcome": "validated",
+          "invocation": {
+            "invocation_id": "0f46f6d0-20f6-49ae-a9cb-1ca7dd413a78",
+            "generated_at": "2026-10-18T22:39:08.028673Z",
+            "started_at": "2026-10-18T22:39:05.785118Z",
+            "dbt_version": "1.11.14",
+            "command": "build",
+            "target": "dev",
+            "select": null,
+            "elapsed_seconds": 0.9151952266693115
+          },
+          "selection": {
+            "requested": null,
+            "matched": [
+              "stg_discovery",
+              "stg_legacy",
+              "stg_observations",
+              "stg_releases",
+              "stg_repositories",
+              "stg_snapshots",
+              "stg_traffic",
+              "annotations",
+              "not_null_stg_discovery_discovery_source_key",
+              "unique_stg_discovery_discovery_source_key",
+              "not_null_stg_legacy_legacy_source_key",
+              "unique_stg_legacy_legacy_source_key",
+              "not_null_stg_observations_observation_source_key",
+              "unique_stg_observations_observation_source_key",
+              "not_null_stg_releases_release_source_key",
+              "unique_stg_releases_release_source_key",
+              "not_null_stg_repositories_repository",
+              "unique_stg_repositories_repository",
+              "not_null_stg_snapshots_snapshot_source_key",
+              "unique_stg_snapshots_snapshot_source_key",
+              "not_null_stg_traffic_traffic_source_key",
+              "unique_stg_traffic_traffic_source_key",
+              "fct_legacy",
+              "fct_observations",
+              "dim_event",
+              "dim_repository",
+              "fct_snapshot_status",
+              "fct_traffic",
+              "not_null_fct_legacy_legacy_key",
+              "not_null_fct_legacy_repository",
+              "unique_fct_legacy_legacy_key",
+              "not_null_fct_observations_observation_key",
+              "not_null_fct_observations_repository",
+              "unique_fct_observations_observation_key",
+              "not_null_dim_event_event_id",
+              "not_null_dim_event_repository",
+              "unique_dim_event_event_id",
+              "not_null_dim_repository_repository",
+              "relationships_dim_event_repository__repository__ref_dim_repository_",
+              "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+              "relationships_fct_observations_repository__repository__ref_dim_repository_",
+              "unique_dim_repository_repository",
+              "not_null_fct_snapshot_status_repository",
+              "not_null_fct_snapshot_status_snapshot_key",
+              "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+              "unique_fct_snapshot_status_snapshot_key",
+              "not_null_fct_traffic_repository",
+              "not_null_fct_traffic_traffic_key",
+              "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+              "traffic_source_contract",
+              "unique_fct_traffic_traffic_key",
+              "fct_path",
+              "fct_referrer",
+              "metricflow_time_spine",
+              "not_null_fct_path_path_key",
+              "not_null_fct_path_repository",
+              "relationships_fct_path_repository__repository__ref_dim_repository_",
+              "unique_fct_path_path_key",
+              "discovery_grid",
+              "not_null_fct_referrer_referrer_key",
+              "not_null_fct_referrer_repository",
+              "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+              "unique_fct_referrer_referrer_key",
+              "not_null_metricflow_time_spine_date_day",
+              "unique_metricflow_time_spine_date_day"
+            ],
+            "empty": false,
+            "complete": true,
+            "unmatched": []
+          },
+          "digests": {
+            "manifest_sha256": "sha256:c33df114601bf101c28bbbb6bd8b96c525f51ad31511d8f146c5d73e99073d17",
+            "run_results_sha256": "sha256:db9c3a37426d0faf2a3190071d9363592828f8ae285257dd4fc8f0db84b81cd8",
+            "source_digest": "sha256:fa2ce4f9f6f63a375962d82858660eb309e310cd1e20b1293ce9db799f40b77e",
+            "plan_digest": null
+          },
+          "generated": [
+            "analytics.main.annotations",
+            "analytics.main.dim_event",
+            "analytics.main.dim_repository",
+            "analytics.main.fct_legacy",
+            "analytics.main.fct_observations",
+            "analytics.main.fct_path",
+            "analytics.main.fct_referrer",
+            "analytics.main.fct_snapshot_status",
+            "analytics.main.fct_traffic",
+            "analytics.main.metricflow_time_spine",
+            "analytics.main.stg_discovery",
+            "analytics.main.stg_legacy",
+            "analytics.main.stg_observations",
+            "analytics.main.stg_releases",
+            "analytics.main.stg_repositories",
+            "analytics.main.stg_snapshots",
+            "analytics.main.stg_traffic"
+          ],
+          "errors": [],
+          "stale_artifacts": false,
+          "plan_drift": [],
+          "nodes": [
+            {
+              "unique_id": "model.oss_analytics.stg_discovery",
+              "name": "stg_discovery",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.03091716766357422,
+              "materialization": "view",
+              "relation": "analytics.main.stg_discovery",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_legacy",
+              "name": "stg_legacy",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.015643835067749023,
+              "materialization": "view",
+              "relation": "analytics.main.stg_legacy",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_observations",
+              "name": "stg_observations",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.01243901252746582,
+              "materialization": "view",
+              "relation": "analytics.main.stg_observations",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_releases",
+              "name": "stg_releases",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.013664960861206055,
+              "materialization": "view",
+              "relation": "analytics.main.stg_releases",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_repositories",
+              "name": "stg_repositories",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.012115240097045898,
+              "materialization": "view",
+              "relation": "analytics.main.stg_repositories",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_snapshots",
+              "name": "stg_snapshots",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.012494802474975586,
+              "materialization": "view",
+              "relation": "analytics.main.stg_snapshots",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.stg_traffic",
+              "name": "stg_traffic",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.05127120018005371,
+              "materialization": "view",
+              "relation": "analytics.main.stg_traffic",
+              "message": "OK"
+            },
+            {
+              "unique_id": "seed.oss_analytics.annotations",
+              "name": "annotations",
+              "resource_type": "seed",
+              "status": "success",
+              "execution_time": 0.02393794059753418,
+              "materialization": "seed",
+              "relation": "analytics.main.annotations",
+              "message": "INSERT 0"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_discovery_discovery_source_key.0504574b78",
+              "name": "not_null_stg_discovery_discovery_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.017067909240722656,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_discovery_discovery_source_key.9f79150df6",
+              "name": "unique_stg_discovery_discovery_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.011796951293945312,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_legacy_legacy_source_key.4005af8564",
+              "name": "not_null_stg_legacy_legacy_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0071179866790771484,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_legacy_legacy_source_key.5c9878946a",
+              "name": "unique_stg_legacy_legacy_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.00832676887512207,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_observations_observation_source_key.0a9b5efec2",
+              "name": "not_null_stg_observations_observation_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008584976196289062,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_observations_observation_source_key.71d4525f0e",
+              "name": "unique_stg_observations_observation_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007910966873168945,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_releases_release_source_key.561fb2c05f",
+              "name": "not_null_stg_releases_release_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0075871944427490234,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_releases_release_source_key.c705203b11",
+              "name": "unique_stg_releases_release_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008323192596435547,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_repositories_repository.7004f81c82",
+              "name": "not_null_stg_repositories_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007256031036376953,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_repositories_repository.69d0beee76",
+              "name": "unique_stg_repositories_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007462024688720703,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_snapshots_snapshot_source_key.964042a59e",
+              "name": "not_null_stg_snapshots_snapshot_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0074961185455322266,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_snapshots_snapshot_source_key.0ca883b0c1",
+              "name": "unique_stg_snapshots_snapshot_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007772207260131836,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_stg_traffic_traffic_source_key.f8f3ee00fc",
+              "name": "not_null_stg_traffic_traffic_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008474111557006836,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_stg_traffic_traffic_source_key.71f63f903e",
+              "name": "unique_stg_traffic_traffic_source_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0076138973236083984,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_legacy",
+              "name": "fct_legacy",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.026607036590576172,
+              "materialization": "table",
+              "relation": "analytics.main.fct_legacy",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_observations",
+              "name": "fct_observations",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.014045000076293945,
+              "materialization": "table",
+              "relation": "analytics.main.fct_observations",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.dim_event",
+              "name": "dim_event",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.01366877555847168,
+              "materialization": "table",
+              "relation": "analytics.main.dim_event",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.dim_repository",
+              "name": "dim_repository",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.013840913772583008,
+              "materialization": "table",
+              "relation": "analytics.main.dim_repository",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_snapshot_status",
+              "name": "fct_snapshot_status",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.01639723777770996,
+              "materialization": "table",
+              "relation": "analytics.main.fct_snapshot_status",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_traffic",
+              "name": "fct_traffic",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.014145135879516602,
+              "materialization": "table",
+              "relation": "analytics.main.fct_traffic",
+              "message": "OK"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_legacy_legacy_key.cd1a8ddfd7",
+              "name": "not_null_fct_legacy_legacy_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.00897216796875,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_legacy_repository.eefeff28f0",
+              "name": "not_null_fct_legacy_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0072100162506103516,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_legacy_legacy_key.0c547999b1",
+              "name": "unique_fct_legacy_legacy_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007424116134643555,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_observations_observation_key.674964e9d4",
+              "name": "not_null_fct_observations_observation_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007256031036376953,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_observations_repository.bfc9386302",
+              "name": "not_null_fct_observations_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007742881774902344,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_observations_observation_key.67f8c65d58",
+              "name": "unique_fct_observations_observation_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008340120315551758,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_dim_event_event_id.0c6d51b179",
+              "name": "not_null_dim_event_event_id",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.006971120834350586,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_dim_event_repository.08cc61bfe8",
+              "name": "not_null_dim_event_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.006960868835449219,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_dim_event_event_id.2b7d146c7c",
+              "name": "unique_dim_event_event_id",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007547855377197266,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_dim_repository_repository.54eee3ce05",
+              "name": "not_null_dim_repository_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007379770278930664,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_dim_event_repository__repository__ref_dim_repository_.412f2fb58c",
+              "name": "relationships_dim_event_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008579015731811523,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_legacy_repository__repository__ref_dim_repository_.f12a19ab61",
+              "name": "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.009706974029541016,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_observations_repository__repository__ref_dim_repository_.c08f4ee287",
+              "name": "relationships_fct_observations_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007948160171508789,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_dim_repository_repository.3bad728b11",
+              "name": "unique_dim_repository_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007105827331542969,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_repository.d3b7cbbc68",
+              "name": "not_null_fct_snapshot_status_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007122993469238281,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_snapshot_key.5dc1b3bcc0",
+              "name": "not_null_fct_snapshot_status_snapshot_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.00767207145690918,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_snapshot_status_repository__repository__ref_dim_repository_.f42b2ac446",
+              "name": "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.01041412353515625,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_snapshot_status_snapshot_key.d1bf4a46f8",
+              "name": "unique_fct_snapshot_status_snapshot_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0074961185455322266,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_traffic_repository.df3e944ebf",
+              "name": "not_null_fct_traffic_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007481813430786133,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_traffic_traffic_key.4d87115ef7",
+              "name": "not_null_fct_traffic_traffic_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007323741912841797,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_traffic_repository__repository__ref_dim_repository_.c515931e45",
+              "name": "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007561922073364258,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.traffic_source_contract",
+              "name": "traffic_source_contract",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008914947509765625,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_traffic_traffic_key.731ee52571",
+              "name": "unique_fct_traffic_traffic_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0076448917388916016,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_path",
+              "name": "fct_path",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.019993066787719727,
+              "materialization": "table",
+              "relation": "analytics.main.fct_path",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.fct_referrer",
+              "name": "fct_referrer",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.01958775520324707,
+              "materialization": "table",
+              "relation": "analytics.main.fct_referrer",
+              "message": "OK"
+            },
+            {
+              "unique_id": "model.oss_analytics.metricflow_time_spine",
+              "name": "metricflow_time_spine",
+              "resource_type": "model",
+              "status": "success",
+              "execution_time": 0.014377832412719727,
+              "materialization": "table",
+              "relation": "analytics.main.metricflow_time_spine",
+              "message": "OK"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_path_path_key.450c1416ad",
+              "name": "not_null_fct_path_path_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0070650577545166016,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_path_repository.dec0a98de0",
+              "name": "not_null_fct_path_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007288217544555664,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_path_repository__repository__ref_dim_repository_.c202ee9a6e",
+              "name": "relationships_fct_path_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.009869098663330078,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_path_path_key.dad82dccb7",
+              "name": "unique_fct_path_path_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008765935897827148,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.discovery_grid",
+              "name": "discovery_grid",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.009779930114746094,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_referrer_referrer_key.0af57f67a0",
+              "name": "not_null_fct_referrer_referrer_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008006095886230469,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_fct_referrer_repository.59dbd5981d",
+              "name": "not_null_fct_referrer_repository",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007982015609741211,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.relationships_fct_referrer_repository__repository__ref_dim_repository_.ef981f0ab1",
+              "name": "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.010081052780151367,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_fct_referrer_referrer_key.6f0d6b0846",
+              "name": "unique_fct_referrer_referrer_key",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.008951187133789062,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.not_null_metricflow_time_spine_date_day.54acf49e8d",
+              "name": "not_null_metricflow_time_spine_date_day",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.0075719356536865234,
+              "materialization": "test"
+            },
+            {
+              "unique_id": "test.oss_analytics.unique_metricflow_time_spine_date_day.ddb41ceac8",
+              "name": "unique_metricflow_time_spine_date_day",
+              "resource_type": "test",
+              "status": "pass",
+              "execution_time": 0.007505178451538086,
+              "materialization": "test"
+            }
+          ]
+        },
+        "verification": {
+          "ran": true,
+          "scope": [
+            "dim_event",
+            "dim_repository",
+            "fct_legacy",
+            "fct_observations",
+            "fct_path",
+            "fct_referrer",
+            "fct_snapshot_status",
+            "fct_traffic",
+            "metricflow_time_spine",
+            "stg_discovery",
+            "stg_legacy",
+            "stg_observations",
+            "stg_releases",
+            "stg_repositories",
+            "stg_snapshots",
+            "stg_traffic"
+          ],
+          "findings": [],
+          "finding_count": 0,
+          "suppressed": {
+            "no_relation": "dbt's run results are authoritative for the nodes this build ran"
+          }
+        }
+      },
+      "connection": {
+        "connector": "duckdb",
+        "target": {
+          "path": "/Users/marcociavarella/Projects/how-to-track-your-open-source-analytics/.data/workspaces/4ca28031f7c54ab29cd70539c1af11e3/warehouse/analytics.duckdb"
+        },
+        "source": ".dex/config.yml"
+      },
+      "cost": {
+        "paradigm": "free_local",
+        "estimate": 0.0,
+        "ceiling": null,
+        "estimate_quality": null,
+        "unit": null
+      },
+      "warnings": [
+        "no confirm handshake: this connector cannot bill, so there was nothing to confirm and the command ran without asking",
+        "no single driving parent could be identified for dim_event (it is a set operation, so it has no single parent), metricflow_time_spine (it is driven by a set operation, so it has no single parent)"
+      ],
+      "diffs": [],
+      "errors": [],
+      "reason": null
+    },
+    "validated": false
+  }
+}

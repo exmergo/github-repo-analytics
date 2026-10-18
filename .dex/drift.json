@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "connector": "duckdb",
+  "snapshot_created_at": "2026-10-18T22:29:33.406994+00:00",
+  "axes": {
+    "schema": {
+      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "scope": null,
+      "findings": []
+    },
+    "volume": {
+      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "scope": null,
+      "findings": []
+    },
+    "grain": {
+      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "scope": null,
+      "findings": [
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.stg_observations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.stg_observations has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine",
+            "stg_observations"
+          ],
+          "impacted_metrics": [
+            "forks_net_change",
+            "forks_observed",
+            "stars_net_change",
+            "stars_observed"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.raw.observations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.raw.observations has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine",
+            "stg_observations"
+          ],
+          "impacted_metrics": [
+            "forks_net_change",
+            "forks_observed",
+            "stars_net_change",
+            "stars_observed"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.fct_observations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.fct_observations has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine"
+          ],
+          "impacted_metrics": [
+            "forks_net_change",
+            "forks_observed",
+            "stars_net_change",
+            "stars_observed"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.annotations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.annotations has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "annotations",
+            "dim_event",
+            "metricflow_time_spine"
+          ],
+          "impacted_metrics": []
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.stg_releases",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.stg_releases has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "dim_event",
+            "metricflow_time_spine",
+            "stg_releases"
+          ],
+          "impacted_metrics": []
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.raw.releases",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.raw.releases has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "dim_event",
+            "metricflow_time_spine",
+            "stg_releases"
+          ],
+          "impacted_metrics": []
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.dim_event",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.dim_event has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "dim_event",
+            "metricflow_time_spine"
+          ],
+          "impacted_metrics": []
+        }
+      ]
+    },
+    "semantic": {
+      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "scope": null,
+      "findings": [
+        {
+          "axis": "semantic",
+          "code": "dimension_cardinality_changed",
+          "identifier": "analytics.main.fct_path",
+          "column": "path",
+          "severity": "medium",
+          "detail": "dimension 'path' on semantic model 'fct_path' widened: ~69 -> 79 distinct values in analytics.main.fct_path.path",
+          "exact": false,
+          "data": {
+            "distinct_before": 69,
+            "distinct_after": 79,
+            "dimension": "path",
+            "semantic_model": "fct_path"
+          },
+          "impacted_models": [
+            "fct_path"
+          ],
+          "impacted_metrics": [
+            "path_views_14d",
+            "path_visitor_observations_14d"
+          ]
+        },
+        {
+          "axis": "semantic",
+          "code": "dimension_cardinality_changed",
+          "identifier": "analytics.main.fct_referrer",
+          "column": "referrer",
+          "severity": "medium",
+          "detail": "dimension 'referrer' on semantic model 'fct_referrer' narrowed: ~23 -> 22 distinct values in analytics.main.fct_referrer.referrer",
+          "exact": false,
+          "data": {
+            "distinct_before": 23,
+            "distinct_after": 22,
+            "dimension": "referrer",
+            "semantic_model": "fct_referrer"
+          },
+          "impacted_models": [
+            "fct_referrer"
+          ],
+          "impacted_metrics": [
+            "referrer_views_14d",
+            "referrer_visitor_observations_14d"
+          ]
+        }
+      ]
+    }
+  }
+}

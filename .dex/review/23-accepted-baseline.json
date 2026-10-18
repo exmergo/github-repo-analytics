@@ -1,0 +1,46 @@
+{
+  "status": "ok",
+  "data": {
+    "status": "ok",
+    "data": {
+      "snapshot_path": "/Users/marcociavarella/Projects/how-to-track-your-open-source-analytics/.dex/snapshot.json",
+      "baseline": {
+        "from": "cache",
+        "dataset_count": 24,
+        "relationship_count": 9,
+        "grain_baseline_count": 17,
+        "column_detail_count": 24,
+        "cache_updated_at": "2026-10-18T22:28:59.565237+00:00",
+        "carried_forward": false
+      },
+      "transform_layer": {
+        "file_count": 24,
+        "model_count": 17,
+        "source_count": 7
+      },
+      "semantic_layer": {
+        "semantic_model_count": 6,
+        "metric_count": 17
+      },
+      "hint": "commit .dex/snapshot.json like a lockfile, and re-run `maintain snapshot` after each known-good build so drift is measured against a state someone vouched for"
+    },
+    "connection": {
+      "connector": "duckdb",
+      "target": {
+        "path": "/Users/marcociavarella/Projects/how-to-track-your-open-source-analytics/warehouse/analytics.duckdb"
+      },
+      "source": ".dex/config.yml"
+    },
+    "cost": {
+      "paradigm": "free_local",
+      "estimate": null,
+      "ceiling": null,
+      "estimate_quality": null,
+      "unit": null
+    },
+    "warnings": [],
+    "diffs": [],
+    "errors": [],
+    "reason": null
+  }
+}
