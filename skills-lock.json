@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "explore": {
+      "source": "exmergo/dex",
+      "sourceType": "github",
+      "skillPath": "skills/explore/SKILL.md",
+      "computedHash": "80699f748866ca929ef642298de11e122e7eab6bdca2228a8d2f94a7ccc2309a"
+    },
+    "maintain": {
+      "source": "exmergo/dex",
+      "sourceType": "github",
+      "skillPath": "skills/maintain/SKILL.md",
+      "computedHash": "8fc9e107291f721e75e3eacdca829337f850dedf13572859b4975bfeb8e5fc49"
+    },
+    "transform": {
+      "source": "exmergo/dex",
+      "sourceType": "github",
+      "skillPath": "skills/transform/SKILL.md",
+      "computedHash": "e5aa4948f7d5d0dd5bd4b02f78fd251a70a15245d22e70f69679e8d9f7c8e915"
+    }
+  }
+}

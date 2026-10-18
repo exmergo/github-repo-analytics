@@ -1,0 +1,10 @@
+connector: duckdb
+duckdb:
+  path: warehouse/analytics.duckdb
+dbt_project_dir: .
+dbt_target: dev
+semantic:
+  vendor: dbt
+  deployment: local
+cache:
+  backend: filesystem

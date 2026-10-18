@@ -18,12 +18,10 @@ warehouse/
 target/
 logs/
 dbt_packages/
+.user.yml
 
-# Generated Dex state (keep .dex/config.yml and .dex/README.md)
-.dex/cache.json
-.dex/snapshot.json
-.dex/drift.json
-.dex/plans/
+# Keep Dex maps, accepted baselines, plans, and review evidence visible to Git.
+# Query ledgers are local execution logs.
 .dex/*.jsonl
 
 # Local credentials (allow a checked-in example)
