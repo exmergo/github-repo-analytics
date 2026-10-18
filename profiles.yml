@@ -1,0 +1,10 @@
+oss_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('OSS_ANALYTICS_WAREHOUSE', 'warehouse/analytics.duckdb') }}"
+      schema: main
+      threads: 1
+      settings:
+        TimeZone: UTC

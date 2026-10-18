@@ -1,0 +1,29 @@
+name: oss_analytics
+version: 1.0.0
+config-version: 2
+profile: oss_analytics
+model-paths:
+- models
+seed-paths:
+- seeds
+test-paths:
+- data_tests
+clean-targets:
+- target
+- dbt_packages
+models:
+  oss_analytics:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
+seeds:
+  oss_analytics:
+    annotations:
+      +column_types:
+        event_id: varchar
+        repository: varchar
+        event_date: date
+        kind: varchar
+        title: varchar
+        url: varchar

@@ -1,0 +1,12 @@
+version: 2
+sources:
+- name: raw
+  schema: raw
+  tables:
+  - name: repositories
+  - name: traffic
+  - name: observations
+  - name: legacy
+  - name: snapshots
+  - name: discovery
+  - name: releases

@@ -1,0 +1,355 @@
+version: 2
+models:
+- name: dim_repository
+  columns:
+  - name: repository
+    data_tests:
+    - unique
+    - not_null
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: repository_identity
+    description: Stable GitHub repository ID when available, otherwise its configured name.
+  - name: source_revision
+    description: Full immutable Git SHA used to import this repository history.
+  - name: synced_at
+    description: UTC time when the pinned source was imported; not a source event date.
+  description: One row per configured repository.
+- name: fct_traffic
+  columns:
+  - name: traffic_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: clones_total
+    description: GitHub clone operations for this UTC day; not installations.
+  - name: clones_unique
+    description: Daily unique cloner observations; not distinct people over a period.
+  - name: views_total
+    description: GitHub page views for this UTC day; may include automation.
+  - name: views_unique
+    description: Daily unique visitor observations; not distinct people over a period.
+  - name: observed_days
+    description: One per observed repository-day; a coverage count, not an imputation.
+  description: One row per repository and observed UTC date. Counts pass through from the source.
+- name: fct_observations
+  columns:
+  - name: observation_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: stars
+    description: Repository star balance; reconstructed in legacy history, directly captured in observations.
+  - name: forks
+    description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  - name: observation_gap_days
+    description: Days since the previous capture for this repository; null for its first capture.
+  - name: stars_net_change
+    description: Star balance difference only between consecutive captured UTC days; otherwise null.
+  - name: forks_net_change
+    description: Fork balance difference only between consecutive captured UTC days; otherwise null.
+  description: Latest capture per repository and UTC date; daily changes require consecutive dates.
+- name: fct_legacy
+  columns:
+  - name: legacy_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: stars
+    description: Repository star balance; reconstructed in legacy history, directly captured in observations.
+  - name: forks
+    description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  description: One row per repository and historical source date; reconstructed balances carry forward
+    within that repository.
+- name: fct_referrer
+  columns:
+  - name: referrer_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: referrer
+    description: Referring source ever reported in this repository endpoint.
+  - name: views
+    description: Reported views in one rolling snapshot window; null for an unreported item.
+  - name: uniques
+    description: Reported unique observations in one rolling snapshot; not additive across items.
+  - name: reported_rank
+    description: Rank among reported top-10 items; null if absent from the selected snapshot.
+  - name: is_reported
+    description: Whether this item was present in this exact successful snapshot; false is not zero traffic.
+  description: One row per repository, latest daily referrer snapshot, and historically known referrer.
+    Absent items retain null counts.
+- name: fct_path
+  columns:
+  - name: path_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: path
+    description: Repository path ever reported in this repository endpoint.
+  - name: views
+    description: Reported views in one rolling snapshot window; null for an unreported item.
+  - name: uniques
+    description: Reported unique observations in one rolling snapshot; not additive across items.
+  - name: reported_rank
+    description: Rank among reported top-10 items; null if absent from the selected snapshot.
+  - name: is_reported
+    description: Whether this item was present in this exact successful snapshot; false is not zero traffic.
+  description: One row per repository, latest daily path snapshot, and historically known path. Absent
+    items retain null counts.
+- name: fct_snapshot_status
+  columns:
+  - name: snapshot_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: endpoint
+    description: 'GitHub rolling snapshot endpoint: paths or referrers.'
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: source_file
+    description: Original upstream snapshot filename for provenance.
+  description: Latest successful snapshot per repository, endpoint, and UTC date; empty snapshots remain
+    present.
+- name: dim_event
+  columns:
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: event_id
+    data_tests:
+    - unique
+    - not_null
+    description: 'Stable source event identifier; manual annotations use the annotation: prefix in the
+      event mart.'
+  - name: event_date
+    description: UTC event date used for association comparisons, not causal attribution.
+  - name: kind
+    description: Release or maintainer-supplied campaign/event category.
+  - name: title
+    description: Public release or annotation title.
+  - name: url
+    description: Optional public event URL; absence is valid.
+  - name: prerelease
+    description: Whether GitHub marks this release as a prerelease; false for manual annotations.
+  description: One row per public release or annotated event. Comparisons establish association only.
+- name: metricflow_time_spine
+  time_spine:
+    standard_granularity_column: date_day
+  columns:
+  - name: date_day
+    granularity: day
+    data_tests:
+    - unique
+    - not_null
+    description: Continuous UTC day used by MetricFlow as its day-grain time spine.
+  description: Continuous UTC calendar spanning the observed sources and a 28-day margin.
+- name: stg_releases
+  columns:
+  - name: release_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: event_id
+    description: 'Stable source event identifier; manual annotations use the annotation: prefix in the
+      event mart.'
+  - name: event_date
+    description: UTC event date used for association comparisons, not causal attribution.
+  - name: kind
+    description: Release or maintainer-supplied campaign/event category.
+  - name: title
+    description: Public release or annotation title.
+  - name: url
+    description: Optional public event URL; absence is valid.
+  - name: prerelease
+    description: Whether GitHub marks this release as a prerelease; false for manual annotations.
+  description: "Explicit source projection at grain repository \xD7 event_id. No deduplication or missing-date\
+    \ imputation."
+- name: stg_discovery
+  columns:
+  - name: discovery_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: endpoint
+    description: 'GitHub rolling snapshot endpoint: paths or referrers.'
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: item
+    description: Reported path or referrer within this endpoint capture; not a complete traffic census.
+  - name: views
+    description: Reported views in one rolling snapshot window; null for an unreported item.
+  - name: uniques
+    description: Reported unique observations in one rolling snapshot; not additive across items.
+  - name: reported_rank
+    description: Rank among reported top-10 items; null if absent from the selected snapshot.
+  description: "Explicit source projection at grain repository \xD7 endpoint \xD7 captured_at \xD7 item.\
+    \ No deduplication or missing-date imputation."
+- name: stg_legacy
+  columns:
+  - name: legacy_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: stars
+    description: Repository star balance; reconstructed in legacy history, directly captured in observations.
+  - name: forks
+    description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  description: "Explicit source projection at grain repository \xD7 date. No deduplication or missing-date\
+    \ imputation."
+- name: stg_observations
+  columns:
+  - name: observation_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: stars
+    description: Repository star balance; reconstructed in legacy history, directly captured in observations.
+  - name: forks
+    description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  description: "Explicit source projection at grain repository \xD7 captured_at. No deduplication or missing-date\
+    \ imputation."
+- name: stg_repositories
+  columns:
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository_identity
+    description: Stable GitHub repository ID when available, otherwise its configured name.
+  - name: source_revision
+    description: Full immutable Git SHA used to import this repository history.
+  - name: synced_at
+    description: UTC time when the pinned source was imported; not a source event date.
+  description: Explicit source projection at grain repository. No deduplication or missing-date imputation.
+- name: stg_snapshots
+  columns:
+  - name: snapshot_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: endpoint
+    description: 'GitHub rolling snapshot endpoint: paths or referrers.'
+  - name: captured_at
+    description: Exact successful capture timestamp, normalized to UTC for daily selection.
+  - name: source_file
+    description: Original upstream snapshot filename for provenance.
+  description: "Explicit source projection at grain repository \xD7 endpoint \xD7 captured_at. No deduplication\
+    \ or missing-date imputation."
+- name: stg_traffic
+  columns:
+  - name: traffic_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    description: UTC observation date. Missing dates are absent evidence, never implied zeros.
+  - name: clones_total
+    description: GitHub clone operations for this UTC day; not installations.
+  - name: clones_unique
+    description: Daily unique cloner observations; not distinct people over a period.
+  - name: views_total
+    description: GitHub page views for this UTC day; may include automation.
+  - name: views_unique
+    description: Daily unique visitor observations; not distinct people over a period.
+  description: "Explicit source projection at grain repository \xD7 date. No deduplication or missing-date\
+    \ imputation."
