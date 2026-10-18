@@ -1,0 +1,343 @@
+version: 2
+semantic_models:
+- name: repositories
+  description: Repository identity.
+  model: ref('dim_repository')
+  entities:
+  - name: repository
+    type: primary
+    expr: repository
+  dimensions:
+  - name: name
+    type: categorical
+    expr: repository
+- name: fct_traffic
+  description: Governed fct_traffic analytics; see docs/metrics.md for interpretation.
+  model: ref('fct_traffic')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: traffic_row
+    type: primary
+    expr: traffic_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: views_measure
+    agg: sum
+    expr: views_total
+    description: Total GitHub page views. May include automated activity.
+  - name: clones_measure
+    agg: sum
+    expr: clones_total
+    description: Total GitHub clones; not installations or active users.
+  - name: visitor_days_measure
+    agg: sum
+    expr: views_unique
+    description: Sum of daily unique visitors. Counts the same visitor again on another
+      day or repository.
+  - name: cloner_days_measure
+    agg: sum
+    expr: clones_unique
+    description: Sum of daily unique cloners. Not distinct people over the whole period.
+  - name: observed_traffic_days_measure
+    agg: sum
+    expr: observed_days
+    description: Observed repository-days. Compare to expected repository-days to
+      check coverage.
+- name: fct_observations
+  description: Governed fct_observations analytics; see docs/metrics.md for interpretation.
+  model: ref('fct_observations')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: observation_row
+    type: primary
+    expr: observation_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: observation_gap_days
+    type: categorical
+  measures:
+  - name: stars_observed_measure
+    agg: sum
+    expr: stars
+    description: Last observed repository star total within each time bucket, separately
+      per repository.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: forks_observed_measure
+    agg: sum
+    expr: forks
+    description: Last observed repository fork total within each time bucket, separately
+      per repository.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: stars_net_change_measure
+    agg: sum
+    expr: stars_net_change
+    description: Net change between consecutive daily captures; gaps and initial observations
+      are null.
+  - name: forks_net_change_measure
+    agg: sum
+    expr: forks_net_change
+    description: Net change between consecutive daily captures; gaps and initial observations
+      are null.
+- name: fct_legacy
+  description: Governed fct_legacy analytics; see docs/metrics.md for interpretation.
+  model: ref('fct_legacy')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: legacy_row
+    type: primary
+    expr: legacy_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: legacy_stars_cumulative_measure
+    agg: sum
+    expr: stars
+    description: Upstream reconstructed star history at the pinned source revision;
+      not exact historical observed totals.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: legacy_forks_cumulative_measure
+    agg: sum
+    expr: forks
+    description: Upstream reconstructed fork history at the pinned source revision;
+      not exact historical observed totals.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+- name: fct_referrer
+  description: Governed fct_referrer analytics; see docs/metrics.md for interpretation.
+  model: ref('fct_referrer')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: referrer_row
+    type: primary
+    expr: referrer_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: referrer
+    type: categorical
+  measures:
+  - name: referrer_views_14d_measure
+    agg: sum
+    expr: views
+    description: Reported referrer views in the rolling window of the last snapshot
+      in each bucket. Never sum snapshots.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: referrer_visitor_observations_14d_measure
+    agg: sum
+    expr: uniques
+    description: Reported referrer unique observations for one rolling snapshot. Not
+      deduplicated across items.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+- name: fct_path
+  description: Governed fct_path analytics; see docs/metrics.md for interpretation.
+  model: ref('fct_path')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: path_row
+    type: primary
+    expr: path_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: path
+    type: categorical
+  measures:
+  - name: path_views_14d_measure
+    agg: sum
+    expr: views
+    description: Reported path views in the rolling window of the last snapshot in
+      each bucket. Never sum snapshots.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: path_visitor_observations_14d_measure
+    agg: sum
+    expr: uniques
+    description: Reported path unique observations for one rolling snapshot. Not deduplicated
+      across items.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+metrics:
+- name: views
+  label: Views
+  description: Total GitHub page views. May include automated activity.
+  type: simple
+  type_params:
+    measure: views_measure
+- name: clones
+  label: Clones
+  description: Total GitHub clones; not installations or active users.
+  type: simple
+  type_params:
+    measure: clones_measure
+- name: visitor_days
+  label: Visitor Days
+  description: Sum of daily unique visitors. Counts the same visitor again on another
+    day or repository.
+  type: simple
+  type_params:
+    measure: visitor_days_measure
+- name: cloner_days
+  label: Cloner Days
+  description: Sum of daily unique cloners. Not distinct people over the whole period.
+  type: simple
+  type_params:
+    measure: cloner_days_measure
+- name: observed_traffic_days
+  label: Observed Traffic Days
+  description: Count of observed repository-days. For complete coverage expect calendar
+    days multiplied by the number of selected repositories; missing dates contribute
+    no row and are not zero-traffic days.
+  type: simple
+  type_params:
+    measure: observed_traffic_days_measure
+- name: stars_observed
+  label: Stars Observed
+  description: Last observed repository star total within each time bucket, separately
+    per repository.
+  type: simple
+  type_params:
+    measure: stars_observed_measure
+- name: forks_observed
+  label: Forks Observed
+  description: Last observed repository fork total within each time bucket, separately
+    per repository.
+  type: simple
+  type_params:
+    measure: forks_observed_measure
+- name: stars_net_change
+  label: Stars Net Change
+  description: Net change between consecutive daily captures; gaps and initial observations
+    are null.
+  type: simple
+  type_params:
+    measure: stars_net_change_measure
+- name: forks_net_change
+  label: Forks Net Change
+  description: Net change between consecutive daily captures; gaps and initial observations
+    are null.
+  type: simple
+  type_params:
+    measure: forks_net_change_measure
+- name: legacy_stars_cumulative
+  label: Legacy Stars Cumulative
+  description: Upstream reconstructed star history at the pinned source revision;
+    not exact historical observed totals.
+  type: simple
+  type_params:
+    measure: legacy_stars_cumulative_measure
+- name: legacy_forks_cumulative
+  label: Legacy Forks Cumulative
+  description: Upstream reconstructed fork history at the pinned source revision;
+    not exact historical observed totals.
+  type: simple
+  type_params:
+    measure: legacy_forks_cumulative_measure
+- name: referrer_views_14d
+  label: Referrer Views 14D
+  description: Reported referrer views in the rolling window of the last snapshot
+    in each bucket. Never sum snapshots.
+  type: simple
+  type_params:
+    measure: referrer_views_14d_measure
+- name: referrer_visitor_observations_14d
+  label: Referrer Visitor Observations 14D
+  description: Reported referrer unique observations for one rolling snapshot. Not
+    deduplicated across items.
+  type: simple
+  type_params:
+    measure: referrer_visitor_observations_14d_measure
+- name: path_views_14d
+  label: Path Views 14D
+  description: Reported path views in the rolling window of the last snapshot in each
+    bucket. Never sum snapshots.
+  type: simple
+  type_params:
+    measure: path_views_14d_measure
+- name: path_visitor_observations_14d
+  label: Path Visitor Observations 14D
+  description: Reported path unique observations for one rolling snapshot. Not deduplicated
+    across items.
+  type: simple
+  type_params:
+    measure: path_visitor_observations_14d_measure
+- name: views_per_visitor_day
+  label: Views Per Visitor Day
+  description: Total page views divided by the sum of daily unique visitor observations
+    over the same UTC period. Ratio of sums, not an average of daily ratios and not
+    distinct people over the period. Zero denominator returns null.
+  type: ratio
+  type_params:
+    numerator: views
+    denominator: visitor_days
+- name: clones_per_cloner_day
+  label: Clones Per Cloner Day
+  description: Total clone operations divided by the sum of daily unique cloner observations
+    over the same UTC period. Ratio of sums, not installations, active users, or a
+    conversion rate. Zero denominator returns null.
+  type: ratio
+  type_params:
+    numerator: clones
+    denominator: cloner_days
