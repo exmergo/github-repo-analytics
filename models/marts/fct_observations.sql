@@ -11,7 +11,7 @@ with daily as (
     window w as (partition by repository order by date)
 )
 select md5(repository || '|' || cast(date as varchar)) as observation_key,
-       repository, date, captured_at, stars, forks,
+       repository, date, captured_at, stars, forks, watchers, open_issues_and_prs,
        date_diff('day', previous_date, date) as observation_gap_days,
        case when date_diff('day', previous_date, date) = 1 then stars - previous_stars end as stars_net_change,
        case when date_diff('day', previous_date, date) = 1 then forks - previous_forks end as forks_net_change

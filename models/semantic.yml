@@ -101,6 +101,26 @@ semantic_models:
     expr: forks_net_change
     description: Net change between consecutive daily captures; gaps and initial observations
       are null.
+  - name: watchers_observed_measure
+    agg: sum
+    expr: watchers
+    description: Last observed GitHub watcher (subscriber) total within each time bucket,
+      separately per repository. Null before collection captured it.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: open_issues_and_prs_observed_measure
+    agg: sum
+    expr: open_issues_and_prs
+    description: Last observed open issues plus open pull requests (GitHub open_issues_count)
+      within each time bucket, separately per repository.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
 - name: fct_legacy
   description: Governed fct_legacy analytics; see docs/metrics.md for interpretation.
   model: ref('fct_legacy')
@@ -139,6 +159,16 @@ semantic_models:
       window_choice: max
       window_groupings:
       - repository
+  - name: legacy_stars_change_measure
+    agg: sum
+    expr: stars_change
+    description: Change in the upstream reconstructed star balance between historical
+      rows; the first row is null.
+  - name: legacy_forks_change_measure
+    agg: sum
+    expr: forks_change
+    description: Change in the upstream reconstructed fork balance between historical
+      rows; the first row is null.
 - name: fct_referrer
   description: Governed fct_referrer analytics; see docs/metrics.md for interpretation.
   model: ref('fct_referrer')
@@ -219,6 +249,203 @@ semantic_models:
       window_choice: max
       window_groupings:
       - repository
+- name: events
+  description: Releases and maintainer annotations used for association comparisons.
+  model: ref('dim_event')
+  defaults:
+    agg_time_dimension: event_date
+  entities:
+  - name: event
+    type: primary
+    expr: event_id
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: event_date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: kind
+    type: categorical
+  - name: title
+    type: categorical
+  - name: prerelease
+    type: categorical
+  measures:
+  - name: events_measure
+    agg: count
+    expr: event_id
+    description: Published releases and annotations dated in the period.
+- name: fct_star_history
+  description: Star history from the dates current stargazers starred the repository.
+  model: ref('fct_star_history')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: star_history_row
+    type: primary
+    expr: star_history_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: stars_gained_measure
+    agg: sum
+    expr: stars_gained
+    description: Current stargazers who starred in the period. Unstars are invisible, so
+      history counts only people who still star the repository.
+- name: fct_fork_history
+  description: Fork history from the creation dates of existing direct forks.
+  model: ref('fct_fork_history')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: fork_history_row
+    type: primary
+    expr: fork_history_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: forks_created_measure
+    agg: sum
+    expr: forks_created
+    description: Existing direct forks created in the period; deleted forks are invisible.
+- name: fct_issues
+  description: Issue and pull request activity without titles, bodies, or author identities.
+  model: ref('fct_issues')
+  defaults:
+    agg_time_dimension: created_date
+  entities:
+  - name: issue
+    type: primary
+    expr: issue_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: created_date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: closed_date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: merged_date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: kind
+    type: categorical
+  - name: author_association
+    type: categorical
+  measures:
+  - name: issues_opened_measure
+    agg: sum
+    expr: case when kind = 'issue' then 1 else 0 end
+    description: Issues opened in the period (excludes pull requests).
+  - name: issues_closed_measure
+    agg: sum
+    expr: case when kind = 'issue' and closed_date is not null then 1 else 0 end
+    agg_time_dimension: closed_date
+    description: Issues closed in the period, by close date (excludes pull requests).
+  - name: prs_opened_measure
+    agg: sum
+    expr: case when kind = 'pull_request' then 1 else 0 end
+    description: Pull requests opened in the period.
+  - name: prs_merged_measure
+    agg: sum
+    expr: case when merged_date is not null then 1 else 0 end
+    agg_time_dimension: merged_date
+    description: Pull requests merged in the period, by merge date.
+  - name: first_time_contributor_prs_measure
+    agg: sum
+    expr: case when kind = 'pull_request' and is_first_time_contributor then 1 else 0 end
+    description: Pull requests whose author GitHub marked as a first-time contributor when
+      collection first saw them. Backfilled history undercounts.
+  - name: hours_to_merge_measure
+    agg: percentile
+    expr: hours_to_merge
+    agg_time_dimension: merged_date
+    agg_params:
+      percentile: 0.5
+      use_discrete_percentile: false
+    description: Median hours from opening to merge for pull requests merged in the period.
+- name: fct_release_downloads
+  description: GitHub release asset download balances captured by collection.
+  model: ref('fct_release_downloads')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: release_download_row
+    type: primary
+    expr: release_download_key
+  - name: repository
+    type: foreign
+    expr: repository
+  - name: event
+    type: foreign
+    expr: event_id
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: release_downloads_measure
+    agg: sum
+    expr: download_count
+    description: Cumulative release asset downloads at the last capture in each bucket,
+      separately per repository. Not unique users or installations.
+    non_additive_dimension:
+      name: date
+      window_choice: max
+      window_groupings:
+      - repository
+  - name: release_downloads_net_change_measure
+    agg: sum
+    expr: downloads_net_change
+    description: Release asset download change between consecutive daily captures; gaps
+      and initial captures are null.
+- name: fct_package_downloads
+  description: Optional package-registry downloads (PyPI via pypistats, npm via the npm API).
+  model: ref('fct_package_downloads')
+  defaults:
+    agg_time_dimension: date
+  entities:
+  - name: package_download
+    type: primary
+    expr: package_download_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: registry
+    type: categorical
+  - name: package
+    type: categorical
+  measures:
+  - name: package_downloads_measure
+    agg: sum
+    expr: downloads
+    description: Registry downloads reported for the period; includes CI and bots, PyPI
+      excludes mirrors. Not installations or users.
 metrics:
 - name: views
   label: Views
@@ -341,3 +568,152 @@ metrics:
   type_params:
     numerator: clones
     denominator: cloner_days
+- name: watchers_observed
+  label: Watchers Observed
+  description: "Last observed GitHub watcher (subscriber) total within each time bucket, separately per repository."
+  type: simple
+  type_params:
+    measure: watchers_observed_measure
+- name: open_issues_and_prs_observed
+  label: Open Issues and PRs Observed
+  description: "Last observed open issues plus open pull requests (GitHub open_issues_count), separately per repository."
+  type: simple
+  type_params:
+    measure: open_issues_and_prs_observed_measure
+- name: legacy_stars_change
+  label: Legacy Stars Change
+  description: "Change in the upstream reconstructed star balance; historical, not observed captures."
+  type: simple
+  type_params:
+    measure: legacy_stars_change_measure
+- name: legacy_forks_change
+  label: Legacy Forks Change
+  description: "Change in the upstream reconstructed fork balance; historical, not observed captures."
+  type: simple
+  type_params:
+    measure: legacy_forks_change_measure
+- name: events
+  label: Events
+  description: "Published releases and maintainer annotations dated in the period."
+  type: simple
+  type_params:
+    measure: events_measure
+- name: stars_gained
+  label: Stars Gained
+  description: "Stars from current stargazers by the day they starred. Unstars are invisible; complete only through the last fully collected day."
+  type: simple
+  type_params:
+    measure: stars_gained_measure
+- name: forks_created
+  label: Forks Created
+  description: "Existing direct forks by creation day. Deleted forks are invisible; complete only through the last fully collected day."
+  type: simple
+  type_params:
+    measure: forks_created_measure
+- name: issues_opened
+  label: Issues Opened
+  description: "Issues opened in the period, excluding pull requests."
+  type: simple
+  type_params:
+    measure: issues_opened_measure
+- name: issues_closed
+  label: Issues Closed
+  description: "Issues closed in the period by close date, excluding pull requests."
+  type: simple
+  type_params:
+    measure: issues_closed_measure
+- name: prs_opened
+  label: PRs Opened
+  description: "Pull requests opened in the period."
+  type: simple
+  type_params:
+    measure: prs_opened_measure
+- name: prs_merged
+  label: PRs Merged
+  description: "Pull requests merged in the period by merge date."
+  type: simple
+  type_params:
+    measure: prs_merged_measure
+- name: first_time_contributor_prs
+  label: First-Time Contributor PRs
+  description: "Pull requests GitHub marked as from first-time contributors when first collected. Backfilled history undercounts; this is not distinct new people."
+  type: simple
+  type_params:
+    measure: first_time_contributor_prs_measure
+- name: median_hours_to_merge
+  label: Median Hours to Merge
+  description: "Median hours from opening to merge for pull requests merged in the period."
+  type: simple
+  type_params:
+    measure: hours_to_merge_measure
+- name: release_downloads
+  label: Release Downloads
+  description: "Cumulative GitHub release asset downloads at the last capture in each bucket. Not unique users or installations."
+  type: simple
+  type_params:
+    measure: release_downloads_measure
+- name: release_downloads_net_change
+  label: Release Downloads Net Change
+  description: "Release asset download change between consecutive daily captures; gaps are null."
+  type: simple
+  type_params:
+    measure: release_downloads_net_change_measure
+- name: package_downloads
+  label: Package Downloads
+  description: "Registry downloads across configured packages. Includes CI and bots; not installations or users."
+  type: simple
+  type_params:
+    measure: package_downloads_measure
+- name: pypi_downloads
+  label: PyPI Downloads
+  description: "PyPI downloads (pypistats, mirrors excluded) for configured packages. Includes CI; not users."
+  type: simple
+  type_params:
+    measure: package_downloads_measure
+  filter: "{{ Dimension('package_download__registry') }} = 'pypi'"
+- name: npm_downloads
+  label: npm Downloads
+  description: "npm registry downloads for configured packages. Includes CI; not users."
+  type: simple
+  type_params:
+    measure: package_downloads_measure
+  filter: "{{ Dimension('package_download__registry') }} = 'npm'"
+- name: stars_from_history
+  label: Stars From History
+  description: "Running total of current stargazers at the end of each period, from star history. People who later unstarred are invisible, so earlier totals can be lower than what was observed at the time."
+  type: cumulative
+  type_params:
+    measure: stars_gained_measure
+    cumulative_type_params:
+      period_agg: last
+- name: views_28d
+  label: Views (Rolling 28 Days)
+  description: "GitHub page views over the trailing 28 days ending on the last day of each period. Missing traffic days contribute nothing; check coverage."
+  type: cumulative
+  type_params:
+    measure: views_measure
+    cumulative_type_params:
+      window: 28 days
+      period_agg: last
+- name: views_wow_growth
+  label: Views Week-over-Week Growth
+  description: "Relative change in views versus the previous week; query at week grain. Null when the prior week has no views."
+  type: derived
+  type_params:
+    expr: (views - views_prior_week) / nullif(views_prior_week, 0)
+    metrics:
+    - name: views
+    - name: views
+      offset_window: 1 week
+      alias: views_prior_week
+- name: stars_gained_wow_growth
+  label: Stars Gained Week-over-Week Growth
+  description: "Relative change in stars gained versus the previous week; query at week grain. Null when the prior week gained none."
+  type: derived
+  type_params:
+    expr: (stars_gained - stars_gained_prior_week) / nullif(stars_gained_prior_week, 0)
+    metrics:
+    - name: stars_gained
+    - name: stars_gained
+      offset_window: 1 week
+      alias: stars_gained_prior_week

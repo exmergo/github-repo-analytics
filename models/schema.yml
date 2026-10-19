@@ -71,6 +71,10 @@ models:
     description: Star balance difference only between consecutive captured UTC days; otherwise null.
   - name: forks_net_change
     description: Fork balance difference only between consecutive captured UTC days; otherwise null.
+  - name: watchers
+    description: GitHub watcher (subscriber) count at capture; null for captures that predate the field.
+  - name: open_issues_and_prs
+    description: GitHub open_issues_count at capture, which includes open pull requests; null when not captured.
   description: Latest capture per repository and UTC date; daily changes require consecutive dates.
 - name: fct_legacy
   columns:
@@ -93,6 +97,10 @@ models:
     description: Repository star balance; reconstructed in legacy history, directly captured in observations.
   - name: forks
     description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  - name: stars_change
+    description: Reconstructed star balance change since the previous historical row; null for the first row.
+  - name: forks_change
+    description: Reconstructed fork balance change since the previous historical row; null for the first row.
   description: One row per repository and historical source date; reconstructed balances carry forward
     within that repository.
 - name: fct_referrer
@@ -299,6 +307,10 @@ models:
     description: Repository star balance; reconstructed in legacy history, directly captured in observations.
   - name: forks
     description: Repository fork balance; reconstructed in legacy history, directly captured in observations.
+  - name: watchers
+    description: GitHub watcher (subscriber) count at capture; null for captures that predate the field.
+  - name: open_issues_and_prs
+    description: GitHub open_issues_count at capture, which includes open pull requests; null when not captured.
   description: "Explicit source projection at grain repository \xD7 captured_at. No deduplication or missing-date\
     \ imputation."
 - name: stg_repositories
@@ -353,3 +365,327 @@ models:
     description: Daily unique visitor observations; not distinct people over a period.
   description: "Explicit source projection at grain repository \xD7 date. No deduplication or missing-date\
     \ imputation."
+- name: stg_release_assets
+  columns:
+  - name: release_asset_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: event_id
+    description: "Release event identifier shared with dim_event."
+    data_tests:
+    - not_null
+  - name: asset_id
+    description: "GitHub release asset ID."
+    data_tests:
+    - not_null
+  - name: captured_at
+    description: "Exact successful capture timestamp, normalized to UTC for daily selection."
+    data_tests:
+    - not_null
+  - name: download_count
+    description: "Cumulative asset downloads reported by GitHub at capture; not unique users."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 asset_id \u00d7 captured_at. No deduplication or missing-date imputation."
+- name: stg_signal_captures
+  columns:
+  - name: signal_capture_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: signal
+    description: "Collected signal: stargazers, forks, issues, or registry:package for downloads."
+    data_tests:
+    - not_null
+  - name: captured_at
+    description: "Exact successful capture timestamp of the signal files."
+    data_tests:
+    - not_null
+  - name: complete
+    description: "False when GitHub pagination limits truncated the listing."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 signal. No deduplication or missing-date imputation."
+- name: stg_stargazer_days
+  columns:
+  - name: stargazer_day_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: date
+    description: "UTC day current stargazers starred the repository."
+    data_tests:
+    - not_null
+  - name: stars
+    description: "Current stargazers who starred on this day; unstarred users are absent."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 date. No deduplication or missing-date imputation."
+- name: stg_fork_days
+  columns:
+  - name: fork_day_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: date
+    description: "UTC day existing forks were created."
+    data_tests:
+    - not_null
+  - name: forks
+    description: "Existing direct forks created on this day; deleted forks are absent."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 date. No deduplication or missing-date imputation."
+- name: stg_issues
+  columns:
+  - name: issue_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: number
+    description: "Issue or pull request number."
+    data_tests:
+    - not_null
+  - name: kind
+    description: "issue or pull_request."
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values: ['issue', 'pull_request']
+  - name: created_at
+    description: "UTC creation timestamp."
+    data_tests:
+    - not_null
+  - name: closed_at
+    description: "UTC close timestamp; null while open."
+  - name: merged_at
+    description: "UTC merge timestamp for pull requests; null if unmerged."
+  - name: author_association
+    description: "GitHub author association, e.g. FIRST_TIME_CONTRIBUTOR; no identities are stored."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 number. No deduplication or missing-date imputation."
+- name: stg_package_downloads
+  columns:
+  - name: package_download_source_key
+    description: Stable key for the complete declared row grain; not a person identifier.
+    data_tests:
+    - unique
+    - not_null
+  - name: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+    data_tests:
+    - not_null
+  - name: registry
+    description: "Package registry: pypi or npm."
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values: ['pypi', 'npm']
+  - name: package
+    description: "Registry package name configured in sources.yml."
+    data_tests:
+    - not_null
+  - name: date
+    description: "UTC download day as reported by the registry."
+    data_tests:
+    - not_null
+  - name: downloads
+    description: "Registry downloads for the day; PyPI excludes mirrors; both include CI and bots."
+    data_tests:
+    - not_null
+  description: "Explicit source projection at grain repository \u00d7 registry \u00d7 package \u00d7 date. No deduplication or missing-date imputation."
+- name: fct_star_history
+  columns:
+  - name: star_history_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    data_tests:
+    - not_null
+    description: "UTC day within star-history coverage."
+  - name: stars_gained
+    data_tests:
+    - not_null
+    description: "Current stargazers who starred on this day; zero on covered days without stars. Unstars are invisible."
+  description: "One row per repository and covered UTC day from the first current star through the last complete day."
+- name: fct_fork_history
+  columns:
+  - name: fork_history_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: date
+    data_tests:
+    - not_null
+    description: "UTC day within fork-history coverage."
+  - name: forks_created
+    data_tests:
+    - not_null
+    description: "Existing direct forks created on this day; zero on covered days. Deleted forks are invisible."
+  description: "One row per repository and covered UTC day from the first existing fork through the last complete day."
+- name: fct_issues
+  columns:
+  - name: issue_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: number
+    data_tests:
+    - not_null
+    description: "Issue or pull request number."
+  - name: kind
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values: ['issue', 'pull_request']
+    description: "issue or pull_request."
+  - name: created_date
+    data_tests:
+    - not_null
+    description: "UTC creation date."
+  - name: closed_date
+    description: "UTC close date; null while open."
+  - name: merged_date
+    description: "UTC merge date for pull requests; null if unmerged."
+  - name: author_association
+    data_tests:
+    - not_null
+    description: "GitHub author association first observed by collection."
+  - name: is_first_time_contributor
+    data_tests:
+    - not_null
+    description: "Author was a first-time contributor when collection first saw the item; backfilled history undercounts."
+  - name: hours_to_merge
+    description: "Hours from creation to merge for merged pull requests; null otherwise."
+  description: "One row per repository issue or pull request. No titles, bodies, or author identities are stored."
+- name: fct_release_downloads
+  columns:
+  - name: release_download_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: event_id
+    data_tests:
+    - not_null
+    description: "Release event identifier; joins dim_event."
+  - name: asset_id
+    data_tests:
+    - not_null
+    description: "GitHub release asset ID."
+  - name: date
+    data_tests:
+    - not_null
+    description: "UTC capture date; the latest capture per asset and day is kept."
+  - name: captured_at
+    data_tests:
+    - not_null
+    description: "Exact successful capture timestamp."
+  - name: download_count
+    data_tests:
+    - not_null
+    description: "Cumulative asset downloads at capture; not unique users or installations."
+  - name: downloads_net_change
+    description: "Download difference only between consecutive captured UTC days; otherwise null."
+  description: "Latest capture per repository, release asset, and UTC date. Downloads are cumulative balances."
+- name: fct_package_downloads
+  columns:
+  - name: package_download_key
+    data_tests:
+    - unique
+    - not_null
+    description: Stable key for the complete declared row grain; not a person identifier.
+  - name: repository
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_repository')
+          field: repository
+    description: GitHub owner/repository name; required in every cross-project grain.
+  - name: registry
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values: ['pypi', 'npm']
+    description: "Package registry: pypi or npm."
+  - name: package
+    data_tests:
+    - not_null
+    description: "Registry package name configured in sources.yml."
+  - name: date
+    data_tests:
+    - not_null
+    description: "UTC download day as reported by the registry."
+  - name: downloads
+    data_tests:
+    - not_null
+    description: "Registry downloads for the day; PyPI excludes mirrors; both include CI and bots."
+  description: "One row per repository, registry, package, and reported UTC day. Absent days are unreported, not zero."

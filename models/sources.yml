@@ -10,3 +10,9 @@ sources:
   - name: snapshots
   - name: discovery
   - name: releases
+  - name: release_assets
+  - name: signal_captures
+  - name: stargazer_days
+  - name: fork_days
+  - name: issues
+  - name: package_downloads
