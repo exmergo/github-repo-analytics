@@ -149,18 +149,25 @@ def build(root: Path) -> dict:
 
 
 def smoke_metrics(root: Path, *, database=None) -> list[str]:
-    from .questions import METRICS
+    from .questions import METRICS, TIME_METRICS
 
     tested = []
     for metric in METRICS:
+        grouping = ["--group-by", "repository__name"]
+        if metric in TIME_METRICS:
+            grouping = [
+                "--group-by",
+                "repository__name,metric_time",
+                "--grain",
+                TIME_METRICS[metric],
+            ]
         result = dex(
             root,
             "explore",
             "semantic",
             "query",
             metric,
-            "--group-by",
-            "repository__name",
+            *grouping,
             "--local",
             database=database,
         )

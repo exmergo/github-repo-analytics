@@ -218,3 +218,136 @@ def test_zero_denominator_and_missing_day(workspace):
     report = coverage(workspace, "exmergo/dex", date(2026, 7, 1), date(2026, 7, 4))
     assert report["missing_dates"] == [date(2026, 7, 2)]
     assert not report["complete"]
+
+
+def test_star_and_fork_history(project):
+    result = query(
+        project,
+        "stars_gained,stars_from_history",
+        "exmergo/dex",
+        group_by="metric_time",
+        grain="month",
+        start="2026-07-01",
+        end="2026-08-31",
+    )
+    values = {
+        str(r["metric_time__month"])[:7]: (r["stars_gained"], r["stars_from_history"])
+        for r in rows(result)
+    }
+    assert values == {"2026-07": (3, 3), "2026-08": (3, 6)}
+    totals = dex(
+        project,
+        "explore",
+        "semantic",
+        "query",
+        "stars_gained,forks_created",
+        "--group-by",
+        "repository__name",
+        "--local",
+    )
+    # The fork created on the partial capture day is excluded; a repository without forks is null.
+    assert {
+        r["repository__name"]: (r["stars_gained"], r["forks_created"]) for r in rows(totals)
+    } == {
+        "exmergo/dex": (6, 1),
+        "example/other": (1, None),
+    }
+
+
+def test_community_activity_by_event_date(project):
+    values = result_values(
+        query(
+            project,
+            "issues_opened,issues_closed,prs_opened,prs_merged,first_time_contributor_prs,median_hours_to_merge",
+            "exmergo/dex",
+            start="2026-07-01",
+            end="2026-08-01",
+        )
+    )
+    assert values == {
+        "issues_opened": 2,
+        "issues_closed": 1,
+        "prs_opened": 3,
+        "prs_merged": 2,
+        "first_time_contributor_prs": 1,
+        "median_hours_to_merge": pytest.approx(24.0),
+    }
+    window = answer(
+        project, "community", "exmergo/dex", start="2026-07-01", end="2026-07-08", grain="week"
+    )
+    assert window["available"] and window["zero_when_null"]
+    beyond = answer(project, "community", "exmergo/dex", start="2026-08-25", end="2026-09-05")
+    assert not beyond["available"] and "2026-08-30" in beyond["reason"]
+
+
+def test_downloads_vitals_and_events(project):
+    assert result_values(query(project, "pypi_downloads,npm_downloads", "exmergo/dex")) == {
+        "pypi_downloads": 140,
+        "npm_downloads": None,
+    }
+    assert (
+        result_values(
+            query(project, "release_downloads", "exmergo/dex", start="2026-07-01", end="2026-07-03")
+        )["release_downloads"]
+        == 15
+    )
+    assert result_values(
+        query(
+            project,
+            "release_downloads,release_downloads_net_change,watchers_observed,open_issues_and_prs_observed,events",
+            "exmergo/dex",
+        )
+    ) == {
+        "release_downloads": 30,
+        "release_downloads_net_change": 5,
+        "watchers_observed": 3,
+        "open_issues_and_prs_observed": 2,
+        "events": 2,
+    }
+    assert (
+        result_values(query(project, "legacy_stars_change", "example/other"))["legacy_stars_change"]
+        == 2
+    )
+    other = answer(project, "package-downloads", "example/other")
+    assert not other["available"] and "No packages configured" in other["reason"]
+    pypi = answer(project, "package-downloads", "exmergo/dex", days=7)
+    assert pypi["period"] == {"start": "2026-07-22", "end_exclusive": "2026-07-29"}
+
+
+def test_rolling_and_week_over_week(project):
+    weekly = query(
+        project,
+        "views,views_wow_growth",
+        "exmergo/dex",
+        group_by="metric_time",
+        grain="week",
+        start="2026-06-29",
+        end="2026-07-20",
+    )
+    values = {
+        str(r["metric_time__week"])[:10]: (r["views"], r["views_wow_growth"]) for r in rows(weekly)
+    }
+    # The first week is partial (five days), so the next full week reads as 40% growth.
+    assert values["2026-07-06"] == (70, pytest.approx(0.4))
+    assert values["2026-07-13"] == (70, pytest.approx(0.0))
+    rolling = query(
+        project,
+        "views_28d",
+        "exmergo/dex",
+        group_by="metric_time",
+        grain="day",
+        start="2026-07-28",
+        end="2026-07-29",
+    )
+    assert [r["views_28d"] for r in rows(rolling)] == [280]
+
+
+def test_compare_and_weekly_report(project):
+    compared = answer(project, "compare", None, start="2026-07-01", end="2026-07-08")
+    assert {r["repository__name"] for r in rows(compared["result"])} == {
+        "exmergo/dex",
+        "example/other",
+    }
+    report = answer(project, "weekly-report", "exmergo/dex")
+    assert report["sections"]["star_history"]["available"]
+    assert all("evidence" not in s for s in report["sections"].values())

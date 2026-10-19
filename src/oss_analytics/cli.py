@@ -52,10 +52,11 @@ def main():
     status.add_argument("--require-fresh", action="store_true")
     question = sub.add_parser("question", help="run a governed question recipe")
     question.add_argument("question")
-    question.add_argument("--repository", required=True)
+    question.add_argument("--repository", help="owner/name; omit only for compare")
     for name in ["start", "end", "snapshot-date", "compare-date", "event-id"]:
         question.add_argument("--" + name)
-    question.add_argument("--days", type=int, choices=[7, 28], default=7)
+    question.add_argument("--days", type=int, choices=[7, 14, 28, 91], default=7)
+    question.add_argument("--grain", choices=["day", "week", "month"], default="week")
     metadata = sub.add_parser("collect-metadata", help="CI: append public totals and releases")
     metadata.add_argument("--repository", required=True)
     metadata.add_argument("--destination", required=True, type=Path)
@@ -142,11 +143,12 @@ def dispatch(root, args):
             compare_date=args.compare_date,
             event_id=args.event_id,
             days=args.days,
+            grain=args.grain,
         )
     if args.command == "events":
-        import duckdb
+        from .warehouse import read as read_warehouse
 
-        with duckdb.connect(str(root / "warehouse/analytics.duckdb"), read_only=True) as c:
+        with read_warehouse(root) as c:
             rows = c.execute(
                 "select repository, event_id, event_date, kind, title, url, prerelease from dim_event order by event_date"
             ).fetchall()

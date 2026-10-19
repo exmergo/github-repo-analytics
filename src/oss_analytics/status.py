@@ -5,10 +5,10 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-import duckdb
 
 from .io import read_json
 from .lifecycle import code_digest
+from .warehouse import read as read_warehouse
 
 
 def status(root: Path, *, at: datetime | None = None) -> dict:
@@ -30,7 +30,7 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
     )
     sources = {s["repository"]: s for s in built["inputs"]["sources"]}
     result = []
-    with duckdb.connect(str(root / "warehouse/analytics.duckdb"), read_only=True) as connection:
+    with read_warehouse(root) as connection:
         for repo, source in sources.items():
             dates = [
                 r[0]
@@ -48,6 +48,13 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
             endpoint_captures = dict(snapshots)
             if captures:
                 endpoint_captures["repository_totals"] = captures
+            signals = connection.execute(
+                "select signal, captured_at, complete from stg_signal_captures where repository = ? order by signal",
+                [repo],
+            ).fetchall()
+            # Collected signals age like any endpoint; a stalled collector must not look fresh.
+            for name, stamp, _ in signals:
+                endpoint_captures["signal:" + name] = stamp
             # A new totals capture must not conceal a stale traffic/discovery source.
             oldest = min(endpoint_captures.values(), default=None)
             # Updating a local checkout does not make a stale upstream observation fresh.
@@ -92,6 +99,10 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
                         name: round(max(0, (at - stamp).total_seconds() / 3600), 2)
                         for name, stamp in endpoint_captures.items()
                     },
+                    "signals": {
+                        name: {"captured_at": stamp, "complete": complete}
+                        for name, stamp, complete in signals
+                    },
                     "freshness": freshness,
                     "collection_age_hours": round(age, 2) if age is not None else None,
                 }
@@ -114,7 +125,7 @@ def coverage(root: Path, repository: str, start: date, end: date) -> dict:
         raise ValueError("end must be after start (end is exclusive)")
     if (end - start).days > 3660:
         raise ValueError("comparison windows are limited to ten years")
-    with duckdb.connect(str(root / "warehouse/analytics.duckdb"), read_only=True) as connection:
+    with read_warehouse(root) as connection:
         observed = {
             r[0]
             for r in connection.execute(
