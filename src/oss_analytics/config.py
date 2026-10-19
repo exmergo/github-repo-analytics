@@ -3,13 +3,18 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
 
 REPOSITORY = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 REVISION = re.compile(r"^[0-9a-f]{40}$")
+# PyPI normalized names and npm names, including @scope/name.
+PACKAGE = {
+    "pypi": re.compile(r"^[A-Za-z0-9]([A-Za-z0-9._-]*[A-Za-z0-9])?$"),
+    "npm": re.compile(r"^(@[a-z0-9][a-z0-9._~-]*/)?[a-z0-9][a-z0-9._~-]*$"),
+}
 
 
 def validate_repository(repository: str) -> None:
@@ -26,6 +31,13 @@ class Source:
     data_repository: str = ""
     data_branch: str = "github-repo-stats"
     expected_refresh_hours: int = 24
+    # Optional add-on: {"pypi": [...], "npm": [...]}. Most projects publish to one or neither.
+    packages: dict = field(default_factory=dict)
+
+    def package_list(self) -> list[tuple[str, str]]:
+        return [
+            (registry, name) for registry in PACKAGE for name in self.packages.get(registry, [])
+        ]
 
 
 def load_sources(root: Path) -> list[Source]:
@@ -51,6 +63,15 @@ def load_sources(root: Path) -> list[Source]:
             raise ValueError("expected_refresh_hours must be a positive integer")
         if not source.data_branch or source.data_branch.startswith("-"):
             raise ValueError("invalid source branch")
+        if not isinstance(source.packages, dict) or set(source.packages) - set(PACKAGE):
+            raise ValueError("packages supports only pypi and npm lists")
+        for registry, names in source.packages.items():
+            if not isinstance(names, list) or not all(
+                isinstance(n, str) and PACKAGE[registry].fullmatch(n) for n in names
+            ):
+                raise ValueError(f"invalid {registry} package list for {source.repository}")
+            if len({n.lower() for n in names}) != len(names):
+                raise ValueError(f"duplicate {registry} package for {source.repository}")
         seen.add(source.repository.lower())
         result.append(source)
     return result

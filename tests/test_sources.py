@@ -15,10 +15,12 @@ SHA = "a" * 40
 
 
 class FakeGitHub:
-    def __init__(self, files, *, publication=None, truncated=False):
+    def __init__(self, files, *, publication=None, truncated=False, subtree_truncated=None):
         self.files = files
         self.publication = publication
         self.truncated = truncated
+        # By default a truncated root also truncates the repository subtree.
+        self.subtree_truncated = truncated if subtree_truncated is None else subtree_truncated
         self.routes = []
 
     def json(self, route, **kwargs):
@@ -26,9 +28,27 @@ class FakeGitHub:
         if "/commits/" in route:
             return {"sha": SHA}
         if "/git/trees/" in route:
+            node = route.split("/git/trees/")[1].split("?")[0]
+            root = not node.startswith("tree:")
+            if root and route.endswith("recursive=1"):
+                return {
+                    "truncated": self.truncated,
+                    "tree": [{"path": p, "type": "blob"} for p in self.files],
+                }
+            # Non-recursive listings descend one directory; node names stand in for SHAs.
+            prefix = "" if root else node.removeprefix("tree:") + "/"
+            if route.endswith("recursive=1"):
+                return {
+                    "truncated": self.subtree_truncated,
+                    "tree": [
+                        {"path": p[len(prefix) :], "type": "blob"}
+                        for p in self.files
+                        if p.startswith(prefix)
+                    ],
+                }
+            names = {p[len(prefix) :].split("/")[0] for p in self.files if p.startswith(prefix)}
             return {
-                "truncated": self.truncated,
-                "tree": [{"path": p, "type": "blob"} for p in self.files],
+                "tree": [{"path": n, "type": "tree", "sha": "tree:" + prefix + n} for n in names]
             }
         raise AssertionError(route)
 
@@ -82,6 +102,25 @@ def test_truncated_tree_does_not_activate(tmp_path):
     with pytest.raises(SourceError, match="truncated"):
         sync(root, client=FakeGitHub(upstream_files(), truncated=True), supplement=False)
     assert not (root / ".data/sync.json").exists()
+
+
+def test_large_branch_lists_only_the_repository_subtree(tmp_path):
+    root = input_root(tmp_path)
+    files = upstream_files()
+    files["other/project/ghrs-data/views_clones_aggregate.csv"] = b"unrelated"
+    client = FakeGitHub(files, truncated=True, subtree_truncated=False)
+    manifest = sync(root, client=client, supplement=False)
+    assert list(manifest["sources"][0]["files"]) == [
+        "exmergo/dex/ghrs-data/views_clones_aggregate.csv"
+    ]
+    assert any(r.endswith("/git/trees/tree:exmergo/dex?recursive=1") for r in client.routes)
+
+
+def test_case_mismatched_upstream_folder_lands_under_configured_name(tmp_path):
+    root = input_root(tmp_path)
+    files = {k.replace("exmergo/dex", "Exmergo/Dex"): v for k, v in upstream_files().items()}
+    manifest = sync(root, client=FakeGitHub(files), supplement=False)
+    assert "exmergo/dex/ghrs-data/views_clones_aggregate.csv" in manifest["sources"][0]["files"]
 
 
 def test_published_source_defaults_to_approved_revision(tmp_path):
@@ -202,3 +241,210 @@ def test_multi_repository_ci_candidate_uses_one_pinned_commit(tmp_path):
     assert {s["source_revision"] for s in candidate["sources"]} == {SHA}
     tables, _ = parse_inputs(root, candidate)
     assert {r[0] for r in tables["traffic"]} == {"exmergo/dex", "example/other"}
+
+
+def test_rate_limit_retries_and_http_date_retry_after():
+    from email.utils import format_datetime
+    from datetime import datetime, timedelta, timezone
+
+    limited = urllib.error.HTTPError(
+        "https://api.github.com/test", 403, "Limited", {"x-ratelimit-remaining": "0"}, None
+    )
+    later = format_datetime(datetime.now(timezone.utc) + timedelta(seconds=5), usegmt=True)
+    throttled = urllib.error.HTTPError(
+        "https://api.github.com/test", 429, "Later", {"Retry-After": later}, None
+    )
+
+    class Response:
+        url = "https://api.github.com/test"
+        headers = {}
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self, size):
+            return b"[]"
+
+    with (
+        patch("urllib.request.urlopen", side_effect=[limited, throttled, Response()]) as call,
+        patch("time.sleep") as sleep,
+    ):
+        assert GitHub().json("/test") == []
+    assert call.call_count == 3
+    assert 0 < sleep.call_args_list[1].args[0] <= 6
+    distant = urllib.error.HTTPError(
+        "https://api.github.com/test",
+        403,
+        "Limited",
+        {"x-ratelimit-remaining": "0", "x-ratelimit-reset": "9999999999"},
+        None,
+    )
+    with patch("urllib.request.urlopen", side_effect=distant), patch("time.sleep"):
+        with pytest.raises(SourceError, match="rate limit resets"):
+            GitHub().json("/test")
+
+
+def test_package_hosts_receive_no_token_and_others_are_refused():
+    seen = {}
+
+    def opener(request, timeout):
+        seen.update(dict(request.header_items()))
+        raise urllib.error.HTTPError(request.full_url, 404, "No", {}, None)
+
+    with patch("urllib.request.urlopen", side_effect=opener):
+        GitHub("secret").get("https://pypistats.org/api/packages/x/overall", optional=True)
+    assert "Authorization" not in seen
+    with pytest.raises(SourceError, match="allowed"):
+        GitHub().get("https://example.com/x")
+
+
+class SignalClient:
+    """Public endpoints the signal collector uses, with Link-free single pages."""
+
+    def __init__(self, issues, *, registry_error=False):
+        self.issues = issues
+        self.registry_error = registry_error
+        self.urls = []
+
+    def paginate(self, route, accept="", max_pages=100):
+        self.urls.append(route)
+        if "/stargazers" in route:
+            assert accept == "application/vnd.github.star+json"
+            return [
+                {"starred_at": "2026-07-01T23:30:00Z", "user": {"login": "a"}},
+                {"starred_at": "2026-07-01T01:00:00Z", "user": {"login": "b"}},
+                {"starred_at": "2026-07-03T00:00:00Z", "user": {"login": "c"}},
+            ], True
+        if "/forks" in route:
+            return [{"created_at": "2026-07-02T10:00:00Z", "owner": {"login": "d"}}], True
+        if "/issues" in route:
+            return self.issues, True
+        raise AssertionError(route)
+
+    def json_url(self, url, optional=False):
+        self.urls.append(url)
+        if self.registry_error:
+            raise SourceError("pypistats.org HTTP 503; retry later")
+        return {
+            "data": [
+                {"category": "without_mirrors", "date": "2026-07-01", "downloads": 4},
+                {"category": "with_mirrors", "date": "2026-07-01", "downloads": 9},
+            ]
+        }
+
+
+def issue(number, updated, association, merged=None):
+    return {
+        "number": number,
+        "created_at": "2026-07-01T00:00:00Z",
+        "updated_at": updated,
+        "closed_at": merged,
+        "author_association": association,
+        "user": {"login": "someone"},
+        "title": "private words",
+        "pull_request": {"merged_at": merged},
+    }
+
+
+def test_signals_store_aggregates_and_merge_incrementally(tmp_path):
+    from oss_analytics.config import Source
+    from oss_analytics.sources import collect_signals, read_csv
+
+    source = Source("exmergo/dex", packages={"pypi": ["exmergo-dex-core"]})
+    client = SignalClient([issue(7, "2026-07-01T05:00:00Z", "FIRST_TIME_CONTRIBUTOR")])
+    first = collect_signals(client, source, tmp_path, "2026-07-04T00:00:00+00:00")
+    folder = tmp_path / "exmergo/dex/signals"
+    assert read_csv(folder / "stargazers.csv") == [
+        {"date": "2026-07-01", "stars": "2"},
+        {"date": "2026-07-03", "stars": "1"},
+    ]
+    stored = "".join(p.read_text() for p in folder.rglob("*.csv"))
+    assert "someone" not in stored and "private words" not in stored and "login" not in stored
+    assert first["packages"]["pypi:exmergo-dex-core"]["days"] == 1
+    assert not any("npmjs" in u for u in client.urls)
+    # GitHub later recomputes the association; the first observation is kept.
+    client = SignalClient(
+        [issue(7, "2026-07-05T00:00:00Z", "CONTRIBUTOR", merged="2026-07-05T00:00:00Z")],
+        registry_error=True,
+    )
+    second = collect_signals(client, source, tmp_path, "2026-07-06T00:00:00+00:00")
+    assert any("since=2026-07-01T04:00:00Z" in u for u in client.urls)
+    rows = read_csv(folder / "issues.csv")
+    assert rows[0]["author_association"] == "FIRST_TIME_CONTRIBUTOR"
+    assert rows[0]["merged_at"] == "2026-07-05T00:00:00Z"
+    assert second["errors"] and "pypi:exmergo-dex-core" in second["packages"]
+    assert read_csv(folder / "downloads/pypi/exmergo-dex-core.csv") == [
+        {"date": "2026-07-01", "downloads": "4"}
+    ]
+
+
+@pytest.mark.parametrize(
+    "packages",
+    ["{pypi: [ok], cargo: [x]}", "{pypi: ['bad name']}", "{npm: [Upper]}", "{pypi: [a, A]}"],
+)
+def test_invalid_packages(tmp_path, packages):
+    (tmp_path / "sources.yml").write_text(
+        f"repositories:\n  - repository: exmergo/dex\n    packages: {packages}\n"
+    )
+    with pytest.raises(ValueError):
+        load_sources(tmp_path)
+
+
+def test_counts_accept_integral_floats_only():
+    from oss_analytics.warehouse import count
+
+    assert count("3.0") == 3
+    for value in ["3.5", "-1", "", True]:
+        with pytest.raises(ValueError):
+            count(value)
+
+
+def test_blob_cache_skips_unchanged_downloads_and_checks_integrity(tmp_path):
+    from oss_analytics.sources import git_blob_sha
+
+    root = input_root(tmp_path)
+    data = next(iter(upstream_files().values()))
+    path = "exmergo/dex/ghrs-data/views_clones_aggregate.csv"
+
+    class Hashed(FakeGitHub):
+        downloads = 0
+
+        def json(self, route, **kwargs):
+            tree = super().json(route, **kwargs)
+            for entry in tree.get("tree", []):
+                entry["sha"] = self.blob
+            return tree
+
+        def get(self, url, **kwargs):
+            if not url.endswith("/published.json"):
+                Hashed.downloads += 1
+            return super().get(url, **kwargs)
+
+    client = Hashed({path: data})
+    client.blob = git_blob_sha(data)
+    sync(root, client=client, supplement=False)
+    sync(root, client=client, supplement=False)
+    assert Hashed.downloads == 1
+    tampered = Hashed({path: data})
+    tampered.blob = "0" * 40
+    with pytest.raises(SourceError, match="does not match"):
+        sync(root, client=tampered, supplement=False)
+
+
+def test_anonymous_run_skips_star_dates_and_keeps_previous_history(tmp_path):
+    from oss_analytics.config import Source
+    from oss_analytics.sources import collect_signals
+
+    source = Source("exmergo/dex")
+    collect_signals(SignalClient([]), source, tmp_path, "2026-07-04T00:00:00+00:00")
+    anonymous = SignalClient([])
+    anonymous.token = None
+    record = collect_signals(anonymous, source, tmp_path, "2026-07-05T00:00:00+00:00")
+    assert not any("stargazers" in u for u in anonymous.urls)
+    assert "set GITHUB_TOKEN" in record["errors"][0]
+    # The earlier history survives with the time it was actually collected.
+    assert record["stargazers"]["captured_at"] == "2026-07-04T00:00:00+00:00"
+    assert record["forks"]["captured_at"] == "2026-07-05T00:00:00+00:00"

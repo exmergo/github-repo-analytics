@@ -72,6 +72,8 @@ def make_fixture(root: Path) -> dict:
                     "captured_at": capture,
                     "stars": stars + index,
                     "forks": day + index,
+                    "watchers": 3 + index,
+                    "open_issues_and_prs": 2,
                     "releases": [
                         {
                             "id": 1000 + index,
@@ -81,10 +83,82 @@ def make_fixture(root: Path) -> dict:
                             "html_url": f"https://github.com/{repo}/releases/tag/v1.0.0",
                             "draft": False,
                             "prerelease": False,
+                            # Cumulative balances: +5 between consecutive days 1 and 2, gap to 4.
+                            "assets": [
+                                {"id": 5000 + index, "download_count": {1: 10, 2: 15, 4: 30}[day]}
+                            ],
                         }
                     ],
                 },
             )
+        signals = directory / repo / "signals"
+        csv_file(
+            "../signals/stargazers.csv",
+            ["date", "stars"],
+            [["2026-07-01", 2], ["2026-07-03", 1], ["2026-08-10", 3]]
+            if index == 0
+            else [["2026-07-05", 1]],
+        )
+        csv_file(
+            "../signals/forks.csv",
+            ["date", "forks"],
+            # The capture day (2026-08-31) is partial and excluded from fork history.
+            [["2026-07-02", 1], ["2026-08-31", 1]] if index == 0 else [],
+        )
+        csv_file(
+            "../signals/issues.csv",
+            ["number", "kind", "created_at", "closed_at", "merged_at", "author_association"],
+            [
+                [1, "issue", "2026-07-01T10:00:00Z", "2026-07-03T10:00:00Z", "", "MEMBER"],
+                [
+                    2,
+                    "pull_request",
+                    "2026-07-02T00:00:00Z",
+                    "2026-07-02T12:00:00Z",
+                    "2026-07-02T12:00:00Z",
+                    "FIRST_TIME_CONTRIBUTOR",
+                ],
+                [
+                    3,
+                    "pull_request",
+                    "2026-07-05T00:00:00Z",
+                    "2026-07-06T00:00:00Z",
+                    "",
+                    "CONTRIBUTOR",
+                ],
+                [4, "issue", "2026-07-20T00:00:00Z", "", "", "NONE"],
+                [
+                    5,
+                    "pull_request",
+                    "2026-07-21T00:00:00Z",
+                    "2026-07-22T12:00:00Z",
+                    "2026-07-22T12:00:00Z",
+                    "CONTRIBUTOR",
+                ],
+            ]
+            if index == 0
+            else [],
+        )
+        packages = {}
+        if index == 0:
+            first_download = date(2026, 7, 1)
+            csv_file(
+                "../signals/downloads/pypi/exmergo-dex-core.csv",
+                ["date", "downloads"],
+                [[(first_download + timedelta(days=d)).isoformat(), 5] for d in range(28)],
+            )
+            packages = {"pypi:exmergo-dex-core": {"days": 28, "latest": "2026-07-28"}}
+        write_json(
+            signals / "capture.json",
+            {
+                "captured_at": "2026-08-31T04:25:00+00:00",
+                "errors": [],
+                "stargazers": {"complete": True, "listed": 6 if index == 0 else 1},
+                "forks": {"complete": True, "listed": 2 if index == 0 else 0},
+                "issues": {"complete": True, "through": "2026-08-31T04:00:00Z", "items": 5},
+                "packages": packages,
+            },
+        )
         sources.append(
             {
                 "repository": repo,
