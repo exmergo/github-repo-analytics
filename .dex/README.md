@@ -4,6 +4,6 @@
 
 Maps, baselines, drift reports, and plans are visible to Git. Review and commit the accepted `snapshot.json` like a lockfile. Plans contain the actual proposed file contents and diffs; an already applied plan is engineering history, not an instruction to apply it again. Use `dex transform plans` to inspect plans through the engine.
 
-Start with [review/README.md](review/README.md) for the Explore → Transform → Maintain audit, including the original findings, applied plan IDs, verification results, and limitations. Files in that directory are actual command responses; they are not hand-authored replacements for Dex's state.
+Start with [review/README.md](review/README.md) for the latest Explore → Transform → Maintain session, including applied, rejected, and superseded plan IDs, verification results, and limitations. Files in that directory are actual command responses; they are not hand-authored replacements for Dex's state.
 
 Successful CI publication also preserves its exploration cache and accepted snapshot as `analytics-state/` on the data branch. That evolving publication baseline is separate from the reviewed baseline on the default branch. Source SQL and MetricFlow YAML remain the metric definitions. Query ledgers, local data, dbt output, and warehouse files stay ignored. See [the lifecycle guide](../docs/lifecycle.md).

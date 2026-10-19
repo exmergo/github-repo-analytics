@@ -1,0 +1,515 @@
+{
+  "status": "ok",
+  "data": {
+    "question": "weekly-report",
+    "repository": "exmergo/dex",
+    "definition": "Last complete week: traffic growth, stars, community, downloads",
+    "evidence": {
+      "ready": true,
+      "reason": null,
+      "built_at": "2026-10-19T17:24:20.595511+00:00",
+      "checked_at": "2026-10-19T17:28:41.232583+00:00",
+      "code_digest": "941170c4c99317d899bb4e27a82a7542282e11fbf444ddb637397022b3e2322e",
+      "synced_at": "2026-10-19T17:23:40.182985+00:00",
+      "warnings": [],
+      "expected_unavailable_fields": {
+        "main.annotations.url": "Annotation URLs are optional and none were supplied",
+        "main.fct_observations.forks_net_change": "No consecutive daily source captures exist",
+        "main.fct_observations.observation_gap_days": "No repository has two daily captures yet",
+        "main.fct_observations.stars_net_change": "No consecutive daily source captures exist",
+        "main.fct_release_downloads.downloads_net_change": "No release asset has consecutive daily captures yet"
+      },
+      "repositories": [
+        {
+          "repository": "exmergo/dex",
+          "source_revision": "d8376f19024a6877cd355e80f9826b46cb8e300a",
+          "source_data_repository": "exmergo/dex",
+          "first_traffic_date": "2026-06-23",
+          "last_traffic_date": "2026-10-17",
+          "latest_eligible_date": "2026-10-17",
+          "missing_traffic_dates": [],
+          "observed_traffic_days": 117,
+          "traffic_lag_days": 2,
+          "last_observed_totals_at": "2026-10-19 17:23:41.610988+00:00",
+          "latest_snapshots": {
+            "referrers": "2026-10-19 04:39:37+00:00",
+            "paths": "2026-10-19 04:39:37+00:00"
+          },
+          "endpoint_age_hours": {
+            "referrers": 12.82,
+            "paths": 12.82,
+            "repository_totals": 0.08,
+            "signal:forks": 0.08,
+            "signal:issues": 0.08,
+            "signal:pypi:exmergo-dex-core": 0.08,
+            "signal:stargazers": 0.08
+          },
+          "signals": {
+            "forks": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "issues": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "pypi:exmergo-dex-core": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "stargazers": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            }
+          },
+          "freshness": "fresh",
+          "collection_age_hours": 12.82
+        }
+      ]
+    },
+    "available": true,
+    "sections": {
+      "traffic_growth": {
+        "question": "growth",
+        "repository": "exmergo/dex",
+        "definition": "Consecutive complete 7-day or 28-day traffic windows",
+        "coverage": [
+          {
+            "start": "2026-10-04",
+            "end_exclusive": "2026-10-11",
+            "observed_days": 7,
+            "expected_days": 7,
+            "missing_dates": [],
+            "recent_unsettled_dates": [],
+            "complete": true
+          },
+          {
+            "start": "2026-10-11",
+            "end_exclusive": "2026-10-18",
+            "observed_days": 7,
+            "expected_days": 7,
+            "missing_dates": [],
+            "recent_unsettled_dates": [],
+            "complete": true
+          }
+        ],
+        "available": true,
+        "results": [
+          {
+            "status": "ok",
+            "data": {
+              "columns": [
+                "views",
+                "clones"
+              ],
+              "types": [
+                "HUGEINT",
+                "HUGEINT"
+              ],
+              "cells": [
+                [
+                  801,
+                  849
+                ]
+              ],
+              "row_count": 1,
+              "truncated": false,
+              "backend": "local",
+              "vendor": "dbt",
+              "deployment": "local",
+              "execution": "dex"
+            },
+            "connection": {
+              "connector": "duckdb",
+              "target": {
+                "path": "./warehouse/analytics.duckdb"
+              },
+              "source": ".dex/config.yml"
+            },
+            "cost": {
+              "paradigm": "free_local",
+              "estimate": null,
+              "ceiling": null,
+              "estimate_quality": null,
+              "unit": null
+            },
+            "warnings": [],
+            "diffs": [],
+            "errors": [],
+            "reason": null
+          },
+          {
+            "status": "ok",
+            "data": {
+              "columns": [
+                "views",
+                "clones"
+              ],
+              "types": [
+                "HUGEINT",
+                "HUGEINT"
+              ],
+              "cells": [
+                [
+                  1712,
+                  4630
+                ]
+              ],
+              "row_count": 1,
+              "truncated": false,
+              "backend": "local",
+              "vendor": "dbt",
+              "deployment": "local",
+              "execution": "dex"
+            },
+            "connection": {
+              "connector": "duckdb",
+              "target": {
+                "path": "./warehouse/analytics.duckdb"
+              },
+              "source": ".dex/config.yml"
+            },
+            "cost": {
+              "paradigm": "free_local",
+              "estimate": null,
+              "ceiling": null,
+              "estimate_quality": null,
+              "unit": null
+            },
+            "warnings": [],
+            "diffs": [],
+            "errors": [],
+            "reason": null
+          }
+        ],
+        "changes": {
+          "views": {
+            "absolute": 911,
+            "percent": 113.73283395755305
+          },
+          "clones": {
+            "absolute": 3781,
+            "percent": 445.3474676089517
+          }
+        },
+        "as_of": "2026-10-19 17:28:42.242066+00:00"
+      },
+      "star_history": {
+        "question": "star-history",
+        "repository": "exmergo/dex",
+        "definition": "Stars and forks gained per day/week/month from current stargazers",
+        "signal_coverage": {
+          "signals": {
+            "stargazers": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "forks": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "issues": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "pypi:exmergo-dex-core": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            }
+          },
+          "complete_through": {
+            "star-history": "2026-10-18",
+            "community": "2026-10-18",
+            "package-downloads": "2026-10-18"
+          },
+          "release_asset_rows": 0
+        },
+        "available": true,
+        "period": {
+          "start": "2026-10-05",
+          "end_exclusive": "2026-10-19"
+        },
+        "zero_when_null": true,
+        "result": {
+          "status": "ok",
+          "data": {
+            "columns": [
+              "metric_time__week",
+              "stars_gained",
+              "forks_created",
+              "stars_from_history"
+            ],
+            "types": [
+              "TIMESTAMP",
+              "HUGEINT",
+              "HUGEINT",
+              "HUGEINT"
+            ],
+            "cells": [
+              [
+                "2026-10-05T00:00:00",
+                36,
+                1,
+                61
+              ],
+              [
+                "2026-10-12T00:00:00",
+                27,
+                12,
+                88
+              ]
+            ],
+            "row_count": 2,
+            "truncated": false,
+            "backend": "local",
+            "vendor": "dbt",
+            "deployment": "local",
+            "execution": "dex"
+          },
+          "connection": {
+            "connector": "duckdb",
+            "target": {
+              "path": "./warehouse/analytics.duckdb"
+            },
+            "source": ".dex/config.yml"
+          },
+          "cost": {
+            "paradigm": "free_local",
+            "estimate": null,
+            "ceiling": null,
+            "estimate_quality": null,
+            "unit": null
+          },
+          "warnings": [],
+          "diffs": [],
+          "errors": [],
+          "reason": null
+        },
+        "reason": null,
+        "interpretation": "Stars are dated by when current stargazers starred; people who unstarred are invisible, so past totals are lower bounds of past interest. The partial capture day is excluded. Within this covered window, a null count means no stars that period."
+      },
+      "community": {
+        "question": "community",
+        "repository": "exmergo/dex",
+        "definition": "Issues and PRs opened, closed, merged; first-time contributors; time to merge",
+        "signal_coverage": {
+          "signals": {
+            "stargazers": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "forks": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "issues": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "pypi:exmergo-dex-core": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            }
+          },
+          "complete_through": {
+            "star-history": "2026-10-18",
+            "community": "2026-10-18",
+            "package-downloads": "2026-10-18"
+          },
+          "release_asset_rows": 0
+        },
+        "available": true,
+        "period": {
+          "start": "2026-10-12",
+          "end_exclusive": "2026-10-19"
+        },
+        "zero_when_null": true,
+        "result": {
+          "status": "ok",
+          "data": {
+            "columns": [
+              "issues_opened",
+              "prs_opened",
+              "first_time_contributor_prs",
+              "issues_closed",
+              "prs_merged",
+              "median_hours_to_merge"
+            ],
+            "types": [
+              "HUGEINT",
+              "HUGEINT",
+              "HUGEINT",
+              "HUGEINT",
+              "HUGEINT",
+              "DOUBLE"
+            ],
+            "cells": [
+              [
+                103,
+                60,
+                0,
+                38,
+                45,
+                6.413055555555555
+              ]
+            ],
+            "row_count": 1,
+            "truncated": false,
+            "backend": "local",
+            "vendor": "dbt",
+            "deployment": "local",
+            "execution": "dex"
+          },
+          "connection": {
+            "connector": "duckdb",
+            "target": {
+              "path": "./warehouse/analytics.duckdb"
+            },
+            "source": ".dex/config.yml"
+          },
+          "cost": {
+            "paradigm": "free_local",
+            "estimate": null,
+            "ceiling": null,
+            "estimate_quality": null,
+            "unit": null
+          },
+          "warnings": [],
+          "diffs": [],
+          "errors": [],
+          "reason": null
+        },
+        "reason": null,
+        "interpretation": "Counts are by event date (opened, closed, merged); within this covered window a null count means no activity. First-time contributor PRs use GitHub's association when collection first saw the PR; backfilled history undercounts. Median time to merge covers PRs merged in the period."
+      },
+      "release_downloads": {
+        "question": "release-downloads",
+        "repository": "exmergo/dex",
+        "definition": "GitHub release asset downloads by release",
+        "signal_coverage": {
+          "signals": {
+            "stargazers": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "forks": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "issues": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "pypi:exmergo-dex-core": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            }
+          },
+          "complete_through": {
+            "star-history": "2026-10-18",
+            "community": "2026-10-18",
+            "package-downloads": "2026-10-18"
+          },
+          "release_asset_rows": 0
+        },
+        "available": false,
+        "reason": "This repository has no release assets captured; GitHub counts downloads only for uploaded assets, not source archives."
+      },
+      "package_downloads": {
+        "question": "package-downloads",
+        "repository": "exmergo/dex",
+        "definition": "PyPI/npm downloads for configured packages (optional add-on)",
+        "signal_coverage": {
+          "signals": {
+            "stargazers": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "forks": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "issues": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            },
+            "pypi:exmergo-dex-core": {
+              "captured_at": "2026-10-19 17:23:41.610988+00:00",
+              "complete": true
+            }
+          },
+          "complete_through": {
+            "star-history": "2026-10-18",
+            "community": "2026-10-18",
+            "package-downloads": "2026-10-18"
+          },
+          "release_asset_rows": 0
+        },
+        "available": true,
+        "period": {
+          "start": "2026-10-05",
+          "end_exclusive": "2026-10-19"
+        },
+        "zero_when_null": false,
+        "result": {
+          "status": "ok",
+          "data": {
+            "columns": [
+              "metric_time__week",
+              "package_download__registry",
+              "package_download__package",
+              "package_downloads"
+            ],
+            "types": [
+              "TIMESTAMP",
+              "VARCHAR",
+              "VARCHAR",
+              "HUGEINT"
+            ],
+            "cells": [
+              [
+                "2026-10-12T00:00:00",
+                "pypi",
+                "exmergo-dex-core",
+                1651
+              ],
+              [
+                "2026-10-05T00:00:00",
+                "pypi",
+                "exmergo-dex-core",
+                1611
+              ]
+            ],
+            "row_count": 2,
+            "truncated": false,
+            "backend": "local",
+            "vendor": "dbt",
+            "deployment": "local",
+            "execution": "dex"
+          },
+          "connection": {
+            "connector": "duckdb",
+            "target": {
+              "path": "./warehouse/analytics.duckdb"
+            },
+            "source": ".dex/config.yml"
+          },
+          "cost": {
+            "paradigm": "free_local",
+            "estimate": null,
+            "ceiling": null,
+            "estimate_quality": null,
+            "unit": null
+          },
+          "warnings": [],
+          "diffs": [],
+          "errors": [],
+          "reason": null
+        },
+        "reason": null,
+        "interpretation": "Registry downloads include CI and mirrors-excluded bots; they are not installations or users. Registries revise recent days."
+      }
+    },
+    "interpretation": "Each section states its own window and coverage. Unavailable sections are reported, not filled with zero."
+  }
+}

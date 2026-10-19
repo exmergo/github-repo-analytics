@@ -1,78 +1,88 @@
 {
   "schema_version": 1,
   "connector": "duckdb",
-  "snapshot_created_at": "2026-10-18T22:29:33.406994+00:00",
+  "snapshot_created_at": "2026-10-19T16:59:35.826480+00:00",
   "axes": {
     "schema": {
-      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "run_at": "2026-10-19T17:28:38.917011+00:00",
       "scope": null,
       "findings": []
     },
     "volume": {
-      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "run_at": "2026-10-19T17:28:38.917011+00:00",
       "scope": null,
-      "findings": []
+      "findings": [
+        {
+          "axis": "volume",
+          "code": "row_count_changed",
+          "identifier": "analytics.main.stg_observations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.stg_observations: rows 3 -> 5 (+66.7%)",
+          "exact": true,
+          "data": {
+            "row_count_before": 3,
+            "row_count_after": 5,
+            "change_fraction": 0.6667
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine",
+            "stg_observations"
+          ],
+          "impacted_metrics": [
+            "forks_net_change",
+            "forks_observed",
+            "open_issues_and_prs_observed",
+            "stars_net_change",
+            "stars_observed",
+            "watchers_observed"
+          ]
+        },
+        {
+          "axis": "volume",
+          "code": "row_count_changed",
+          "identifier": "analytics.raw.observations",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.raw.observations: rows 3 -> 5 (+66.7%)",
+          "exact": true,
+          "data": {
+            "row_count_before": 3,
+            "row_count_after": 5,
+            "change_fraction": 0.6667
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine",
+            "stg_observations"
+          ],
+          "impacted_metrics": [
+            "forks_net_change",
+            "forks_observed",
+            "open_issues_and_prs_observed",
+            "stars_net_change",
+            "stars_observed",
+            "watchers_observed"
+          ]
+        }
+      ]
     },
     "grain": {
-      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "run_at": "2026-10-19T17:28:38.917011+00:00",
       "scope": null,
       "findings": [
         {
           "axis": "grain",
-          "code": "no_rows",
-          "identifier": "analytics.main.stg_observations",
-          "column": null,
-          "severity": "low",
-          "detail": "analytics.main.stg_observations has no rows; null fractions were not reported",
-          "exact": true,
-          "data": {
-            "row_count": 0
-          },
-          "impacted_models": [
-            "fct_observations",
-            "metricflow_time_spine",
-            "stg_observations"
-          ],
-          "impacted_metrics": [
-            "forks_net_change",
-            "forks_observed",
-            "stars_net_change",
-            "stars_observed"
-          ]
-        },
-        {
-          "axis": "grain",
-          "code": "no_rows",
-          "identifier": "analytics.raw.observations",
-          "column": null,
-          "severity": "low",
-          "detail": "analytics.raw.observations has no rows; null fractions were not reported",
-          "exact": true,
-          "data": {
-            "row_count": 0
-          },
-          "impacted_models": [
-            "fct_observations",
-            "metricflow_time_spine",
-            "stg_observations"
-          ],
-          "impacted_metrics": [
-            "forks_net_change",
-            "forks_observed",
-            "stars_net_change",
-            "stars_observed"
-          ]
-        },
-        {
-          "axis": "grain",
-          "code": "no_rows",
+          "code": "fully_null_column",
           "identifier": "analytics.main.fct_observations",
-          "column": null,
-          "severity": "low",
-          "detail": "analytics.main.fct_observations has no rows; null fractions were not reported",
+          "column": "observation_gap_days",
+          "severity": "high",
+          "detail": "observation_gap_days on analytics.main.fct_observations is 100% NULL",
           "exact": true,
           "data": {
-            "row_count": 0
+            "null_fraction": 1.0,
+            "row_count": 1
           },
           "impacted_models": [
             "fct_observations",
@@ -81,8 +91,92 @@
           "impacted_metrics": [
             "forks_net_change",
             "forks_observed",
+            "open_issues_and_prs_observed",
             "stars_net_change",
-            "stars_observed"
+            "stars_observed",
+            "watchers_observed"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "fully_null_column",
+          "identifier": "analytics.main.fct_observations",
+          "column": "forks_net_change",
+          "severity": "high",
+          "detail": "forks_net_change on analytics.main.fct_observations is 100% NULL",
+          "exact": true,
+          "data": {
+            "null_fraction": 1.0,
+            "row_count": 1
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine"
+          ],
+          "impacted_metrics": [
+            "forks_net_change"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "fully_null_column",
+          "identifier": "analytics.main.fct_observations",
+          "column": "stars_net_change",
+          "severity": "high",
+          "detail": "stars_net_change on analytics.main.fct_observations is 100% NULL",
+          "exact": true,
+          "data": {
+            "null_fraction": 1.0,
+            "row_count": 1
+          },
+          "impacted_models": [
+            "fct_observations",
+            "metricflow_time_spine"
+          ],
+          "impacted_metrics": [
+            "stars_net_change"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.main.stg_release_assets",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.main.stg_release_assets has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "fct_release_downloads",
+            "metricflow_time_spine",
+            "stg_release_assets"
+          ],
+          "impacted_metrics": [
+            "release_downloads",
+            "release_downloads_net_change"
+          ]
+        },
+        {
+          "axis": "grain",
+          "code": "no_rows",
+          "identifier": "analytics.raw.release_assets",
+          "column": null,
+          "severity": "low",
+          "detail": "analytics.raw.release_assets has no rows; null fractions were not reported",
+          "exact": true,
+          "data": {
+            "row_count": 0
+          },
+          "impacted_models": [
+            "fct_release_downloads",
+            "metricflow_time_spine",
+            "stg_release_assets"
+          ],
+          "impacted_metrics": [
+            "release_downloads",
+            "release_downloads_net_change"
           ]
         },
         {
@@ -101,65 +195,34 @@
             "dim_event",
             "metricflow_time_spine"
           ],
-          "impacted_metrics": []
+          "impacted_metrics": [
+            "events"
+          ]
         },
         {
           "axis": "grain",
           "code": "no_rows",
-          "identifier": "analytics.main.stg_releases",
+          "identifier": "analytics.main.fct_release_downloads",
           "column": null,
           "severity": "low",
-          "detail": "analytics.main.stg_releases has no rows; null fractions were not reported",
+          "detail": "analytics.main.fct_release_downloads has no rows; null fractions were not reported",
           "exact": true,
           "data": {
             "row_count": 0
           },
           "impacted_models": [
-            "dim_event",
-            "metricflow_time_spine",
-            "stg_releases"
-          ],
-          "impacted_metrics": []
-        },
-        {
-          "axis": "grain",
-          "code": "no_rows",
-          "identifier": "analytics.raw.releases",
-          "column": null,
-          "severity": "low",
-          "detail": "analytics.raw.releases has no rows; null fractions were not reported",
-          "exact": true,
-          "data": {
-            "row_count": 0
-          },
-          "impacted_models": [
-            "dim_event",
-            "metricflow_time_spine",
-            "stg_releases"
-          ],
-          "impacted_metrics": []
-        },
-        {
-          "axis": "grain",
-          "code": "no_rows",
-          "identifier": "analytics.main.dim_event",
-          "column": null,
-          "severity": "low",
-          "detail": "analytics.main.dim_event has no rows; null fractions were not reported",
-          "exact": true,
-          "data": {
-            "row_count": 0
-          },
-          "impacted_models": [
-            "dim_event",
+            "fct_release_downloads",
             "metricflow_time_spine"
           ],
-          "impacted_metrics": []
+          "impacted_metrics": [
+            "release_downloads",
+            "release_downloads_net_change"
+          ]
         }
       ]
     },
     "semantic": {
-      "run_at": "2026-10-18T22:40:25.377370+00:00",
+      "run_at": "2026-10-19T17:28:38.917011+00:00",
       "scope": null,
       "findings": [
         {

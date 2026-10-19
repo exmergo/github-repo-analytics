@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "data": {
+    "ready": true,
+    "reason": null,
+    "built_at": "2026-10-19T17:24:20.595511+00:00",
+    "checked_at": "2026-10-19T17:28:41.232583+00:00",
+    "code_digest": "941170c4c99317d899bb4e27a82a7542282e11fbf444ddb637397022b3e2322e",
+    "synced_at": "2026-10-19T17:23:40.182985+00:00",
+    "warnings": [],
+    "expected_unavailable_fields": {
+      "main.annotations.url": "Annotation URLs are optional and none were supplied",
+      "main.fct_observations.forks_net_change": "No consecutive daily source captures exist",
+      "main.fct_observations.observation_gap_days": "No repository has two daily captures yet",
+      "main.fct_observations.stars_net_change": "No consecutive daily source captures exist",
+      "main.fct_release_downloads.downloads_net_change": "No release asset has consecutive daily captures yet"
+    },
+    "repositories": [
+      {
+        "repository": "exmergo/dex",
+        "source_revision": "d8376f19024a6877cd355e80f9826b46cb8e300a",
+        "source_data_repository": "exmergo/dex",
+        "first_traffic_date": "2026-06-23",
+        "last_traffic_date": "2026-10-17",
+        "latest_eligible_date": "2026-10-17",
+        "missing_traffic_dates": [],
+        "observed_traffic_days": 117,
+        "traffic_lag_days": 2,
+        "last_observed_totals_at": "2026-10-19 17:23:41.610988+00:00",
+        "latest_snapshots": {
+          "paths": "2026-10-19 04:39:37+00:00",
+          "referrers": "2026-10-19 04:39:37+00:00"
+        },
+        "endpoint_age_hours": {
+          "paths": 12.82,
+          "referrers": 12.82,
+          "repository_totals": 0.08,
+          "signal:forks": 0.08,
+          "signal:issues": 0.08,
+          "signal:pypi:exmergo-dex-core": 0.08,
+          "signal:stargazers": 0.08
+        },
+        "signals": {
+          "forks": {
+            "captured_at": "2026-10-19 17:23:41.610988+00:00",
+            "complete": true
+          },
+          "issues": {
+            "captured_at": "2026-10-19 17:23:41.610988+00:00",
+            "complete": true
+          },
+          "pypi:exmergo-dex-core": {
+            "captured_at": "2026-10-19 17:23:41.610988+00:00",
+            "complete": true
+          },
+          "stargazers": {
+            "captured_at": "2026-10-19 17:23:41.610988+00:00",
+            "complete": true
+          }
+        },
+        "freshness": "fresh",
+        "collection_age_hours": 12.82
+      }
+    ]
+  }
+}
