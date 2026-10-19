@@ -234,8 +234,9 @@ a field, flag, or macro you need is not described here.
   re-run to make it go away: relay the finding, its two counts, and the join it
   names. Relay a suppression too: it separates "checked and clean" from "not
   checked".
-- On ClickHouse, keep the `custom_settings` block in `profiles.yml`; it is how the
-  confirmed budget becomes a server-side cap.
+- On ClickHouse, keep the `custom_settings` block in `profiles.yml`, and on Trino
+  the `session_properties` block; each is how the confirmed budget becomes a
+  server-side cap.
 
 ### Test mutation
 

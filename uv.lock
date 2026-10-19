@@ -321,15 +321,15 @@ wheels = [
 
 [[package]]
 name = "exmergo-dex-core"
-version = "1.14.0"
+version = "1.15.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/dc/112125cb7dba718187fcc8cb1d8a739462e131a57fe08a25ef2b1d439a31/exmergo_dex_core-1.14.0.tar.gz", hash = "sha256:f666202b767ac5fa0529f14837c4f7b8168f11bea5aa66fc46a1ab3bdc09ef96", size = 2118581, upload-time = "2026-10-16T16:25:19.83Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/64/5d/e4fb5b2356dee49306e4a5cb3f6a30c16adc6efc2f14ddeba00ef58fa9cf/exmergo_dex_core-1.15.0.tar.gz", hash = "sha256:8c267ead0136fd9662a22d98eb8e43042e9e5995b5ed261e936dd36159ba4ea1", size = 2300926, upload-time = "2026-10-19T15:03:24.374Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1b/3b/bb92961cc37d8dd76a71eaf3698c7d00302b78c1042c8f09dddefce41f5f/exmergo_dex_core-1.14.0-py3-none-any.whl", hash = "sha256:a01900e1a212da4c68d418bee6cddaed4f3d55dc13dec2b5f08bc3b9d6cd83b6", size = 1150506, upload-time = "2026-10-16T16:25:17.854Z" },
+    { url = "https://files.pythonhosted.org/packages/48/62/44325a214bdc467a97a2d60d13c8584763517da801984757b7ca9a89911a/exmergo_dex_core-1.15.0-py3-none-any.whl", hash = "sha256:cb5bb73bab5698db53c0a99d820de64efe48427e4a0a45c5134a4c6e866330d6", size = 1242905, upload-time = "2026-10-19T15:03:22.409Z" },
 ]
 
 [package.optional-dependencies]
@@ -574,7 +574,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "exmergo-dex-core", extras = ["duckdb", "semantic"], specifier = "==1.14.0" },
+    { name = "exmergo-dex-core", extras = ["duckdb", "semantic"], specifier = "==1.15.0" },
     { name = "pyyaml", specifier = ">=6,<7" },
 ]
 

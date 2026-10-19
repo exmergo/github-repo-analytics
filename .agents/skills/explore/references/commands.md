@@ -162,6 +162,37 @@ a refusal names the target that failed while the others still answer. Targets
 are plain dataset names; statements times targets counts against
 `query.max_statements`.
 
+### Values-free mode
+
+A host can pin values-free mode (`DEX_RESULT_MODE=values_free`, or a
+`--values-free` flag on the command), and every envelope then carries
+`data.result_mode: "values_free"`. No value read from a table reaches you in it,
+so a statement runs only if every output column is an aggregate over the rows it
+reads and the result is one row:
+
+- Allowed aggregates: `COUNT` (with `DISTINCT` inside it), `COUNT_IF`/`COUNTIF`,
+  the approximate distinct counts, `SUM`, `AVG`, `STDDEV`/`VARIANCE` and their
+  variants, `CORR`, `COVAR_*`, `BOOL_AND`, `BOOL_OR`, `ENTROPY`, `KURTOSIS`,
+  `SKEWNESS`, and `FILTER (WHERE ...)` on any of them. Around them: numbers,
+  arithmetic, comparisons, `CASE`, a numeric cast, `ROUND`, `COALESCE`, `NULLIF`.
+- Refused, each with its `data.code`: a bare column (`bare_column`), a column in
+  `GROUP BY` (`group_by_column`), `DISTINCT` (`distinct_projection`), `LIMIT` or
+  `OFFSET` (`limit_offset`), `ORDER BY` (`order_by`), a window
+  (`window_function`), `MIN`, `MAX`, `ANY_VALUE`, `MODE`, a median, a quantile,
+  `ARRAY_AGG` or `STRING_AGG` (`aggregate_not_allowed`), a text literal in the
+  select list (`literal_projection`), a set operation (`set_operation`).
+- `WHERE`, `HAVING`, joins and subqueries in `FROM` are unrestricted. To compare
+  groups, ask one filtered count per group (`count(*) filter (where status =
+  'paid')`), not a `GROUP BY`.
+- A warehouse error arrives as `code: warehouse_refused` with its words withheld;
+  rewrite the statement rather than asking for the message.
+
+`explore profile` in the mode lists `withheld_fields` (`min_value`, `max_value`,
+`value_domain`) on each dataset; everything else is unchanged. Commands not
+reviewed for the mode (`cluster`, `semantic values`/`query`, every `transform`
+and `maintain` command) refuse with `code: command_not_values_free`. Tell the
+user rather than looking for a way around it.
+
 ## `explore cluster <object> [--features a,b,c] [-k N]`
 
 Runs k-means over a bounded sample of the object's numeric columns and returns
@@ -267,10 +298,29 @@ it as `execution` (`dex` or `vendor`).
 - `semantic.vendor: slayer` reads the SLayer model files named in
   `semantic.slayer.models` (needs the `[slayer]` extra). `list` and
   `--for-dimension` answer: a metric is a saved measure named `model.measure`,
-  and a dimension token is `model.column`. `values` and `query` refuse by name,
-  because SLayer executes through its own datasource connection, outside the
-  firewall and the cost guard; the refusal names the same physical route.
-  `--api` is refused, since dex reads no hosted SLayer.
+  and a dimension token is `model.column`. `values` and `query` run locally
+  with `execution: dex`: SLayer renders the SQL as a dry run, never opening a
+  datasource or reading a credential, and dex runs it through the same guards
+  as `--local` (PII gate, SELECT-only, relation pre-check, cost handshake,
+  columnar cap). The `[semantic]` extra is not needed. What a query can say:
+  - every metric in one query sits on one model, and an ad-hoc formula is
+    refused;
+  - `--group-by` takes that model's own columns (`orders.status`); a column
+    reached through a join is not groupable;
+  - `--grain` buckets the model's `default_time_dimension` at a built-in SLayer
+    grain (`day`, `week`, `month`, ...), and a model with none refuses it;
+  - `--where` is SLayer's filter syntax, not Jinja: `status = 'paid'`, read
+    relative to the query's model, or a dotted column through a declared join.
+    A clause dex cannot read, or one carrying `{variable}` syntax, is refused;
+  - `--order-by` names one of the query's own metrics or grouped columns;
+    write a descending one as `--order-by=-orders.revenue`, since with a space
+    the leading `-` is read as a flag and refused.
+
+  `values` is rooted at the dimension's own model (`scoped_to` empty, the
+  model's own filters applied), or at the `--metric` model when one is named,
+  in which case the dimension must be groupable for it. Connectors: DuckDB,
+  BigQuery, Snowflake, Postgres, and Redshift; Databricks, ClickHouse and Trino
+  refuse with the reason. `--api` is refused, since dex reads no hosted SLayer.
 
 `dimension_scope` says whether a dimension row is one declaration or one
 groupable path, which is why two backends can report different dimension counts

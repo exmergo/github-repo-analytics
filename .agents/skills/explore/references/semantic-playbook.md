@@ -116,7 +116,9 @@ domain comes back capped and `truncated`, and says so.
 
 Use a `query` instead when you want the distribution rather than the domain: group
 the metric by the dimension and read the sizes. That costs a query where `values`
-often does not.
+often does not. On a SLayer layer it always does: SLayer has no distinct-values
+shortcut, so `values` renders a dimension-only query and runs it through the same
+cost handshake as a metric query.
 
 ## When a command is refused
 
@@ -169,8 +171,9 @@ for the column yourself and do not treat the absence as a data problem.
 
 ## When the layer is SLayer models
 
-`vendor: slayer` means the layer is SLayer model files in the repository. `list`
-reads the same shape as anywhere else, with a few things to read differently:
+`vendor: slayer` means the layer is SLayer model files in the repository. `list`,
+`values` and `query` read the same shape as anywhere else, with a few things to
+read differently:
 
 - **A metric is a saved SLayer measure**, named `model.measure`, of type
   `formula`. Its formula is under `composition.expr`. It declares no aggregation
@@ -182,10 +185,37 @@ reads the same shape as anywhere else, with a few things to read differently:
   answers within one model.
 - **There are no entities.** The joins and keys are real and reach `explore map`,
   `explore relationships` and `explore profile` through `--use-project`.
-- **`query` and `values` refuse.** SLayer would run them through its own
-  datasource connection, outside the firewall and the cost guard. Take the same
-  physical route as for Ossie: a dimension's `semantic_model`, that model's
-  `relation`, then `explore profile` and `explore query`.
+- **`query` and `values` run, and dex executes them.** SLayer only renders the
+  SQL, as a dry run over the model files dex validated; dex runs it through the
+  same PII gate, relation pre-check and cost handshake as the dbt `--local`
+  backend, and `execution` is `dex`. Treat a result as cost-guarded, exactly as
+  you would a local dbt one.
+- **One model per query.** A SLayer query is rooted at one model, so every
+  metric you pass must be a saved measure on the same model; query each model's
+  metrics separately. A formula such as `sum(amount)` is refused: it is a
+  definition nobody reviewed, so ask for it to be saved as a measure instead.
+- **Group by the model's own columns.** `--group-by orders.status` works; a
+  column on a joined model does not, even where the layer declares the join.
+  Bucket time with `--grain month`, which applies to the model's
+  `default_time_dimension` (its `time_axis` in `list`). Order only by a metric or
+  a column you grouped by, with `-` for descending (`--order-by=-orders.revenue`).
+- **`--where` is SLayer's filter syntax, not Jinja.** Write
+  `--where "status = 'paid'"`, with columns read relative to the query's model;
+  a dotted name (`customers.region = 'EU'`) walks a declared join. The gate
+  screens every column a clause names, joined ones included, so a PII column
+  refuses the query wherever it appears. A clause dex cannot read, or one with
+  `{variable}` placeholders, is refused: write the value into the clause.
+- **`values` before `--where`, as anywhere.** `values orders.status` reads the
+  column's domain on its own model, with the model's own filters applied, so
+  `scoped_to` is empty. `--metric` reads the values present for that metric
+  instead and names it in `scoped_to`, and is refused for a dimension the metric
+  cannot group by. A grain suffix (`orders.ordered_at__month`) works on a time
+  dimension only.
+- **Not every connector.** DuckDB, BigQuery, Snowflake, Postgres and Redshift
+  are supported. Databricks and ClickHouse refuse with the reason, because
+  SLayer's SQL for them would run and return wrong numbers or would need a live
+  server, and Trino refuses until its rendered SQL has been reviewed. On those, take the physical route: a dimension's `semantic_model`,
+  that model's `relation`, then `explore profile` and `explore query`.
 
 A model file dex refuses (a stale `version`, a duplicate name, a join to a model
 that is not configured) is named in `notes` with its file and element, and the
@@ -203,7 +233,9 @@ not treat the absence of an estimate as "it was free".
 
 `list` and the catalog side cost no warehouse query on any backend: one GraphQL
 round trip hosted, one compiled-artifact read locally, one repository read for a
-native layer. `values` and `query` do spend on the two dbt backends. On a native
-Ossie layer or a SLayer layer neither runs at all, so the only spend on that path is the
+native layer. `values` and `query` do spend on the two dbt backends and on a
+SLayer layer, and on SLayer they take the same handshake as `--local`: a billed
+connector returns `needs_confirmation` with the estimate before anything runs. On
+a native Ossie layer neither runs at all, so the only spend on that path is the
 `explore profile` and `explore query` you reach for instead, and those carry
 their own estimate and confirmation.
