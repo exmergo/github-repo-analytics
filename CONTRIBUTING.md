@@ -1,5 +1,7 @@
 # Contributing
 
+Participation follows the [code of conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). For a question the template cannot answer yet, open a *Question or metric request* issue first so the definition can be agreed before code.
+
 Bootstrap with `bash scripts/bootstrap.sh`. Run `uv run --frozen pytest -q`, `uv run --frozen ruff check .`, and `uv run --frozen ruff format --check .` before proposing a change.
 
 Metric changes need numerical expectations exercised through Dex/MetricFlow, including their allowed dimensions, period aggregation, missing observations, and zero denominators. Preserve the distinction between daily counts, observed balances, and rolling snapshots. Update the metric contract and question cookbook with any public interface changes.
