@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Setup guide
+    url: https://github.com/exmergo/github-repo-analytics/blob/main/docs/setup.md
+    about: Token scopes, enabling collection, and tracking several projects.
+  - name: Question cookbook
+    url: https://github.com/exmergo/github-repo-analytics/blob/main/docs/questions.md
+    about: Every executable question recipe, with example output.
+  - name: Report a security issue privately
+    url: https://github.com/exmergo/github-repo-analytics/security/advisories/new
+    about: Never post tokens or private data in a public issue.

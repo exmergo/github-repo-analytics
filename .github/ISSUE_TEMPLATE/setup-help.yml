@@ -1,0 +1,20 @@
+name: Setup help
+description: Enabling collection for your projects did not work.
+labels: [setup]
+body:
+  - type: checkboxes
+    id: steps
+    attributes:
+      label: Completed setup steps
+      options:
+        - label: Created my repository from the template and edited `sources.yml`.
+        - label: Added the `GHRS_TOKEN` secret with Administration read access to the tracked repositories.
+        - label: Set Actions workflow permissions to "Read and write".
+        - label: Set the `ANALYTICS_ENABLED` repository variable to `true`.
+  - type: textarea
+    id: run
+    attributes:
+      label: Failed run
+      description: Link to the Actions run and the failing step's last lines. Never paste the token.
+    validations:
+      required: true

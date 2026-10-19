@@ -1,0 +1,38 @@
+name: Finish template setup
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  checklist:
+    # Runs in repositories created from the template, until collection is enabled.
+    if: github.repository != 'exmergo/github-repo-analytics' && vars.ANALYTICS_ENABLED != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open the setup checklist once
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SERVER: ${{ github.server_url }}
+        run: |
+          title="Finish setting up repository analytics"
+          if test -n "$(gh issue list --state all --search "\"$title\" in:title" --json number --jq '.[0].number')"; then
+            exit 0
+          fi
+          gh issue create --title "$title" --body "$(cat <<BODY
+          This repository was created from the GitHub repo analytics template. Collection stays off until these steps are done:
+
+          - [ ] Edit \`sources.yml\`: replace the \`exmergo/dex\` example with your public repositories. Set \`mode: collect\` and add \`packages: {pypi: [...]}\` or \`{npm: [...]}\` if you publish packages.
+          - [ ] Create a fine-grained token with **Administration: read** on the tracked repositories and **Contents: read and write** on this repository. Save it as the \`GHRS_TOKEN\` Actions secret.
+          - [ ] Settings → Actions → General → Workflow permissions: choose **Read and write permissions**.
+          - [ ] Settings → Secrets and variables → Actions → Variables: add \`ANALYTICS_ENABLED\` = \`true\`.
+          - [ ] Actions → *Collect and validate repository analytics* → **Run workflow** once.
+
+          Traffic aggregates become public in this repository's \`github-repo-stats\` branch. Full guide: $SERVER/$GH_REPO/blob/main/docs/setup.md
+          BODY
+          )"

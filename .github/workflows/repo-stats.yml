@@ -21,13 +21,17 @@ jobs:
   configuration:
     if: vars.ANALYTICS_ENABLED == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       matrix: ${{ steps.sources.outputs.matrix }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
           version: "0.13.1"
+          enable-cache: true
       - run: bash scripts/bootstrap.sh
       - id: sources
         env:
@@ -39,6 +43,9 @@ jobs:
   collect:
     needs: configuration
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # One project's failure must not block publishing the others; validation still gates.
+    continue-on-error: true
     permissions:
       contents: write
     strategy:
@@ -50,6 +57,7 @@ jobs:
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
           version: "0.13.1"
+          enable-cache: true
       - run: bash scripts/bootstrap.sh
       - name: Preserve traffic using the existing action
         if: matrix.mode == 'collect'
@@ -71,7 +79,8 @@ jobs:
           fi
       - name: Import and supplement
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          # Public stargazer, fork, issue and release reads; a PAT raises the rate limit.
+          GITHUB_TOKEN: ${{ secrets.GHRS_TOKEN || github.token }}
           TRACKED_REPOSITORY: ${{ matrix.repository }}
         run: uv run --frozen oss-analytics stage --repository "$TRACKED_REPOSITORY" --destination .data-branch
       - name: Persist raw history before validation
@@ -86,8 +95,10 @@ jobs:
             git -C .data-branch push origin HEAD:github-repo-stats
           fi
   validate-and-publish:
-    needs: collect
+    needs: [configuration, collect]
+    if: ${{ !cancelled() && needs.configuration.result == 'success' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
     steps:
@@ -95,6 +106,7 @@ jobs:
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
           version: "0.13.1"
+          enable-cache: true
       - run: bash scripts/bootstrap.sh
       - name: Pin raw candidate and restore previous baseline
         id: candidate
@@ -139,5 +151,36 @@ jobs:
           git -C .data-branch config user.name github-actions[bot]
           git -C .data-branch config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git -C .data-branch add published.json analytics-state
+          if git -C .data-branch diff --cached --quiet; then
+            echo "Publication unchanged"
+            exit 0
+          fi
           git -C .data-branch commit -m "Publish validated analytics revision"
-          git -C .data-branch push origin HEAD:github-repo-stats
+          # Publication files are disjoint from raw folders, so rebasing onto new raw data is safe.
+          for attempt in 1 2 3; do
+            if git -C .data-branch push origin HEAD:github-repo-stats; then exit 0; fi
+            git -C .data-branch pull --rebase origin github-repo-stats
+          done
+          exit 1
+  report-failure:
+    needs: [configuration, collect, validate-and-publish]
+    if: ${{ failure() && github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update the collection failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Analytics collection is failing"
+          number=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          body="The scheduled run failed: $RUN_URL. Raw observations already collected are retained. See docs/operations.md#failures."
+          if test -n "$number"; then
+            gh issue comment "$number" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi

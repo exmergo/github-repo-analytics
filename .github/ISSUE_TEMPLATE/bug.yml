@@ -1,0 +1,49 @@
+name: Bug report
+description: A command, workflow, metric, or recipe behaves incorrectly.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Never paste tokens. Traffic numbers you paste become public.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Collection workflow (GitHub Actions)
+        - sync / build / check / baseline
+        - A metric returns a wrong number
+        - A question recipe
+        - Dex explore / transform / maintain
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or workflow run
+      description: The exact command, or a link to the failed Actions run.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened
+      description: Paste the JSON envelope's `errors`, `warnings`, and `reason` fields.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Status output
+      description: Output of `uv run --frozen oss-analytics status --json` (remove anything private).
+      render: json
