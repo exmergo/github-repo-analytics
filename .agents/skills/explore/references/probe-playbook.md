@@ -168,6 +168,7 @@ appear across every row of this JSON column"):
 | Redshift | `t, UNPIVOT t.doc AS v AT k` |
 | DuckDB | `t, UNNEST(json_keys(doc)) AS u(k)` |
 | ClickHouse | `t ARRAY JOIN JSONExtractKeysAndValuesRaw(doc) AS kv` (there is no lateral join; ARRAY JOIN is the expansion) |
+| Trino | `t CROSS JOIN UNNEST(CAST(json_parse(doc) AS MAP(VARCHAR, JSON))) AS u(k, v)` (Trino unnests maps and arrays, not JSON; relations are always `catalog.schema.table`) |
 
 The unnested value must come from a column of a table in the query, bare or
 through a JSON or array function. Unnesting a subquery, another table, a

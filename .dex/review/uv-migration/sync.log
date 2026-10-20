@@ -1,7 +1,0 @@
-Resolved 65 packages in 1ms
-   Building oss-analytics @ file:///Users/marcociavarella/Projects/how-to-track-your-open-source-analytics
-      Built oss-analytics @ file:///Users/marcociavarella/Projects/how-to-track-your-open-source-analytics
-Prepared 1 package in 367ms
-Uninstalled 1 package in 0.93ms
-Installed 1 package in 1ms
- ~ oss-analytics==0.1.0 (from file:///Users/marcociavarella/Projects/how-to-track-your-open-source-analytics)

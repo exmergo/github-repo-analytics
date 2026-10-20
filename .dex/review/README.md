@@ -1,55 +1,47 @@
-# Dex audit and corrections
+# Dex audit trail: adding stars, community, and downloads
 
-This directory records an actual Explore → Transform → Maintain pass over the existing project. The initial implementation was authored directly; these plans are subsequent corrections, not evidence that its original authorship followed Dex's workflow. No Git staging or commits were performed during this audit.
+This directory holds the actual Dex command output from one Explore → Transform → Maintain session (2026-10-19). That session took the template from traffic-only analytics to 39 governed metrics: star and fork history, issues and pull requests, release and package downloads, repository vitals, rolling and week-over-week metrics. Every model and metric change in the session went through a Dex plan. Nothing in the dbt project or semantic layer was hand-edited in place of the guarded command.
 
-The engine used here is the project's installed `exmergo-dex-core==1.14.0`, invoked through `uv run --no-sync dex` (or the Python orchestration that invokes that same CLI). The installed skills pin their standalone launcher to 1.14.1. That launcher could not download its engine because sandbox DNS cannot resolve PyPI; its actual stderr is retained in `00-skill-wrapper.stderr`. No raw database client substituted for Dex during this audit.
+- **Engine:** `exmergo-dex-core==1.15.0`, both through the project lock (`uv run --frozen dex`) and through the Explore/Transform/Maintain skill launchers.
+- **Warehouse:** local DuckDB, built from the public `exmergo/dex` example plus live public signals. Run outside of any session, `oss-analytics status --json` reports the current readiness, coverage, source revision, and code digest.
+- **Paths:** absolute paths in saved envelopes were rewritten to `.`, `~`, `<scratchpad>`, or `<dex-plugin-1.15.0>`. Nothing else was edited.
+
+The previous session's trail (Dex 1.14) is in Git history. Its accepted baseline is kept as [previous-baseline.json](previous-baseline.json), and this session's changes were checked against it.
 
 ## Read the evidence in this order
 
-| Step | Actual command response | What to review |
+| Step | Evidence | What it shows |
 |---|---|---|
-| Explore | [01-explore-before.json](01-explore-before.json) | Warehouse columns, grains, relationships, PII findings, and initial cache reuse. |
-| Diagnose | [02-verify-before.json](02-verify-before.json) | Eight undeclared-column findings, seven models without column contracts, and unverified grains/joins. |
-| Dependencies | [03-references.json](03-references.json) | Complete reference discovery for the staging models and traffic mart. |
-| Old baseline | [04-check-before.json](04-check-before.json), [baseline-before.json](baseline-before.json) | The original drift comparison and the untouched previous baseline. |
-| Model plan | [05-contracts-plan.json](05-contracts-plan.json), [06-contracts-apply.json](06-contracts-apply.json) | Applied plan `pea618a9ddd`: seven explicit staging projections, six complete grain keys, complete model column declarations, annotation seed types, and a traffic source-contract test. |
-| Verified build | [07-build-verify.json](07-build-verify.json) | Dex built on dev and verification ran. Read `suppressed` and warnings as well as findings. |
-| Semantic discovery | [08-semantic-inventory.json](08-semantic-inventory.json) | All 17 metrics, their inputs, aggregation time axes, and queryable dimensions. No catalog elements were elided. |
-| Semantic plan | [09-semantic-plan.json](09-semantic-plan.json), [11-semantic-apply.json](11-semantic-apply.json) | Applied plan `p7ae49ddfc3`: clarify coverage and ratio-of-sums descriptions. Expressions and aggregations are unchanged. |
-| Reconcile | [13-reconcile.json](13-reconcile.json) | Interim old-baseline comparison: zero mechanical fixes, nine advisory proposals. Compiled-artifact staleness is explicitly reported. No advisory proposal was automatically applied. |
-| Final dev build | [14-final-build-verify.json](14-final-build-verify.json) | 17 successful model/seed nodes and 48 passing dbt tests; verification ran with zero findings. |
-| Preserve the diff | [15-check-against-original-baseline.json](15-check-against-original-baseline.json) | Intentional staging additions/model changes and three metric-description changes remain observable against the original baseline. |
-| Whole-project verification | [16-verify-after.json](16-verify-after.json) | Zero findings and no suppressed axes, with explicit unresolved join/set-operation warnings. |
-| Candidate publication path | [18-candidate-build.json](18-candidate-build.json) | The application loaded an isolated candidate, built through Dex, executed every metric, and then replaced the local warehouse. |
-| Mutation evidence | [19-snapshot-mutation.json](19-snapshot-mutation.json) | Both generated snapshot-filter defects were caught by `discovery_grid`; no excluded baseline tests or elided mutants. This covers that model and those mutations, not the whole project. |
-| Metric execution | [20-metric-execution.json](20-metric-execution.json) | The actual Dex catalog and all 17 MetricFlow query envelopes, including empty results. |
-| Fresh map | [21-final-map.json](21-final-map.json) | All 24 objects freshly profiled, none skipped, and zero PII-flagged columns. Inferred keys on single-repository raw data are not multi-repository contracts. |
-| Plans | [22-plans.json](22-plans.json) | Engine-generated plan listing and applied/pending states. |
-| Baseline acceptance | [23-accepted-baseline.json](23-accepted-baseline.json) | Generated after the verified candidate, numerical integration tests, and refreshed full map. The previous comparison is retained above. |
-| Final maintenance | [24-final-check.json](24-final-check.json) | Schema, volume, grain, semantic, and verification results against the accepted state; original findings are retained. |
-| Readiness | [25-status.json](25-status.json) | Validated code/input digest, exact traffic coverage, source revision, collection age, and separate freshness status. |
-| Discovery diagnostics | [26-discovery-profiles.json](26-discovery-profiles.json), [27-cardinality-diagnostic.json](27-cardinality-diagnostic.json) | Profile evidence and firewalled aggregate probes explain the remaining cardinality notices. |
+| Connect | [01](01-connect.json) | Read-only DuckDB connection, free local cost paradigm. |
+| Inventory and map | [02](02-inventory.json), [03](03-map-before.json) | 24 objects, declared joins read from the semantic layer, zero PII columns. |
+| Reference check | [04](04-check-reference-build.json) | The unchanged models rebuilt on 1.15.0 pass `check` against the previous baseline, so the engine upgrade alone changed nothing. |
+| Explore new sources | [05](05-profile-new-raw-tables.json) | Profiles of the new raw tables before any SQL was written: grains (`date`, `number`), null fractions, value domains. Dex flagged `release_assets.asset_name` as a possible name (PII, confidence 0.6). No metric needs it, so ingestion drops the column instead of overriding the flag. |
+| Staging plan | [06](06-staging-plan.json) → [07](07-staging-apply.json) → [08](08-staging-build-verify.json) | Plan `pd93b32993a`: six staging models plus contracts. The only change to an existing model is two additive columns on `stg_observations`. The build ran with `verification.ran: true` and zero findings. |
+| Marts plan | [09](09-marts-plan.json) → [10](10-marts-apply.json) → [11](11-marts-build-verify.json) | Plan `p4ba3d1fc76`: star, fork, issue, release-download, and package-download marts. `row_attribution` proves `fct_legacy` keeps 33 → 33 rows after the refactor. Time-spine attribution was honestly reported as unmeasurable until the new marts existed. 28 models, 127 tests, zero verification findings. |
+| Probe the marts | [12](12-marts-probes.json) | Star history sums to 88 and observed stars are 88. Forks reach 21 of 24 because the partial capture day is excluded by design. |
+| Semantic plan | [13](13-semantic-plan.json) → [14](14-semantic-apply.json) → [15](15-semantic-build-verify.json) | Plan `p52de526669`: 27 definitions added, 2 updated additively, 21 unchanged, and the plan was parsed by dbt before being stored. |
+| Maintain vs previous baseline | [16](16-check-against-previous-baseline.json) | Every schema and semantic finding is additive and matches the plans above. The volume jumps are the example finally having observations and releases. Two cardinality notices repeat the previous audit. |
+| Reconcile | [17](17-reconcile.json) | 1 mechanical and 35 advisory proposals. **The mechanical proposal (plan `p854e61500e`) was reviewed and rejected:** re-scaffolding `stg_observations` would delete the hand-written `observation_source_key` that `fct_observations` relies on. It would also add a second `stg_observations.yml` that duplicates the model's contract in `schema.yml`, and assert `captured_at` unique, which is false across repositories. The drift it targets was already handled by plan `pd93b32993a`. The plan stays unapplied as a record. |
+| Accept the change | [18](18-map-full.json), [19](19-baseline-accepted.json) | Full re-map (41 objects, zero PII columns), then the reviewed baseline. |
+| A metric definition fix | [20](20-cumulative-definitions-refusal.json) → [21](21-cumulative-plan.json) → [22](22-cumulative-apply.json) → [23](23-cumulative-build-verify.json) | `stars_from_history` read 25, 25, 28, 74 by week because cumulative metrics default to the first day of each period. Plan `p93b1d13147` sets `period_agg: last`, and the running total is now 25, 25, 61, 88. The definitions splicer refused this file's layout ([20](20-cumulative-definitions-refusal.json)) and named the guarded whole-file route, which was used. Plan `p1863b2e333` was superseded by a wording fix and is unapplied. |
+| Maintain catches it | [24](24-check-catches-definition-change.json) | `check` blocked on `definition_changed` for both cumulative metrics until the change was reviewed and the baseline accepted. |
+| Mutation testing | [25](25-mutation-fct_snapshot_status.json), [26](26-mutation-semantic-backed-model.json) | `fct_snapshot_status` scores 1.0: both generated mutants were killed, none excluded or elided. Its key now hashes the declared daily grain, so the `unique` test catches a removed dedup. Models that back a semantic model cannot be mutated with this engine release (see limitations). |
+| Whole-project verify | [27](27-verify.json) | Zero findings. Row population was **suppressed**, not checked: "no compiled model could be lined up against a driving parent". The per-build `--verify` runs above are the row-level evidence. |
+| Relationships | [28](28-relationships-verified.json) | 16 joins, all verified, zero orphans. Joins from empty release-asset tables have no orphan fraction to measure. |
+| Semantic catalog | [29](29-semantic-inventory.json), [30](30-diagram.json) | 39 metrics with their inputs and dimensions, and the entity diagram (Dex's own Mermaid; not redrawn). |
+| Plans | [31](31-plans.json) | Engine plan listing: applied, rejected, and superseded plans. |
+| Final state | [32](32-final-check.json), [33](33-status.json), [34](34-weekly-report.json) | `check` passes. `status` is ready and fresh with every signal captured. `weekly-report` answers all sections except release downloads, which are unavailable because Dex uploads no release assets. |
 
-The root `.dex/cache.json`, `.dex/snapshot.json`, `.dex/drift.json`, and `.dex/plans/` are engine-generated and visible to Git. Review and commit the accepted snapshot like a lockfile. Use `dex transform plans` to inspect plans. `p00d3a022ec` is a superseded, unapplied proposal with unnecessary formatting changes; `p7ae49ddfc3` replaced it. Do not apply the superseded plan.
+## What validation establishes, and what it does not
 
-## What validation does and does not establish
+- [validation-tests.log](validation-tests.log): **53 passed, 1 skipped** (the opt-in live test, which passed separately against the public example). The suite runs real MetricFlow queries through Dex over a two-repository fixture. It asserts exact values for every new metric, gap and null behavior, recipe windows, anonymous collection, incremental issue merge, rate-limit retries, and the blob-cache integrity check. [validation-lint.log](validation-lint.log) covers ruff and actionlint.
+- The final check still reports three high-severity `fully_null_column` findings. Each is excused only because the source proves the absence (fewer than two daily captures exist yet), and the excuse is recorded in the check output, not hidden.
+- The two medium cardinality notices compare approximate profile counts with exact counts. The previous audit showed the same tables return 79 exact vs 69 approximate paths and 22 vs 23 referrers.
+- Release-download metrics are verified by fixture values only. The live example has no uploaded release assets.
 
-[validation-tests.log](validation-tests.log) records **35 passing integration tests and one skipped live-network test**. These exercise real DuckDB and MetricFlow over two deterministic repositories: counts, ratios, missing observations, rolling snapshots, UTC boundaries, definition drift, failed-build recovery, publication, and plan/apply. [validation-lint.log](validation-lint.log) records passing lint and formatting checks. The publication gate now also rejects a build whose verification response is missing or says it did not run.
+## Engine limitations found in this session (reported to Dex)
 
-Dex cannot automatically resolve the discovery models' list-expansion joins or assign a single driving parent to event unions and the calendar. Those remain warnings; the discovery grid assertion and numerical integration tests provide additional evidence. Zero findings does not mean every relationship was automatically proved.
-
-Final maintenance still reports seven low-severity empty-source notices and two medium-severity dimension-cardinality notices. The latter compare path counts of 69 → 79 and referrer counts of 23 → 22 even immediately after a refreshed baseline. The diagnostic queries on the same unchanged tables return **79 exact versus 69 approximate paths**, and **22 exact versus 23 approximate referrers**. This is consistent with comparing approximate profile counts with exact maintenance counts; it is not evidence that those categories were added or removed during this audit. The original findings remain visible; no cache editing, detection override, or repeated baseline replacement was used to erase them.
-
-The discovery profiles also flag that the warehouse permits nullable grain columns. The dbt `not_null` tests prove their current values are non-null; they do not install physical `NOT NULL` constraints. Read those two claims separately.
-
-Mutation checking of `fct_traffic` failed with a semantic-model validation error ([10-traffic-mutation.json](10-traffic-mutation.json)). Staging traffic has no mutation operator the engine supports ([12-staging-mutation.json](12-staging-mutation.json)). Neither result establishes mutation coverage. The successful, bounded snapshot-model check is reported separately above.
-
-The preferred definition-splicing command refused the existing YAML layout ([09-semantic-definitions-refusal.json](09-semantic-definitions-refusal.json)). Its diagnostic explicitly requested a whole-file edits payload. The accepted semantic plan used that guarded route, and its diff changes only the intended descriptions. Row attribution was not emitted by this engine release; no missing attribution is treated as a zero-row delta.
-
-The real-data candidate is existing public `exmergo/dex` history at Git revision `031e95d61f01fc469c35299f5fa7c1b55e229d5a`. It contains 116 traffic days and 212 raw discovery snapshots. This offline candidate has no supplemental observed star/fork captures or releases: four observed-growth metrics return no rows. Those results establish execution, not data availability. The two-repository fixture suite validates their numerical behavior. Historical data must not be presented as fresh, and no missing source was fabricated.
-
-These audit commands used the former requirements-based bootstrap. The later [native uv migration](uv-migration/README.md) replaces that bootstrap with `uv.lock`, removes the duplicate constraints and requirements lock, and updates commands to `uv run --frozen`. The original command envelopes above remain unchanged as historical evidence.
-
-## Review grouping
-
-Review the staging projections and `models/schema.yml` with model plan `pea618a9ddd`; then review `models/semantic.yml` with semantic plan `p7ae49ddfc3`. Next review `src/oss_analytics/lifecycle.py` and its skipped-verification regression tests. Review the generated artifacts, `.gitignore`, agent instructions, and lifecycle documentation together so the evidence-retention policy is explicit. Git commits remain the maintainer's choice.
+1. **Definitions splicing** refuses `models/semantic.yml` because the file uses indentless YAML sequences (`- name:` at column 0 under `semantic_models:` and `metrics:`). The refusal is safe and names `--edits-file`, which was used. Only a whole-file diff can be reviewed in that case.
+2. **Mutation testing** wraps the mutated model as `materialized='ephemeral'`. A semantic model that `ref()`s an ephemeral model fails dbt's semantic manifest validation (`PydanticSemanticModel`), so no model backing a metric can be mutation-tested. Value tests in `tests/test_metrics.py` cover those models instead.
+3. **Semantic query results are capped at 50 rows**, and `--limit` does not raise the cap. Recipes keep each query within one bounded window and refuse truncated results.
+4. **Reconcile's mechanical re-scaffold** of a hand-written staging model drops key logic and adds a duplicate model YAML (see step 17). Read every mechanical proposal before applying it.

@@ -16,7 +16,13 @@ The data branch can contain upstream-generated reports; those are byproducts. Th
 
 Run `uv run --frozen oss-analytics status --json`. Validation readiness, collection age, traffic lag, and missing dates are separate facts. Collection older than 48 hours (or twice the configured interval, whichever is larger) warns; older than seven days is critical. `status --require-fresh` also rejects traffic more than three calendar days behind. Exact historical answers can still be valid against old, clearly labeled data.
 
-GitHub may delay/drop scheduled jobs and disables public-repository schedules after 60 days without activity. See [GitHub's schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule). Verify that a workflow is enabled before assuming a quiet chart represents a quiet project.
+GitHub may delay/drop scheduled jobs and disables public-repository schedules after 60 days without activity. See [GitHub's schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule). Collection commits to the data branch every day, which normally counts as activity, but this template deliberately does not try to circumvent the rule. If **Actions** shows the workflow as disabled, re-enable it there; `status --json` reports the growing collection age either way. Verify that a workflow is enabled before assuming a quiet chart represents a quiet project.
+
+Each project is collected in its own matrix job. One failing project does not block the others' raw data; validation still refuses to publish while any project is stale.
+
+### Failures
+
+A failed scheduled run opens, or comments on, a single **Analytics collection is failing** issue that links the run. Close it once a run succeeds. Signal collection is independent: a package-registry outage is recorded in `signals/capture.json` and `status` warnings, keeps the previous download history, and never blocks GitHub data.
 
 If collection stops:
 
@@ -37,7 +43,7 @@ To change declarations, edit `pyproject.toml` (or use `uv add`/`uv remove`), the
 
 ## Release this template
 
-Before enabling the Exmergo showcase:
+Before enabling the Exmergo showcase (`exmergo/github-repo-analytics`):
 
 - Run the full fixture suite and lint checks.
 - Run the explicit public-example smoke test with network access.

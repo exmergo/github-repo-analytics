@@ -199,7 +199,7 @@ is not described here.
   explicit budget from the user, and re-issue with
   `--confirm --budget <magnitude>` in the estimate's unit: bytes on BigQuery, warehouse-seconds on
   Snowflake and Databricks, compute-seconds on Redshift, database-seconds on
-  Postgres and ClickHouse. On DuckDB nothing prompts.
+  Postgres and ClickHouse, cluster-seconds on Trino. On DuckDB nothing prompts.
 - `check`, `semantic`, and `verify` answer first and offer second: they return
   `ok` with final findings, and the price of the rest under `data.offer`
   (`data.axes_run` says what ran, `data.offer.axes` what the estimate adds).

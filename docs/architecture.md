@@ -2,7 +2,7 @@
 
 The default branch owns source configuration, SQL, tests, annotations, and semantic definitions. The `github-repo-stats` branch owns raw collected history, supplemental observations, upstream provenance records, `published.json`, and validated Dex state under `analytics-state/`.
 
-Local `.data/inputs/<id>/` directories are immutable imported candidates. The sync manifest records every resolved Git commit and file checksum. Downloads use raw-content URLs at that commit. Required schema/type errors reject the candidate without replacing the previous sync manifest. Existing local supplemental observations survive future syncs.
+Local `.data/inputs/<id>/` directories are immutable imported candidates. Imports list only each configured repository's subtree of the data branch and download files through a content-addressed cache (`.data/blobs/`, keyed and verified by Git blob SHA), so a growing branch is not re-downloaded on every sync. The sync manifest records every resolved Git commit and file checksum. Downloads use raw-content URLs at that commit. Required schema/type errors reject the candidate without replacing the previous sync manifest. Existing local supplemental observations survive future syncs.
 
 The Python loader writes typed `raw.*` tables in a new candidate warehouse. dbt staging views preserve the source contract; dbt marts own grains and derived columns:
 
@@ -15,6 +15,10 @@ The Python loader writes typed `raw.*` tables in a new candidate warehouse. dbt 
 | `fct_snapshot_status` | Repository × endpoint × UTC capture date |
 | `fct_referrer`, `fct_path` | Repository × daily snapshot × item ever seen in that endpoint |
 | `dim_event` | Repository × stable release/annotation event ID |
+| `fct_star_history`, `fct_fork_history` | Repository × covered UTC day (dense; zero only inside coverage) |
+| `fct_issues` | Repository × issue or pull request number |
+| `fct_release_downloads` | Repository × release asset × UTC capture date, latest capture on that date |
+| `fct_package_downloads` | Repository × registry × package × reported UTC day |
 | `metricflow_time_spine` | Continuous UTC date |
 
 Facts have unique keys and repository relationships. MetricFlow joins facts through declared entities rather than joining daily traffic directly to many referrers or events. Non-additive time dimensions select the latest observed totals/snapshots within each repository and bucket.

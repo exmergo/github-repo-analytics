@@ -5,13 +5,39 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "oss-analytics"
 version = "0.1.0"
-description = "Free, reproducible open-source project analytics with Dex, DuckDB, and MetricFlow"
+description = "GitHub repo analytics for open-source maintainers: traffic beyond 14 days, star history, downloads, and community activity with dbt, MetricFlow, and Dex"
+readme = "README.md"
 requires-python = ">=3.11,<3.13"
 license = "Apache-2.0"
+authors = [{ name = "Exmergo" }]
+keywords = [
+  "github-analytics",
+  "github-traffic",
+  "star-history",
+  "open-source",
+  "maintainers",
+  "pypi-downloads",
+  "dbt",
+  "metricflow",
+  "duckdb",
+  "semantic-layer",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Version Control :: Git",
+]
 dependencies = [
-  "exmergo-dex-core[duckdb,semantic]==1.14.0",
+  "exmergo-dex-core[duckdb,semantic]==1.15.0",
   "pyyaml>=6,<7",
 ]
+
+[project.urls]
+Homepage = "https://github.com/exmergo/github-repo-analytics"
+Documentation = "https://github.com/exmergo/github-repo-analytics/tree/main/docs"
+Issues = "https://github.com/exmergo/github-repo-analytics/issues"
 
 [project.scripts]
 oss-analytics = "oss_analytics.cli:main"

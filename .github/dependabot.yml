@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Actions stay pinned by commit SHA; Dependabot proposes the new SHA and version comment.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ["*"]
+    # Dex, dbt, and MetricFlow updates change metric execution: review them with `oss-analytics check`.
+    open-pull-requests-limit: 3

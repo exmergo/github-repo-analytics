@@ -1,88 +1,114 @@
-# How to track your open-source analytics
+# GitHub repo analytics for open-source maintainers
 
-**Give your maintainers and their agents one place to answer questions about your project's growth.** Keep GitHub history, define metrics once, and query them locally with [Dex](https://github.com/exmergo/dex), DuckDB, dbt Core, and MetricFlow.
+**Keep your GitHub traffic beyond 14 days, see real star history, track release and PyPI/npm downloads, and measure community activity, all in a repository you own.** Metrics are defined once (dbt + MetricFlow), tested, and queryable by you or your coding agent through [Dex](https://github.com/exmergo/dex). Free on GitHub Actions; no paid warehouse, SaaS, or LLM API.
 
-- Are views and clones growing over the last four weeks?
-- Where is attention coming from, and how did those sources change?
-- What content do visitors look at?
-- Are stars and forks growing?
-- What changed around a release, launch, or blog post?
-- Are the data fresh and complete enough to answer?
+GitHub's Insights → Traffic page forgets everything after 14 days, shows only the top 10 referrers, and has no history for stars, downloads, or contributors. This template answers the questions maintainers actually ask:
 
-No paid warehouse, dbt Cloud account, analytics subscription, or LLM API is required. All analytics software is open source. Standard GitHub Actions runners are free for public repositories; GitHub itself is the hosted source and scheduler. Agents are optional and use whichever model/runtime you choose.
+| Question | Recipe |
+|---|---|
+| Are views and clones growing week over week? | `growth`, `traffic-trend` |
+| When did my stars arrive, and what caused the spike? | `star-history`, `event-impact` |
+| Where does traffic come from, and how is that changing? | `referrers`, `referrer-trend`, `referrer-change` |
+| What do visitors read? | `paths`, `path-change` |
+| How many PyPI / npm / release downloads did we get? | `package-downloads`, `release-downloads` |
+| Is the community healthy? Issues opened vs closed, PRs merged, first-time contributors, time to merge | `community` |
+| How do my projects compare? | `compare` |
+| What happened this week? | `weekly-report` |
+| Are the numbers fresh and complete enough to trust? | `status` |
 
-## Ask your first question
+## Try it in two minutes
 
-Prerequisites: Git, [uv 0.13.1 or later](https://docs.astral.sh/uv/getting-started/installation/), and macOS or Linux (Windows users can use WSL). The bootstrap selects Python 3.11; CI also tests 3.12. The first import needs internet but **no GitHub token**.
+Prerequisites: Git, [uv 0.13.1+](https://docs.astral.sh/uv/getting-started/installation/), macOS or Linux (Windows via WSL).
 
 ```bash
-git clone https://github.com/exmergo/how-to-track-your-open-source-analytics.git
-cd how-to-track-your-open-source-analytics
+git clone https://github.com/exmergo/github-repo-analytics.git
+cd github-repo-analytics
 bash scripts/bootstrap.sh
 uv run --frozen oss-analytics sync
 uv run --frozen oss-analytics build
 uv run --frozen oss-analytics baseline
 uv run --frozen oss-analytics check
-uv run --frozen oss-analytics question growth --repository exmergo/dex --days 7
+uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
 ```
 
-The example fetches `exmergo/dex`'s public `github-repo-stats` branch at an immutable commit. It supplements that history with a public star/fork observation and release dates. Subsequent syncs retain your observations. The original GitHub traffic API requires privileged access, but reading the already published example does not.
+The example imports [Dex](https://github.com/exmergo/dex)'s public traffic history and collects its public forks, issues, releases, and PyPI downloads live. GitHub only serves star dates to authenticated requests, so for star history run `export GITHUB_TOKEN=$(gh auth token)` (any token, no scopes needed) before `sync`; without one, `star-history` reports itself unavailable. Real output from `question star-history --days 28 --grain week` on 2026-10-19:
 
-The initial baseline accepts the built state. On subsequent updates, run `sync`, `build`, and `check` first; review any drift before accepting a replacement baseline.
+```text
+week        stars_gained  forks_created  stars_from_history
+2026-09-21             0              0                  25
+2026-09-28             0              0                  25
+2026-10-05            36              1                  61
+2026-10-12            27             12                  88
+```
 
-`uv.lock` pins the direct and transitive dependencies across supported platforms and Python versions. Bootstrap runs `uv sync --locked`; execute commands with `uv run --frozen` to use that lock without resolving updates. See [dependency maintenance](docs/operations.md#dependencies).
+Every answer is a JSON envelope with the exact period (end exclusive), metric names, coverage, freshness, source revision, and code digest. An answer the data cannot support says so instead of guessing: a window past the last collected day, a missing snapshot, or a project without packages is reported as unavailable, never as zero.
 
-## Give your agent the repo
+## Track your own projects
 
-Point any coding agent at [AGENTS.md](AGENTS.md). The agent checks coverage, discovers MetricFlow metrics through Dex, and returns numbers with dates, definitions, and provenance.
+1. [Create a repository from this template](https://github.com/exmergo/github-repo-analytics/generate). It opens a setup checklist issue.
+2. Edit `sources.yml`:
+
+   ```yaml
+   repositories:
+     - repository: your-org/your-project
+       mode: collect
+       packages:                 # optional; omit if you publish none
+         pypi: [your-project]
+   ```
+
+3. Add a `GHRS_TOKEN` secret (fine-grained, **Administration: read** on tracked repos, **Contents: read/write** on this repo), allow Actions to write, and set the `ANALYTICS_ENABLED` variable to `true`. Details: [setup guide](docs/setup.md).
+
+A daily workflow then collects traffic, referrers, paths, stars, forks, issues, releases, and downloads into a versioned `github-repo-stats` branch, rebuilds the models, checks them, and publishes only a validated revision. One analytics repository can track many projects.
+
+**Collection publishes aggregates publicly.** Traffic counts, referrers, and popular paths normally need push access to see. No logins, names, emails, or issue text are ever stored. See [SECURITY.md](SECURITY.md).
+
+## Ask with an agent
+
+Point any coding agent at [AGENTS.md](AGENTS.md). It checks readiness, prefers the 20 executable recipes, and otherwise discovers the 39 governed metrics through Dex, so it never guesses a metric name or writes ad hoc SQL:
 
 ```bash
 uv run --frozen oss-analytics status --json
 uv run --frozen oss-analytics questions
 uv run --frozen dex explore semantic list --local
-uv run --frozen dex explore semantic query views,clones \
+uv run --frozen dex explore semantic query views,views_wow_growth,stars_gained \
   --group-by repository__name,metric_time --grain week --local
 ```
 
-There are 14 executable recipes. See the [question cookbook](docs/questions.md) for historical snapshots and release comparisons. The recipe commands handle coverage checks; direct Dex queries give agents the full governed metric surface.
-
-## Track your projects
-
-[Create a repository from this template](https://github.com/exmergo/how-to-track-your-open-source-analytics/generate), edit `sources.yml`, and follow [setup](docs/setup.md). One analytics repo can track several public projects. Import existing `github-repo-stats` history or enable daily collection for projects you maintain.
-
-**Enabling collection publishes traffic aggregates, referrers, and popular paths in your public data branch.** These traffic statistics normally require repository permission to read. The template keeps aggregate counts, not visitor identities.
+## How it works
 
 ```mermaid
 flowchart LR
-  GitHub[GitHub traffic and public metadata] --> Raw[Versioned raw data branch]
+  GitHub[GitHub traffic + public API] --> Raw[Versioned raw data branch]
+  Registries[PyPI / npm stats] --> Raw
   Raw --> DuckDB[Local DuckDB]
   DuckDB --> dbt[Tested dbt models]
   dbt --> MF[MetricFlow definitions]
   MF --> Dex[Dex governed queries]
   Dex --> Answers[Maintainers and agents]
-  Dex --> ETM[Explore / Transform / Maintain artifacts]
+  Dex --> ETM[Explore / Transform / Maintain]
   ETM --> dbt
 ```
 
-The definitions and source configuration in Git are authoritative. The DuckDB file and `.dex/` exploration cache are reproducible. CI only promotes a candidate after its model, metric, and maintenance checks pass.
+Everything that defines a number lives in Git: `sources.yml`, the SQL models, and `models/semantic.yml`. The DuckDB file is rebuilt from pinned raw commits. Every model and metric change in this repository went through Dex: **explore** the warehouse before writing SQL, **transform** with a reviewable plan, a dev build, and row-level verification, and **maintain** by checking schema, volume, grain, and metric definitions against the committed baseline. The [Dex audit trail](.dex/review/README.md) holds the actual command output, including what Dex caught and the proposals that were rejected.
 
 ## Know what the numbers mean
 
-GitHub activity measures attention. Clones do not establish installations or active use. Daily unique counts are exposed as **visitor-days** and **cloner-days**, because the same person can appear on several days or repositories. Rolling referrer snapshots are never summed. A source missing from a top-10 snapshot is unreported, not zero. Historical star/fork series from the upstream action are labeled separately from observed totals.
+- **Clones are not installs, and views include bots.** Daily unique counts are exposed as visitor-days and cloner-days, because one person counts again on each day and repository.
+- **Star history dates current stargazers.** People who later unstarred are invisible, so past totals are lower bounds. `stars_observed` is the true current total.
+- **Downloads are not users.** They exist only for uploaded release assets and configured packages, and include CI.
+- **Referrers are a rolling top 10.** Snapshots are never summed, and a source missing from the top 10 is unreported, not zero.
+- **First-time contributor PRs** are accurate from the start of daily collection; backfilled history undercounts.
 
-Read the [metric contract](docs/metrics.md), [architecture](docs/architecture.md), [Dex lifecycle tutorial](docs/lifecycle.md), and [operations guide](docs/operations.md).
-
-The [Dex audit trail](.dex/review/README.md) contains the actual exploration, applied model/semantic plans, verified builds, and maintenance reports. Review `.dex/snapshot.json` as the shared maintenance baseline; plans and other engineering artifacts are visible to Git.
+Read the [metric contract](docs/metrics.md), [question cookbook](docs/questions.md), [architecture](docs/architecture.md), [Dex lifecycle](docs/lifecycle.md), and [operations guide](docs/operations.md).
 
 ## Contribute
 
 ```bash
 bash scripts/bootstrap.sh
 uv run --frozen pytest -q
-uv run --frozen ruff check .
-uv run --frozen ruff format --check .
+uv run --frozen ruff check . && uv run --frozen ruff format --check .
 ```
 
-Normal tests use two synthetic repositories and never need credentials or network access. `uv run --frozen pytest tests/test_live.py --live` opts into the public example smoke test. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Tests use two synthetic repositories, run real MetricFlow queries through Dex, and need no network or credentials. `pytest tests/test_live.py --live` opts into the public example. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md).
 
-Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for attribution.
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

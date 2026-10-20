@@ -70,7 +70,7 @@ from pathlib import Path
 # Rewritten by scripts/prepare_release.sh to the tagged version. The connector
 # extra is deliberately NOT part of this pin: it is chosen at runtime (see
 # _resolve_connector), so a release artifact is connector-neutral.
-DEX_CORE_VERSION = "1.14.1"
+DEX_CORE_VERSION = "1.15.0"
 
 # Connector id -> packaging extra. The engine's connector ids and the pyproject
 # extras share names, so this is the identity set today. An unknown or unset
@@ -84,6 +84,7 @@ _KNOWN_CONNECTORS = (
     "postgres",
     "redshift",
     "clickhouse",
+    "trino",
 )
 _DEFAULT_CONNECTOR = "duckdb"
 
@@ -92,10 +93,11 @@ _DEFAULT_CONNECTOR = "duckdb"
 # nothing it loads, dbt and package code included, can pick them up. A denylist
 # rather than an allowlist on purpose: connector discovery reads open-ended
 # families (DATABASE_URL, PG*, SNOWFLAKE_*, DATABRICKS_*, AWS_*, GOOGLE_*,
-# CLICKHOUSE_PASSWORD, DBT_SL_*) and dbt reads whatever env_var() a project names,
-# so an allowlist would break a working setup every time it missed one. A private
-# dbt package that authenticated through GITHUB_TOKEN should switch to dbt's own
-# DBT_ENV_SECRET_GIT_CREDENTIAL, which passes through.
+# CLICKHOUSE_PASSWORD, TRINO_*, DBT_SL_*) and dbt reads whatever env_var() a
+# project names, so an allowlist would break a working setup every time it
+# missed one. A private dbt package that authenticated through GITHUB_TOKEN
+# should switch to dbt's own DBT_ENV_SECRET_GIT_CREDENTIAL, which passes
+# through.
 _WITHHELD_FROM_ENGINE = (
     "CLICKHOUSE_CLOUD_API_KEY",
     "CLICKHOUSE_CLOUD_API_SECRET",
@@ -319,7 +321,9 @@ def _feature_extras(argv: list[str], vendor: str | None = None) -> list[str]:
 
     `slayer` is the exception that does read `vendor`, the configured
     `semantic.vendor`, because it is too heavy to take on a guess (see
-    `_SLAYER_COMMANDS`).
+    `_SLAYER_COMMANDS`). The same read keeps MetricFlow out of a SLayer `query` or
+    `values`: SLayer renders those itself, so `semantic` would be installed for
+    nothing.
     """
 
     positionals = _positionals(argv)
@@ -338,7 +342,8 @@ def _feature_extras(argv: list[str], vendor: str | None = None) -> list[str]:
     if command != ("explore", "semantic"):
         return extras
     mode = positionals[2] if len(positionals) > 2 else "list"
-    if mode in _SEMANTIC_RENDERING_MODES and "--api" not in argv:
+    renders_with_metricflow = vendor != _SLAYER_VENDOR and "--api" not in argv
+    if mode in _SEMANTIC_RENDERING_MODES and renders_with_metricflow:
         return [*extras, "semantic-api", "semantic"]
     return [*extras, "semantic-api"]
 

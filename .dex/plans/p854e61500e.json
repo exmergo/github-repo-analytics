@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "plan_id": "p854e61500e",
+  "created_at": "2026-10-19T16:54:50.605888+00:00",
+  "intent": "maintain reconcile",
+  "project_dir": ".",
+  "edit_target": "project",
+  "edits": [
+    {
+      "path": "models/staging/stg_observations.sql",
+      "new_content": "with source as (\n    select * from {{ source('raw', 'observations') }}\n),\n\nrenamed as (\n    select\n        repository,\n        captured_at,\n        stars,\n        forks,\n        watchers,\n        open_issues_and_prs\n    from source\n)\n\nselect * from renamed\n",
+      "old_content_hash": "e61c69cbad912bd86575208884c20f1cf0487893a6e3858e5901caf06ebd1e4d",
+      "op": "upsert",
+      "kind": "model_sql"
+    },
+    {
+      "path": "models/staging/stg_observations.yml",
+      "new_content": "version: 2\n\nmodels:\n  - name: stg_observations\n    columns:\n      - name: repository\n        data_tests: [not_null]\n      - name: captured_at\n        data_tests: [unique, not_null]\n      - name: stars\n        data_tests: [not_null]\n      - name: forks\n        data_tests: [not_null]\n      - name: watchers\n      - name: open_issues_and_prs\n",
+      "old_content_hash": null,
+      "op": "upsert",
+      "kind": "schema_yml"
+    }
+  ],
+  "applied_at": null
+}

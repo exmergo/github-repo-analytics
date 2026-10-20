@@ -38,6 +38,7 @@ and a nested object's own field names never surface as top-level keys.
 | Postgres | jsonb | accepted directly |
 | DuckDB | JSON | accepted directly |
 | ClickHouse | raw JSON text in a String | accepted directly |
+| Trino | json | pass `json_parse(payload)` |
 
 Two BigQuery quirks are absorbed by the macro: a JSON path argument must be a
 compile-time literal (the macro reads values with the subscript operator, which

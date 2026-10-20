@@ -4,7 +4,7 @@ The metric definitions and tests are the value of this repository. Dex helps an 
 
 Agents should read the installed skills under `.agents/skills/{explore,transform,maintain}/SKILL.md`. The project-pinned `uv run --frozen dex` commands below invoke the actual Dex engine; the skills also provide a standalone launcher with its own release pin. Inspect each command's envelope, especially refusals, warnings, skipped checks, and attribution when available. Never replace a refused engine operation with hand edits to the project.
 
-The repository's [audit trail](../.dex/review/README.md) records actual Explore, Transform plan/apply, verified build, and Maintain runs. The initial implementation predates that audit; the retained plans describe subsequent corrections, not a reconstruction of its original authorship.
+The repository's [audit trail](../.dex/review/README.md) records a complete session: exploring new raw tables before writing SQL, three Transform plans (staging, marts, semantic layer) with row attribution and verified dev builds, a Maintain check against the previous baseline, a reconcile proposal that was reviewed and rejected, a metric-definition fix that `check` caught, mutation testing, and the accepted baseline. It also lists the engine limitations met along the way.
 
 ## Explore the existing warehouse
 
@@ -47,7 +47,9 @@ A complete command payload follows this shape:
 {"edits":[{"path":"models/marts/fct_traffic.sql","kind":"model_sql","op":"upsert","content":"<full SQL model>"},{"path":"models/semantic.yml","kind":"semantic_yml","op":"upsert","content":"<full semantic YAML>"}]}
 ```
 
-An agent can prepare a different payload for the maintainer's actual request. Shared-file metric updates can also use Dex's `semantic plan`/definition payloads to preserve unrelated content. Never edit generated manifests to change a definition.
+An agent can prepare a different payload for the maintainer's actual request. Shared-file metric updates can also use Dex's `semantic plan --definitions-file` payloads to preserve unrelated content; for this repository's `models/semantic.yml` layout the splicer refuses and asks for a whole-file `--edits-file`, which is the guarded route to take. Never edit generated manifests to change a definition.
+
+`dex transform test --mutate <model>` measures whether tests catch planted defects. It works on models outside the semantic layer (for example `fct_snapshot_status`); the 1.15 engine cannot mutate a model that backs a semantic model, so those are covered by value tests in `tests/test_metrics.py`.
 
 `oss-analytics build` loads a candidate warehouse and uses Dex's `transform build --target dev --verify`. It then profiles the candidate and exercises real MetricFlow queries before replacing the local database. A successful dbt parse alone is insufficient.
 

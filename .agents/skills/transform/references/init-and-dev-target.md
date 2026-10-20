@@ -21,6 +21,7 @@ counts. Init refuses if any dbt project already exists.
 | Postgres | builds go to `postgres.dev_schema` (default `dbt_dev`); the password reaches dbt only through `PGPASSWORD` |
 | Redshift | builds go to `redshift.dev_schema` (default `dbt_dev`); with `redshift.workgroup` pinned the profile renders IAM auth (temporary credentials from the AWS chain), otherwise the password reaches dbt only through `REDSHIFT_PASSWORD` |
 | ClickHouse | builds go to `clickhouse.dev_database` (default `dbt_dev`), rendered as the profile's `schema:` because dbt-clickhouse has no `database:` key; the password reaches dbt only through `CLICKHOUSE_PASSWORD`; the profile's `custom_settings` block turns the confirmed budget into a per-statement server-side cap |
+| Trino | builds go to `trino.dev_catalog`.`dev_schema` (default `dbt_dev`); dbt creates the schema but never the catalog, so `dev_catalog` must exist and be writable (a `tpch`, `tpcds`, `jmx`, `system` or `faker` catalog is refused; `memory` and `blackhole` warn); the user, password or token reach dbt only through `TRINO_USER`, `TRINO_PASSWORD` or `TRINO_JWT_TOKEN`; the profile's `session_properties` block turns the confirmed budget into a per-statement server-side cap |
 
 Every connector discovers its connection and refuses with the fix named when
 none resolves.
@@ -66,6 +67,10 @@ still has to be changed to match.
   `CREATE SCHEMA` / `GRANT` statement to run. On ClickHouse the check can come
   back with no verdict when the server hides another user's grants; it then warns
   and the build proceeds with dbt's own error as the backstop.
+- Trino: dbt creates the dev schema but never the catalog, so a missing
+  `dev_catalog`, or one whose connector cannot be written, is refused before
+  dbt runs. Write permission is not checked: Trino exposes no grant table, so
+  dbt's own error is the backstop.
 - DuckDB: the dev target is a database file, and dbt would create an empty one,
   then fail every `source()` relation with a confusing catalog error. Copy the
   shared source warehouse to the dev target path (for example

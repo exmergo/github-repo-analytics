@@ -17,6 +17,7 @@ matching block in `.dex/config.yml`:
 | Postgres | `postgres:` with a `schemas` allowlist |
 | Redshift | `redshift:` with the Serverless `workgroup` and a `schemas` allowlist |
 | ClickHouse | `clickhouse:` with a `databases` allowlist |
+| Trino | `trino:` with a `catalogs` allowlist (`catalog` or `catalog.schema` entries) and a writable `dev_catalog` |
 
 The allowlist is a committed cost boundary: nothing outside it is read.
 
@@ -33,6 +34,7 @@ expired credentials, relay the fix it names:
 | Postgres | `DATABASE_URL`, `PG*` environment variables, or a `pg_service.conf` entry |
 | Redshift | the AWS credential chain (`aws configure`, `AWS_*`), or `REDSHIFT_*` environment variables |
 | ClickHouse | `CLICKHOUSE_URL`, or `CLICKHOUSE_*` environment variables |
+| Trino | `TRINO_URL` (the read-only identity), or `TRINO_*` environment variables; a password or token needs `https`, and OAuth2, Kerberos and certificate auth are refused |
 
 ## Cost units
 
@@ -47,6 +49,7 @@ per-table breakdown where relevant, in the unit `--budget` takes:
 | Redshift | compute-seconds | RPU-hours |
 | Postgres | database-seconds | none: the guarded quantity is load |
 | ClickHouse | database-seconds (compute-seconds on Cloud) | none |
+| Trino | cluster-seconds | none; `estimate_basis` says `floor` where a catalog had no statistics |
 | DuckDB | free and local | nothing to confirm |
 
 OK envelopes report actual spend under `data.spend`, which accumulates in
@@ -92,6 +95,7 @@ that names nothing is refused with the schemas that do exist.
 | Databricks | a `catalog.schema` |
 | Postgres, Redshift | a schema |
 | ClickHouse | a database (identifiers are two-part `database.table`) |
+| Trino | a `catalog` or `catalog.schema` (relations are always written `catalog.schema.table`) |
 
 `explore map --scope <schema>` is the first thing to reach for on a warehouse
 whose full map would be expensive.

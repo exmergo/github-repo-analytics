@@ -1,0 +1,35 @@
+name: Question or metric request
+description: A question about your project that this template cannot answer yet.
+labels: [metric-request]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: The question you want answered
+      placeholder: e.g. "How many first-time contributors had a PR merged last quarter?"
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: What decision would the answer inform?
+      description: Helps us pick a definition that is honest about what GitHub data can show.
+  - type: dropdown
+    id: source
+    attributes:
+      label: Where could the data come from?
+      options:
+        - Already collected (a new metric or recipe over existing tables)
+        - GitHub REST/GraphQL API
+        - A package registry (PyPI, npm, crates.io, ...)
+        - Somewhere else
+        - Not sure
+    validations:
+      required: true
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: Checks
+      options:
+        - label: I ran `uv run --frozen oss-analytics questions` and `dex explore semantic list --local` and nothing answers this.
+          required: true

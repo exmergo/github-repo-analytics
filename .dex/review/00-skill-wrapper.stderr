@@ -1,5 +1,0 @@
-error: Failed to fetch: https://pypi.org/simple/exmergo-dex-core/
-  cause: error sending request for url (https://pypi.org/simple/exmergo-dex-core/)
-  cause: client error (Connect)
-  cause: dns error
-  cause: failed to lookup address information: nodename nor servname provided, or not known

@@ -21,7 +21,11 @@ Comparison arithmetic on returned governed metrics is allowed. Do not recreate m
 - Referrer/path metrics describe one reported rolling top-10 window. Null indicates unreported. Period grouping selects the latest snapshot; it does not sum windows.
 - Never filter `is_reported` before selecting the latest time bucket: that can select an older reported observation. Exact-date recipes already handle unreported items.
 - Event comparisons show association. Disclose other events and incomplete windows.
-- If asked for active users, downloads, conversion rates, contributor health, or revenue, state that the required source is absent.
+- `stars_gained`/`stars_from_history` date current stargazers by when they starred. Unstars and deleted forks are invisible, so past totals are lower bounds; use `stars_observed` for the current total. Coverage ends the day before capture; `signals.*.complete` false means GitHub truncated the listing.
+- Issue metrics count events by their own date (opened, closed, merged). `first_time_contributor_prs` counts pull requests, not people, and undercounts history from before daily collection began. `open_issues_and_prs_observed` includes open pull requests.
+- Downloads exist only for uploaded release assets (`release_downloads`, a cumulative balance) and configured packages (`pypi_downloads`, `npm_downloads`). They are not users or installations. A repository without assets or packages is unavailable, not zero.
+- Windowed and offset metrics (`views_28d`, `*_wow_growth`) need `metric_time`; partial first/current weeks distort week-over-week growth. Dex returns at most 50 rows per semantic query: choose a coarser grain rather than reading a truncated result.
+- If asked for active users, installations, conversion rates, contributor sentiment, or revenue, state that the required source is absent.
 
 ## Build and maintain
 

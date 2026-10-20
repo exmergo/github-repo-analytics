@@ -1,6 +1,6 @@
 ---
 name: explore
-description: 'Use this whenever you need to know what is actually in a database, warehouse, or DuckDB file before you trust it: inventory, column profiles, PII detection, grain and data-quality problems, verified joins, ER diagrams, ad-hoc SQL probes, segmentation, and the semantic layer a repo declares (dbt or Apache Ossie). Trigger it on an unmet precondition, not on phrasing: if you are about to write or fix SQL against tables whose columns, types, grain, or join keys you have not verified in this session, use this FIRST. That includes dbt work (building a model, fixing one, debugging wrong numbers) whenever the ticket names source tables without spelling out their schema. It applies mid-task too: on reaching a table you have not inspected, stop and use this rather than guess column names. Also for "what''s in my duckdb", "is this data any good", "how do these tables relate". Read-only; writes only the .dex/ cache. It does not author the model: transform does, and maintain reconciles a project that has drifted.'
+description: 'Use this whenever you need to know what is actually in a database, warehouse, or DuckDB file before you trust it: inventory, column profiles, PII detection, grain and data-quality problems, verified joins, ER diagrams, ad-hoc SQL probes, segmentation, and the semantic layer a repo declares (dbt, Apache Ossie, or SLayer). Trigger it on an unmet precondition, not on phrasing: if you are about to write or fix SQL against tables whose columns, types, grain, or join keys you have not verified in this session, use this FIRST. That includes dbt work (building a model, fixing one, debugging wrong numbers) whenever the ticket names source tables without spelling out their schema. It applies mid-task too: on reaching a table you have not inspected, stop and use this rather than guess column names. Also for "what''s in my duckdb", "is this data any good", "how do these tables relate". Read-only; writes only the .dex/ cache. It does not author the model: transform does, and maintain reconciles a project that has drifted.'
 compatibility: 'Needs a local shell and uv. On first use, uv downloads the exmergo-dex-core engine from PyPI at the version scripts/run.py pins. Runs in Claude Code or another agent that loads Agent Skills and has a shell, not in claude.ai chat.'
 ---
 
@@ -139,7 +139,9 @@ https://github.com/exmergo/dex/tree/main/packages/dex-core.
    `values <dimension>` before writing a `--where`
    filter. On a native Ossie layer, `values` and `query` refuse and name the
    physical route instead (`explore profile`, then `explore query` on the
-   relation): take it.
+   relation): take it. On a SLayer layer both run locally: metrics and
+   dimensions are named `model.measure` and `model.column`, `--where` is
+   SLayer's filter syntax rather than Jinja, and `--api` is refused.
 
 Per-command fields, caps, and backend detail are in
 `${CLAUDE_SKILL_DIR}/references/commands.md`. Read it when a field or flag you
@@ -162,6 +164,11 @@ need is not described here.
   the probe playbook.
 - A warning that a flag sits below the blocking threshold is information to pass
   to the user, not an error to fix.
+- When envelopes carry `data.result_mode: "values_free"`, the host has pinned
+  values-free mode: no table value may reach you. Ask counts and other one-row
+  aggregates only (no column in `GROUP BY`, no `MIN`/`MAX`, `DISTINCT` or
+  `LIMIT`), never try to leave the mode, and treat a `data.code` refusal as final
+  for that shape. The rule is in `${CLAUDE_SKILL_DIR}/references/commands.md`.
 - If the user says a refused column is not personal data, recommend a
   `pii_overrides` entry in `.dex/config.yml` (the fully qualified column, with an
   optional reason), proposed with `dex config set pii_overrides '<list>'` (the
