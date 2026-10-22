@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-10-22T13:35:20.082537+00:00",
+  "errors": [],
+  "forks": {
+    "captured_at": "2026-10-22T13:35:20.082537+00:00",
+    "complete": true,
+    "listed": 0
+  },
+  "issues": {
+    "captured_at": "2026-10-22T13:35:20.082537+00:00",
+    "complete": true,
+    "items": 4,
+    "through": "2026-10-22T13:33:20Z"
+  },
+  "packages": {},
+  "stargazers": {
+    "captured_at": "2026-10-22T13:35:20.082537+00:00",
+    "complete": true,
+    "listed": 4
+  }
+}
