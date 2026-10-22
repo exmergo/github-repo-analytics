@@ -1,4 +1,5 @@
 import hashlib
+import io
 import json
 from unittest.mock import patch
 import urllib.error
@@ -199,6 +200,11 @@ def test_auth_failure_and_transient_retry():
     unauthorized = urllib.error.HTTPError("https://api.github.com/test", 401, "No", {}, None)
     with patch("urllib.request.urlopen", side_effect=unauthorized):
         with pytest.raises(SourceError, match="token expiry"):
+            GitHub("secret").json("/test")
+    body = io.BytesIO(b'{"message": "Resource not accessible by\\npersonal access token"}')
+    refused = urllib.error.HTTPError("https://api.github.com/test", 403, "No", {}, body)
+    with patch("urllib.request.urlopen", side_effect=refused):
+        with pytest.raises(SourceError, match='403 \\("Resource not accessible by personal access'):
             GitHub("secret").json("/test")
     transient = urllib.error.HTTPError("https://api.github.com/test", 503, "Later", {}, None)
     with patch("urllib.request.urlopen", side_effect=transient) as call, patch("time.sleep"):

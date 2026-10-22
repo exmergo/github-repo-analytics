@@ -52,6 +52,18 @@ def rate_limited(exc: urllib.error.HTTPError) -> bool:
     )
 
 
+def error_message(exc: urllib.error.HTTPError) -> str:
+    """GitHub explains a refusal in its JSON body; keep one bounded line of it."""
+    try:
+        message = json.loads(exc.read(4096)).get("message", "")
+    except (AttributeError, OSError, TypeError, ValueError):
+        return ""
+    if not isinstance(message, str):
+        return ""
+    message = " ".join(message.split())[:200]
+    return f' ("{message}")' if message else ""
+
+
 def write_json(path: Path, value) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -103,7 +115,8 @@ class GitHub:
                         ) from None
                 elif exc.code in {401, 403, 404}:
                     raise SourceError(
-                        f"{parsed.hostname} HTTP {exc.code}: check repository access, token "
+                        f"{parsed.hostname} HTTP {exc.code}{error_message(exc)}: check "
+                        "repository access (fine-grained tokens must include the repository), token "
                         "expiry, and API rate limits; previous valid inputs are retained"
                     ) from None
                 elif exc.code not in {429, 500, 502, 503, 504} or attempt == 2:
