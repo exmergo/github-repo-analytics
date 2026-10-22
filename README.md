@@ -11,6 +11,7 @@ What you get:
 - ⭐ **Real star history.** See when your stars arrived and what caused the spike.
 - 📦 **Downloads.** GitHub release assets, PyPI, and npm.
 - 🤝 **Community activity.** Issues opened vs closed, PRs merged, first-time contributors, time to merge.
+- 🦆 **A DuckDB file you can query.** Every number lives in `warehouse/analytics.duckdb`, and the raw history is plain CSV in a branch you own.
 
 Metrics are defined once (dbt + MetricFlow), tested, and queryable by you or your coding agent through [Dex](https://github.com/exmergo/dex).
 
@@ -40,6 +41,74 @@ This template fixes that and answers the questions maintainers actually ask. Eac
 
 Run any recipe with `uv run --frozen oss-analytics question <recipe>`.
 
+## Real answers from a real project
+
+This repository tracks [Dex](https://github.com/exmergo/dex), an open-source project for analytics engineering agents. Everything below is real output from the warehouse you build in [Try it in two minutes](#try-it-in-two-minutes), captured on 2026-10-22. Periods are end-exclusive.
+
+### 120 days of traffic, where GitHub shows 14
+
+`status` reports 120 observed traffic days for `exmergo/dex`, from 2026-06-23 to 2026-10-20, with no missing day: **11,462 views and 23,457 clones**. GitHub's own Traffic page would show the last 14 of them.
+
+`question traffic-trend --repository exmergo/dex --days 91 --grain week`, the last eight complete weeks:
+
+```text
+week        views  clones
+2026-08-24    621   1,022
+2026-08-31  1,369   2,688
+2026-09-07    324   1,132
+2026-09-14    129     472
+2026-09-21    119     513
+2026-09-28    316   1,155
+2026-10-05    976   1,113
+2026-10-12  1,761   5,351
+```
+
+### The star spike, and what was behind it
+
+`question star-history --repository exmergo/dex --days 91 --grain week`. Stars crept from 22 to 25 between mid-August and late September, then:
+
+```text
+week        stars_gained  forks_created  stars_from_history
+2026-09-21             0              0                  25
+2026-09-28             0              0                  25
+2026-10-05            36              1                  61
+2026-10-12            27             12                  88
+```
+
+**Was it a release?** `question event-impact` compares the 7 days before and after Dex v1.12.6 (2026-10-06). Views went from **343 to 1,523 (+344%)** and clones from 1,147 to 1,895 (+65%). The recipe does not credit the release: it names the **six other releases** inside those windows and labels the result "association only".
+
+**Where did the visitors come from?** `question referrer-change` compares GitHub's rolling 14-day top 10 on two exact capture days:
+
+```text
+referrer        2026-09-22  2026-10-22
+exmergo.com             15         588
+github.com              83          77
+linkedin.com             4          13
+reddit.com              15           2
+hn.algolia.com           1   (not in top 10)
+```
+
+In the 14 days before 2026-10-22, the project's own website sent 588 views, up from 15. A referrer that drops out of the top 10 is reported as unreported, never as zero.
+
+### Community and downloads
+
+`question community --repository exmergo/dex --days 28` (2026-09-24 to 2026-10-22):
+
+```text
+issues opened  issues closed  PRs opened  PRs merged  median time to merge
+          175             95         118         106          11.6 hours
+```
+
+`question package-downloads --repository exmergo/dex --days 28`, PyPI downloads of `exmergo-dex-core` per complete week: **894, then 1,611, then 1,651**.
+
+### And what it refuses to make up
+
+`question weekly-report` returns traffic growth, stars, community, and downloads in one envelope. Its release-downloads section for Dex reads:
+
+> This repository has no release assets captured; GitHub counts downloads only for uploaded assets, not source archives.
+
+Every answer is a JSON envelope with the exact period, metric names, coverage, freshness, source revision, and code digest. When the data cannot support an answer, it says so, and missing data is **unavailable, never zero**.
+
 ## Try it in two minutes
 
 **Prerequisites**
@@ -65,14 +134,6 @@ uv run --frozen oss-analytics baseline   # record the accepted baseline
 uv run --frozen oss-analytics check      # verify against the baseline
 ```
 
-**3. Ask a question**
-
-```bash
-uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
-```
-
-The example imports [Dex](https://github.com/exmergo/dex)'s public traffic history. It also collects its public forks, issues, releases, and PyPI downloads live. A second source is this repository itself: its own daily workflow collects its traffic, so `--repository exmergo/github-repo-analytics` shows the template tracking its own launch.
-
 > [!TIP]
 > **Want star history?** GitHub only serves star dates to authenticated requests. Run this before `sync` (any token works, no scopes needed):
 >
@@ -82,20 +143,55 @@ The example imports [Dex](https://github.com/exmergo/dex)'s public traffic histo
 >
 > Without a token, `star-history` reports itself unavailable.
 
-Real output from `question star-history --days 28 --grain week` on 2026-10-19:
+**3. Ask a question**
 
-```text
-week        stars_gained  forks_created  stars_from_history
-2026-09-21             0              0                  25
-2026-09-28             0              0                  25
-2026-10-05            36              1                  61
-2026-10-12            27             12                  88
+```bash
+uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
 ```
 
-**Every answer is honest about its evidence:**
+You get the numbers in [Real answers](#real-answers-from-a-real-project), updated to the latest published day. The example imports Dex's public traffic history and collects its forks, issues, releases, and PyPI downloads live. The second source is this repository itself, so `--repository exmergo/github-repo-analytics` shows the template tracking its own launch.
 
-- It comes as a JSON envelope with the exact period (end exclusive), metric names, coverage, freshness, source revision, and code digest.
-- When the data cannot support an answer, it says so instead of guessing. A window past the last collected day, a missing snapshot, or a project without packages is reported as **unavailable, never as zero**.
+**4. Query the DuckDB file yourself**
+
+`build` writes everything to **`warehouse/analytics.duckdb`**:
+
+| Schema | What is in it |
+|---|---|
+| `raw` | Each source as collected, for example `traffic`, `stargazer_days`, `fork_days`, `issues`, `discovery` (referrers and paths), `observations`, `releases`, `release_assets`, `package_downloads` |
+| `main.stg_*` | Typed staging views over `raw` |
+| `main.fct_*`, `main.dim_*` | The tested marts the metrics read: `fct_traffic` (one row per repository and day), `fct_star_history`, `fct_fork_history`, `fct_issues`, `fct_referrer`, `fct_path`, `fct_package_downloads`, `fct_release_downloads`, `fct_observations`, `dim_event`, `dim_repository` |
+
+Open it with any DuckDB client. With the Python package that `bootstrap.sh` already installed:
+
+```bash
+uv run --frozen python -c "import duckdb; print(duckdb.connect('warehouse/analytics.duckdb', read_only=True).sql('''
+  select strftime(date, '%Y-%m') as month, sum(views_total) as views, sum(clones_total) as clones
+  from fct_traffic where repository = 'exmergo/dex' group by 1 order by 1'''))"
+```
+
+```text
+┌─────────┬────────┬────────┐
+│  month  │ views  │ clones │
+│ varchar │ int128 │ int128 │
+├─────────┼────────┼────────┤
+│ 2026-06 │    228 │     97 │
+│ 2026-07 │   3167 │   4645 │
+│ 2026-08 │   3274 │   5013 │
+│ 2026-09 │   1728 │   4772 │
+│ 2026-10 │   3065 │   8930 │
+└─────────┴────────┴────────┘
+```
+
+Or use the [DuckDB CLI](https://duckdb.org/docs/installation/) (`duckdb -readonly warehouse/analytics.duckdb`), or `uv run --frozen dex explore query "<SELECT ...>"`, which reads the same file through Dex's read-only, PII-aware guard.
+
+Open it read-only: `build` replaces the file from the raw data each time. Ad hoc SQL is for exploring. For numbers you report, use the recipes or the governed metrics, which already handle the traps. For example, summing `views_unique` across days counts the same person again every day.
+
+**No lock-in:** the raw history lives in this repository's `github-repo-stats` branch as plain files:
+- per project, `ghrs-data/views_clones_aggregate.csv` and the daily top-10 referrer and path snapshots;
+- `signals/*.csv` for stars, forks, and issues;
+- `metadata/*.json` captures.
+
+Any tool can read them, even if you stop using this template.
 
 ## Track your own projects
 
@@ -119,7 +215,9 @@ week        stars_gained  forks_created  stars_from_history
 
 The full walkthrough is in the [setup guide](docs/setup.md).
 
-**What happens next:** a [daily workflow](.github/workflows/repo-stats.yml) collects traffic, referrers, paths, stars, forks, issues, releases, and downloads into a versioned `github-repo-stats` branch. It then rebuilds the models, checks them, and publishes only a validated revision.
+**What happens next:** a [daily workflow](.github/workflows/repo-stats.yml) collects traffic, referrers, paths, stars, forks, issues, releases, and downloads into a versioned `github-repo-stats` branch. It then rebuilds the models, checks them, and publishes only a validated revision. If a scheduled run fails, it opens an "Analytics collection is failing" issue, and raw data already collected is kept.
+
+GitHub only keeps traffic for 14 days, so **traffic history starts the day you turn collection on** (star, fork, and issue history is backfilled). Set it up before your next launch, not after.
 
 One analytics repository can track many projects.
 
@@ -128,13 +226,13 @@ One analytics repository can track many projects.
 
 ## Ask with an agent
 
-Point any coding agent at [AGENTS.md](AGENTS.md). The agent will:
+Point any coding agent at [AGENTS.md](AGENTS.md) and ask in plain language. Asked "did the v1.12.6 release drive traffic?", an agent following it:
 
-- check data readiness first,
-- prefer one of the 20 executable [recipes](docs/questions.md),
-- otherwise discover the 39 governed metrics in [`models/semantic.yml`](models/semantic.yml) through Dex.
+1. checks `status`, and sees the data is fresh with no missing days;
+2. picks the `event-impact` recipe rather than writing SQL;
+3. answers with the numbers above: views +344% in the 7 days after, clones +65%. It also says this is an association, and that six other releases fall inside the same windows.
 
-So it never guesses a metric name or writes ad hoc SQL.
+When no recipe fits, it discovers the 39 governed metrics in [`models/semantic.yml`](models/semantic.yml) through Dex, so it never guesses a metric name.
 
 ```bash
 uv run --frozen oss-analytics status --json      # is the data ready?
@@ -169,7 +267,14 @@ flowchart LR
 | [**Transform**](.agents/skills/transform/SKILL.md) | Make changes through a reviewable plan, a dev build, and row-level verification. |
 | [**Maintain**](.agents/skills/maintain/SKILL.md) | Check schema, volume, grain, and metric definitions against the committed baseline. |
 
-The [Dex audit trail](.dex/review/README.md) holds the actual command output, including what Dex caught and the proposals that were rejected.
+### What Dex caught while building this
+
+The [audit trail](.dex/review/README.md) holds the raw command output for each of these:
+
+- **A metric that returned the wrong number.** The weekly running star total read 25, 25, 28, 74 instead of 25, 25, 61, 88: a cumulative metric reported each week's first day. After the fix, `maintain check` blocked the changed definition until the new meaning was reviewed and accepted ([steps 21–24](.dex/review/README.md)).
+- **A proposed fix that would have broken a model.** `maintain reconcile` offered to re-scaffold `stg_observations`, which would have deleted a key a downstream model reads. It was reviewed and rejected ([step 17](.dex/review/README.md)).
+- **A second project that broke a baseline assumption.** Adding a second repository made `date` repeat across projects. `check` refused to publish until a probe showed every "duplicate" was a different repository on the same day: 134 rows, 134 unique (repository, date) pairs ([steps 35–37](.dex/review/README.md#follow-up-adding-a-second-repository-2026-10-22)).
+- **A routine upgrade, checked like one.** Moving to Dex 1.15.2 meant checking against the old baseline, tracing 12 findings to real new data, reconciling (nothing to apply), and only then taking a new baseline ([steps 40–49](.dex/review/README.md#maintenance-dex-1152-and-a-day-of-new-data-2026-10-22)).
 
 ## Know what the numbers mean
 
