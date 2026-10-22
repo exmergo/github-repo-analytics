@@ -456,7 +456,13 @@ def require_public_sources(root: Path, *, destination=None, client=None) -> None
         repositories.add(destination)
     for repository in sorted(repositories):
         validate_repository(repository)
-        if client.json(f"/repos/{repository}").get("private") is not False:
+        try:
+            private = client.json(f"/repos/{repository}").get("private")
+        except SourceError as exc:
+            # A missing, misspelled, or private repository answers 404: name which one.
+            raise SourceError(f"{repository}: {exc}") from None
+        if private is not False:
             raise SourceError(
-                "collection/import and the analytics destination require public repositories"
+                f"{repository}: collection/import and the analytics destination"
+                " require public repositories"
             )

@@ -221,7 +221,16 @@ def test_private_project_rejected_before_collection(tmp_path):
     client.json = lambda route: {"private": False}
     require_public_sources(root, destination="exmergo/analytics", client=client)
     client.json = lambda route: {"private": route.endswith("exmergo/dex")}
-    with pytest.raises(SourceError, match="public repositories"):
+    with pytest.raises(SourceError, match="exmergo/dex: .*public repositories"):
+        require_public_sources(root, destination="exmergo/analytics", client=client)
+
+    def missing(route):
+        if route.endswith("exmergo/analytics"):
+            raise SourceError("api.github.com HTTP 404")
+        return {"private": False}
+
+    client.json = missing
+    with pytest.raises(SourceError, match="^exmergo/analytics: api.github.com HTTP 404"):
         require_public_sources(root, destination="exmergo/analytics", client=client)
 
 
