@@ -11,7 +11,8 @@ What you get:
 - ⭐ **Real star history.** See when your stars arrived and what caused the spike.
 - 📦 **Downloads.** GitHub release assets, PyPI, and npm.
 - 🤝 **Community activity.** Issues opened vs closed, PRs merged, first-time contributors, time to merge.
-- 🧮 **39 governed metrics you or your agent can query.** Defined once in MetricFlow, tested, and served through Dex, backed by a local DuckDB file and raw CSV history in a branch you own.
+- 🧮 **39 governed metrics you or your agent can query.** Defined once in MetricFlow, tested, and served through Dex.
+- 🦆 **A DuckDB file for the lowest level of detail.** Every row lives in `warehouse/analytics.duckdb`, and the raw history is plain CSV in a branch you own.
 
 Metrics are defined once (dbt + MetricFlow), tested, and queryable by you or your coding agent through [Dex](https://github.com/exmergo/dex).
 
@@ -213,7 +214,7 @@ week        views  views_wow_growth  stars_gained
 
 Each answer is a JSON envelope (`data.columns`, `data.cells`, warnings, and whether the result was `truncated`). Dex returns at most 50 rows per query, so pick a coarser grain rather than reading a truncated result. Filters use MetricFlow's `Dimension` and `TimeDimension` syntax. [AGENTS.md](AGENTS.md) has the full rules for reading each metric.
 
-**5. Or open the DuckDB file**
+**5. Go to the lowest level of detail in DuckDB**
 
 `build` writes everything to **`warehouse/analytics.duckdb`**:
 
