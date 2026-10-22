@@ -57,7 +57,7 @@ GitHub recomputes `author_association` over time: a first-time contributor's pul
 
 ## Downloads
 
-`release_downloads` is GitHub's cumulative `download_count` for uploaded release assets. GitHub does not count source archive (zip/tarball) downloads, so a project without uploaded assets has no release download data rather than zero. Neither release nor registry downloads are users or installations: they include CI, mirrors (npm), bots, and repeated installs.
+`release_downloads` is GitHub's cumulative `download_count` for uploaded release assets. GitHub does not count source archive (zip/tarball) downloads, so a project without uploaded assets has no release download data rather than zero. These metrics are verified against fixture values only: neither bundled example uploads release assets. Neither release nor registry downloads are users or installations: they include CI, mirrors (npm), bots, and repeated installs.
 
 `pypi_downloads` comes from pypistats.org without mirrors, and `npm_downloads` from the npm downloads API. Registries revise recent days; the newest response wins for each date. Packages are an optional add-on: an unconfigured registry is unavailable, not zero.
 

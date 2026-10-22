@@ -173,6 +173,7 @@ The [Dex audit trail](.dex/review/README.md) holds the actual command output, in
 - **Clones are not installs, and views include bots.** Daily unique counts are exposed as visitor-days and cloner-days, because one person counts again on each day and repository.
 - **Star history dates current stargazers.** People who later unstarred are invisible, so past totals are lower bounds. `stars_observed` is the true current total.
 - **Downloads are not users.** They exist only for uploaded release assets and configured packages, and include CI.
+- **Release downloads are tested on synthetic data only.** Neither example project uploads release assets, so these metrics have not yet run against live data. [Open an issue](https://github.com/exmergo/github-repo-analytics/issues/new/choose) if your numbers look wrong.
 - **Referrers are a rolling top 10.** Snapshots are never summed. A source missing from the top 10 is unreported, not zero.
 - **First-time contributor PRs** are accurate from the start of daily collection. Backfilled history undercounts.
 
