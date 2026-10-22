@@ -32,6 +32,18 @@ The previous session's trail (Dex 1.14) is in Git history. Its accepted baseline
 | Plans | [31](31-plans.json) | Engine plan listing: applied, rejected, and superseded plans. |
 | Final state | [32](32-final-check.json), [33](33-status.json), [34](34-weekly-report.json) | `check` passes. `status` is ready and fresh with every signal captured. `weekly-report` answers all sections except release downloads, which are unavailable because Dex uploads no release assets. |
 
+## Follow-up: adding a second repository (2026-10-22)
+
+Adding `exmergo/github-repo-analytics` in `mode: collect` gave the warehouse a second repository. The scheduled run [39787868704](https://github.com/exmergo/github-repo-analytics/actions/runs/39787868704) collected both projects and kept their raw data, then refused to publish.
+
+| Step | Evidence | What it shows |
+|---|---|---|
+| Maintain blocks | [35](35-check-blocks-second-repository.json) | `check` reports `key_lost_uniqueness` on `date` (traffic, star history) and `number` (issues). The one-repository baseline had recorded these single columns as unique. The same findings reproduced locally on the pinned candidate `8fb6923`. |
+| Explore the cause | [36](36-grain-probe-per-repository.json) | Every duplicate is a different repository on the same date or issue number. Traffic has 134 rows: 134 distinct `(repository, date)` pairs but only 121 dates. Star history: 114 and 114, against 111 dates. Issues: 770 and 770, against 766 numbers. The models and their `(repository, …)` tests are correct; the baseline was behind. |
+| Accept the reviewed change | [37](37-baseline-two-repositories.json), [38](38-check-two-repositories.json), [39](39-status-two-repositories.json) | New baseline, `check` passes, and `status` is ready with both projects fresh. The new project has 14 days of traffic, GitHub's full window, and complete star, fork, and issue signals. |
+
+The one-repository baseline is kept as [previous-baseline-one-repository.json](previous-baseline-one-repository.json). No model or metric changed, so no Transform plan was needed.
+
 ## What validation establishes, and what it does not
 
 - [validation-tests.log](validation-tests.log): **53 passed, 1 skipped** (the opt-in live test, which passed separately against the public example). The suite runs real MetricFlow queries through Dex over a two-repository fixture. It asserts exact values for every new metric, gap and null behavior, recipe windows, anonymous collection, incremental issue merge, rate-limit retries, and the blob-cache integrity check. [validation-lint.log](validation-lint.log) covers ruff and actionlint.
