@@ -2,6 +2,9 @@
 
 **Own your project's growth data, in a repository you control.**
 
+<img width="1280" height="640" alt="github-repo-analytics-social-preview" src="https://github.com/user-attachments/assets/5a57254a-c6d1-4f4d-9e11-9e4a9d771612" />
+
+
 What you get:
 
 - 📈 **Traffic history beyond 14 days.** Views, clones, referrers, and popular pages, kept forever.
