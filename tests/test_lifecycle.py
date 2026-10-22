@@ -101,6 +101,12 @@ def test_first_capture_missing_legacy_series_and_optional_urls(workspace):
     for index, source in enumerate(manifest["sources"]):
         folder = workspace / manifest["directory"] / source["repository"]
         (folder / "ghrs-data/forks.csv").unlink()
+        # A new project: nothing closed or merged yet.
+        (folder / "signals/issues.csv").write_text(
+            "number,kind,created_at,closed_at,merged_at,author_association\n"
+            "1,issue,2026-07-01T10:00:00Z,,,NONE\n"
+            "2,pull_request,2026-07-02T00:00:00Z,,,NONE\n"
+        )
         for path in (folder / "metadata").glob("*.json"):
             if index == 0 and path.name == "1.json":
                 value = read_json(path)
@@ -120,6 +126,8 @@ def test_first_capture_missing_legacy_series_and_optional_urls(workspace):
     assert "main.fct_legacy.forks" in expected
     assert "main.annotations.url" in expected
     assert "main.dim_event.url" in expected
+    assert "raw.issues.closed_at" in expected
+    assert "raw.issues.merged_at" in expected
     result = answer(workspace, "star-growth", "exmergo/dex")
     assert not result["available"]
     assert result["reason"]

@@ -72,10 +72,15 @@ def expected_nullable_fields(root: Path) -> dict[str, str]:
             "select count(closed_at), count(merged_at) from raw.issues"
         ).fetchone()
         if not closed:
-            expected["main.stg_issues.closed_at"] = "No collected issue or pull request is closed"
-            expected["main.fct_issues.closed_date"] = "No collected issue or pull request is closed"
+            for field in [
+                "raw.issues.closed_at",
+                "main.stg_issues.closed_at",
+                "main.fct_issues.closed_date",
+            ]:
+                expected[field] = "No collected issue or pull request is closed"
         if not merged:
             for field in [
+                "raw.issues.merged_at",
                 "main.stg_issues.merged_at",
                 "main.fct_issues.merged_date",
                 "main.fct_issues.hours_to_merge",
