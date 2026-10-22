@@ -11,7 +11,7 @@ What you get:
 - ⭐ **Real star history.** See when your stars arrived and what caused the spike.
 - 📦 **Downloads.** GitHub release assets, PyPI, and npm.
 - 🤝 **Community activity.** Issues opened vs closed, PRs merged, first-time contributors, time to merge.
-- 🦆 **A DuckDB file you can query.** Every number lives in `warehouse/analytics.duckdb`, and the raw history is plain CSV in a branch you own.
+- 🧮 **39 governed metrics you or your agent can query.** Defined once in MetricFlow, tested, and served through Dex, backed by a local DuckDB file and raw CSV history in a branch you own.
 
 Metrics are defined once (dbt + MetricFlow), tested, and queryable by you or your coding agent through [Dex](https://github.com/exmergo/dex).
 
@@ -151,7 +151,69 @@ uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
 
 You get the numbers in [Real answers](#real-answers-from-a-real-project), updated to the latest published day. The example imports Dex's public traffic history and collects its forks, issues, releases, and PyPI downloads live. The second source is this repository itself, so `--repository exmergo/github-repo-analytics` shows the template tracking its own launch.
 
-**4. Query the DuckDB file yourself**
+**4. Query the governed metrics**
+
+Recipes cover the common questions. For everything else, query the semantic layer: **39 metrics** defined once in [`models/semantic.yml`](models/semantic.yml), compiled by MetricFlow, and run through Dex. This is the path for agents. Metric names are discovered rather than guessed, every metric is tested, and MetricFlow handles the joins and time grains, so the answer is the same number every time.
+
+Discover what exists. Each metric carries its meaning in its description (condensed from the JSON envelope):
+
+```bash
+uv run --frozen dex explore semantic list --local
+```
+
+```text
+views               simple      Total GitHub page views. May include automated activity.
+stars_gained        simple      Stars from current stargazers by the day they starred. ...
+stars_from_history  cumulative  Running total of current stargazers at the end of each period ...
+views_wow_growth    derived     Relative change in views versus the previous week; query at week grain ...
+... 39 metrics
+```
+
+Read a dimension's values before filtering on it:
+
+```bash
+uv run --frozen dex explore semantic values repository__name --metric views --local
+# exmergo/dex, exmergo/github-repo-analytics
+```
+
+Query several metrics at once, by month, for complete months:
+
+```bash
+uv run --frozen dex explore semantic query views,clones,stars_gained,prs_merged,pypi_downloads \
+  --group-by metric_time --grain month \
+  --where "{{ Dimension('repository__name') }} = 'exmergo/dex'" \
+  --where "{{ TimeDimension('metric_time', 'day') }} >= '2026-07-01' and {{ TimeDimension('metric_time', 'day') }} < '2026-10-01'" \
+  --order-by metric_time --local
+```
+
+```text
+month    views  clones  stars_gained  prs_merged  pypi_downloads
+2026-07  3,167   4,645            15          77           5,070
+2026-08  3,274   5,013             9          83           4,857
+2026-09  1,728   4,772             1          54           2,587
+```
+
+Derived metrics work the same way. Here, week-over-week growth:
+
+```bash
+uv run --frozen dex explore semantic query views,views_wow_growth,stars_gained \
+  --group-by metric_time --grain week \
+  --where "{{ Dimension('repository__name') }} = 'exmergo/dex'" \
+  --where "{{ TimeDimension('metric_time', 'day') }} >= '2026-09-21' and {{ TimeDimension('metric_time', 'day') }} < '2026-10-19'" \
+  --order-by metric_time --local
+```
+
+```text
+week        views  views_wow_growth  stars_gained
+2026-09-21    119             -7.8%             0
+2026-09-28    316           +165.5%             0
+2026-10-05    976           +208.9%            36
+2026-10-12  1,761            +80.4%            27
+```
+
+Each answer is a JSON envelope (`data.columns`, `data.cells`, warnings, and whether the result was `truncated`). Dex returns at most 50 rows per query, so pick a coarser grain rather than reading a truncated result. Filters use MetricFlow's `Dimension` and `TimeDimension` syntax. [AGENTS.md](AGENTS.md) has the full rules for reading each metric.
+
+**5. Or open the DuckDB file**
 
 `build` writes everything to **`warehouse/analytics.duckdb`**:
 
@@ -267,14 +329,15 @@ flowchart LR
 | [**Transform**](.agents/skills/transform/SKILL.md) | Make changes through a reviewable plan, a dev build, and row-level verification. |
 | [**Maintain**](.agents/skills/maintain/SKILL.md) | Check schema, volume, grain, and metric definitions against the committed baseline. |
 
-### What Dex caught while building this
+### What Dex does in this project
 
 The [audit trail](.dex/review/README.md) holds the raw command output for each of these:
 
-- **A metric that returned the wrong number.** The weekly running star total read 25, 25, 28, 74 instead of 25, 25, 61, 88: a cumulative metric reported each week's first day. After the fix, `maintain check` blocked the changed definition until the new meaning was reviewed and accepted ([steps 21–24](.dex/review/README.md)).
-- **A proposed fix that would have broken a model.** `maintain reconcile` offered to re-scaffold `stg_observations`, which would have deleted a key a downstream model reads. It was reviewed and rejected ([step 17](.dex/review/README.md)).
-- **A second project that broke a baseline assumption.** Adding a second repository made `date` repeat across projects. `check` refused to publish until a probe showed every "duplicate" was a different repository on the same day: 134 rows, 134 unique (repository, date) pairs ([steps 35–37](.dex/review/README.md#follow-up-adding-a-second-repository-2026-10-22)).
-- **A routine upgrade, checked like one.** Moving to Dex 1.15.2 meant checking against the old baseline, tracing 12 findings to real new data, reconciling (nothing to apply), and only then taking a new baseline ([steps 40–49](.dex/review/README.md#maintenance-dex-1152-and-a-day-of-new-data-2026-10-22)).
+- **Every change is proven before it lands.** Models change through reviewable plans. Before anything was written, a refactor of `fct_legacy` was shown to return exactly the same rows: 33 before, 33 after ([step 09](.dex/review/09-marts-plan.json)).
+- **The semantic layer only grows through checked plans.** One plan added 27 metric definitions, left 21 untouched, and was parsed by dbt before it was stored, so it could not land broken ([step 13](.dex/review/13-semantic-plan.json)).
+- **Metric meanings cannot change silently.** The daily run compares every definition with the committed baseline, and a changed metric is held until someone reviews it ([step 24](.dex/review/24-check-catches-definition-change.json)).
+- **New data is checked before it is published.** When a second project joined, the run held publication, Dex showed exactly what changed, and the reviewed result went out the same day ([steps 35–37](.dex/review/README.md#follow-up-adding-a-second-repository-2026-10-22)).
+- **Upgrades are maintained like any other change.** Moving to Dex 1.15.2 meant checking against the previous baseline, tracing every finding to real new data, and only then accepting a new baseline ([steps 40–49](.dex/review/README.md#maintenance-dex-1152-and-a-day-of-new-data-2026-10-22)).
 
 ## Know what the numbers mean
 
