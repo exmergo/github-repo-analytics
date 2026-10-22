@@ -68,7 +68,7 @@ uv run --frozen oss-analytics check      # verify against the baseline
 uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
 ```
 
-The example imports [Dex](https://github.com/exmergo/dex)'s public traffic history. It also collects its public forks, issues, releases, and PyPI downloads live.
+The example imports [Dex](https://github.com/exmergo/dex)'s public traffic history. It also collects its public forks, issues, releases, and PyPI downloads live. A second source is this repository itself: its own daily workflow collects its traffic, so `--repository exmergo/github-repo-analytics` shows the template tracking its own launch.
 
 > [!TIP]
 > **Want star history?** GitHub only serves star dates to authenticated requests. Run this before `sync` (any token works, no scopes needed):

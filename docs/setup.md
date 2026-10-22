@@ -1,6 +1,6 @@
 # Set up your analytics repository
 
-Create a public repository from the template, clone it, and run `bash scripts/bootstrap.sh`. The default `sources.yml` imports Dex's public example. Replace it with the projects you want to track: keeping `exmergo/dex` in your `sources.yml` would copy its history into your public data branch every day.
+Create a public repository from the template, clone it, and run `bash scripts/bootstrap.sh`. The default `sources.yml` has two public examples: it imports Dex's published history and collects this template's own traffic. Replace both with the projects you want to track. Keeping `exmergo/dex` would copy its history into your public data branch every day, and keeping `exmergo/github-repo-analytics` fails collection, because your token cannot read another owner's traffic.
 
 A repository created from the template opens a **Finish setting up repository analytics** issue with this checklist. Nothing is collected until you complete it.
 

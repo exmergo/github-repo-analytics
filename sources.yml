@@ -1,5 +1,6 @@
-# Import a public example without a token. See docs/setup.md to collect your projects.
+# Two public examples: replace both with your projects. See docs/setup.md.
 repositories:
+  # Imports Dex's published traffic history; no token is needed.
   - repository: exmergo/dex
     mode: import
     data_repository: exmergo/dex
@@ -8,3 +9,9 @@ repositories:
     # Optional add-on. Dex publishes to PyPI only; list npm packages under `npm:` if you have any.
     packages:
       pypi: [exmergo-dex-core]
+  # This template tracks its own launch. Its scheduled workflow collects with GHRS_TOKEN,
+  # so a copy that keeps this entry fails: your token cannot read this repository's traffic.
+  - repository: exmergo/github-repo-analytics
+    mode: collect
+    data_repository: exmergo/github-repo-analytics
+    expected_refresh_hours: 24
