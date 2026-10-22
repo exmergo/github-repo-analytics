@@ -1,0 +1,601 @@
+{
+  "captured_at": "2026-10-22T12:49:42.062616+00:00",
+  "forks": 28,
+  "github_id": 1278285296,
+  "open_issues_and_prs": 131,
+  "releases": [
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.15.2",
+      "id": 419672520,
+      "name": "v1.15.2",
+      "prerelease": false,
+      "published_at": "2026-10-21T14:40:52Z",
+      "tag_name": "v1.15.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.15.1",
+      "id": 418320639,
+      "name": "v1.15.1",
+      "prerelease": false,
+      "published_at": "2026-10-20T11:26:37Z",
+      "tag_name": "v1.15.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.15.0",
+      "id": 417416512,
+      "name": "v1.15.0",
+      "prerelease": false,
+      "published_at": "2026-10-19T14:50:21Z",
+      "tag_name": "v1.15.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.14.1",
+      "id": 416309719,
+      "name": "v1.14.1",
+      "prerelease": false,
+      "published_at": "2026-10-18T07:45:55Z",
+      "tag_name": "v1.14.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.14.0",
+      "id": 415149684,
+      "name": "v1.14.0",
+      "prerelease": false,
+      "published_at": "2026-10-16T16:13:51Z",
+      "tag_name": "v1.14.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.13.3",
+      "id": 413762415,
+      "name": "v1.13.3",
+      "prerelease": false,
+      "published_at": "2026-10-15T12:04:44Z",
+      "tag_name": "v1.13.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.13.2",
+      "id": 412962883,
+      "name": "v1.13.2",
+      "prerelease": false,
+      "published_at": "2026-10-14T16:55:22Z",
+      "tag_name": "v1.13.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.13.1",
+      "id": 411839080,
+      "name": "v1.13.1",
+      "prerelease": false,
+      "published_at": "2026-10-13T15:37:15Z",
+      "tag_name": "v1.13.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.13.0",
+      "id": 410845055,
+      "name": "v1.13.0",
+      "prerelease": false,
+      "published_at": "2026-10-12T17:20:18Z",
+      "tag_name": "v1.13.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.8",
+      "id": 409980936,
+      "name": "v1.12.8",
+      "prerelease": false,
+      "published_at": "2026-10-11T23:16:07Z",
+      "tag_name": "v1.12.8"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.7",
+      "id": 406692235,
+      "name": "v1.12.7",
+      "prerelease": false,
+      "published_at": "2026-10-08T10:14:06Z",
+      "tag_name": "v1.12.7"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.6",
+      "id": 404630737,
+      "name": "v1.12.6",
+      "prerelease": false,
+      "published_at": "2026-10-06T11:28:37Z",
+      "tag_name": "v1.12.6"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.5",
+      "id": 402083849,
+      "name": "v1.12.5",
+      "prerelease": false,
+      "published_at": "2026-10-02T19:07:40Z",
+      "tag_name": "v1.12.5"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.4",
+      "id": 400488476,
+      "name": "v1.12.4",
+      "prerelease": false,
+      "published_at": "2026-09-30T22:40:20Z",
+      "tag_name": "v1.12.4"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.3",
+      "id": 390320777,
+      "name": "v1.12.3",
+      "prerelease": false,
+      "published_at": "2026-09-16T22:40:28Z",
+      "tag_name": "v1.12.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.2",
+      "id": 385907127,
+      "name": "v1.12.2",
+      "prerelease": false,
+      "published_at": "2026-09-09T23:28:31Z",
+      "tag_name": "v1.12.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.1",
+      "id": 385706043,
+      "name": "v1.12.1",
+      "prerelease": false,
+      "published_at": "2026-09-09T17:09:45Z",
+      "tag_name": "v1.12.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.12.0",
+      "id": 384652753,
+      "name": "v1.12.0",
+      "prerelease": false,
+      "published_at": "2026-09-08T10:56:19Z",
+      "tag_name": "v1.12.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.11.0",
+      "id": 383732064,
+      "name": "v1.11.0",
+      "prerelease": false,
+      "published_at": "2026-09-06T22:09:38Z",
+      "tag_name": "v1.11.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.10.0",
+      "id": 383291361,
+      "name": "v1.10.0",
+      "prerelease": false,
+      "published_at": "2026-09-05T15:47:57Z",
+      "tag_name": "v1.10.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.9.2",
+      "id": 381234361,
+      "name": "v1.9.2",
+      "prerelease": false,
+      "published_at": "2026-09-02T12:25:22Z",
+      "tag_name": "v1.9.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.9.1",
+      "id": 379734791,
+      "name": "v1.9.1",
+      "prerelease": false,
+      "published_at": "2026-08-31T12:22:46Z",
+      "tag_name": "v1.9.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.9.0",
+      "id": 378190515,
+      "name": "v1.9.0",
+      "prerelease": false,
+      "published_at": "2026-08-28T00:12:32Z",
+      "tag_name": "v1.9.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.8.0",
+      "id": 377310849,
+      "name": "v1.8.0",
+      "prerelease": false,
+      "published_at": "2026-08-26T17:45:27Z",
+      "tag_name": "v1.8.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.7.0",
+      "id": 376512404,
+      "name": "v1.7.0",
+      "prerelease": false,
+      "published_at": "2026-08-25T15:27:44Z",
+      "tag_name": "v1.7.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.6",
+      "id": 371186173,
+      "name": "v1.6.6",
+      "prerelease": false,
+      "published_at": "2026-08-15T23:46:04Z",
+      "tag_name": "v1.6.6"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.5",
+      "id": 370773436,
+      "name": "v1.6.5",
+      "prerelease": false,
+      "published_at": "2026-08-14T19:12:23Z",
+      "tag_name": "v1.6.5"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.4",
+      "id": 369574322,
+      "name": "v1.6.4",
+      "prerelease": false,
+      "published_at": "2026-08-12T23:01:12Z",
+      "tag_name": "v1.6.4"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.3",
+      "id": 367877368,
+      "name": "v1.6.3",
+      "prerelease": false,
+      "published_at": "2026-08-10T11:59:02Z",
+      "tag_name": "v1.6.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.2",
+      "id": 367575733,
+      "name": "v1.6.2",
+      "prerelease": false,
+      "published_at": "2026-08-09T20:18:36Z",
+      "tag_name": "v1.6.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.1",
+      "id": 367438042,
+      "name": "v1.6.1",
+      "prerelease": false,
+      "published_at": "2026-08-09T09:40:58Z",
+      "tag_name": "v1.6.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.6.0",
+      "id": 367278552,
+      "name": "v1.6.0",
+      "prerelease": false,
+      "published_at": "2026-08-08T18:59:38Z",
+      "tag_name": "v1.6.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.5.2",
+      "id": 365563396,
+      "name": "v1.5.2",
+      "prerelease": false,
+      "published_at": "2026-08-05T13:52:39Z",
+      "tag_name": "v1.5.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.5.1",
+      "id": 364212881,
+      "name": "v1.5.1",
+      "prerelease": false,
+      "published_at": "2026-08-03T12:50:16Z",
+      "tag_name": "v1.5.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.5.0",
+      "id": 363535012,
+      "name": "v1.5.0",
+      "prerelease": false,
+      "published_at": "2026-08-01T13:42:32Z",
+      "tag_name": "v1.5.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.4.3",
+      "id": 362540996,
+      "name": "v1.4.3",
+      "prerelease": false,
+      "published_at": "2026-07-30T15:38:32Z",
+      "tag_name": "v1.4.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.4.2",
+      "id": 360740486,
+      "name": "v1.4.2",
+      "prerelease": false,
+      "published_at": "2026-07-27T22:34:19Z",
+      "tag_name": "v1.4.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.4.1",
+      "id": 360102964,
+      "name": "v1.4.1",
+      "prerelease": false,
+      "published_at": "2026-07-26T19:43:46Z",
+      "tag_name": "v1.4.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.4.0",
+      "id": 360030498,
+      "name": "v1.4.0",
+      "prerelease": false,
+      "published_at": "2026-07-26T14:06:47Z",
+      "tag_name": "v1.4.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.3.1",
+      "id": 358973855,
+      "name": "v1.3.1",
+      "prerelease": false,
+      "published_at": "2026-07-23T21:51:14Z",
+      "tag_name": "v1.3.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.3.0",
+      "id": 357677091,
+      "name": "v1.3.0",
+      "prerelease": false,
+      "published_at": "2026-07-21T22:31:39Z",
+      "tag_name": "v1.3.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.2.2",
+      "id": 356100342,
+      "name": "v1.2.2",
+      "prerelease": false,
+      "published_at": "2026-07-18T12:48:31Z",
+      "tag_name": "v1.2.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.2.1",
+      "id": 355395859,
+      "name": "v1.2.1",
+      "prerelease": false,
+      "published_at": "2026-07-16T22:51:19Z",
+      "tag_name": "v1.2.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.2.0",
+      "id": 353785841,
+      "name": "v1.2.0",
+      "prerelease": false,
+      "published_at": "2026-07-14T12:39:34Z",
+      "tag_name": "v1.2.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.1.1",
+      "id": 352736287,
+      "name": "v1.1.1",
+      "prerelease": false,
+      "published_at": "2026-07-12T11:32:50Z",
+      "tag_name": "v1.1.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.1.0",
+      "id": 351704245,
+      "name": "v1.1.0",
+      "prerelease": false,
+      "published_at": "2026-07-09T18:13:17Z",
+      "tag_name": "v1.1.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.0.1",
+      "id": 349898984,
+      "name": "v1.0.1",
+      "prerelease": false,
+      "published_at": "2026-07-06T21:31:50Z",
+      "tag_name": "v1.0.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v1.0.0",
+      "id": 349866213,
+      "name": "v1.0.0",
+      "prerelease": false,
+      "published_at": "2026-07-06T20:48:37Z",
+      "tag_name": "v1.0.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.4",
+      "id": 349739641,
+      "name": "v0.1.4",
+      "prerelease": false,
+      "published_at": "2026-07-06T18:26:12Z",
+      "tag_name": "v0.1.4"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.3",
+      "id": 349328345,
+      "name": "v0.1.3",
+      "prerelease": false,
+      "published_at": "2026-07-06T04:55:47Z",
+      "tag_name": "v0.1.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.2",
+      "id": 349031207,
+      "name": "v0.1.2",
+      "prerelease": false,
+      "published_at": "2026-07-04T20:24:33Z",
+      "tag_name": "v0.1.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.1",
+      "id": 348945934,
+      "name": "v0.1.1",
+      "prerelease": false,
+      "published_at": "2026-07-04T12:25:26Z",
+      "tag_name": "v0.1.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a6",
+      "id": 348359226,
+      "name": "v0.1.0a6",
+      "prerelease": false,
+      "published_at": "2026-07-03T01:10:13Z",
+      "tag_name": "v0.1.0a6"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0",
+      "id": 348755116,
+      "name": "v0.1.0",
+      "prerelease": false,
+      "published_at": "2026-07-03T18:41:16Z",
+      "tag_name": "v0.1.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a5",
+      "id": 348335277,
+      "name": "v0.1.0a5",
+      "prerelease": false,
+      "published_at": "2026-07-02T23:20:37Z",
+      "tag_name": "v0.1.0a5"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a4",
+      "id": 348207482,
+      "name": "v0.1.0a4",
+      "prerelease": false,
+      "published_at": "2026-07-02T17:57:46Z",
+      "tag_name": "v0.1.0a4"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a3",
+      "id": 347572974,
+      "name": "v0.1.0a3",
+      "prerelease": false,
+      "published_at": "2026-07-01T16:00:15Z",
+      "tag_name": "v0.1.0a3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a2",
+      "id": 347456219,
+      "name": "v0.1.0a2",
+      "prerelease": false,
+      "published_at": "2026-07-01T12:50:37Z",
+      "tag_name": "v0.1.0a2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/dex/releases/tag/v0.1.0a1",
+      "id": 347139094,
+      "name": "v0.1.0a1",
+      "prerelease": false,
+      "published_at": "2026-06-30T22:44:23Z",
+      "tag_name": "v0.1.0a1"
+    }
+  ],
+  "repository": "exmergo/dex",
+  "stars": 90,
+  "watchers": 1
+}
