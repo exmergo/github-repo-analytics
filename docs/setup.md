@@ -31,7 +31,7 @@ repositories:
 
 ### Why a personal token is needed
 
-GitHub's traffic endpoints (views, clones, referrers, paths) require push access to each tracked repository, and the workflow's built-in `GITHUB_TOKEN` cannot read another repository's traffic. Stars, forks, issues, releases, and package downloads are public and work without it, but the token also raises the API rate limit for large projects.
+GitHub's traffic endpoints (views, clones, referrers, paths) require push access to each tracked repository, and the workflow's built-in `GITHUB_TOKEN` cannot read another repository's traffic. Star history needs it too: GitHub refuses to list another repository's stargazers with dates to the built-in token (HTTP 403), and a fine-grained token only gets them for repositories it includes. Forks, issues, releases, and package downloads are public and work without it, but the token also raises the API rate limit for large projects.
 
 ### Create the token
 
@@ -42,6 +42,8 @@ GitHub's traffic endpoints (views, clones, referrers, paths) require push access
 | Each tracked repository | **Administration: read** | Traffic API |
 | This analytics repository | **Contents: read and write** | The collector commits to the `github-repo-stats` branch |
 
+Include every tracked repository in the token, including one you only import: a repository missing from the token's list loses star history (status reports `stargazers: api.github.com HTTP 403`), even when it is public.
+
 Metadata: read is added automatically. A fine-grained token has one resource owner (you or one organization), so keep the tracked projects and the analytics repository under that owner. Organizations may require an owner to approve fine-grained tokens. If your organization blocks them, a classic token with the `repo` scope also works but grants far more access.
 
 Set an expiry and a calendar reminder: an expired token fails collection, and the workflow then opens an **Analytics collection is failing** issue.
@@ -50,7 +52,8 @@ Set an expiry and a calendar reminder: an expired token fails collection, and th
 
 1. **Settings → Secrets and variables → Actions → Secrets:** add `GHRS_TOKEN`.
 2. **Settings → Secrets and variables → Actions → Variables:** add `ANALYTICS_ENABLED` = `true`.
-3. **Settings → Actions → General → Workflow permissions:** choose **Read and write permissions**. If a branch ruleset covers all branches, exclude `github-repo-stats`. Protect `main` through your normal review settings.
+3. If a branch ruleset covers all branches, exclude `github-repo-stats`. Protect `main` through your normal review settings.
+   The default **Workflow permissions** setting can stay **Read**: each job that writes declares `contents: write` or `issues: write` itself. Organizations often block the read-and-write default (GitHub answers `409 Write permissions for workflows are disabled by the organization`), and the workflow does not need it.
 4. Manually run **Collect and validate repository analytics** once. It creates the data branch if necessary, retains raw observations, then publishes a validated revision. After publication, set `data_repository` to your analytics repository for local syncs; it defaults to the tracked repository if omitted.
 
 For example, after the first workflow in `your-org/project-analytics`:
@@ -67,7 +70,7 @@ repositories:
 
 `data_repository` selects local import location; `mode: collect` controls what the scheduled workflow collects. All workflow writes go to the analytics repository running it. Private projects are excluded from this public template.
 
-For scheduled imports only, no `GHRS_TOKEN` is needed: configure `mode: import`, keep its external `data_repository`, and enable `ANALYTICS_ENABLED`. The ordinary workflow token writes this analytics repo's data branch and reads public metadata.
+For scheduled imports only, no `GHRS_TOKEN` is needed: configure `mode: import`, keep its external `data_repository`, and enable `ANALYTICS_ENABLED`. The ordinary workflow token writes this analytics repo's data branch and reads public metadata. Star history is then unavailable, because GitHub lists stargazer dates only to a token that includes the repository; add `GHRS_TOKEN` covering it to collect them.
 
 To read this analytics repo's validated publication locally while keeping external import origins configured, run:
 

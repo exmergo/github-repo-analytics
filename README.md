@@ -112,7 +112,6 @@ week        stars_gained  forks_created  stars_from_history
 
 3. **Give the workflow access:**
    - Add a `GHRS_TOKEN` secret: a fine-grained token with **Administration: read** on tracked repos and **Contents: read/write** on this repo ([how to create it](docs/setup.md#create-the-token)).
-   - Allow Actions to write.
    - Set the `ANALYTICS_ENABLED` repository variable to `true` ([details](docs/setup.md#enable-collection)).
 
 The full walkthrough is in the [setup guide](docs/setup.md).

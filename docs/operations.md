@@ -24,6 +24,8 @@ Each project is collected in its own matrix job. One failing project does not bl
 
 A failed scheduled run opens, or comments on, a single **Analytics collection is failing** issue that links the run. Close it once a run succeeds. Signal collection is independent: a package-registry outage is recorded in `signals/capture.json` and `status` warnings, keeps the previous download history, and never blocks GitHub data.
 
+A green run therefore does not prove every signal was collected. After the first run, and after rotating the token, read the warnings in the *Check model and metric contracts* step's `status` output. Each one names the signal and GitHub's own reason, for example `stargazers: api.github.com HTTP 403 ("Resource not accessible by personal access token")`, which means the token does not include that repository.
+
 If collection stops:
 
 1. Inspect the failed Actions run. Check the last successful snapshot and traffic dates.

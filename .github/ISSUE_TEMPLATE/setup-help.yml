@@ -9,7 +9,7 @@ body:
       options:
         - label: Created my repository from the template and edited `sources.yml`.
         - label: Added the `GHRS_TOKEN` secret with Administration read access to the tracked repositories.
-        - label: Set Actions workflow permissions to "Read and write".
+        - label: Included every tracked repository in the token's repository list.
         - label: Set the `ANALYTICS_ENABLED` repository variable to `true`.
   - type: textarea
     id: run

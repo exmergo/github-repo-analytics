@@ -28,8 +28,7 @@ jobs:
           This repository was created from the GitHub repo analytics template. Collection stays off until these steps are done:
 
           - [ ] Edit \`sources.yml\`: replace the \`exmergo/dex\` example with your public repositories. Set \`mode: collect\` and add \`packages: {pypi: [...]}\` or \`{npm: [...]}\` if you publish packages.
-          - [ ] Create a fine-grained token with **Administration: read** on the tracked repositories and **Contents: read and write** on this repository. Save it as the \`GHRS_TOKEN\` Actions secret.
-          - [ ] Settings → Actions → General → Workflow permissions: choose **Read and write permissions**.
+          - [ ] Create a fine-grained token with **Administration: read** on the tracked repositories and **Contents: read and write** on this repository. Include every tracked repository, or its star history is refused. Save it as the \`GHRS_TOKEN\` Actions secret.
           - [ ] Settings → Secrets and variables → Actions → Variables: add \`ANALYTICS_ENABLED\` = \`true\`.
           - [ ] Actions → *Collect and validate repository analytics* → **Run workflow** once.
 
