@@ -2,7 +2,7 @@
 
 This directory holds the actual Dex command output from one Explore → Transform → Maintain session (2026-10-19). That session took the template from traffic-only analytics to 39 governed metrics: star and fork history, issues and pull requests, release and package downloads, repository vitals, rolling and week-over-week metrics. Every model and metric change in the session went through a Dex plan. Nothing in the dbt project or semantic layer was hand-edited in place of the guarded command.
 
-- **Engine:** `exmergo-dex-core==1.15.0`, both through the project lock (`uv run --frozen dex`) and through the Explore/Transform/Maintain skill launchers.
+- **Engine:** `exmergo-dex-core==1.15.0`, both through the project lock (`uv run --frozen dex`) and through the Explore/Transform/Maintain skill launchers. Steps 40 to 49 ran on 1.15.2 (see [the maintenance pass](#maintenance-dex-1152-and-a-day-of-new-data-2026-10-22)).
 - **Warehouse:** local DuckDB, built from the public `exmergo/dex` example plus live public signals. Run outside of any session, `oss-analytics status --json` reports the current readiness, coverage, source revision, and code digest.
 - **Paths:** absolute paths in saved envelopes were rewritten to `.`, `~`, `<scratchpad>`, or `<dex-plugin-1.15.0>`. Nothing else was edited.
 
@@ -43,6 +43,22 @@ Adding `exmergo/github-repo-analytics` in `mode: collect` gave the warehouse a s
 | Accept the reviewed change | [37](37-baseline-two-repositories.json), [38](38-check-two-repositories.json), [39](39-status-two-repositories.json) | New baseline, `check` passes, and `status` is ready with both projects fresh. The new project has 14 days of traffic, GitHub's full window, and complete star, fork, and issue signals. |
 
 The one-repository baseline is kept as [previous-baseline-one-repository.json](previous-baseline-one-repository.json). No model or metric changed, so no Transform plan was needed.
+
+## Maintenance: Dex 1.15.2 and a day of new data (2026-10-22)
+
+A routine maintenance pass before v1.0.1. The engine moved from 1.15.0 to 1.15.2 in `pyproject.toml`, `uv.lock`, and the vendored skills, and the warehouse was rebuilt from the latest published data. No model, test, or metric changed.
+
+| Step | Evidence | What it shows |
+|---|---|---|
+| Check against the old baseline | [40](40-check-dex-1.15.2-against-1.15.0-baseline.json) | All four axes ran under 1.15.2 against the 1.15.0 baseline. There was no `semantic_format_changed`, so the definitions were compared by content. 12 findings: 2 high, 4 medium, 6 low. |
+| Explain the high findings | [41](41-probe-observation-capture-days.json) | `stars_net_change` and `forks_net_change` are NULL by design. `exmergo/dex` has captures on 2026-10-19 and 2026-10-22, and a net change needs consecutive days. Dex's hint that "its joined relation may have matched nothing" does not apply: the columns come from a `lag()` window, not from the join it names. |
+| Name the new values | [42](42-probe-new-dimension-values.json) | `author_association` gained `FIRST_TIME_CONTRIBUTOR`, the first live first-time contributor PR, which `fct_issues` already counts. `dim_event` gained this repository's own v1.0.0 release and Dex v1.15.1 and v1.15.2. Paths and referrers are GitHub's rolling top 10. |
+| Reconcile | [43](43-reconcile-all-advisory.json) | 0 mechanical and 12 advisory proposals, and no plan stored. Every finding is a decision about new data, and each was reviewed above. Compare step 17, where 1.15.0 proposed a mechanical re-scaffold that would have broken `stg_observations`. |
+| Gate and verify | [44](44-gate-check-and-verify.json) | `oss-analytics check` passes against the old baseline: 39 metrics smoke-tested, and the only excused NULLs are the four source-proven ones. `maintain verify` returns no findings with nothing suppressed. Under 1.15.0, its row-population check was suppressed ([27](27-verify.json)). |
+| Re-map and re-baseline | [45](45-map-full-refresh.json), [46](46-baseline-dex-1.15.2.json) | `explore map --use-project --full --refresh` re-scanned all 41 objects, because cached profiles under 24 hours old are otherwise reused. Then the snapshot was taken. |
+| Check the new baseline | [47](47-check-after-baseline.json), [48](48-probe-exact-vs-approximate-distinct.json), [49](49-status.json) | `check` passes and `status` is ready. The two remaining medium cardinality notices compare an approximate baseline count with an exact live count on unchanged data: paths are 88 exact against 79 approximate, and referrers 23 against 24. That is Dex issue #640, not drift. |
+
+The 1.15.0 baseline is kept as [previous-baseline-dex-1.15.0.json](previous-baseline-dex-1.15.0.json).
 
 ## What validation establishes, and what it does not
 

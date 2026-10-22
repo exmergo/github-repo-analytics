@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "connector": "duckdb",
-  "snapshot_created_at": "2026-10-22T13:44:52.650448+00:00",
+  "snapshot_created_at": "2026-10-22T20:51:52.489662+00:00",
   "axes": {
     "schema": {
-      "run_at": "2026-10-22T13:45:08.911836+00:00",
+      "run_at": "2026-10-22T20:52:07.780249+00:00",
       "scope": null,
       "findings": []
     },
     "volume": {
-      "run_at": "2026-10-22T13:45:08.911836+00:00",
+      "run_at": "2026-10-22T20:52:07.780249+00:00",
       "scope": null,
       "findings": []
     },
     "grain": {
-      "run_at": "2026-10-22T13:45:08.911836+00:00",
+      "run_at": "2026-10-22T20:52:07.780249+00:00",
       "scope": null,
       "findings": [
         {
@@ -23,23 +23,11 @@
           "identifier": "analytics.main.fct_observations",
           "column": "forks_net_change",
           "severity": "high",
-          "detail": "forks_net_change on analytics.main.fct_observations is 100% NULL; its joined relation may have matched nothing",
+          "detail": "forks_net_change on analytics.main.fct_observations is 100% NULL",
           "exact": true,
           "data": {
             "null_fraction": 1.0,
-            "row_count": 3,
-            "joins": [
-              {
-                "from_dataset": "analytics.main.fct_observations",
-                "from_columns": [
-                  "repository"
-                ],
-                "to_dataset": "analytics.main.dim_repository",
-                "to_columns": [
-                  "repository"
-                ]
-              }
-            ]
+            "row_count": 3
           },
           "impacted_models": [
             "fct_observations",
@@ -55,23 +43,11 @@
           "identifier": "analytics.main.fct_observations",
           "column": "stars_net_change",
           "severity": "high",
-          "detail": "stars_net_change on analytics.main.fct_observations is 100% NULL; its joined relation may have matched nothing",
+          "detail": "stars_net_change on analytics.main.fct_observations is 100% NULL",
           "exact": true,
           "data": {
             "null_fraction": 1.0,
-            "row_count": 3,
-            "joins": [
-              {
-                "from_dataset": "analytics.main.fct_observations",
-                "from_columns": [
-                  "repository"
-                ],
-                "to_dataset": "analytics.main.dim_repository",
-                "to_columns": [
-                  "repository"
-                ]
-              }
-            ]
+            "row_count": 3
           },
           "impacted_models": [
             "fct_observations",
@@ -166,7 +142,7 @@
       ]
     },
     "semantic": {
-      "run_at": "2026-10-22T13:45:08.911836+00:00",
+      "run_at": "2026-10-22T20:52:07.780249+00:00",
       "scope": null,
       "findings": [
         {
