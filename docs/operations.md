@@ -35,6 +35,10 @@ If collection stops:
 
 Raw inputs survive a failed analytics check. A malformed new input cannot replace a previous sync candidate; an interrupted/failed build cannot replace the previous DuckDB file. The last published candidate remains available even if newer raw commits have failures. Remove unused local `.data/inputs/` generations only after confirming they are not referenced by `.data/sync.json` or `.data/build.json`.
 
+### Adding a repository
+
+A baseline taken while only one repository has data records keys such as `date` or issue `number` as unique. When a second repository arrives, the next check blocks publication with `key_lost_uniqueness` on those columns; the raw data is already saved. Confirm that each duplicate belongs to a different repository: build and check locally, or count distinct `(repository, date)` pairs with `dex explore query`. Then run the workflow manually with **accept_baseline** checked. [`.dex/review/README.md`](../.dex/review/README.md#follow-up-adding-a-second-repository-2026-10-22) walks through one real case.
+
 ## Dependencies
 
 `pyproject.toml` declares dependencies and `uv.lock` records their resolved versions, package hashes, and platform/Python markers. The bootstrap runs `uv sync --locked`, which refuses a missing or stale lockfile. It uses Python 3.11 from `.python-version` unless you explicitly select another supported interpreter. CI installs from the same lock on Python 3.11 and 3.12.
