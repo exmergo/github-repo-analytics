@@ -59,6 +59,20 @@ jobs:
           version: "0.13.1"
           enable-cache: true
       - run: bash scripts/bootstrap.sh
+      # The upstream action branches off the default branch when the data branch is missing,
+      # which would copy this repository's code into it. Start it empty instead.
+      - name: Create the data branch
+        shell: bash
+        run: |
+          if ! git ls-remote --exit-code --heads origin github-repo-stats >/dev/null; then
+            git worktree add --detach .data-init
+            git -C .data-init switch --orphan github-repo-stats
+            git -C .data-init -c user.name=github-actions[bot] \
+              -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
+              commit --allow-empty -m "Start the analytics data branch"
+            git -C .data-init push origin HEAD:github-repo-stats
+            git worktree remove --force .data-init
+          fi
       - name: Preserve traffic using the existing action
         if: matrix.mode == 'collect'
         uses: jgehrcke/github-repo-stats@306db38ad131cab2aa5f2cd3062bf6f8aa78c1aa # v1.4.2
@@ -69,14 +83,8 @@ jobs:
       - name: Prepare raw data checkout
         shell: bash
         run: |
-          if git ls-remote --exit-code --heads origin github-repo-stats >/dev/null; then
-            git fetch origin github-repo-stats
-            git worktree add .data-branch FETCH_HEAD
-          else
-            git worktree add --detach .data-branch
-            git -C .data-branch switch --orphan github-repo-stats
-            git -C .data-branch rm -rf --ignore-unmatch .
-          fi
+          git fetch origin github-repo-stats
+          git worktree add .data-branch FETCH_HEAD
       - name: Import and supplement
         env:
           # Public stargazer, fork, issue and release reads; a PAT raises the rate limit.
