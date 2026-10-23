@@ -772,3 +772,4 @@ number,kind,created_at,closed_at,merged_at,author_association
 779,issue,2026-10-22T20:38:03Z,,,MEMBER
 780,issue,2026-10-22T20:38:05Z,,,MEMBER
 781,issue,2026-10-22T20:38:06Z,,,MEMBER
+782,pull_request,2026-10-22T22:41:39Z,,,FIRST_TIME_CONTRIBUTOR
