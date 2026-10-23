@@ -1,20 +1,20 @@
 {
-  "captured_at": "2026-10-22T21:08:11.292897+00:00",
+  "captured_at": "2026-10-23T04:39:16.530850+00:00",
   "errors": [],
   "forks": {
-    "captured_at": "2026-10-22T21:08:11.292897+00:00",
+    "captured_at": "2026-10-23T04:39:16.530850+00:00",
     "complete": true,
     "listed": 0
   },
   "issues": {
-    "captured_at": "2026-10-22T21:08:11.292897+00:00",
+    "captured_at": "2026-10-23T04:39:16.530850+00:00",
     "complete": true,
-    "items": 8,
-    "through": "2026-10-22T21:06:15Z"
+    "items": 10,
+    "through": "2026-10-22T22:41:40Z"
   },
   "packages": {},
   "stargazers": {
-    "captured_at": "2026-10-22T21:08:11.292897+00:00",
+    "captured_at": "2026-10-23T04:39:16.530850+00:00",
     "complete": true,
     "listed": 4
   }
