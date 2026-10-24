@@ -2,7 +2,7 @@
   "data_repository": "exmergo/dex",
   "expected_refresh_hours": 24,
   "files": {
-    "exmergo/dex/ghrs-data/forks.csv": "0168a58638691ff829d08047fb59d86c86046f7c45af1c22edaafef6b8354ab6",
+    "exmergo/dex/ghrs-data/forks.csv": "82f3689aabfac51d4f3582b087030b874cb031a055656c6e78b93f2cc2c751c8",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
     "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
@@ -225,11 +225,13 @@
     "exmergo/dex/ghrs-data/snapshots/2026-10-22_043629_top_referrers_snapshot.csv": "094c10e85f4519667689d359c988dd05349d0d66bbfdab16c8cfb1b8c1ab8223",
     "exmergo/dex/ghrs-data/snapshots/2026-10-23_043742_top_paths_snapshot.csv": "3232e697de419048d6b2fc4e49f5541fda2c434c4a4b08394c19d529f33d774d",
     "exmergo/dex/ghrs-data/snapshots/2026-10-23_043742_top_referrers_snapshot.csv": "b46f2cd1e1081f6f8623792defc12cc5fe0164800e8f28a3b76603b1feaec3e7",
-    "exmergo/dex/ghrs-data/stargazers.csv": "052802cfac0bb10ddd94a4ed112943ad8403c664346583a8e2d7475fd2b15045",
-    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "9ebddea1ff771bf670e283ccc226da24b47b346d688c9fa2bd83bb6d95240ace"
+    "exmergo/dex/ghrs-data/snapshots/2026-10-24_043441_top_paths_snapshot.csv": "6d028b66ab96b580f9e244dd0dcda7eb62ac9aad0ff9e41ce1c72c6c73992a7f",
+    "exmergo/dex/ghrs-data/snapshots/2026-10-24_043441_top_referrers_snapshot.csv": "d309daa96676637243950f4b2590ed635911ecc0db6f53b7bf03f1e4d308945d",
+    "exmergo/dex/ghrs-data/stargazers.csv": "958c1824dcc4f4e3495113fee9899fc004d04bb6963240f2395f004b5f6eb2b8",
+    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "ff94ede1c27a6749e082ef20f7317972df268c8e85d89b106218660f6e481783"
   },
   "publication": null,
   "repository": "exmergo/dex",
-  "source_head": "470eb8cdd6369be0373df295161738f17b48aecd",
-  "source_revision": "470eb8cdd6369be0373df295161738f17b48aecd"
+  "source_head": "1a20f6af7b844e7d23c8c36ebbc6568f6a61f49f",
+  "source_revision": "1a20f6af7b844e7d23c8c36ebbc6568f6a61f49f"
 }
