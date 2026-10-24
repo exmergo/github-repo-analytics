@@ -1,0 +1,31 @@
+{
+  "captured_at": "2026-10-24T04:36:10.742741+00:00",
+  "forks": 0,
+  "github_id": 1424862326,
+  "open_issues_and_prs": 1,
+  "releases": [
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.1",
+      "id": 421207059,
+      "name": "v1.0.1: template fixes and Dex 1.15.2",
+      "prerelease": false,
+      "published_at": "2026-10-22T21:10:52Z",
+      "tag_name": "v1.0.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.0",
+      "id": 420797383,
+      "name": "v1.0.0: GitHub repo analytics for open-source maintainers",
+      "prerelease": false,
+      "published_at": "2026-10-22T14:02:20Z",
+      "tag_name": "v1.0.0"
+    }
+  ],
+  "repository": "exmergo/github-repo-analytics",
+  "stars": 5,
+  "watchers": 0
+}
