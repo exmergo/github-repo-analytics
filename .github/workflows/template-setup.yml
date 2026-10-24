@@ -27,11 +27,11 @@ jobs:
           gh issue create --title "$title" --body "$(cat <<BODY
           This repository was created from the GitHub repo analytics template. Collection stays off until these steps are done:
 
-          - [ ] Edit \`sources.yml\`: replace both examples (\`exmergo/dex\` and \`exmergo/github-repo-analytics\`) with your public repositories. Set \`mode: collect\` and add \`packages: {pypi: [...]}\` or \`{npm: [...]}\` if you publish packages.
+          - [ ] Edit \`sources.yml\`: replace both examples (\`exmergo/dex\` and \`exmergo/github-repo-analytics\`) with your repositories. Set \`mode: collect\` and add \`packages: {pypi: [...]}\` or \`{npm: [...]}\` if you publish packages.
           - [ ] Create a fine-grained token with **Administration: read** on the tracked repositories and **Contents: read and write** on this repository. Include every tracked repository, or its star history is refused. Save it as the \`GHRS_TOKEN\` Actions secret.
           - [ ] Settings → Secrets and variables → Actions → Variables: add \`ANALYTICS_ENABLED\` = \`true\`.
           - [ ] Actions → *Collect and validate repository analytics* → **Run workflow** once.
 
-          Traffic aggregates become public in this repository's \`github-repo-stats\` branch. Full guide: $SERVER/$GH_REPO/blob/main/docs/setup.md
+          Traffic aggregates are stored in this repository's \`github-repo-stats\` branch, visible to anyone who can read this repository. Keep it private to track private repositories. Full guide: $SERVER/$GH_REPO/blob/main/docs/setup.md
           BODY
           )"

@@ -285,7 +285,7 @@ GitHub only keeps traffic for 14 days, so **traffic history starts the day you t
 One analytics repository can track many projects.
 
 > [!IMPORTANT]
-> **Collection publishes aggregates publicly.** Traffic counts, referrers, and popular paths normally need push access to see. No logins, names, emails, or issue text are ever stored. See [SECURITY.md](SECURITY.md).
+> **Aggregates are as visible as your analytics repository.** Collected data lives in its `github-repo-stats` branch, so a public analytics repository publishes traffic counts, referrers, and popular paths that normally need push access to see. Make it private to keep them private, and to track private repositories. No logins, names, emails, or issue text are ever stored. See [SECURITY.md](SECURITY.md).
 
 ## Ask with an agent
 

@@ -24,8 +24,6 @@ def now_iso() -> str:
 
 def metadata(client: GitHub, repository: str, captured_at: str) -> dict:
     repo = client.json(f"/repos/{repository}")
-    if repo.get("private"):
-        raise SourceError("this public template supports public repositories only")
     return {
         "repository": repository,
         "github_id": repo["id"],
@@ -274,12 +272,21 @@ def import_source(
     ref = revision or source.data_branch
     if revision and not REVISION.fullmatch(revision):
         raise ValueError("revision must be a full lowercase Git commit SHA")
+    private = client.json(f"/repos/{origin}").get("private") is not False
+
+    def read(commit: str, path: str, *, optional: bool = False):
+        # Raw content never receives the token, so private data branches go through the API.
+        if private:
+            return client.contents(origin, commit, path, optional=optional)
+        return client.get(
+            f"https://raw.githubusercontent.com/{origin}/{commit}/{quote(path, safe='/')}",
+            optional=optional,
+        )
+
     commit = client.json(f"/repos/{origin}/commits/{quote(ref, safe='')}")
     head = commit["sha"]
     # Template-managed branches publish an approved input commit. Legacy branches have no pointer.
-    pointer_bytes = client.get(
-        f"https://raw.githubusercontent.com/{origin}/{head}/published.json", optional=True
-    )
+    pointer_bytes = read(head, "published.json", optional=True)
     publication = json.loads(pointer_bytes) if pointer_bytes else None
     sha = publication["data_commit"] if publication and not revision else head
     if not REVISION.fullmatch(sha):
@@ -318,9 +325,7 @@ def import_source(
         if cached and cached.exists():
             data = cached.read_bytes()
         else:
-            data = client.get(
-                f"https://raw.githubusercontent.com/{origin}/{sha}/{quote(path, safe='/')}"
-            )
+            data = read(sha, path)
             if blob:
                 if git_blob_sha(data) != blob:
                     raise SourceError(f"downloaded content does not match Git object for {path}")
@@ -444,25 +449,27 @@ def stage(root: Path, repository: str, destination: Path, *, client=None) -> dic
     return {"source": record, "observation": observation, "signals": signals}
 
 
-def require_public_sources(root: Path, *, destination=None, client=None) -> None:
-    """CI preflight runs before any collector can publish protected traffic."""
+def require_safe_visibility(root: Path, *, destination=None, client=None) -> None:
+    """CI preflight: private data must never be published in a public analytics repository."""
     client = client or GitHub()
     repositories = set()
     for source in load_sources(root):
         repositories.add(source.repository)
         if source.mode == "import":
             repositories.add(source.data_repository or source.repository)
-    if destination:
-        repositories.add(destination)
-    for repository in sorted(repositories):
+    private = {}
+    for repository in sorted(repositories | ({destination} if destination else set())):
         validate_repository(repository)
         try:
-            private = client.json(f"/repos/{repository}").get("private")
+            private[repository] = client.json(f"/repos/{repository}").get("private") is not False
         except SourceError as exc:
-            # A missing, misspelled, or private repository answers 404: name which one.
+            # A missing, misspelled, or inaccessible repository answers 404: name which one.
             raise SourceError(f"{repository}: {exc}") from None
-        if private is not False:
+    if destination and not private[destination]:
+        exposed = sorted(r for r in repositories if private[r])
+        if exposed:
             raise SourceError(
-                f"{repository}: collection/import and the analytics destination"
-                " require public repositories"
+                f"{', '.join(exposed)}: a private repository cannot be collected or imported"
+                f" into the public analytics repository {destination}; make {destination}"
+                " private or remove it from sources.yml"
             )

@@ -35,10 +35,11 @@ jobs:
       - run: bash scripts/bootstrap.sh
       - id: sources
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          # The built-in token cannot see a private repository other than this one.
+          GITHUB_TOKEN: ${{ secrets.GHRS_TOKEN || github.token }}
         shell: bash
         run: |
-          matrix=$(uv run --frozen oss-analytics matrix --verify-public | python -c 'import json,sys; d=json.load(sys.stdin); sys.exit("; ".join(d.get("errors", []))) if d.get("status") != "ok" else print(json.dumps(d["data"]))')
+          matrix=$(uv run --frozen oss-analytics matrix --verify-visibility | python -c 'import json,sys; d=json.load(sys.stdin); sys.exit("; ".join(d.get("errors", []))) if d.get("status") != "ok" else print(json.dumps(d["data"]))')
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
   collect:
     needs: configuration

@@ -65,7 +65,7 @@ def main():
     stage.add_argument("--destination", required=True, type=Path)
     matrix = sub.add_parser("matrix", help="CI: generate source matrix")
     matrix.add_argument("--mode", choices=["collect", "all"], default="all")
-    matrix.add_argument("--verify-public", action="store_true")
+    matrix.add_argument("--verify-visibility", action="store_true")
     publish = sub.add_parser("publish", help="CI: write validated publication metadata")
     publish.add_argument("--destination", type=Path, required=True)
     publish.add_argument("--data-commit", required=True)
@@ -166,10 +166,10 @@ def dispatch(root, args):
     if args.command == "stage":
         return sources.stage(root, args.repository, args.destination.resolve())
     if args.command == "matrix":
-        if args.verify_public:
+        if args.verify_visibility:
             import os
 
-            sources.require_public_sources(root, destination=os.environ.get("GITHUB_REPOSITORY"))
+            sources.require_safe_visibility(root, destination=os.environ.get("GITHUB_REPOSITORY"))
         return {
             "include": [
                 {"repository": s.repository, "mode": s.mode}

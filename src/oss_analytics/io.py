@@ -11,7 +11,7 @@ import urllib.request
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 GITHUB_HOSTS = {"api.github.com", "raw.githubusercontent.com"}
 # Package registries are contacted only when a repository configures the add-on.
@@ -154,6 +154,14 @@ class GitHub:
 
     def json(self, route: str, *, optional: bool = False):
         return self.json_url("https://api.github.com" + route, optional=optional)
+
+    def contents(self, repository: str, ref: str, path: str, *, optional: bool = False):
+        """Read one file at a commit through the API, which unlike raw content takes the token."""
+        url = (
+            f"https://api.github.com/repos/{repository}/contents/{quote(path, safe='/')}"
+            f"?ref={quote(ref, safe='')}"
+        )
+        return self.request(url, optional=optional, accept="application/vnd.github.raw+json")[0]
 
     def json_url(self, url: str, *, optional: bool = False):
         data = self.get(url, optional=optional)

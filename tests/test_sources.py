@@ -16,9 +16,12 @@ SHA = "a" * 40
 
 
 class FakeGitHub:
-    def __init__(self, files, *, publication=None, truncated=False, subtree_truncated=None):
+    def __init__(
+        self, files, *, publication=None, truncated=False, subtree_truncated=None, private=False
+    ):
         self.files = files
         self.publication = publication
+        self.private = private
         self.truncated = truncated
         # By default a truncated root also truncates the repository subtree.
         self.subtree_truncated = truncated if subtree_truncated is None else subtree_truncated
@@ -26,6 +29,8 @@ class FakeGitHub:
 
     def json(self, route, **kwargs):
         self.routes.append(route)
+        if route.count("/") == 3:
+            return {"private": self.private}
         if "/commits/" in route:
             return {"sha": SHA}
         if "/git/trees/" in route:
@@ -59,6 +64,14 @@ class FakeGitHub:
         # Assert downloads are pinned, not made from a moving branch name.
         assert "/" + SHA + "/" in url or self.publication
         return self.files[url.split("/", 6)[6]]
+
+    def contents(self, repository, ref, path, **kwargs):
+        assert self.private, "public data branches are read from raw content"
+        self.routes.append(f"contents:{ref}:{path}")
+        if path == "published.json":
+            return json.dumps(self.publication).encode() if self.publication else None
+        assert ref == SHA or self.publication
+        return self.files[path]
 
 
 def input_root(tmp_path):
@@ -213,16 +226,23 @@ def test_auth_failure_and_transient_retry():
         assert call.call_count == 3
 
 
-def test_private_project_rejected_before_collection(tmp_path):
-    from oss_analytics.sources import require_public_sources
+def test_private_project_only_rejected_from_a_public_destination(tmp_path):
+    from oss_analytics.sources import require_safe_visibility
 
     root = input_root(tmp_path)
     client = GitHub()
-    client.json = lambda route: {"private": False}
-    require_public_sources(root, destination="exmergo/analytics", client=client)
-    client.json = lambda route: {"private": route.endswith("exmergo/dex")}
-    with pytest.raises(SourceError, match="exmergo/dex: .*public repositories"):
-        require_public_sources(root, destination="exmergo/analytics", client=client)
+    private = set()
+    client.json = lambda route: {"private": route.removeprefix("/repos/") in private}
+    require_safe_visibility(root, destination="exmergo/analytics", client=client)
+    private = {"exmergo/dex"}
+    with pytest.raises(SourceError, match="^exmergo/dex: .*public analytics repository"):
+        require_safe_visibility(root, destination="exmergo/analytics", client=client)
+    # Nothing leaks when the analytics repository is private too, or when run locally.
+    private = {"exmergo/dex", "exmergo/analytics"}
+    require_safe_visibility(root, destination="exmergo/analytics", client=client)
+    require_safe_visibility(root, client=client)
+    private = {"exmergo/analytics"}
+    require_safe_visibility(root, destination="exmergo/analytics", client=client)
 
     def missing(route):
         if route.endswith("exmergo/analytics"):
@@ -231,7 +251,18 @@ def test_private_project_rejected_before_collection(tmp_path):
 
     client.json = missing
     with pytest.raises(SourceError, match="^exmergo/analytics: api.github.com HTTP 404"):
-        require_public_sources(root, destination="exmergo/analytics", client=client)
+        require_safe_visibility(root, destination="exmergo/analytics", client=client)
+
+
+def test_private_data_branch_is_read_through_the_api(tmp_path):
+    root = input_root(tmp_path)
+    source = load_sources(root)[0]
+    approved = "b" * 40
+    client = FakeGitHub(upstream_files(), publication={"data_commit": approved}, private=True)
+    result = import_source(root, source, root / ".data/input", client=client)
+    assert result["source_revision"] == approved
+    assert f"contents:{SHA}:published.json" in client.routes
+    assert f"contents:{approved}:exmergo/dex/ghrs-data/views_clones_aggregate.csv" in client.routes
 
 
 def test_multi_repository_ci_candidate_uses_one_pinned_commit(tmp_path):
@@ -463,3 +494,17 @@ def test_anonymous_run_skips_star_dates_and_keeps_previous_history(tmp_path):
     # The earlier history survives with the time it was actually collected.
     assert record["stargazers"]["captured_at"] == "2026-07-04T00:00:00+00:00"
     assert record["forks"]["captured_at"] == "2026-07-05T00:00:00+00:00"
+
+
+def test_contents_reads_raw_file_with_the_token():
+    response = io.BytesIO(b"data")
+    response.url = "https://api.github.com/repos/exmergo/analytics/contents/a%20b.csv?ref=" + SHA
+    response.headers = {}
+    response.__enter__ = lambda: response
+    with patch("urllib.request.urlopen") as call:
+        call.return_value.__enter__.return_value = response
+        assert GitHub("secret").contents("exmergo/analytics", SHA, "a b.csv") == b"data"
+    request = call.call_args[0][0]
+    assert request.full_url == response.url
+    assert request.get_header("Authorization") == "Bearer secret"
+    assert request.get_header("Accept") == "application/vnd.github.raw+json"

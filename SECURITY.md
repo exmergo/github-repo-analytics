@@ -7,9 +7,9 @@ Report privately through [GitHub private vulnerability reporting](https://github
 ## What this template handles
 
 - **Tokens.** Collection uses a fine-grained token stored as the `GHRS_TOKEN` Actions secret, and the workflow's own `GITHUB_TOKEN`. Tokens are read from the environment, sent only to `api.github.com`, and never written to files, logs, or the data branch. Package registries (`pypistats.org`, `api.npmjs.org`) never receive a token.
-- **Published data.** Enabling collection publishes traffic aggregates, top referrers, popular paths, star and fork day counts, issue and pull request timestamps with GitHub's author association, and package download counts to the public `github-repo-stats` branch. No logins, names, emails, titles, or issue bodies are stored.
-- **Public repositories only.** Collection refuses private repositories and a private analytics destination before any traffic is read.
-- **Network allowlist.** The HTTP client accepts only HTTPS requests to GitHub's API, public raw content, and the two package-statistics hosts, rejects cross-host redirects, and caps responses at 32 MiB.
+- **Published data.** Enabling collection publishes traffic aggregates, top referrers, popular paths, star and fork day counts, issue and pull request timestamps with GitHub's author association, and package download counts to the analytics repository's `github-repo-stats` branch, which anyone who can read that repository can see. No logins, names, emails, titles, or issue bodies are stored.
+- **No private data in a public repository.** Before any traffic is read, collection refuses to collect or import a private repository into a public analytics repository. A private analytics repository may track public and private repositories. Making it public later publishes its whole history, including the data branch.
+- **Network allowlist.** The HTTP client accepts only HTTPS requests to GitHub's API, raw content of public repositories, and the two package-statistics hosts, rejects cross-host redirects, and caps responses at 32 MiB.
 
 ## Supported versions
 
