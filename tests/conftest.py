@@ -20,11 +20,12 @@ def project(tmp_path_factory):
     for name in [
         "dbt_project.yml",
         "profiles.yml",
-        "sources.yml",
         "pyproject.toml",
         "uv.lock",
     ]:
         shutil.copy2(ROOT / name, root / name)
+    # The fixtures assume the shipped examples, whatever this copy's sources.yml tracks.
+    shutil.copy2(ROOT / "tests/fixtures/sources.yml", root / "sources.yml")
     for name in ["models", "seeds", "data_tests"]:
         shutil.copytree(ROOT / name, root / name)
     (root / ".dex").mkdir()

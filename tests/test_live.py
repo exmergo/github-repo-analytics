@@ -11,8 +11,8 @@ def test_live_example(request, tmp_path):
     if not request.config.getoption("--live"):
         pytest.skip("use --live to enable public GitHub access")
     source = Path(__file__).resolve().parents[1]
+    shutil.copy2(source / "tests/fixtures/sources.yml", tmp_path / "sources.yml")
     for name in [
-        "sources.yml",
         "dbt_project.yml",
         "profiles.yml",
         "uv.lock",

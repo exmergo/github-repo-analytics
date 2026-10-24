@@ -1,0 +1,14 @@
+# Test-only copy of the shipped example configuration. The tests read this file, never
+# the repository's own sources.yml, so a copy of the template can track its own projects.
+repositories:
+  - repository: exmergo/dex
+    mode: import
+    data_repository: exmergo/dex
+    data_branch: github-repo-stats
+    expected_refresh_hours: 24
+    packages:
+      pypi: [exmergo-dex-core]
+  - repository: exmergo/github-repo-analytics
+    mode: collect
+    data_repository: exmergo/github-repo-analytics
+    expected_refresh_hours: 24
