@@ -1,0 +1,562 @@
+{
+  "status": "ok",
+  "data": {
+    "findings": [
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_path",
+        "column": "path",
+        "severity": "medium",
+        "detail": "dimension 'path' on semantic model 'fct_path' widened: ~79 -> 88 distinct values in analytics.main.fct_path.path",
+        "exact": false,
+        "data": {
+          "distinct_before": 79,
+          "distinct_after": 88,
+          "dimension": "path",
+          "semantic_model": "fct_path"
+        },
+        "impacted_models": [
+          "fct_path"
+        ],
+        "impacted_metrics": [
+          "path_views_14d",
+          "path_visitor_observations_14d"
+        ]
+      },
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_referrer",
+        "column": "referrer",
+        "severity": "medium",
+        "detail": "dimension 'referrer' on semantic model 'fct_referrer' narrowed: ~24 -> 23 distinct values in analytics.main.fct_referrer.referrer",
+        "exact": false,
+        "data": {
+          "distinct_before": 24,
+          "distinct_after": 23,
+          "dimension": "referrer",
+          "semantic_model": "fct_referrer"
+        },
+        "impacted_models": [
+          "fct_referrer"
+        ],
+        "impacted_metrics": [
+          "referrer_views_14d",
+          "referrer_visitor_observations_14d"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.stg_deployments",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_deployments has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times",
+          "fct_deployments",
+          "metricflow_time_spine",
+          "stg_deployments"
+        ],
+        "impacted_metrics": [
+          "deployments",
+          "median_hours_lead_time"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.raw.deployments",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.deployments has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times",
+          "fct_deployments",
+          "metricflow_time_spine",
+          "stg_deployments"
+        ],
+        "impacted_metrics": [
+          "deployments",
+          "median_hours_lead_time"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.fct_deployments",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.fct_deployments has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times",
+          "fct_deployments",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "deployments",
+          "median_hours_lead_time"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.stg_release_assets",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_release_assets has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine",
+          "stg_release_assets"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.raw.release_assets",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.release_assets has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine",
+          "stg_release_assets"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.annotations",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.annotations has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "annotations",
+          "dim_event",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "events"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.fct_release_downloads",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.fct_release_downloads has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.stg_deployment_changes",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_deployment_changes has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times",
+          "stg_deployment_changes"
+        ],
+        "impacted_metrics": [
+          "median_hours_lead_time"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.raw.deployment_changes",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.deployment_changes has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times",
+          "stg_deployment_changes"
+        ],
+        "impacted_metrics": [
+          "median_hours_lead_time"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.fct_deployment_lead_times",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.fct_deployment_lead_times has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_deployment_lead_times"
+        ],
+        "impacted_metrics": [
+          "median_hours_lead_time"
+        ]
+      }
+    ],
+    "finding_count": 12,
+    "axes_run": [
+      "grain",
+      "schema",
+      "semantic",
+      "volume"
+    ],
+    "axes": {
+      "schema": {
+        "run_at": "2026-10-26T07:51:25.026313+00:00",
+        "scope": null,
+        "findings": [],
+        "finding_count": 0
+      },
+      "volume": {
+        "run_at": "2026-10-26T07:51:25.026313+00:00",
+        "scope": null,
+        "findings": [],
+        "finding_count": 0
+      },
+      "grain": {
+        "run_at": "2026-10-26T07:51:25.026313+00:00",
+        "scope": null,
+        "findings": [
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.stg_deployments",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_deployments has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times",
+              "fct_deployments",
+              "metricflow_time_spine",
+              "stg_deployments"
+            ],
+            "impacted_metrics": [
+              "deployments",
+              "median_hours_lead_time"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.raw.deployments",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.deployments has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times",
+              "fct_deployments",
+              "metricflow_time_spine",
+              "stg_deployments"
+            ],
+            "impacted_metrics": [
+              "deployments",
+              "median_hours_lead_time"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.fct_deployments",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.fct_deployments has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times",
+              "fct_deployments",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "deployments",
+              "median_hours_lead_time"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.stg_release_assets",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_release_assets has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine",
+              "stg_release_assets"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.raw.release_assets",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.release_assets has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine",
+              "stg_release_assets"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.annotations",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.annotations has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "annotations",
+              "dim_event",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "events"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.fct_release_downloads",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.fct_release_downloads has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.stg_deployment_changes",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_deployment_changes has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times",
+              "stg_deployment_changes"
+            ],
+            "impacted_metrics": [
+              "median_hours_lead_time"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.raw.deployment_changes",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.deployment_changes has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times",
+              "stg_deployment_changes"
+            ],
+            "impacted_metrics": [
+              "median_hours_lead_time"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.fct_deployment_lead_times",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.fct_deployment_lead_times has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_deployment_lead_times"
+            ],
+            "impacted_metrics": [
+              "median_hours_lead_time"
+            ]
+          }
+        ],
+        "finding_count": 10
+      },
+      "semantic": {
+        "run_at": "2026-10-26T07:51:25.026313+00:00",
+        "scope": null,
+        "findings": [
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.fct_path",
+            "column": "path",
+            "severity": "medium",
+            "detail": "dimension 'path' on semantic model 'fct_path' widened: ~79 -> 88 distinct values in analytics.main.fct_path.path",
+            "exact": false,
+            "data": {
+              "distinct_before": 79,
+              "distinct_after": 88,
+              "dimension": "path",
+              "semantic_model": "fct_path"
+            },
+            "impacted_models": [
+              "fct_path"
+            ],
+            "impacted_metrics": [
+              "path_views_14d",
+              "path_visitor_observations_14d"
+            ]
+          },
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.fct_referrer",
+            "column": "referrer",
+            "severity": "medium",
+            "detail": "dimension 'referrer' on semantic model 'fct_referrer' narrowed: ~24 -> 23 distinct values in analytics.main.fct_referrer.referrer",
+            "exact": false,
+            "data": {
+              "distinct_before": 24,
+              "distinct_after": 23,
+              "dimension": "referrer",
+              "semantic_model": "fct_referrer"
+            },
+            "impacted_models": [
+              "fct_referrer"
+            ],
+            "impacted_metrics": [
+              "referrer_views_14d",
+              "referrer_visitor_observations_14d"
+            ]
+          }
+        ],
+        "finding_count": 2
+      }
+    },
+    "baseline": {
+      "snapshot_created_at": "2026-10-25T23:12:14.863761+00:00",
+      "from": "cache"
+    },
+    "drift_path": "./.dex/drift.json",
+    "hint": "run `maintain reconcile [<class>]` for proposed fixes as reviewable diffs"
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "the drift baseline was written by dex 1.15.2 and this engine is 1.16.1; drift reported against it may reflect the engine change as well as the warehouse; re-run `maintain snapshot` once the current state is known-good"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

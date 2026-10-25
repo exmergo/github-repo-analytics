@@ -34,3 +34,6 @@ dbt_packages/
 .DS_Store
 *.swp
 *.swo
+
+# Internal Dex dogfooding notes (not published with the template)
+dex-field-reports/

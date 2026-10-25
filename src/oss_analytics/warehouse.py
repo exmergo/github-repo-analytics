@@ -26,6 +26,8 @@ SCHEMAS = {
     "stargazer_days": "repository varchar, date date, stars bigint",
     "fork_days": "repository varchar, date date, forks bigint",
     "issues": "repository varchar, number bigint, kind varchar, created_at timestamptz, closed_at timestamptz, merged_at timestamptz, author_association varchar",
+    "deployments": "repository varchar, deployment_id bigint, environment varchar, sha varchar, succeeded_at timestamptz",
+    "deployment_changes": "repository varchar, deployment_id bigint, number bigint, merged_at timestamptz, merge_sha varchar",
     "package_downloads": "repository varchar, registry varchar, package varchar, date date, downloads bigint",
 }
 ASSOCIATIONS = {
@@ -276,6 +278,18 @@ def parse_signals(repo: str, folder: Path, tables: dict, warnings: list[str]) ->
         tables["signal_captures"].append(
             (repo, "issues", signal_time(capture, "issues"), bool(capture["issues"]["complete"]))
         )
+    if "deployments" in capture:
+        parse_deployments(repo, folder / "deployments.json", tables, capture["deployments"])
+        complete = capture["deployments"]["complete"]
+        if not isinstance(complete, bool):
+            raise ValueError("deployments completeness must be boolean")
+        if not complete:
+            warnings.append(
+                f"{repo}: deployments or pull request listing incomplete; metrics are lower bounds"
+            )
+        tables["signal_captures"].append(
+            (repo, "deployments", signal_time(capture, "deployments"), complete)
+        )
     for key in sorted(capture.get("packages", {})):
         registry, package = key.split(":", 1)
         seen = set()
@@ -350,3 +364,40 @@ def load(root: Path, manifest: dict, database: Path) -> list[str]:
                 )
         connection.execute("commit")
     return warnings
+
+
+def parse_deployments(repo: str, path: Path, tables: dict, capture: dict) -> None:
+    from .config import REVISION
+
+    body = read_json(path)
+    if not body or body.get("environment") != capture.get("environment"):
+        raise ValueError("deployment evidence does not match captured environment")
+    if body.get("default_branch") != capture.get("default_branch"):
+        raise ValueError("deployment evidence does not match captured default branch")
+    deployments = {}
+    for row in body["deployments"]:
+        key = count(row["deployment_id"])
+        if not key or key in deployments or row["environment"] != body["environment"]:
+            raise ValueError("deployment IDs must be unique and match the configured environment")
+        if not REVISION.fullmatch(row["sha"]):
+            raise ValueError("deployment requires immutable SHA")
+        deployments[key] = timestamp(row["succeeded_at"])
+        tables["deployments"].append((repo, key, row["environment"], row["sha"], deployments[key]))
+    seen = set()
+    for row in body["changes"]:
+        deployment_id, number = count(row["deployment_id"]), count(row["number"])
+        key = (deployment_id, number)
+        merged = timestamp(row["merged_at"])
+        if (
+            not number
+            or key in seen
+            or deployment_id not in deployments
+            or merged > deployments[deployment_id]
+        ):
+            raise ValueError(
+                "deployment changes require unique pairs, an existing deployment and merge before success"
+            )
+        if not REVISION.fullmatch(row["merge_sha"]):
+            raise ValueError("deployment change requires immutable merge SHA")
+        seen.add(key)
+        tables["deployment_changes"].append((repo, deployment_id, number, merged, row["merge_sha"]))

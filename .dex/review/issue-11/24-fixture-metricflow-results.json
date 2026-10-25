@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "data": {
+    "columns": [
+      "metric_time__day",
+      "repository__name",
+      "deployments",
+      "median_hours_lead_time"
+    ],
+    "types": [
+      "TIMESTAMP",
+      "VARCHAR",
+      "HUGEINT",
+      "DOUBLE"
+    ],
+    "cells": [
+      [
+        "2026-07-05T00:00:00",
+        "exmergo/dex",
+        1,
+        null
+      ],
+      [
+        "2026-07-04T00:00:00",
+        "exmergo/dex",
+        1,
+        null
+      ],
+      [
+        "2026-07-06T00:00:00",
+        "exmergo/dex",
+        1,
+        24.0
+      ],
+      [
+        "2026-07-03T00:00:00",
+        "exmergo/dex",
+        1,
+        3.0
+      ],
+      [
+        "2026-07-05T00:00:00",
+        "example/other",
+        1,
+        null
+      ],
+      [
+        "2026-07-04T00:00:00",
+        "example/other",
+        1,
+        null
+      ],
+      [
+        "2026-07-03T00:00:00",
+        "example/other",
+        1,
+        48.0
+      ],
+      [
+        "2026-07-06T00:00:00",
+        "example/other",
+        1,
+        null
+      ]
+    ],
+    "row_count": 8,
+    "truncated": false,
+    "backend": "local",
+    "vendor": "dbt",
+    "deployment": "local",
+    "execution": "dex"
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "<fixture-workspace>"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

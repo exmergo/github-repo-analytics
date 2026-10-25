@@ -1,0 +1,46 @@
+{
+  "status": "ok",
+  "data": {
+    "status": "ok",
+    "data": {
+      "snapshot_path": "./.dex/snapshot.json",
+      "baseline": {
+        "from": "cache",
+        "dataset_count": 47,
+        "relationship_count": 28,
+        "grain_baseline_count": 36,
+        "column_detail_count": 47,
+        "cache_updated_at": "2026-10-25T23:10:41.800463+00:00",
+        "carried_forward": false
+      },
+      "transform_layer": {
+        "file_count": 42,
+        "model_count": 32,
+        "source_count": 15
+      },
+      "semantic_layer": {
+        "semantic_model_count": 14,
+        "metric_count": 41
+      },
+      "hint": "commit .dex/snapshot.json like a lockfile, and re-run `maintain snapshot` after each known-good build so drift is measured against a state someone vouched for"
+    },
+    "connection": {
+      "connector": "duckdb",
+      "target": {
+        "path": "./warehouse/analytics.duckdb"
+      },
+      "source": ".dex/config.yml"
+    },
+    "cost": {
+      "paradigm": "free_local",
+      "estimate": null,
+      "ceiling": null,
+      "estimate_quality": null,
+      "unit": null
+    },
+    "warnings": [],
+    "diffs": [],
+    "errors": [],
+    "reason": null
+  }
+}

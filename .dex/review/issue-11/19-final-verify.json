@@ -1,0 +1,38 @@
+{
+  "status": "ok",
+  "data": {
+    "findings": [],
+    "finding_count": 0,
+    "suppressed": {},
+    "notes": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "no single driving parent could be identified for dim_event (it is a set operation, so it has no single parent), metricflow_time_spine (it is driven by a set operation, so it has no single parent)",
+    "fct_star_history: left join \"analytics\".\"main\".\"stg_stargazer_days\" AS e on e.repository = days.repository AND e.date = days.date: a join column could not be resolved to a physical relation and column",
+    "fct_star_history: inner join \"analytics\".\"main\".\"stg_stargazer_days\" AS e on e.repository = c.repository: a join column could not be resolved to a physical relation and column",
+    "fct_path: inner join items AS i on s.repository = i.repository: a join column could not be resolved to a physical relation and column",
+    "fct_path: left join \"analytics\".\"main\".\"stg_discovery\" AS d on d.repository = s.repository AND d.endpoint = s.endpoint AND d.captured_at = s.captured_at AND d.item = n.item: a join column could not be resolved to a physical relation and column",
+    "fct_referrer: inner join items AS i on s.repository = i.repository: a join column could not be resolved to a physical relation and column",
+    "fct_referrer: left join \"analytics\".\"main\".\"stg_discovery\" AS d on d.repository = s.repository AND d.endpoint = s.endpoint AND d.captured_at = s.captured_at AND d.item = n.item: a join column could not be resolved to a physical relation and column",
+    "fct_deployments: inner join \"analytics\".\"main\".\"stg_signal_captures\" AS c on d.repository = c.repository AND c.signal = 'deployments': no conjunctive column-to-column equality",
+    "fct_fork_history: left join \"analytics\".\"main\".\"stg_fork_days\" AS e on e.repository = days.repository AND e.date = days.date: a join column could not be resolved to a physical relation and column",
+    "fct_fork_history: inner join \"analytics\".\"main\".\"stg_fork_days\" AS e on e.repository = c.repository: a join column could not be resolved to a physical relation and column"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

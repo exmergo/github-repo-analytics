@@ -175,6 +175,9 @@ def test_every_recipe(project):
             "compare_date": "2026-07-16",
             "event_id": "exmergo/dex:release:1000",
         }
+        if name == "deployments":
+            # Shipping is sparse: choose the fixture's shipping window explicitly.
+            options.update(start="2026-07-01", end="2026-07-07")
         result = answer(project, name, "exmergo/dex", **options)
         assert result["available"] is (name != "active-users"), name
     missing = answer(project, "referrers", "exmergo/dex", snapshot_date="2026-07-03")

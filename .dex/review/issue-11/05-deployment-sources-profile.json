@@ -1,0 +1,298 @@
+{
+  "status": "ok",
+  "data": {
+    "datasets": [
+      {
+        "identifier": "explore.raw.deployments",
+        "object_type": "table",
+        "row_count": 10,
+        "byte_size": null,
+        "candidate_keys": [
+          [
+            "deployment_id",
+            "repository"
+          ],
+          [
+            "succeeded_at",
+            "repository"
+          ]
+        ],
+        "grain": [
+          "deployment_id",
+          "repository"
+        ],
+        "key_evidence": [
+          {
+            "columns": [
+              "deployment_id",
+              "repository"
+            ],
+            "status": "reported",
+            "reason": "deployment_id, repository is unique as a combination on all 10 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
+          },
+          {
+            "columns": [
+              "succeeded_at",
+              "repository"
+            ],
+            "status": "reported",
+            "reason": "succeeded_at, repository is unique as a combination on all 10 rows, proven by an exact distinct-combination probe, and ranks behind deployment_id, repository, which is proven at a smaller cardinality"
+          }
+        ],
+        "composite_keys": [
+          [
+            "deployment_id",
+            "repository"
+          ],
+          [
+            "succeeded_at",
+            "repository"
+          ]
+        ],
+        "rank_score": null,
+        "data_quality": [
+          "deployment_id is not unique: ~5 distinct over 10 rows (~5 rows would have to be removed for it to be unique, so it is unique for ~50.0% of rows); joins on it will fan out"
+        ],
+        "findings": [
+          {
+            "column": "deployment_id",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "deployment_id participates in the detected grain but the warehouse still allows it to be NULL"
+          },
+          {
+            "column": "repository",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
+          }
+        ],
+        "profiled_at": "2026-10-25T23:01:27.052049+00:00",
+        "semantic_models": [],
+        "suppressed_fields": [
+          "pii",
+          "pii_overridden"
+        ],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 2,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": null,
+            "max_value": null,
+            "value_domain": null,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 5,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": 10,
+            "max_value": 14,
+            "value_domain": null,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "environment",
+            "data_type": "VARCHAR",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 1,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": null,
+            "max_value": null,
+            "value_domain": {
+              "values": [
+                {
+                  "value": "production",
+                  "count": 10
+                }
+              ],
+              "elided": 0
+            },
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "sha",
+            "data_type": "VARCHAR",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 1,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": null,
+            "max_value": null,
+            "value_domain": {
+              "values": [
+                {
+                  "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  "count": 10
+                }
+              ],
+              "elided": 0
+            },
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "succeeded_at",
+            "data_type": "TIMESTAMP WITH TIME ZONE",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 5,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": "2026-07-03T14:00:00+02:00",
+            "max_value": "2026-08-31T03:00:00+02:00",
+            "value_domain": null,
+            "temporal_granularity": "hour",
+            "temporal_span": 1406,
+            "temporal_distinct_periods": 5,
+            "temporal_missing_periods": 1401,
+            "temporal_largest_gap": 1332
+          }
+        ],
+        "elided_column_count": 0
+      },
+      {
+        "identifier": "explore.raw.deployment_changes",
+        "object_type": "table",
+        "row_count": 6,
+        "byte_size": null,
+        "candidate_keys": [
+          [
+            "merged_at",
+            "deployment_id"
+          ]
+        ],
+        "grain": [
+          "merged_at",
+          "deployment_id"
+        ],
+        "key_evidence": [
+          {
+            "columns": [
+              "merged_at",
+              "deployment_id"
+            ],
+            "status": "reported",
+            "reason": "merged_at, deployment_id is unique as a combination on all 6 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
+          }
+        ],
+        "composite_keys": [
+          [
+            "merged_at",
+            "deployment_id"
+          ]
+        ],
+        "rank_score": null,
+        "data_quality": [],
+        "findings": [
+          {
+            "column": "merged_at",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "merged_at participates in the detected grain but the warehouse still allows it to be NULL"
+          },
+          {
+            "column": "deployment_id",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "deployment_id participates in the detected grain but the warehouse still allows it to be NULL"
+          }
+        ],
+        "profiled_at": "2026-10-25T23:01:27.079993+00:00",
+        "semantic_models": [],
+        "suppressed_fields": [
+          "pii",
+          "pii_overridden",
+          "value_domain"
+        ],
+        "columns": [
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 3,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": 10,
+            "max_value": 13,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "merged_at",
+            "data_type": "TIMESTAMP WITH TIME ZONE",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 4,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": "2026-07-01T14:00:00+02:00",
+            "max_value": "2026-07-05T14:00:00+02:00",
+            "temporal_granularity": "hour",
+            "temporal_span": 97,
+            "temporal_distinct_periods": 4,
+            "temporal_missing_periods": 93,
+            "temporal_largest_gap": 49
+          }
+        ],
+        "elided_column_count": 3
+      }
+    ],
+    "profiled_count": 2,
+    "cache_hit_count": 0,
+    "cache_path": "./.dex/cache.json",
+    "updated_at": "2026-10-25T23:01:26.982670+00:00",
+    "notes": [
+      "merged 2 profiled object(s) into the existing cache (0 refreshed, 2 added); other datasets and relationships preserved"
+    ]
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./.data/issue11/explore.duckdb"
+    },
+    "source": "flag"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

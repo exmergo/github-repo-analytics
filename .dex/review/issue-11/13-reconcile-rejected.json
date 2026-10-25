@@ -1,0 +1,244 @@
+{
+  "status": "ok",
+  "data": {
+    "proposals": [
+      {
+        "axis": "semantic",
+        "kind": "advisory",
+        "finding_code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_observations",
+        "column": "observation_gap_days",
+        "action": "decide whether the new categorical value belongs in the impacted metric definitions; a firewalled `explore query` can name it",
+        "paths": []
+      },
+      {
+        "axis": "semantic",
+        "kind": "advisory",
+        "finding_code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_path",
+        "column": "path",
+        "action": "decide whether the new categorical value belongs in the impacted metric definitions; a firewalled `explore query` can name it",
+        "paths": []
+      },
+      {
+        "axis": "semantic",
+        "kind": "advisory",
+        "finding_code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_referrer",
+        "column": "referrer",
+        "action": "decide whether the new categorical value belongs in the impacted metric definitions; a firewalled `explore query` can name it",
+        "paths": []
+      },
+      {
+        "axis": "semantic",
+        "kind": "advisory",
+        "finding_code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.dim_event",
+        "column": "title",
+        "action": "decide whether the new categorical value belongs in the impacted metric definitions; a firewalled `explore query` can name it",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.main.stg_observations",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.raw.observations",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.main.fct_observations",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "key_lost_uniqueness",
+        "identifier": "analytics.main.stg_stargazer_days",
+        "column": "date",
+        "action": "decide: dedup upstream, change the declared grain, or accept the duplicates",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "key_lost_uniqueness",
+        "identifier": "analytics.raw.stargazer_days",
+        "column": "date",
+        "action": "decide: dedup upstream, change the declared grain, or accept the duplicates; the unique test keeps the break visible in builds",
+        "paths": [
+          "models/schema.yml"
+        ]
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.main.stg_stargazer_days",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.raw.stargazer_days",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "no_rows",
+        "identifier": "analytics.main.stg_release_assets",
+        "column": null,
+        "action": "review the finding; no automatic fix applies",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "no_rows",
+        "identifier": "analytics.raw.release_assets",
+        "column": null,
+        "action": "review the finding; no automatic fix applies",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "no_rows",
+        "identifier": "analytics.main.annotations",
+        "column": null,
+        "action": "review the finding; no automatic fix applies",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "no_rows",
+        "identifier": "analytics.main.fct_release_downloads",
+        "column": null,
+        "action": "review the finding; no automatic fix applies",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.main.stg_fork_days",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "volume",
+        "kind": "advisory",
+        "finding_code": "row_count_changed",
+        "identifier": "analytics.raw.fork_days",
+        "column": null,
+        "action": "check the load or pipeline; if the new volume is expected, re-run `explore map` and `maintain snapshot` to accept it",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "forks",
+        "action": "decide: dedup upstream, change the declared grain, or accept the duplicates",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "open_issues_and_prs",
+        "action": "decide: dedup upstream, change the declared grain, or accept the duplicates",
+        "paths": []
+      },
+      {
+        "axis": "grain",
+        "kind": "advisory",
+        "finding_code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "stars",
+        "action": "decide: dedup upstream, change the declared grain, or accept the duplicates",
+        "paths": []
+      },
+      {
+        "axis": "schema",
+        "kind": "advisory",
+        "finding_code": "table_added",
+        "identifier": "analytics.raw.deployment_changes",
+        "column": null,
+        "action": "a new table appeared; scaffold a staging model with `transform plan --scaffold` if it should enter the project",
+        "paths": []
+      },
+      {
+        "axis": "schema",
+        "kind": "advisory",
+        "finding_code": "table_added",
+        "identifier": "analytics.raw.deployments",
+        "column": null,
+        "action": "a new table appeared; scaffold a staging model with `transform plan --scaffold` if it should enter the project",
+        "paths": []
+      }
+    ],
+    "proposal_count": 22,
+    "mechanical_count": 0,
+    "advisory_count": 22,
+    "plan_id": "pee465d7bfc",
+    "hint": "review the diffs, then apply with `transform apply pee465d7bfc` (human edits since detection surface as a conflict, never a silent overwrite)"
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "models/staging/stg_stg_stargazer_days.yml is not among the files this project format's view returned, and no other file declares 'stg_stg_stargazer_days', so the lost unique key on analytics.main.stg_stargazer_days has no test edit; add a `unique` test wherever that model is defined",
+    "models/staging/stg_fct_observations.yml is not among the files this project format's view returned, and no other file declares 'stg_fct_observations', so the lost unique key on analytics.main.fct_observations has no test edit; add a `unique` test wherever that model is defined",
+    "models/staging/stg_fct_observations.yml is not among the files this project format's view returned, and no other file declares 'stg_fct_observations', so the lost unique key on analytics.main.fct_observations has no test edit; add a `unique` test wherever that model is defined",
+    "models/staging/stg_fct_observations.yml is not among the files this project format's view returned, and no other file declares 'stg_fct_observations', so the lost unique key on analytics.main.fct_observations has no test edit; add a `unique` test wherever that model is defined",
+    "definition or model changes since the baseline are recorded but not reconciled: if the current project state is intended, re-run `maintain snapshot` to accept it as the new baseline"
+  ],
+  "diffs": [
+    {
+      "path": "models/schema.yml",
+      "op": "update",
+      "unified": "--- a/models/schema.yml\n+++ b/models/schema.yml\n@@ -448,6 +448,7 @@\n     description: \"UTC day current stargazers starred the repository.\"\n     data_tests:\n     - not_null\n+    - unique\n   - name: stars\n     description: \"Current stargazers who starred on this day; unstarred users are absent.\"\n     data_tests:\n",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "errors": [],
+  "reason": null
+}

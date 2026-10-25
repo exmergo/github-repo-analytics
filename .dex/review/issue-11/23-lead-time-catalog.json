@@ -1,0 +1,250 @@
+{
+  "status": "ok",
+  "data": {
+    "backend": "local",
+    "vendor": "dbt",
+    "deployment": "local",
+    "execution": "dex",
+    "dimension_scope": "queryable_paths",
+    "scoped_to": [
+      "median_hours_lead_time"
+    ],
+    "elided": {
+      "semantic_models": 0,
+      "metrics": 0,
+      "dimensions": 0,
+      "entities": 0,
+      "measures": 0,
+      "dimensions_per_metric": 0
+    },
+    "semantic_models": [
+      {
+        "name": "fct_deployment_lead_times",
+        "description": "Per-PR merge-to-success hours at the earliest observed successful production deployment containing its merge SHA. Unmapped PRs are absent.",
+        "model_ref": "fct_deployment_lead_times",
+        "agg_time_dimension": "date",
+        "primary_entity": "shipped_pr",
+        "relation": "analytics.main.fct_deployment_lead_times"
+      },
+      {
+        "name": "repositories",
+        "description": "Repository identity.",
+        "model_ref": "dim_repository",
+        "primary_entity": "repository",
+        "relation": "analytics.main.dim_repository"
+      }
+    ],
+    "metrics": [
+      {
+        "name": "median_hours_lead_time",
+        "type": "simple",
+        "label": "Median Hours Lead Time",
+        "description": "Continuous median merge-to-deployment hours per PR, assigned once to the earliest observed successful production deployment whose SHA contains its merge SHA. Grouped by shipping date; unmapped PRs excluded. Not first-commit lead time.",
+        "dimensions": [
+          "metric_time",
+          "repository__name",
+          "shipped_pr__date",
+          "shipped_pr__environment"
+        ],
+        "semantic_models": [
+          "fct_deployment_lead_times"
+        ],
+        "input_measures": [
+          "hours_lead_time_measure"
+        ],
+        "composition": {
+          "measure": "hours_lead_time_measure"
+        },
+        "time_axis": [
+          "date"
+        ],
+        "queryable_granularities": [
+          "day",
+          "week",
+          "month",
+          "quarter",
+          "year"
+        ]
+      }
+    ],
+    "dimensions": [
+      {
+        "name": "metric_time",
+        "type": "time",
+        "queryable_granularities": [
+          "day",
+          "week",
+          "month",
+          "quarter",
+          "year"
+        ]
+      },
+      {
+        "name": "repository__name",
+        "type": "categorical",
+        "definition": "name",
+        "semantic_model": "repositories",
+        "queryable_granularities": [],
+        "column": "repository"
+      },
+      {
+        "name": "shipped_pr__date",
+        "type": "time",
+        "definition": "date",
+        "semantic_model": "fct_deployment_lead_times",
+        "queryable_granularities": [
+          "day",
+          "week",
+          "month",
+          "quarter",
+          "year"
+        ],
+        "column": "date"
+      },
+      {
+        "name": "shipped_pr__environment",
+        "type": "categorical",
+        "definition": "environment",
+        "semantic_model": "fct_deployment_lead_times",
+        "queryable_granularities": [],
+        "column": "environment"
+      }
+    ],
+    "entities": [
+      {
+        "name": "repository",
+        "type": "primary",
+        "roles": [
+          {
+            "semantic_model": "fct_deployments",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_deployment_lead_times",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "repositories",
+            "type": "primary",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_traffic",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_observations",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_legacy",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_referrer",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_path",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "events",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_star_history",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_fork_history",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_issues",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_release_downloads",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          },
+          {
+            "semantic_model": "fct_package_downloads",
+            "type": "foreign",
+            "expr": "repository",
+            "column": "repository"
+          }
+        ]
+      },
+      {
+        "name": "shipped_pr",
+        "type": "primary",
+        "roles": [
+          {
+            "semantic_model": "fct_deployment_lead_times",
+            "type": "primary",
+            "expr": "shipped_pr_key",
+            "column": "shipped_pr_key"
+          }
+        ]
+      }
+    ],
+    "measures": [
+      {
+        "name": "hours_lead_time_measure",
+        "agg": "percentile",
+        "expr": "hours_lead_time",
+        "agg_time_dimension": "date",
+        "description": "Per-PR merge-to-success hours at the earliest observed successful production deployment containing its merge SHA. Unmapped PRs are absent.",
+        "semantic_model": "fct_deployment_lead_times",
+        "column": "hours_lead_time"
+      }
+    ],
+    "notes": [
+      "scoped to 1 of 41 metrics and what they reach; list without --metric for the whole layer"
+    ]
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

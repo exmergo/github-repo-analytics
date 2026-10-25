@@ -215,6 +215,20 @@ def collect_signals(client: GitHub, source: Source, destination: Path, captured_
     )
     if result:
         record["issues"] = result
+    if source.deployments:
+        from .deployments import collect_deployments
+
+        result = attempt(
+            "deployments",
+            lambda: collect_deployments(client, source, folder / "deployments.json"),
+            folder / "deployments.json",
+            state.get("deployments")
+            if (state.get("deployments") or {}).get("environment")
+            == source.deployments["environment"]
+            else None,
+        )
+        if result:
+            record["deployments"] = result
     for registry, package in source.package_list():
         key = f"{registry}:{package}"
         path = folder / "downloads" / registry / (package.replace("/", "__") + ".csv")

@@ -149,6 +149,47 @@ def make_fixture(root: Path) -> dict:
             )
             packages = {"pypi:exmergo-dex-core": {"days": 28, "latest": "2026-07-28"}}
         write_json(
+            signals / "deployments.json",
+            {
+                "environment": "production",
+                "default_branch": "main",
+                "deployments": [
+                    {
+                        "deployment_id": n,
+                        "environment": "production",
+                        "sha": "a" * 40,
+                        "succeeded_at": stamp,
+                    }
+                    for n, stamp in [
+                        (10, "2026-07-03T12:00:00Z"),
+                        (11, "2026-07-04T12:00:00Z"),
+                        (12, "2026-07-05T12:00:00Z"),
+                        (13, "2026-07-06T12:00:00Z"),
+                        (14, "2026-08-31T01:00:00Z"),
+                    ]
+                ],
+                "changes": [
+                    {
+                        "deployment_id": dep,
+                        "number": number,
+                        "merged_at": merged,
+                        "merge_sha": "b" * 40,
+                    }
+                    for dep, number, merged in (
+                        [
+                            (10, 101, "2026-07-03T10:00:00Z"),
+                            (10, 102, "2026-07-03T08:00:00Z"),
+                            (11, 101, "2026-07-03T10:00:00Z"),
+                            (11, 102, "2026-07-03T08:00:00Z"),
+                            (13, 103, "2026-07-05T12:00:00Z"),
+                        ]
+                        if index == 0
+                        else [(10, 101, "2026-07-01T12:00:00Z")]
+                    )
+                ],
+            },
+        )
+        write_json(
             signals / "capture.json",
             {
                 "captured_at": "2026-08-31T04:25:00+00:00",
@@ -157,6 +198,11 @@ def make_fixture(root: Path) -> dict:
                 "forks": {"complete": True, "listed": 2 if index == 0 else 0},
                 "issues": {"complete": True, "through": "2026-08-31T04:00:00Z", "items": 5},
                 "packages": packages,
+                "deployments": {
+                    "complete": True,
+                    "environment": "production",
+                    "default_branch": "main",
+                },
             },
         )
         sources.append(

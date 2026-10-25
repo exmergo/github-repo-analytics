@@ -1,0 +1,265 @@
+{
+  "status": "ok",
+  "data": {
+    "model": "fct_deployment_lead_times",
+    "target": "dev",
+    "baseline": {
+      "tests": [
+        {
+          "name": "deployment_contract",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_date",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_deployment_key",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_environment",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_hours_lead_time",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_merged_at",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_number",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_repository",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_shipped_pr_key",
+          "status": "pass"
+        },
+        {
+          "name": "not_null_fct_deployment_lead_times_succeeded_at",
+          "status": "pass"
+        },
+        {
+          "name": "relationships_fct_deployment_lead_times_deployment_key__deployment_key__ref_fct_deployments_",
+          "status": "pass"
+        },
+        {
+          "name": "relationships_fct_deployment_lead_times_repository__repository__ref_dim_repository_",
+          "status": "pass"
+        },
+        {
+          "name": "unique_fct_deployment_lead_times_shipped_pr_key",
+          "status": "pass"
+        }
+      ],
+      "excluded": []
+    },
+    "mutants": [
+      {
+        "id": "m04",
+        "operator": "division",
+        "scope": "(final select)",
+        "defect": "the ratio 'DATE_DIFF('MICROSECOND', merged_at, succeeded_at) / 3600000000.0' is inverted, so it reports the reciprocal of the rate it is named for",
+        "before": "DATE_DIFF('MICROSECOND', merged_at, succeeded_at) / 3600000000.0",
+        "after": "3600000000.0 / DATE_DIFF('MICROSECOND', merged_at, succeeded_at)",
+        "suggested_test": "an `expression_is_true` test bounding the ratio",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "distinguishable",
+          "only_in_mutant": 4,
+          "only_in_baseline": 4,
+          "mutant_rows": 4,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m05",
+        "operator": "predicate_negate",
+        "scope": "(final select)",
+        "defect": "the filter 'shipping_order = 1' is inverted, so the model keeps exactly the rows it was written to exclude",
+        "before": "shipping_order = 1",
+        "after": "NOT (shipping_order = 1)",
+        "suggested_test": "an `expression_is_true` test asserting the filter holds over the model's rows",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "distinguishable",
+          "only_in_mutant": 2,
+          "only_in_baseline": 4,
+          "mutant_rows": 2,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m07",
+        "operator": "predicate_negate",
+        "scope": "ranked",
+        "defect": "the filter 'c.merged_at <= d.succeeded_at' is inverted, so the model keeps exactly the rows it was written to exclude",
+        "before": "c.merged_at <= d.succeeded_at",
+        "after": "NOT (c.merged_at <= d.succeeded_at)",
+        "suggested_test": "an `expression_is_true` test asserting the filter holds over the model's rows",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "distinguishable",
+          "only_in_mutant": 0,
+          "only_in_baseline": 4,
+          "mutant_rows": 0,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m01",
+        "operator": "comparison",
+        "scope": "ranked",
+        "defect": "the boundary 'c.merged_at <= d.succeeded_at' now excludes the edge value ('c.merged_at < d.succeeded_at'), so a row sitting exactly on it leaves the model",
+        "before": "c.merged_at <= d.succeeded_at",
+        "after": "c.merged_at < d.succeeded_at",
+        "suggested_test": "a unit test with a row exactly on the boundary",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "equivalent",
+          "only_in_mutant": 0,
+          "only_in_baseline": 0,
+          "mutant_rows": 4,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m03",
+        "operator": "join_type",
+        "scope": "ranked",
+        "defect": "the inner join to fct_deployments AS d became a left join, so rows that should have been filtered out survive, carrying nulls",
+        "before": "inner join fct_deployments AS d",
+        "after": "left join fct_deployments AS d",
+        "suggested_test": "a unit test with a row whose key has no match in the joined relation",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "equivalent",
+          "only_in_mutant": 0,
+          "only_in_baseline": 0,
+          "mutant_rows": 4,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m06",
+        "operator": "predicate_drop",
+        "scope": "ranked",
+        "defect": "the filter 'c.merged_at <= d.succeeded_at' stops filtering, so every row it was excluding now flows into the model",
+        "before": "c.merged_at <= d.succeeded_at",
+        "after": "",
+        "suggested_test": "a unit test with a row the filter has to exclude",
+        "status": "survived",
+        "caught_by": [],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": {
+          "status": "equivalent",
+          "only_in_mutant": 0,
+          "only_in_baseline": 0,
+          "mutant_rows": 4,
+          "baseline_rows": 4,
+          "reason": null
+        }
+      },
+      {
+        "id": "m02",
+        "operator": "predicate_drop",
+        "scope": "(final select)",
+        "defect": "the filter 'shipping_order = 1' stops filtering, so every row it was excluding now flows into the model",
+        "before": "shipping_order = 1",
+        "after": "",
+        "suggested_test": "an `expression_is_true` test asserting the filter holds",
+        "status": "killed",
+        "caught_by": [
+          "unique_fct_deployment_lead_times_shipped_pr_key"
+        ],
+        "caught_downstream_by": [],
+        "warn_only": false,
+        "equivalence": null
+      }
+    ],
+    "counts": {
+      "generated": 7,
+      "killed": 1,
+      "caught_downstream": 0,
+      "survived": 6,
+      "rejected": 0,
+      "not_run": 0
+    },
+    "score": 0.14285714285714285,
+    "score_with_downstream": null,
+    "cap": {
+      "limit": 20,
+      "generated": 7,
+      "considered": 7,
+      "elided": {}
+    },
+    "runs": 15,
+    "equivalence": {
+      "checked": true,
+      "self_check": "reproducible",
+      "distinguishable": 3,
+      "equivalent": 3,
+      "not_checked": 0,
+      "reason": null
+    },
+    "downstream": {
+      "enabled": false,
+      "requested": null,
+      "reason": "no model in this project reads 'fct_deployment_lead_times'",
+      "models": [],
+      "tests": [],
+      "excluded": [],
+      "cut": [],
+      "elided": 0
+    }
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "<fixture-workspace>"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "semantic models referencing 'fct_deployment_lead_times' were omitted from the shadow project: mutation coverage runs with an ephemeral mutant, which the semantic layer cannot anchor",
+    "no confirm handshake: this connector cannot bill, so there was nothing to confirm and the command ran without asking",
+    "6 planted defect(s) survived this model's tests. 3 change the model's output on the dev data, so a test asserting over that data would catch them today; 3 produce exactly the unmutated model's rows there, so only a unit test fixture that reaches the case can catch them. They are in data.mutants, the ones the data tells apart first, each with the test that would catch it"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

@@ -1,5 +1,7 @@
 # Dex audit trail: adding stars, community, and downloads
 
+The [issue 11 deployment lifecycle audit](issue-11/README.md) records the later addition of production deployment frequency and merge-to-deployment lead time, including its preserved baseline comparison.
+
 This directory holds the actual Dex command output from one Explore → Transform → Maintain session (2026-10-19). That session took the template from traffic-only analytics to 39 governed metrics: star and fork history, issues and pull requests, release and package downloads, repository vitals, rolling and week-over-week metrics. Every model and metric change in the session went through a Dex plan. Nothing in the dbt project or semantic layer was hand-edited in place of the guarded command.
 
 - **Engine:** `exmergo-dex-core==1.15.0`, both through the project lock (`uv run --frozen dex`) and through the Explore/Transform/Maintain skill launchers. Steps 40 to 49 ran on 1.15.2 (see [the maintenance pass](#maintenance-dex-1152-and-a-day-of-new-data-2026-10-22)).

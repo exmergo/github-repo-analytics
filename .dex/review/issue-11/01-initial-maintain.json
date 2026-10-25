@@ -1,0 +1,1002 @@
+{
+  "status": "ok",
+  "data": {
+    "findings": [
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_observations",
+        "column": "observation_gap_days",
+        "severity": "medium",
+        "detail": "dimension 'observation_gap_days' on semantic model 'fct_observations' widened: 1 -> 3 distinct values in analytics.main.fct_observations.observation_gap_days",
+        "exact": true,
+        "data": {
+          "distinct_before": 1,
+          "distinct_after": 3,
+          "dimension": "observation_gap_days",
+          "semantic_model": "fct_observations"
+        },
+        "impacted_models": [
+          "fct_observations"
+        ],
+        "impacted_metrics": [
+          "forks_net_change",
+          "forks_observed",
+          "open_issues_and_prs_observed",
+          "stars_net_change",
+          "stars_observed",
+          "watchers_observed"
+        ]
+      },
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_path",
+        "column": "path",
+        "severity": "medium",
+        "detail": "dimension 'path' on semantic model 'fct_path' widened: ~79 -> 88 distinct values in analytics.main.fct_path.path",
+        "exact": false,
+        "data": {
+          "distinct_before": 79,
+          "distinct_after": 88,
+          "dimension": "path",
+          "semantic_model": "fct_path"
+        },
+        "impacted_models": [
+          "fct_path"
+        ],
+        "impacted_metrics": [
+          "path_views_14d",
+          "path_visitor_observations_14d"
+        ]
+      },
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.fct_referrer",
+        "column": "referrer",
+        "severity": "medium",
+        "detail": "dimension 'referrer' on semantic model 'fct_referrer' narrowed: ~24 -> 23 distinct values in analytics.main.fct_referrer.referrer",
+        "exact": false,
+        "data": {
+          "distinct_before": 24,
+          "distinct_after": 23,
+          "dimension": "referrer",
+          "semantic_model": "fct_referrer"
+        },
+        "impacted_models": [
+          "fct_referrer"
+        ],
+        "impacted_metrics": [
+          "referrer_views_14d",
+          "referrer_visitor_observations_14d"
+        ]
+      },
+      {
+        "axis": "semantic",
+        "code": "dimension_cardinality_changed",
+        "identifier": "analytics.main.dim_event",
+        "column": "title",
+        "severity": "medium",
+        "detail": "dimension 'title' on semantic model 'events' widened: 60 -> 63 distinct values in analytics.main.dim_event.title",
+        "exact": true,
+        "data": {
+          "distinct_before": 60,
+          "distinct_after": 63,
+          "dimension": "title",
+          "semantic_model": "events"
+        },
+        "impacted_models": [
+          "dim_event"
+        ],
+        "impacted_metrics": [
+          "events"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.main.stg_observations",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_observations: rows 15 -> 20 (+33.3%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 15,
+          "row_count_after": 20,
+          "change_fraction": 0.3333
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine",
+          "stg_observations"
+        ],
+        "impacted_metrics": [
+          "forks_net_change",
+          "forks_observed",
+          "open_issues_and_prs_observed",
+          "stars_net_change",
+          "stars_observed",
+          "watchers_observed"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.raw.observations",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.observations: rows 15 -> 20 (+33.3%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 15,
+          "row_count_after": 20,
+          "change_fraction": 0.3333
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine",
+          "stg_observations"
+        ],
+        "impacted_metrics": [
+          "forks_net_change",
+          "forks_observed",
+          "open_issues_and_prs_observed",
+          "stars_net_change",
+          "stars_observed",
+          "watchers_observed"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.main.fct_observations",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.fct_observations: rows 3 -> 6 (+100.0%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 3,
+          "row_count_after": 6,
+          "change_fraction": 1.0
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "forks_net_change",
+          "forks_observed",
+          "open_issues_and_prs_observed",
+          "stars_net_change",
+          "stars_observed",
+          "watchers_observed"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "key_lost_uniqueness",
+        "identifier": "analytics.main.stg_stargazer_days",
+        "column": "date",
+        "severity": "low",
+        "detail": "date on analytics.main.stg_stargazer_days is no longer unique: 35 distinct over 37 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+        "exact": true,
+        "data": {
+          "distinct_count": 35,
+          "row_count": 37,
+          "was_grain": false,
+          "severity_floor_applied": true,
+          "grain_min_rows": 100
+        },
+        "impacted_models": [
+          "fct_star_history",
+          "metricflow_time_spine",
+          "stg_stargazer_days"
+        ],
+        "impacted_metrics": [
+          "stars_from_history",
+          "stars_gained",
+          "stars_gained_wow_growth"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "key_lost_uniqueness",
+        "identifier": "analytics.raw.stargazer_days",
+        "column": "date",
+        "severity": "low",
+        "detail": "date on analytics.raw.stargazer_days is no longer unique: 35 distinct over 37 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+        "exact": true,
+        "data": {
+          "distinct_count": 35,
+          "row_count": 37,
+          "was_grain": true,
+          "severity_floor_applied": true,
+          "grain_min_rows": 100
+        },
+        "impacted_models": [
+          "fct_star_history",
+          "metricflow_time_spine",
+          "stg_stargazer_days"
+        ],
+        "impacted_metrics": [
+          "stars_from_history",
+          "stars_gained",
+          "stars_gained_wow_growth"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.main.stg_stargazer_days",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_stargazer_days: rows 33 -> 37 (+12.1%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 33,
+          "row_count_after": 37,
+          "change_fraction": 0.1212
+        },
+        "impacted_models": [
+          "fct_star_history",
+          "metricflow_time_spine",
+          "stg_stargazer_days"
+        ],
+        "impacted_metrics": [
+          "stars_from_history",
+          "stars_gained",
+          "stars_gained_wow_growth"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.raw.stargazer_days",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.stargazer_days: rows 33 -> 37 (+12.1%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 33,
+          "row_count_after": 37,
+          "change_fraction": 0.1212
+        },
+        "impacted_models": [
+          "fct_star_history",
+          "metricflow_time_spine",
+          "stg_stargazer_days"
+        ],
+        "impacted_metrics": [
+          "stars_from_history",
+          "stars_gained",
+          "stars_gained_wow_growth"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.stg_release_assets",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_release_assets has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine",
+          "stg_release_assets"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.raw.release_assets",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.release_assets has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine",
+          "stg_release_assets"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.annotations",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.annotations has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "annotations",
+          "dim_event",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "events"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "no_rows",
+        "identifier": "analytics.main.fct_release_downloads",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.fct_release_downloads has no rows; null fractions were not reported",
+        "exact": true,
+        "data": {
+          "row_count": 0
+        },
+        "impacted_models": [
+          "fct_release_downloads",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "release_downloads",
+          "release_downloads_net_change"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.main.stg_fork_days",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.main.stg_fork_days: rows 14 -> 16 (+14.3%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 14,
+          "row_count_after": 16,
+          "change_fraction": 0.1429
+        },
+        "impacted_models": [
+          "fct_fork_history",
+          "metricflow_time_spine",
+          "stg_fork_days"
+        ],
+        "impacted_metrics": [
+          "forks_created"
+        ]
+      },
+      {
+        "axis": "volume",
+        "code": "row_count_changed",
+        "identifier": "analytics.raw.fork_days",
+        "column": null,
+        "severity": "low",
+        "detail": "analytics.raw.fork_days: rows 14 -> 16 (+14.3%)",
+        "exact": true,
+        "data": {
+          "row_count_before": 14,
+          "row_count_after": 16,
+          "change_fraction": 0.1429
+        },
+        "impacted_models": [
+          "fct_fork_history",
+          "metricflow_time_spine",
+          "stg_fork_days"
+        ],
+        "impacted_metrics": [
+          "forks_created"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "forks",
+        "severity": "low",
+        "detail": "forks on analytics.main.fct_observations is no longer unique: 4 distinct over 6 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+        "exact": true,
+        "data": {
+          "distinct_count": 4,
+          "row_count": 6,
+          "was_grain": false,
+          "severity_floor_applied": true,
+          "grain_min_rows": 100
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "forks_observed"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "open_issues_and_prs",
+        "severity": "low",
+        "detail": "open_issues_and_prs on analytics.main.fct_observations is no longer unique: 4 distinct over 6 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+        "exact": true,
+        "data": {
+          "distinct_count": 4,
+          "row_count": 6,
+          "was_grain": false,
+          "severity_floor_applied": true,
+          "grain_min_rows": 100
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "open_issues_and_prs_observed"
+        ]
+      },
+      {
+        "axis": "grain",
+        "code": "key_lost_uniqueness",
+        "identifier": "analytics.main.fct_observations",
+        "column": "stars",
+        "severity": "low",
+        "detail": "stars on analytics.main.fct_observations is no longer unique: 5 distinct over 6 rows (~1 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+        "exact": true,
+        "data": {
+          "distinct_count": 5,
+          "row_count": 6,
+          "was_grain": false,
+          "severity_floor_applied": true,
+          "grain_min_rows": 100
+        },
+        "impacted_models": [
+          "fct_observations",
+          "metricflow_time_spine"
+        ],
+        "impacted_metrics": [
+          "stars_observed"
+        ]
+      }
+    ],
+    "finding_count": 20,
+    "axes_run": [
+      "grain",
+      "schema",
+      "semantic",
+      "volume"
+    ],
+    "axes": {
+      "schema": {
+        "run_at": "2026-10-25T22:58:17.996936+00:00",
+        "scope": null,
+        "findings": [],
+        "finding_count": 0
+      },
+      "volume": {
+        "run_at": "2026-10-25T22:58:17.996936+00:00",
+        "scope": null,
+        "findings": [
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.main.stg_observations",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_observations: rows 15 -> 20 (+33.3%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 15,
+              "row_count_after": 20,
+              "change_fraction": 0.3333
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine",
+              "stg_observations"
+            ],
+            "impacted_metrics": [
+              "forks_net_change",
+              "forks_observed",
+              "open_issues_and_prs_observed",
+              "stars_net_change",
+              "stars_observed",
+              "watchers_observed"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.raw.observations",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.observations: rows 15 -> 20 (+33.3%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 15,
+              "row_count_after": 20,
+              "change_fraction": 0.3333
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine",
+              "stg_observations"
+            ],
+            "impacted_metrics": [
+              "forks_net_change",
+              "forks_observed",
+              "open_issues_and_prs_observed",
+              "stars_net_change",
+              "stars_observed",
+              "watchers_observed"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.main.fct_observations",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.fct_observations: rows 3 -> 6 (+100.0%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 3,
+              "row_count_after": 6,
+              "change_fraction": 1.0
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "forks_net_change",
+              "forks_observed",
+              "open_issues_and_prs_observed",
+              "stars_net_change",
+              "stars_observed",
+              "watchers_observed"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.main.stg_stargazer_days",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_stargazer_days: rows 33 -> 37 (+12.1%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 33,
+              "row_count_after": 37,
+              "change_fraction": 0.1212
+            },
+            "impacted_models": [
+              "fct_star_history",
+              "metricflow_time_spine",
+              "stg_stargazer_days"
+            ],
+            "impacted_metrics": [
+              "stars_from_history",
+              "stars_gained",
+              "stars_gained_wow_growth"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.raw.stargazer_days",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.stargazer_days: rows 33 -> 37 (+12.1%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 33,
+              "row_count_after": 37,
+              "change_fraction": 0.1212
+            },
+            "impacted_models": [
+              "fct_star_history",
+              "metricflow_time_spine",
+              "stg_stargazer_days"
+            ],
+            "impacted_metrics": [
+              "stars_from_history",
+              "stars_gained",
+              "stars_gained_wow_growth"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.main.stg_fork_days",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_fork_days: rows 14 -> 16 (+14.3%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 14,
+              "row_count_after": 16,
+              "change_fraction": 0.1429
+            },
+            "impacted_models": [
+              "fct_fork_history",
+              "metricflow_time_spine",
+              "stg_fork_days"
+            ],
+            "impacted_metrics": [
+              "forks_created"
+            ]
+          },
+          {
+            "axis": "volume",
+            "code": "row_count_changed",
+            "identifier": "analytics.raw.fork_days",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.fork_days: rows 14 -> 16 (+14.3%)",
+            "exact": true,
+            "data": {
+              "row_count_before": 14,
+              "row_count_after": 16,
+              "change_fraction": 0.1429
+            },
+            "impacted_models": [
+              "fct_fork_history",
+              "metricflow_time_spine",
+              "stg_fork_days"
+            ],
+            "impacted_metrics": [
+              "forks_created"
+            ]
+          }
+        ],
+        "finding_count": 7
+      },
+      "grain": {
+        "run_at": "2026-10-25T22:58:17.996936+00:00",
+        "scope": null,
+        "findings": [
+          {
+            "axis": "grain",
+            "code": "key_lost_uniqueness",
+            "identifier": "analytics.main.stg_stargazer_days",
+            "column": "date",
+            "severity": "low",
+            "detail": "date on analytics.main.stg_stargazer_days is no longer unique: 35 distinct over 37 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+            "exact": true,
+            "data": {
+              "distinct_count": 35,
+              "row_count": 37,
+              "was_grain": false,
+              "severity_floor_applied": true,
+              "grain_min_rows": 100
+            },
+            "impacted_models": [
+              "fct_star_history",
+              "metricflow_time_spine",
+              "stg_stargazer_days"
+            ],
+            "impacted_metrics": [
+              "stars_from_history",
+              "stars_gained",
+              "stars_gained_wow_growth"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "key_lost_uniqueness",
+            "identifier": "analytics.raw.stargazer_days",
+            "column": "date",
+            "severity": "low",
+            "detail": "date on analytics.raw.stargazer_days is no longer unique: 35 distinct over 37 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+            "exact": true,
+            "data": {
+              "distinct_count": 35,
+              "row_count": 37,
+              "was_grain": true,
+              "severity_floor_applied": true,
+              "grain_min_rows": 100
+            },
+            "impacted_models": [
+              "fct_star_history",
+              "metricflow_time_spine",
+              "stg_stargazer_days"
+            ],
+            "impacted_metrics": [
+              "stars_from_history",
+              "stars_gained",
+              "stars_gained_wow_growth"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.stg_release_assets",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.stg_release_assets has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine",
+              "stg_release_assets"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.raw.release_assets",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.raw.release_assets has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine",
+              "stg_release_assets"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.annotations",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.annotations has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "annotations",
+              "dim_event",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "events"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "no_rows",
+            "identifier": "analytics.main.fct_release_downloads",
+            "column": null,
+            "severity": "low",
+            "detail": "analytics.main.fct_release_downloads has no rows; null fractions were not reported",
+            "exact": true,
+            "data": {
+              "row_count": 0
+            },
+            "impacted_models": [
+              "fct_release_downloads",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "release_downloads",
+              "release_downloads_net_change"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "key_lost_uniqueness",
+            "identifier": "analytics.main.fct_observations",
+            "column": "forks",
+            "severity": "low",
+            "detail": "forks on analytics.main.fct_observations is no longer unique: 4 distinct over 6 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+            "exact": true,
+            "data": {
+              "distinct_count": 4,
+              "row_count": 6,
+              "was_grain": false,
+              "severity_floor_applied": true,
+              "grain_min_rows": 100
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "forks_observed"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "key_lost_uniqueness",
+            "identifier": "analytics.main.fct_observations",
+            "column": "open_issues_and_prs",
+            "severity": "low",
+            "detail": "open_issues_and_prs on analytics.main.fct_observations is no longer unique: 4 distinct over 6 rows (~2 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+            "exact": true,
+            "data": {
+              "distinct_count": 4,
+              "row_count": 6,
+              "was_grain": false,
+              "severity_floor_applied": true,
+              "grain_min_rows": 100
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "open_issues_and_prs_observed"
+            ]
+          },
+          {
+            "axis": "grain",
+            "code": "key_lost_uniqueness",
+            "identifier": "analytics.main.fct_observations",
+            "column": "stars",
+            "severity": "low",
+            "detail": "stars on analytics.main.fct_observations is no longer unique: 5 distinct over 6 rows (~1 duplicate rows); joins on it will fan out (severity capped at low: fewer than 100 rows)",
+            "exact": true,
+            "data": {
+              "distinct_count": 5,
+              "row_count": 6,
+              "was_grain": false,
+              "severity_floor_applied": true,
+              "grain_min_rows": 100
+            },
+            "impacted_models": [
+              "fct_observations",
+              "metricflow_time_spine"
+            ],
+            "impacted_metrics": [
+              "stars_observed"
+            ]
+          }
+        ],
+        "finding_count": 9
+      },
+      "semantic": {
+        "run_at": "2026-10-25T22:58:17.996936+00:00",
+        "scope": null,
+        "findings": [
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.fct_observations",
+            "column": "observation_gap_days",
+            "severity": "medium",
+            "detail": "dimension 'observation_gap_days' on semantic model 'fct_observations' widened: 1 -> 3 distinct values in analytics.main.fct_observations.observation_gap_days",
+            "exact": true,
+            "data": {
+              "distinct_before": 1,
+              "distinct_after": 3,
+              "dimension": "observation_gap_days",
+              "semantic_model": "fct_observations"
+            },
+            "impacted_models": [
+              "fct_observations"
+            ],
+            "impacted_metrics": [
+              "forks_net_change",
+              "forks_observed",
+              "open_issues_and_prs_observed",
+              "stars_net_change",
+              "stars_observed",
+              "watchers_observed"
+            ]
+          },
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.fct_path",
+            "column": "path",
+            "severity": "medium",
+            "detail": "dimension 'path' on semantic model 'fct_path' widened: ~79 -> 88 distinct values in analytics.main.fct_path.path",
+            "exact": false,
+            "data": {
+              "distinct_before": 79,
+              "distinct_after": 88,
+              "dimension": "path",
+              "semantic_model": "fct_path"
+            },
+            "impacted_models": [
+              "fct_path"
+            ],
+            "impacted_metrics": [
+              "path_views_14d",
+              "path_visitor_observations_14d"
+            ]
+          },
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.fct_referrer",
+            "column": "referrer",
+            "severity": "medium",
+            "detail": "dimension 'referrer' on semantic model 'fct_referrer' narrowed: ~24 -> 23 distinct values in analytics.main.fct_referrer.referrer",
+            "exact": false,
+            "data": {
+              "distinct_before": 24,
+              "distinct_after": 23,
+              "dimension": "referrer",
+              "semantic_model": "fct_referrer"
+            },
+            "impacted_models": [
+              "fct_referrer"
+            ],
+            "impacted_metrics": [
+              "referrer_views_14d",
+              "referrer_visitor_observations_14d"
+            ]
+          },
+          {
+            "axis": "semantic",
+            "code": "dimension_cardinality_changed",
+            "identifier": "analytics.main.dim_event",
+            "column": "title",
+            "severity": "medium",
+            "detail": "dimension 'title' on semantic model 'events' widened: 60 -> 63 distinct values in analytics.main.dim_event.title",
+            "exact": true,
+            "data": {
+              "distinct_before": 60,
+              "distinct_after": 63,
+              "dimension": "title",
+              "semantic_model": "events"
+            },
+            "impacted_models": [
+              "dim_event"
+            ],
+            "impacted_metrics": [
+              "events"
+            ]
+          }
+        ],
+        "finding_count": 4
+      }
+    },
+    "baseline": {
+      "snapshot_created_at": "2026-10-22T20:51:52.489662+00:00",
+      "from": "cache"
+    },
+    "drift_path": "./.dex/drift.json",
+    "hint": "run `maintain reconcile [<class>]` for proposed fixes as reviewable diffs"
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "the exploration cache is newer than the drift baseline; if the current state is known-good, re-run `explore map` (or `explore map --full` to cover objects past the rank cutoff) and then `maintain snapshot`, so drift is not measured against a stale baseline",
+    "this baseline's warehouse side was pinned from an exploration cache captured 74h ago (2026-10-22T20:51:50.508021+00:00), beyond the 24h freshness window; anything created or changed in the warehouse since then is not in it and will report as drift. Run `explore map` first, then `maintain snapshot`, to pin current state"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

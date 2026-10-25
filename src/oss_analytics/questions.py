@@ -40,6 +40,8 @@ METRICS = [
     "prs_merged",
     "first_time_contributor_prs",
     "median_hours_to_merge",
+    "deployments",
+    "median_hours_lead_time",
     "release_downloads",
     "release_downloads_net_change",
     "package_downloads",
@@ -138,6 +140,7 @@ RECIPES = {
     "compare": "One window across every tracked repository",
     "referrer-trend": "Current top referrers, latest snapshot per week; windows never summed",
     "weekly-report": "Last complete week: traffic growth, stars, community, downloads",
+    "deployments": "Production deployments and median merge-to-deployment lead time",
     "active-users": "Unavailable: GitHub activity does not measure active users",
 }
 
@@ -231,6 +234,9 @@ def answer(
             else "No observations support this metric in the requested period yet.",
             "interpretation": "Observed totals are captured snapshots. Net daily changes require consecutive captures. Legacy history is reconstructed and may change on reimport.",
         }
+
+    if question == "deployments":
+        return deployment_answer(root, response, repository, record, start, end, days, grain)
 
     if question in {"star-history", "community", "release-downloads", "package-downloads"}:
         return signal_answer(root, response, question, repository, record, start, end, days, grain)
@@ -641,4 +647,57 @@ def weekly_report(root, response, repository, record):
         "available": any(s.get("available") for s in sections.values()),
         "sections": sections,
         "interpretation": "Each section states its own window and coverage. Unavailable sections are reported, not filled with zero.",
+    }
+
+
+def deployment_answer(root, response, repository, record, start, end, days, grain):
+    """Shipping evidence is observed history; absent evidence is never an inferred zero."""
+    signal = record["signals"].get("deployments")
+    if (start is None) != (end is None):
+        raise ValueError("provide both --start and --end")
+    if not signal:
+        return {
+            **response,
+            "available": False,
+            "reason": "No deployment capture. Configure deployments: {source: github, environment: production} and sync/build/check.",
+        }
+    if not signal["complete"]:
+        return {
+            **response,
+            "available": False,
+            "reason": "Deployment/status or merged-PR evidence is incomplete; no smaller comparison was substituted.",
+        }
+    captured = signal["captured_at"]
+    end_date = date.fromisoformat(end) if end else captured.date()
+    start_date = date.fromisoformat(start) if start else end_date - timedelta(days=days)
+    if end_date <= start_date:
+        raise ValueError("end must be after start")
+    if end_date > captured.date():
+        return {
+            **response,
+            "available": False,
+            "reason": "The requested window includes the partial capture day or later; no shorter window was substituted.",
+        }
+    metrics = "deployments,median_hours_lead_time"
+    result = query(
+        root,
+        metrics,
+        repository,
+        start=start_date,
+        end=end_date,
+        group_by="metric_time",
+        grain=grain,
+    )
+    return {
+        **response,
+        "available": has_values(result, metrics),
+        "period": {"start": start_date, "end_exclusive": end_date},
+        "capture": signal,
+        "zero_when_null": False,
+        "result": result,
+        "reason": None
+        if has_values(result, metrics)
+        else "No observed successful deployments in this window; absent evidence was not replaced by zero.",
+        "units": {"deployments": "deployments", "median_hours_lead_time": "hours"},
+        "interpretation": "Observed GitHub deployment history in the explicitly configured environment. Counts include redeployments; lead time is a per-PR median from merge to its first observed successful containing deployment, grouped by shipping date. Missing statuses, deleted records and unobserved earlier deployments limit historical completeness. Unmapped PRs and null medians are not zero. Capture UTC day excluded.",
     }

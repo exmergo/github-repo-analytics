@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "data": {
+    "shape": "columnar",
+    "results": [
+      {
+        "index": 0,
+        "status": "ok",
+        "line": null,
+        "shape": "columnar",
+        "columns": [
+          "rows",
+          "repo_days"
+        ],
+        "types": [
+          "BIGINT",
+          "BIGINT"
+        ],
+        "cells": [
+          [
+            37,
+            37
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "tables": [
+          "analytics.raw.stargazer_days"
+        ],
+        "notes": [],
+        "warnings": [],
+        "error": null,
+        "reason": null,
+        "stage": null
+      },
+      {
+        "index": 1,
+        "status": "ok",
+        "line": null,
+        "shape": "columnar",
+        "columns": [
+          "rows",
+          "captures"
+        ],
+        "types": [
+          "BIGINT",
+          "BIGINT"
+        ],
+        "cells": [
+          [
+            20,
+            20
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "tables": [
+          "analytics.raw.observations"
+        ],
+        "notes": [],
+        "warnings": [],
+        "error": null,
+        "reason": null,
+        "stage": null
+      }
+    ],
+    "statement_count": 2,
+    "ok_count": 2,
+    "failed_count": 0,
+    "profiled_on_demand": [],
+    "notes": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

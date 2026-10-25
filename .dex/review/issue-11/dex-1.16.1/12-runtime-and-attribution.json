@@ -1,0 +1,6 @@
+{
+  "engine": "1.16.1",
+  "metricflow": "0.213.0",
+  "commit_trailer": "Co-authored-by: Dex <dex@exmergo.com>",
+  "source": "exmergo_dex_core.attribution.COMMIT_TRAILER from the installed 1.16.1 package"
+}

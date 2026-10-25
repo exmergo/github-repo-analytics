@@ -1,0 +1,171 @@
+{
+  "status": "ok",
+  "data": {
+    "datasets": [
+      {
+        "identifier": "explore.raw.deployment_changes",
+        "object_type": "table",
+        "row_count": 6,
+        "byte_size": null,
+        "candidate_keys": [
+          [
+            "merged_at",
+            "deployment_id"
+          ]
+        ],
+        "grain": [
+          "merged_at",
+          "deployment_id"
+        ],
+        "key_evidence": [
+          {
+            "columns": [
+              "merged_at",
+              "deployment_id"
+            ],
+            "status": "reported",
+            "reason": "merged_at, deployment_id is unique as a combination on all 6 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
+          }
+        ],
+        "composite_keys": [
+          [
+            "merged_at",
+            "deployment_id"
+          ]
+        ],
+        "rank_score": null,
+        "data_quality": [],
+        "findings": [
+          {
+            "column": "merged_at",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "merged_at participates in the detected grain but the warehouse still allows it to be NULL"
+          },
+          {
+            "column": "deployment_id",
+            "code": "nullable_grain_column",
+            "severity": "medium",
+            "detail": "deployment_id participates in the detected grain but the warehouse still allows it to be NULL"
+          }
+        ],
+        "profiled_at": "2026-10-25T23:01:27.079993+00:00",
+        "semantic_models": [],
+        "suppressed_fields": [
+          "pii",
+          "pii_overridden",
+          "value_domain"
+        ],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 2,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": null,
+            "max_value": null,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 3,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": 10,
+            "max_value": 13,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "number",
+            "data_type": "BIGINT",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 3,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": 101,
+            "max_value": 103,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          },
+          {
+            "name": "merged_at",
+            "data_type": "TIMESTAMP WITH TIME ZONE",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 4,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": "2026-07-01T14:00:00+02:00",
+            "max_value": "2026-07-05T14:00:00+02:00",
+            "temporal_granularity": "hour",
+            "temporal_span": 97,
+            "temporal_distinct_periods": 4,
+            "temporal_missing_periods": 93,
+            "temporal_largest_gap": 49
+          },
+          {
+            "name": "merge_sha",
+            "data_type": "VARCHAR",
+            "nullable": true,
+            "null_fraction": 0.0,
+            "distinct_count": 1,
+            "distinct_count_exact": false,
+            "is_unique": false,
+            "min_value": null,
+            "max_value": null,
+            "temporal_granularity": null,
+            "temporal_span": null,
+            "temporal_distinct_periods": null,
+            "temporal_missing_periods": null,
+            "temporal_largest_gap": null
+          }
+        ],
+        "elided_column_count": 0
+      }
+    ],
+    "profiled_count": 0,
+    "cache_hit_count": 1,
+    "cache_path": "./.dex/cache.json",
+    "updated_at": "2026-10-25T23:02:22.636033+00:00",
+    "notes": [
+      "merged 0 profiled object(s) into the existing cache (0 refreshed, 0 added); other datasets and relationships preserved",
+      "reused 1 fresh cached profile(s) (schema unchanged, profiled within 24h); pass --refresh to force re-profiling"
+    ]
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./.data/issue11/explore.duckdb"
+    },
+    "source": "flag"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

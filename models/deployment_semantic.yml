@@ -1,0 +1,74 @@
+semantic_models:
+  - name: fct_deployments
+    description: Successful deployment IDs in the explicitly configured production
+      environment, before the partial capture day.
+    model: ref('fct_deployments')
+    defaults:
+      agg_time_dimension: date
+    entities:
+      - name: production_deployment
+        type: primary
+        expr: deployment_key
+      - name: repository
+        type: foreign
+        expr: repository
+    dimensions:
+      - name: date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: environment
+        type: categorical
+    measures:
+      - name: deployments_measure
+        agg: sum
+        expr: deployment_count
+        description: Successful deployment IDs in the explicitly configured production
+          environment, before the partial capture day.
+  - name: fct_deployment_lead_times
+    description: Per-PR merge-to-success hours at the earliest observed successful
+      production deployment containing its merge SHA. Unmapped PRs are absent.
+    model: ref('fct_deployment_lead_times')
+    defaults:
+      agg_time_dimension: date
+    entities:
+      - name: shipped_pr
+        type: primary
+        expr: shipped_pr_key
+      - name: repository
+        type: foreign
+        expr: repository
+    dimensions:
+      - name: date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: environment
+        type: categorical
+    measures:
+      - name: hours_lead_time_measure
+        agg: percentile
+        expr: hours_lead_time
+        description: Per-PR merge-to-success hours at the earliest observed successful
+          production deployment containing its merge SHA. Unmapped PRs are absent.
+        agg_params:
+          percentile: 0.5
+          use_discrete_percentile: false
+metrics:
+  - name: deployments
+    label: Deployments
+    description: Count of successful non-transient production deployment IDs by UTC
+      success date. Redeployments count; capture day excluded. Requires configured
+      GitHub Deployments evidence.
+    type: simple
+    type_params:
+      measure: deployments_measure
+  - name: median_hours_lead_time
+    label: Median Hours Lead Time
+    description: Continuous median merge-to-deployment hours per PR, assigned once
+      to the earliest observed successful production deployment whose SHA contains
+      its merge SHA. Grouped by shipping date; unmapped PRs excluded. Not first-commit
+      lead time.
+    type: simple
+    type_params:
+      measure: hours_lead_time_measure

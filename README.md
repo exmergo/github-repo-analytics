@@ -4,14 +4,13 @@
 
 <img width="1280" height="640" alt="github-repo-analytics-social-preview" src="https://github.com/user-attachments/assets/5a57254a-c6d1-4f4d-9e11-9e4a9d771612" />
 
-
 What you get:
 
 - 📈 **Traffic history beyond 14 days.** Views, clones, referrers, and popular pages, kept forever.
 - ⭐ **Real star history.** See when your stars arrived and what caused the spike.
 - 📦 **Downloads.** GitHub release assets, PyPI, and npm.
 - 🤝 **Community activity.** Issues opened vs closed, PRs merged, first-time contributors, time to merge.
-- 🧮 **39 governed metrics you or your agent can query.** Defined once in MetricFlow, tested, and served through Dex.
+- 🧮 **41 governed metrics you or your agent can query.** Defined once in MetricFlow, tested, and served through Dex.
 - 🦆 **A DuckDB file for the lowest level of detail.** Every row lives in `warehouse/analytics.duckdb`, and the raw history is plain CSV in a branch you own.
 
 Metrics are defined once (dbt + MetricFlow), tested, and queryable by you or your coding agent through [Dex](https://github.com/exmergo/dex).
@@ -152,9 +151,11 @@ uv run --frozen oss-analytics question weekly-report --repository exmergo/dex
 
 You get the numbers in [Real answers](#real-answers-from-a-real-project), updated to the latest published day. The example imports Dex's public traffic history and collects its forks, issues, releases, and PyPI downloads live. The second source is this repository itself, so `--repository exmergo/github-repo-analytics` shows the template tracking its own launch.
 
+Production shipping is also available as an [optional deployment source](docs/setup.md#track-production-deployments-optional): count successful production deployments and measure median merge-to-deployment hours for shipped PRs. GitHub Deployments is supported; workflow-run and release inference are not yet supported.
+
 **4. Query the governed metrics**
 
-Recipes cover the common questions. For everything else, query the semantic layer: **39 metrics** defined once in [`models/semantic.yml`](models/semantic.yml), compiled by MetricFlow, and run through Dex. This is the path for agents. Metric names are discovered rather than guessed, every metric is tested, and MetricFlow handles the joins and time grains, so the answer is the same number every time.
+Recipes cover the common questions. For everything else, query the semantic layer: **41 metrics** defined once in the [model YAML](models/), compiled by MetricFlow, and run through Dex. This is the path for agents. Metric names are discovered rather than guessed, every metric is tested, and MetricFlow handles the joins and time grains, so the answer is the same number every time.
 
 Discover what exists. Each metric carries its meaning in its description (condensed from the JSON envelope):
 
@@ -167,7 +168,7 @@ views               simple      Total GitHub page views. May include automated a
 stars_gained        simple      Stars from current stargazers by the day they starred. ...
 stars_from_history  cumulative  Running total of current stargazers at the end of each period ...
 views_wow_growth    derived     Relative change in views versus the previous week; query at week grain ...
-... 39 metrics
+... 41 metrics
 ```
 
 Read a dimension's values before filtering on it:
@@ -220,9 +221,9 @@ Each answer is a JSON envelope (`data.columns`, `data.cells`, warnings, and whet
 
 | Schema | What is in it |
 |---|---|
-| `raw` | Each source as collected, for example `traffic`, `stargazer_days`, `fork_days`, `issues`, `discovery` (referrers and paths), `observations`, `releases`, `release_assets`, `package_downloads` |
+| `raw` | Each source as collected, for example `traffic`, `stargazer_days`, `fork_days`, `issues`, `discovery` (referrers and paths), `observations`, `releases`, `release_assets`, `package_downloads`, optional `deployments` and `deployment_changes` |
 | `main.stg_*` | Typed staging views over `raw` |
-| `main.fct_*`, `main.dim_*` | The tested marts the metrics read: `fct_traffic` (one row per repository and day), `fct_star_history`, `fct_fork_history`, `fct_issues`, `fct_referrer`, `fct_path`, `fct_package_downloads`, `fct_release_downloads`, `fct_observations`, `dim_event`, `dim_repository` |
+| `main.fct_*`, `main.dim_*` | The tested marts the metrics read: `fct_traffic` (one row per repository and day), `fct_star_history`, `fct_fork_history`, `fct_issues`, `fct_referrer`, `fct_path`, `fct_package_downloads`, `fct_release_downloads`, `fct_observations`, optional `fct_deployments` and `fct_deployment_lead_times`, `dim_event`, `dim_repository` |
 
 Open it with any DuckDB client. With the Python package that `bootstrap.sh` already installed:
 
@@ -251,7 +252,7 @@ Open it read-only: `build` replaces the file from the raw data each time. Ad hoc
 
 **No lock-in:** the raw history lives in this repository's `github-repo-stats` branch as plain files:
 - per project, `ghrs-data/views_clones_aggregate.csv` and the daily top-10 referrer and path snapshots;
-- `signals/*.csv` for stars, forks, and issues;
+- `signals/*.csv` for stars, forks, and issues, plus optional `signals/deployments.json` for shipping evidence;
 - `metadata/*.json` captures.
 
 Any tool can read them, even if you stop using this template.
@@ -295,7 +296,7 @@ Point any coding agent at [AGENTS.md](AGENTS.md) and ask in plain language. Aske
 2. picks the `event-impact` recipe rather than writing SQL;
 3. answers with the numbers above: views +344% in the 7 days after, clones +65%. It also says this is an association, and that six other releases fall inside the same windows.
 
-When no recipe fits, it discovers the 39 governed metrics in [`models/semantic.yml`](models/semantic.yml) through Dex, so it never guesses a metric name.
+When no recipe fits, it discovers the 41 governed metrics in the [model YAML](models/) through Dex, so it never guesses a metric name.
 
 ```bash
 uv run --frozen oss-analytics status --json      # is the data ready?

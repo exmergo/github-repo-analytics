@@ -106,7 +106,8 @@ Every `sync` (locally) and every scheduled run also collects public signals into
 | `forks.csv` | Forks API | Existing forks per creation day; no owners |
 | `issues.csv` | Issues API, incrementally | Number, kind, created/closed/merged times, author association; no titles, bodies, or logins |
 | `downloads/<registry>/<package>.csv` | pypistats.org, api.npmjs.org | Daily downloads, merged by date because registries keep short windows |
-| `capture.json` | | Capture time, completeness, and registry errors |
+| `deployments.json` | GitHub Deployments, statuses, merged PRs, commit comparison (opt-in) | Successful deployment IDs, environment, SHAs, timestamps and PR containment evidence; no authors or bodies |
+| `capture.json` | | Capture time, completeness, and per-signal errors |
 
 Repository metadata observations also record watchers, open issues and pull requests, and release asset download counts.
 
@@ -139,3 +140,33 @@ launch-post,your-org/project-a,2026-10-01,campaign,Launch post,https://example.c
 IDs must be unique in the file; dates are UTC; repositories must be configured. Release events are fetched automatically with stable IDs. Drafts are excluded. Prereleases are retained and only compared when you explicitly select their event ID.
 
 Changing annotations changes the analytics definitions. Rebuild, review the change, accept the new baseline if appropriate, then check.
+
+## Track production deployments (optional)
+
+Choose an exact environment name used by your deployment integration. Configuration is per repository:
+
+```yaml
+repositories:
+  - repository: your-org/project-a
+    mode: collect
+    deployments:
+      source: github
+      environment: production
+```
+
+Run `sync`, `build`, and `check`; review the intentional model change against the prior baseline before accepting a new baseline as described in [the lifecycle guide](lifecycle.md). Existing configurations need no deployment setting. The feature does not infer deployments from successful workflow runs or releases; those sources and first-commit lead time are unsupported.
+
+The collector reads the [GitHub Deployments API](https://docs.github.com/en/rest/deployments/deployments), its [status history](https://docs.github.com/en/rest/deployments/statuses), closed pull requests targeting the current default branch, and [commit comparisons](https://docs.github.com/en/rest/commits/commits#compare-two-commits). Private repositories need **Deployments: read**, **Pull requests: read**, and **Contents: read** on the configured `GHRS_TOKEN`; public endpoints can be read anonymously subject to API rate limits. An Actions token with only `contents: write` cannot read private deployments: use the configured token with these permissions. Each collection failure preserves the previous deployment file and its actual capture timestamp, and other signals continue.
+
+A deployment counts once at its earliest observed `success` status in the chosen environment. Transient preview deployments do not count. Later `inactive` or failed statuses do not erase an observed success. A redeployment with a new deployment ID counts again. The capture UTC day is excluded from both metrics.
+
+A merged PR is linked to the earliest observed successful deployment whose commit contains its `merge_commit_sha`, using identical SHAs or a comparison with status `ahead`/`identical`. This supports GitHub merge, squash and rebase merges without storing commit messages or author identities. Direct commits, unmerged PRs, PRs targeting other branches and PRs without containment evidence have no lead-time observation. Git ancestry cannot establish whether a later revert or feature flag made a change active in production.
+
+Listing endpoints are capped at 50 pages of 100 items. At most 1,000 distinct ancestry comparisons run per collection; exceeding that bound preserves the previous capture and records an error. Incomplete deployment, status or PR listings are reported in `signals.deployments.complete`; the question recipe refuses those windows. Successfully observed history is retained across collections, but GitHub's status retention and deleted deployment records mean a fresh backfill cannot establish complete historical shipping coverage. `complete` describes API listing completion, not proof of all past deployments. Changing the configured environment or default branch starts a separate evidence history at the next successful collection.
+
+```bash
+uv run --frozen oss-analytics question deployments --repository your-org/project-a \
+  --start 2026-07-01 --end 2026-08-01 --grain week
+```
+
+The period end is exclusive. The answer includes capture and provenance evidence; missing deployments or a null lead-time median are never silently replaced by zero. See [the metric contract](metrics.md#production-deployments-and-lead-time).
