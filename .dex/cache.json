@@ -131,7 +131,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:47.304665+00:00",
+      "profiled_at": "2026-10-26T08:57:36.969856+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -351,7 +351,7 @@
           "detail": "event_id participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.361011+00:00",
+      "profiled_at": "2026-10-26T08:57:37.030441+00:00",
       "semantic_models": [
         "events"
       ],
@@ -488,7 +488,7 @@
           "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.406946+00:00",
+      "profiled_at": "2026-10-26T08:57:37.079055+00:00",
       "semantic_models": [
         "repositories"
       ],
@@ -691,7 +691,7 @@
           "detail": "shipped_pr_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.472703+00:00",
+      "profiled_at": "2026-10-26T08:57:37.153304+00:00",
       "semantic_models": [
         "fct_deployment_lead_times"
       ],
@@ -856,7 +856,7 @@
           "detail": "deployment_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.525102+00:00",
+      "profiled_at": "2026-10-26T08:57:37.210624+00:00",
       "semantic_models": [
         "fct_deployments"
       ],
@@ -1015,7 +1015,7 @@
           "detail": "fork_history_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.553014+00:00",
+      "profiled_at": "2026-10-26T08:57:37.243182+00:00",
       "semantic_models": [
         "fct_fork_history"
       ],
@@ -1306,7 +1306,7 @@
           "detail": "issue_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.624571+00:00",
+      "profiled_at": "2026-10-26T08:57:37.308288+00:00",
       "semantic_models": [
         "fct_issues"
       ],
@@ -1498,7 +1498,7 @@
           "detail": "legacy_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.655719+00:00",
+      "profiled_at": "2026-10-26T08:57:37.359931+00:00",
       "semantic_models": [
         "fct_legacy"
       ],
@@ -1758,7 +1758,7 @@
           "detail": "observation_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.708278+00:00",
+      "profiled_at": "2026-10-26T08:57:37.418113+00:00",
       "semantic_models": [
         "fct_observations"
       ],
@@ -1947,7 +1947,7 @@
           "detail": "package_download_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.758212+00:00",
+      "profiled_at": "2026-10-26T08:57:37.469028+00:00",
       "semantic_models": [
         "fct_package_downloads"
       ],
@@ -2227,7 +2227,7 @@
           "detail": "path_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.843039+00:00",
+      "profiled_at": "2026-10-26T08:57:37.557955+00:00",
       "semantic_models": [
         "fct_path"
       ],
@@ -2599,7 +2599,7 @@
           "detail": "referrer_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.910521+00:00",
+      "profiled_at": "2026-10-26T08:57:37.629461+00:00",
       "semantic_models": [
         "fct_referrer"
       ],
@@ -2783,7 +2783,7 @@
           "detail": "release_download_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:47.974762+00:00",
+      "profiled_at": "2026-10-26T08:57:37.695262+00:00",
       "semantic_models": [
         "fct_release_downloads"
       ],
@@ -2972,7 +2972,7 @@
           "detail": "snapshot_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.038546+00:00",
+      "profiled_at": "2026-10-26T08:57:37.762241+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -3131,7 +3131,7 @@
           "detail": "star_history_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.084290+00:00",
+      "profiled_at": "2026-10-26T08:57:37.808648+00:00",
       "semantic_models": [
         "fct_star_history"
       ],
@@ -3344,7 +3344,7 @@
           "detail": "traffic_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.119248+00:00",
+      "profiled_at": "2026-10-26T08:57:37.845916+00:00",
       "semantic_models": [
         "fct_traffic"
       ],
@@ -3404,7 +3404,7 @@
           "detail": "date_day participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.125410+00:00",
+      "profiled_at": "2026-10-26T08:57:37.852791+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -3557,7 +3557,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.172508+00:00",
+      "profiled_at": "2026-10-26T08:57:37.902795+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -3691,7 +3691,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.217866+00:00",
+      "profiled_at": "2026-10-26T08:57:37.951753+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -3950,7 +3950,7 @@
           "detail": "discovery_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.289652+00:00",
+      "profiled_at": "2026-10-26T08:57:38.028564+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4083,7 +4083,7 @@
           "detail": "fork_day_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.316527+00:00",
+      "profiled_at": "2026-10-26T08:57:38.057441+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4332,7 +4332,7 @@
           "detail": "issue_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.378313+00:00",
+      "profiled_at": "2026-10-26T08:57:38.123522+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4484,7 +4484,7 @@
           "detail": "legacy_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.407208+00:00",
+      "profiled_at": "2026-10-26T08:57:38.155322+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4678,7 +4678,7 @@
           "detail": "observation_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.455519+00:00",
+      "profiled_at": "2026-10-26T08:57:38.207178+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4865,7 +4865,7 @@
           "detail": "package_download_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.502693+00:00",
+      "profiled_at": "2026-10-26T08:57:38.257841+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -4999,7 +4999,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.547167+00:00",
+      "profiled_at": "2026-10-26T08:57:38.306735+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5248,7 +5248,7 @@
           "detail": "release_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.626311+00:00",
+      "profiled_at": "2026-10-26T08:57:38.389738+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5383,7 +5383,7 @@
           "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.661841+00:00",
+      "profiled_at": "2026-10-26T08:57:38.426604+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5517,7 +5517,7 @@
           "detail": "signal_capture_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.697687+00:00",
+      "profiled_at": "2026-10-26T08:57:38.464277+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5685,7 +5685,7 @@
           "detail": "snapshot_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.745313+00:00",
+      "profiled_at": "2026-10-26T08:57:38.515364+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5812,7 +5812,7 @@
           "detail": "stargazer_day_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.772404+00:00",
+      "profiled_at": "2026-10-26T08:57:38.545048+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -5996,7 +5996,7 @@
           "detail": "traffic_source_key participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.816121+00:00",
+      "profiled_at": "2026-10-26T08:57:38.594422+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6111,7 +6111,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.844342+00:00",
+      "profiled_at": "2026-10-26T08:57:38.625656+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6226,7 +6226,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.879203+00:00",
+      "profiled_at": "2026-10-26T08:57:38.663044+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6447,7 +6447,7 @@
         "no candidate key detected; grain unknown"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:48.925069+00:00",
+      "profiled_at": "2026-10-26T08:57:38.713197+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6551,7 +6551,7 @@
           "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:48.942760+00:00",
+      "profiled_at": "2026-10-26T08:57:38.732725+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6771,7 +6771,7 @@
           "detail": "created_at participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.007369+00:00",
+      "profiled_at": "2026-10-26T08:57:38.802553+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -6894,7 +6894,7 @@
           "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.026468+00:00",
+      "profiled_at": "2026-10-26T08:57:38.823614+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7059,7 +7059,7 @@
           "detail": "captured_at participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.050594+00:00",
+      "profiled_at": "2026-10-26T08:57:38.850200+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7217,7 +7217,7 @@
           "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.088203+00:00",
+      "profiled_at": "2026-10-26T08:57:38.890178+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7332,7 +7332,7 @@
         "empty table (no rows)"
       ],
       "findings": [],
-      "profiled_at": "2026-10-26T07:55:49.123767+00:00",
+      "profiled_at": "2026-10-26T08:57:38.927884+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7552,7 +7552,7 @@
           "detail": "event_id participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.192921+00:00",
+      "profiled_at": "2026-10-26T08:57:38.999975+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7687,7 +7687,7 @@
           "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.227363+00:00",
+      "profiled_at": "2026-10-26T08:57:39.036710+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7832,7 +7832,7 @@
           "detail": "captured_at participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.254694+00:00",
+      "profiled_at": "2026-10-26T08:57:39.065561+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -7971,7 +7971,7 @@
           "detail": "source_file participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.291686+00:00",
+      "profiled_at": "2026-10-26T08:57:39.103698+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -8081,7 +8081,7 @@
           "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.308548+00:00",
+      "profiled_at": "2026-10-26T08:57:39.122763+00:00",
       "semantic_models": [],
       "values_withheld": false
     },
@@ -8280,7 +8280,7 @@
           "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
         }
       ],
-      "profiled_at": "2026-10-26T07:55:49.330668+00:00",
+      "profiled_at": "2026-10-26T08:57:39.148405+00:00",
       "semantic_models": [],
       "values_withheld": false
     }
@@ -8773,8 +8773,8 @@
   ],
   "provenance": {
     "connector": "duckdb",
-    "created_at": "2026-10-26T07:51:29.909282+00:00",
-    "updated_at": "2026-10-26T07:55:47.231962+00:00",
+    "created_at": "2026-10-26T08:57:36.892725+00:00",
+    "updated_at": "2026-10-26T08:57:36.892725+00:00",
     "tool_version": "1.16.1",
     "inventory_namespaces": [
       "analytics.main",

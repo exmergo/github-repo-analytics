@@ -10,7 +10,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from .io import read_json, write_json
+from .io import publication_provenance, read_json, write_json
 from .sources import now_iso
 from .warehouse import load
 
@@ -287,7 +287,12 @@ def publish(root: Path, destination: Path, data_commit: str, code_commit: str) -
         "lockfile": "uv.lock",
         "lock_sha256": hashlib.sha256(lock.read_bytes()).hexdigest(),
         "validated_at": checked["checked_at"],
-        "sources": built["inputs"]["sources"],
+        # Older inputs may already embed a full prior publication. Compact here too,
+        # so upgrading does not require re-importing or trusting those nested sources.
+        "sources": [
+            {**source, "publication": publication_provenance(source.get("publication"))}
+            for source in built["inputs"]["sources"]
+        ],
         "metrics_tested": checked["metrics"],
     }
     destination.mkdir(parents=True, exist_ok=True)

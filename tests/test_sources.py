@@ -149,6 +149,54 @@ def test_published_source_defaults_to_approved_revision(tmp_path):
     assert replay["source_revision"] == SHA
 
 
+def test_import_retains_publication_identity_without_its_source_tree(tmp_path):
+    root = input_root(tmp_path)
+    publication = {
+        "version": 1,
+        "data_commit": "b" * 40,
+        "code_commit": "c" * 40,
+        "lock_sha256": "d" * 64,
+        "validated_at": "2026-10-26T00:00:00Z",
+        "sources": [{"repository": "exmergo/dex", "publication": {"sources": []}}],
+        "metrics_tested": ["views"],
+    }
+    result = import_source(
+        root,
+        load_sources(root)[0],
+        root / ".data/input",
+        client=FakeGitHub(upstream_files(), publication=publication),
+    )
+    assert result["source_revision"] == publication["data_commit"]
+    assert result["publication"] == {
+        key: value for key, value in publication.items() if key not in {"sources", "metrics_tested"}
+    }
+    assert publication["sources"]  # The original response is not modified.
+
+
+@pytest.mark.parametrize("private", [False, True])
+def test_explicit_revision_can_recover_an_unreadable_publication(tmp_path, private):
+    root = input_root(tmp_path)
+
+    class OversizedPublication(FakeGitHub):
+        def get(self, url, **kwargs):
+            if url.endswith("/published.json"):
+                raise SourceError("source file exceeds 32 MiB")
+            return super().get(url, **kwargs)
+
+        def contents(self, repository, ref, path, **kwargs):
+            if path == "published.json":
+                raise SourceError("source file exceeds 32 MiB")
+            return super().contents(repository, ref, path, **kwargs)
+
+    client = OversizedPublication(upstream_files(), private=private)
+    source = load_sources(root)[0]
+    with pytest.raises(SourceError, match="32 MiB"):
+        import_source(root, source, root / ".data/unreadable", client=client)
+    replay = import_source(root, source, root / ".data/recovery", client=client, revision=SHA)
+    assert replay["source_revision"] == SHA
+    assert replay["publication"] is None
+
+
 @pytest.mark.parametrize(
     "body",
     [

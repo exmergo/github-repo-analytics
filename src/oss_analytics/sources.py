@@ -15,7 +15,7 @@ from pathlib import Path, PurePosixPath
 from urllib.parse import quote
 
 from .config import REVISION, Source, load_sources, validate_repository
-from .io import GitHub, SourceError, read_json, write_json
+from .io import GitHub, SourceError, publication_provenance, read_json, write_json
 
 
 def now_iso() -> str:
@@ -299,10 +299,13 @@ def import_source(
 
     commit = client.json(f"/repos/{origin}/commits/{quote(ref, safe='')}")
     head = commit["sha"]
-    # Template-managed branches publish an approved input commit. Legacy branches have no pointer.
-    pointer_bytes = read(head, "published.json", optional=True)
-    publication = json.loads(pointer_bytes) if pointer_bytes else None
-    sha = publication["data_commit"] if publication and not revision else head
+    # An explicit raw revision (including CI's candidate) must not depend on a prior
+    # publication. This also lets a validated rebuild recover an oversized legacy pointer.
+    publication = None
+    if not revision:
+        pointer_bytes = read(head, "published.json", optional=True)
+        publication = publication_provenance(json.loads(pointer_bytes)) if pointer_bytes else None
+    sha = publication["data_commit"] if publication else head
     if not REVISION.fullmatch(sha):
         raise SourceError("invalid published data commit")
     base, entries = resolve_tree(client, origin, sha, source.repository)
