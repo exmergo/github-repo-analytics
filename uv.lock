@@ -49,11 +49,11 @@ wheels = [
 
 [[package]]
 name = "certifi"
-version = "2025.1.31"
+version = "2026.10.23"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/1c/ab/c9f1e32b7b1bf505bf26f0ef697775960db7932abeb7b516de930ba2705f/certifi-2025.1.31.tar.gz", hash = "sha256:3d5da6925056f6f18f119200434a4780a94263f10d1c21d032a6f6b2baa20651", size = 167577, upload-time = "2025-01-31T02:16:47.166Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fd/11/b524cbd9bbdaca58608e4cf4053fd463417549e1959fa8d3aa18319f9555/certifi-2026.10.23.tar.gz", hash = "sha256:a9895e6e2758b371e0545e321a3a8fd1fcfd9829ada8824a936dfb16aaaf36cd", size = 136225, upload-time = "2026-10-23T11:36:16.478Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/38/fc/bce832fd4fd99766c04d1ee0eead6b0ec6486fb100ae5e74c1d91292b982/certifi-2025.1.31-py3-none-any.whl", hash = "sha256:ca78db4565a652026a4db2bcdf68f2fb589ea80d0be70e03929ed730746b84fe", size = 166393, upload-time = "2025-01-31T02:16:45.015Z" },
+    { url = "https://files.pythonhosted.org/packages/32/d1/a3652fe2c19134d0d15922177821d863cbd7e842d53a21bbe7e8e3a1b5ac/certifi-2026.10.23-py3-none-any.whl", hash = "sha256:e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1", size = 135082, upload-time = "2026-10-23T11:36:14.763Z" },
 ]
 
 [[package]]
@@ -321,15 +321,16 @@ wheels = [
 
 [[package]]
 name = "exmergo-dex-core"
-version = "1.15.2"
+version = "1.16.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "certifi" },
     { name = "pydantic" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ed/aa/eabd6b5f7f79ccc26a53835ecc4e505d56b71b9a9e50faa9ef865beb8d5f/exmergo_dex_core-1.15.2.tar.gz", hash = "sha256:2d430ada669da1a68f70ba5082ecddcb022ac3dcd2c6e290f263cad0a1e6be8e", size = 2341880, upload-time = "2026-10-21T14:47:39.821Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/01/ab4ac54cf9dc002d2d013416e70f62d06329ec4e138be007f191e9a33c5d/exmergo_dex_core-1.16.1.tar.gz", hash = "sha256:9bd8e240d2f3ff6d0b52de8c5e57a7b848e50a5a613f5c0f25701154da328503", size = 2478237, upload-time = "2026-10-25T11:31:12.834Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/7b/687f0e17e128c432398e954d3b6de774f0c049bc4b37944dd4fbb136220f/exmergo_dex_core-1.15.2-py3-none-any.whl", hash = "sha256:a77f55a7004d89c8ef6da0a89043e4f9aaab66005978b47c3be62f1bf6a5b824", size = 1267427, upload-time = "2026-10-21T14:47:37.937Z" },
+    { url = "https://files.pythonhosted.org/packages/78/0e/aadd5e75bbc53533668d025f8a0a3123524099ca18536c123f401333f050/exmergo_dex_core-1.16.1-py3-none-any.whl", hash = "sha256:ff2ef30833ca5fbe582ab76a80b7e7883c26639295b97a0613a28e054bb6aa6e", size = 1337590, upload-time = "2026-10-25T11:31:11.2Z" },
 ]
 
 [package.optional-dependencies]
@@ -337,6 +338,7 @@ duckdb = [
     { name = "dbt-duckdb" },
     { name = "duckdb" },
     { name = "sqlglot" },
+    { name = "urllib3" },
 ]
 semantic = [
     { name = "metricflow" },
@@ -479,7 +481,7 @@ msgpack = [
 
 [[package]]
 name = "metricflow"
-version = "0.211.0"
+version = "0.213.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "importlib-metadata" },
@@ -495,9 +497,9 @@ dependencies = [
     { name = "tabulate" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4d/1c/2303b109a1e02216615d5c01cccf61a12d133f326388b9c881d32d00d182/metricflow-0.211.0.tar.gz", hash = "sha256:e15d0c24647f4498fa0926e87c61dd23b15205c9577566bcf848460d58f48bec", size = 1549648, upload-time = "2026-05-11T21:53:51.895Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a6/ae/0c75d87f004cd56f30862fa1330f6a4e36a26ea32463a6d17d5d1ab32413/metricflow-0.213.0.tar.gz", hash = "sha256:e6b5e8f05a0b9b0183430416052a61747fc89f809c39f2cdc5a3d9ba7a3f6931", size = 643641, upload-time = "2026-09-10T19:24:20.562Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5a/b7/de51d5d04ac43aeecbfea7741bf29da84fd5a04995e25a2b85abaa6ee807/metricflow-0.211.0-py3-none-any.whl", hash = "sha256:9cb83ccaa0c47363482fcc5cb57944a3f1af17ca948d90805524161f4e03d600", size = 1914356, upload-time = "2026-05-11T21:53:49.225Z" },
+    { url = "https://files.pythonhosted.org/packages/58/6c/2ec7e3c433bdab3cf15f4424769794f6d0dab9ecd3c43da00cdb85435d44/metricflow-0.213.0-py3-none-any.whl", hash = "sha256:6e1865535a200607529970f6ca1a9fcd22b7814d0b71cd654d9ee01eecf0157b", size = 999530, upload-time = "2026-09-10T19:24:17.846Z" },
 ]
 
 [[package]]
@@ -574,7 +576,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "exmergo-dex-core", extras = ["duckdb", "semantic"], specifier = "==1.15.2" },
+    { name = "exmergo-dex-core", extras = ["duckdb", "semantic"], specifier = "==1.16.1" },
     { name = "pyyaml", specifier = ">=6,<7" },
 ]
 
@@ -1028,11 +1030,11 @@ wheels = [
 
 [[package]]
 name = "urllib3"
-version = "2.7.0"
+version = "2.8.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c", size = 433602, upload-time = "2026-05-07T16:13:18.596Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e3/05/b17359e1cefb4f909b5e40b1b90a496d987258916dbbf88e842c729f510e/urllib3-2.8.0.tar.gz", hash = "sha256:63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63", size = 458972, upload-time = "2026-09-15T19:29:36.253Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897", size = 131087, upload-time = "2026-05-07T16:13:17.151Z" },
+    { url = "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl", hash = "sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3", size = 135717, upload-time = "2026-09-15T19:29:34.577Z" },
 ]
 
 [[package]]

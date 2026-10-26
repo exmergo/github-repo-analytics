@@ -17,6 +17,7 @@ All commands begin with `uv run --frozen oss-analytics question`. Add `--reposit
 | `star-history` | `--days 91 --grain week` | `stars_gained`, `forks_created`, `stars_from_history` per period from current stargazers; ends at the last complete day |
 | `community` | `--days 28`, or `--start … --end … --grain month` | Issues opened/closed, PRs opened/merged, first-time-contributor PRs, median hours to merge |
 | `release-downloads` | No extra arguments | Latest cumulative downloads per release; unavailable when no assets are uploaded |
+| `deployments` | `--start … --end … --grain week` | Successful production deployment IDs and per-PR median merge-to-deploy hours; opt-in source, complete listings, capture UTC day excluded |
 | `package-downloads` | `--days 28 --grain week` | PyPI/npm downloads per package; unavailable when no packages are configured |
 | `compare` | `--days 28` (no `--repository`) | Views, clones, visitor-days, stars gained, PRs merged, package downloads for every tracked repository, with per-repository coverage |
 | `referrer-trend` | No extra arguments, or `--start … --end …` | The latest reported top 10, followed back through one latest snapshot per 7-day window |
@@ -58,3 +59,12 @@ uv run --frozen dex explore semantic query views,clones --local \
 Direct queries are useful for exploration. Apply the [metric contract](metrics.md) and check coverage before presenting an answer. Do not add referrer snapshots to estimate visits, interpret a missing top-10 row as zero, or call a traffic ratio a conversion rate.
 
 A useful agent response names the period, count and units, metric identifiers, coverage and freshness, source revision, and current code digest. Snapshot responses also name capture times and rolling-window overlap. State uncertainty in the answer itself rather than dropping it from a final summary.
+
+## Production shipping (optional)
+
+```bash
+uv run --frozen oss-analytics question deployments --repository your-org/project-a \
+  --start 2026-07-01 --end 2026-08-01 --grain week
+```
+
+Requires `deployments: {source: github, environment: production}` and collected evidence. Returns `deployments` (deployment IDs) and `median_hours_lead_time` (hours per shipped PR) by UTC shipping period, end exclusive. The recipe refuses incomplete listings and the partial capture day; missing captures and null medians stay unavailable. See [configuration and historical coverage](setup.md#track-production-deployments-optional).

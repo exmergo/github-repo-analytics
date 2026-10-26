@@ -1,0 +1,1414 @@
+{
+  "status": "ok",
+  "data": {
+    "cache_path": "./.dex/cache.json",
+    "object_count": 47,
+    "profiled_count": 47,
+    "cache_hit_count": 0,
+    "skipped_count": 0,
+    "skipped": {
+      "count": 0,
+      "by_namespace": [],
+      "objects": [],
+      "elided": 0,
+      "elided_namespaces": 0
+    },
+    "carried_forward_count": 0,
+    "out_of_scope_carried_count": 0,
+    "dropped_count": 0,
+    "carried_relationship_count": 0,
+    "relationship_count": 28,
+    "pii_column_count": 0,
+    "data_quality_note_count": 14,
+    "top_objects": [
+      {
+        "identifier": "analytics.main.fct_path",
+        "rank_score": 0.7188
+      },
+      {
+        "identifier": "analytics.main.fct_referrer",
+        "rank_score": 0.671
+      },
+      {
+        "identifier": "analytics.main.dim_repository",
+        "rank_score": 0.6624
+      },
+      {
+        "identifier": "analytics.main.fct_issues",
+        "rank_score": 0.6277
+      },
+      {
+        "identifier": "analytics.main.dim_event",
+        "rank_score": 0.6042
+      }
+    ],
+    "objects": [
+      {
+        "identifier": "analytics.main.fct_path",
+        "object_type": "table",
+        "row_count": 8717,
+        "rank_score": 0.7188,
+        "profiled_at": "2026-10-26T07:51:26.266595+00:00",
+        "grain": [
+          "path_key"
+        ],
+        "candidate_key": [
+          "path_key"
+        ],
+        "semantic_models": [
+          "fct_path"
+        ],
+        "columns": [
+          {
+            "name": "path_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 7,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_referrer",
+        "object_type": "table",
+        "row_count": 2530,
+        "rank_score": 0.671,
+        "profiled_at": "2026-10-26T07:51:26.341886+00:00",
+        "grain": [
+          "referrer_key"
+        ],
+        "candidate_key": [
+          "referrer_key"
+        ],
+        "semantic_models": [
+          "fct_referrer"
+        ],
+        "columns": [
+          {
+            "name": "referrer_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 7,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.dim_repository",
+        "object_type": "table",
+        "row_count": 2,
+        "rank_score": 0.6624,
+        "profiled_at": "2026-10-26T07:51:25.742287+00:00",
+        "grain": [
+          "repository"
+        ],
+        "candidate_key": [
+          "repository"
+        ],
+        "semantic_models": [
+          "repositories"
+        ],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository_identity",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          },
+          {
+            "name": "source_revision",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 1,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_issues",
+        "object_type": "table",
+        "row_count": 821,
+        "rank_score": 0.6277,
+        "profiled_at": "2026-10-26T07:51:26.016935+00:00",
+        "grain": [
+          "issue_key"
+        ],
+        "candidate_key": [
+          "issue_key"
+        ],
+        "semantic_models": [
+          "fct_issues"
+        ],
+        "columns": [
+          {
+            "name": "issue_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 8,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.dim_event",
+        "object_type": "table",
+        "row_count": 63,
+        "rank_score": 0.6042,
+        "profiled_at": "2026-10-26T07:51:25.682823+00:00",
+        "grain": [
+          "event_id"
+        ],
+        "candidate_key": [
+          "event_id"
+        ],
+        "semantic_models": [
+          "events"
+        ],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "event_id",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "title",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          },
+          {
+            "name": "url",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_traffic",
+        "object_type": "table",
+        "row_count": 137,
+        "rank_score": 0.5588,
+        "profiled_at": "2026-10-26T07:51:26.576927+00:00",
+        "grain": [
+          "traffic_key"
+        ],
+        "candidate_key": [
+          "traffic_key"
+        ],
+        "semantic_models": [
+          "fct_traffic"
+        ],
+        "columns": [
+          {
+            "name": "traffic_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 6,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_star_history",
+        "object_type": "table",
+        "row_count": 118,
+        "rank_score": 0.5531,
+        "profiled_at": "2026-10-26T07:51:26.537471+00:00",
+        "grain": [
+          "star_history_key"
+        ],
+        "candidate_key": [
+          "star_history_key"
+        ],
+        "semantic_models": [
+          "fct_star_history"
+        ],
+        "columns": [
+          {
+            "name": "star_history_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 2,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_package_downloads",
+        "object_type": "table",
+        "row_count": 116,
+        "rank_score": 0.5525,
+        "profiled_at": "2026-10-26T07:51:26.167607+00:00",
+        "grain": [
+          "package_download_key"
+        ],
+        "candidate_key": [
+          "package_download_key"
+        ],
+        "semantic_models": [
+          "fct_package_downloads"
+        ],
+        "columns": [
+          {
+            "name": "package_download_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_snapshot_status",
+        "object_type": "table",
+        "row_count": 223,
+        "rank_score": 0.5475,
+        "profiled_at": "2026-10-26T07:51:26.486638+00:00",
+        "grain": [
+          "snapshot_key"
+        ],
+        "candidate_key": [
+          "snapshot_key"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "snapshot_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "source_file",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_fork_history",
+        "object_type": "table",
+        "row_count": 99,
+        "rank_score": 0.5464,
+        "profiled_at": "2026-10-26T07:51:25.930244+00:00",
+        "grain": [
+          "fork_history_key"
+        ],
+        "candidate_key": [
+          "fork_history_key"
+        ],
+        "semantic_models": [
+          "fct_fork_history"
+        ],
+        "columns": [
+          {
+            "name": "fork_history_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 1,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.discovery",
+        "object_type": "table",
+        "row_count": 2137,
+        "rank_score": 0.5458,
+        "profiled_at": "2026-10-26T07:51:27.501952+00:00",
+        "grain": null,
+        "candidate_key": null,
+        "semantic_models": [],
+        "columns": [],
+        "elided_column_count": 7,
+        "pii_column_count": 0,
+        "data_quality": [
+          "no candidate key detected; grain unknown"
+        ],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_legacy",
+        "object_type": "table",
+        "row_count": 38,
+        "rank_score": 0.5101,
+        "profiled_at": "2026-10-26T07:51:26.054364+00:00",
+        "grain": [
+          "legacy_key"
+        ],
+        "candidate_key": [
+          "legacy_key"
+        ],
+        "semantic_models": [
+          "fct_legacy"
+        ],
+        "columns": [
+          {
+            "name": "legacy_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 4,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.issues",
+        "object_type": "table",
+        "row_count": 821,
+        "rank_score": 0.5089,
+        "profiled_at": "2026-10-26T07:51:27.597225+00:00",
+        "grain": [
+          "created_at"
+        ],
+        "candidate_key": [
+          "created_at"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "created_at",
+            "data_type": "TIMESTAMP WITH TIME ZONE",
+            "role": "grain",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 6,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_deployments",
+        "object_type": "table",
+        "row_count": 0,
+        "rank_score": 0.4813,
+        "profiled_at": "2026-10-26T07:51:25.895189+00:00",
+        "grain": [
+          "deployment_key"
+        ],
+        "candidate_key": null,
+        "semantic_models": [
+          "fct_deployments"
+        ],
+        "columns": [
+          {
+            "name": "deployment_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 4,
+        "pii_column_count": 0,
+        "data_quality": [
+          "empty table (no rows)",
+          "grain deployment_key comes from the project's declared primary entity (measurement found no key of its own)"
+        ],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.snapshots",
+        "object_type": "table",
+        "row_count": 231,
+        "rank_score": 0.4601,
+        "profiled_at": "2026-10-26T07:51:27.925161+00:00",
+        "grain": [
+          "source_file"
+        ],
+        "candidate_key": [
+          "source_file"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "source_file",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_observations",
+        "object_type": "table",
+        "row_count": 6,
+        "rank_score": 0.4438,
+        "profiled_at": "2026-10-26T07:51:26.113969+00:00",
+        "grain": [
+          "observation_key"
+        ],
+        "candidate_key": [
+          "observation_key"
+        ],
+        "semantic_models": [
+          "fct_observations"
+        ],
+        "columns": [
+          {
+            "name": "observation_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "captured_at",
+            "data_type": "TIMESTAMP WITH TIME ZONE",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 8,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.traffic",
+        "object_type": "table",
+        "row_count": 137,
+        "rank_score": 0.4401,
+        "profiled_at": "2026-10-26T07:51:27.970813+00:00",
+        "grain": [
+          "date",
+          "repository"
+        ],
+        "candidate_key": [
+          "date",
+          "repository"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "clones_unique",
+            "data_type": "BIGINT",
+            "role": "key",
+            "pii": null
+          },
+          {
+            "name": "views_unique",
+            "data_type": "BIGINT",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 2,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.package_downloads",
+        "object_type": "table",
+        "row_count": 116,
+        "rank_score": 0.4337,
+        "profiled_at": "2026-10-26T07:51:27.693107+00:00",
+        "grain": [
+          "date"
+        ],
+        "candidate_key": [
+          "date"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "grain",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 4,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.stg_deployments",
+        "object_type": "table",
+        "row_count": 0,
+        "rank_score": 0.4325,
+        "profiled_at": "2026-10-26T07:51:26.688240+00:00",
+        "grain": null,
+        "candidate_key": null,
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "deployment_key",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [
+          "empty table (no rows)"
+        ],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.releases",
+        "object_type": "table",
+        "row_count": 63,
+        "rank_score": 0.4104,
+        "profiled_at": "2026-10-26T07:51:27.814088+00:00",
+        "grain": [
+          "event_id"
+        ],
+        "candidate_key": [
+          "event_id"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "event_id",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "title",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          },
+          {
+            "name": "url",
+            "data_type": "VARCHAR",
+            "role": "key",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 4,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_deployment_lead_times",
+        "object_type": "table",
+        "row_count": 0,
+        "rank_score": 0.4062,
+        "profiled_at": "2026-10-26T07:51:25.834168+00:00",
+        "grain": [
+          "shipped_pr_key"
+        ],
+        "candidate_key": null,
+        "semantic_models": [
+          "fct_deployment_lead_times"
+        ],
+        "columns": [
+          {
+            "name": "shipped_pr_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "deployment_key",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 6,
+        "pii_column_count": 0,
+        "data_quality": [
+          "empty table (no rows)",
+          "grain shipped_pr_key comes from the project's declared primary entity (measurement found no key of its own)"
+        ],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.stg_deployment_changes",
+        "object_type": "table",
+        "row_count": 0,
+        "rank_score": 0.395,
+        "profiled_at": "2026-10-26T07:51:26.638779+00:00",
+        "grain": null,
+        "candidate_key": null,
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "deployment_key",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "deployment_id",
+            "data_type": "BIGINT",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 4,
+        "pii_column_count": 0,
+        "data_quality": [
+          "empty table (no rows)"
+        ],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.legacy",
+        "object_type": "table",
+        "row_count": 38,
+        "rank_score": 0.3913,
+        "profiled_at": "2026-10-26T07:51:27.621926+00:00",
+        "grain": [
+          "date"
+        ],
+        "candidate_key": [
+          "date"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "grain",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 3,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.raw.stargazer_days",
+        "object_type": "table",
+        "row_count": 37,
+        "rank_score": 0.3903,
+        "profiled_at": "2026-10-26T07:51:27.944386+00:00",
+        "grain": [
+          "date",
+          "repository"
+        ],
+        "candidate_key": [
+          "date",
+          "repository"
+        ],
+        "semantic_models": [],
+        "columns": [
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "date",
+            "data_type": "DATE",
+            "role": "grain",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 1,
+        "pii_column_count": 0,
+        "data_quality": [],
+        "elided_data_quality_count": 0
+      },
+      {
+        "identifier": "analytics.main.fct_release_downloads",
+        "object_type": "table",
+        "row_count": 0,
+        "rank_score": 0.3875,
+        "profiled_at": "2026-10-26T07:51:26.414663+00:00",
+        "grain": [
+          "release_download_key"
+        ],
+        "candidate_key": null,
+        "semantic_models": [
+          "fct_release_downloads"
+        ],
+        "columns": [
+          {
+            "name": "release_download_key",
+            "data_type": "VARCHAR",
+            "role": "grain",
+            "pii": null
+          },
+          {
+            "name": "repository",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          },
+          {
+            "name": "event_id",
+            "data_type": "VARCHAR",
+            "role": "join",
+            "pii": null
+          }
+        ],
+        "elided_column_count": 5,
+        "pii_column_count": 0,
+        "data_quality": [
+          "empty table (no rows)",
+          "grain release_download_key comes from the project's declared primary entity (measurement found no key of its own)"
+        ],
+        "elided_data_quality_count": 0
+      }
+    ],
+    "edges": [
+      {
+        "from_dataset": "analytics.main.fct_release_downloads",
+        "from_columns": [
+          "event_id"
+        ],
+        "to_dataset": "analytics.main.dim_event",
+        "to_columns": [
+          "event_id"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": "semantic entity 'event'",
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.dim_event",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployment_lead_times",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployments",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_fork_history",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_issues",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_legacy",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_observations",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_package_downloads",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_path",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_referrer",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_release_downloads",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_snapshot_status",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_star_history",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_traffic",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": 0.0,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployment_changes",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployments",
+        "from_columns": [
+          "repository"
+        ],
+        "to_dataset": "analytics.main.dim_repository",
+        "to_columns": [
+          "repository"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployment_lead_times",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.fct_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployment_changes",
+        "from_columns": [
+          "deployment_id"
+        ],
+        "to_dataset": "analytics.main.fct_deployments",
+        "to_columns": [
+          "deployment_id"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployment_changes",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.fct_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployments",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.fct_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployment_lead_times",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.stg_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployments",
+        "from_columns": [
+          "deployment_id"
+        ],
+        "to_dataset": "analytics.main.stg_deployments",
+        "to_columns": [
+          "deployment_id"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.fct_deployments",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.stg_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "inferred",
+        "confidence": 0.5,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": []
+      },
+      {
+        "from_dataset": "analytics.main.stg_deployment_changes",
+        "from_columns": [
+          "deployment_key"
+        ],
+        "to_dataset": "analytics.main.stg_deployments",
+        "to_columns": [
+          "deployment_key"
+        ],
+        "kind": "declared",
+        "confidence": 1.0,
+        "verified": true,
+        "orphan_fraction": null,
+        "declared_by": null,
+        "declaration_sources": [
+          "manifest"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "elided_object_count": 22,
+    "elided_column_count": 105,
+    "elided_edge_count": 3,
+    "updated_at": "2026-10-26T07:51:25.541444+00:00",
+    "notes": [
+      "inference examined 44 id-shaped column(s) across 47 profiled object(s)",
+      "14 join(s) come from the semantic layer's declared entity graph, at the declared tier: the layer states the join and names its key per model, so these are read rather than inferred",
+      "13 of them were not found by name-based inference and would otherwise be missing from this map (semantic entity 'repository')",
+      "13 of them are also declared by a relationships test; counted once",
+      "14 object(s) are exposed through the project's semantic layer (see semantic_models on each); the rest back no metric, which is what separates a load-bearing table from a large one",
+      "3 inferred join(s) match declared tests; kept as declared",
+      "13 model(s) back metric definitions; ranking favors them alongside configured hints",
+      "folded 11 same-lineage duplicate relationship(s); 15 object(s) mirror source lineage (a dev/replica dataset mapped alongside its source)",
+      "declined to infer 10 candidate join(s) that matched only on a column name shared as a key by 3 unrelated object(s) (event_id); a name shared this widely (the norm for Firestore/Mongo/DynamoDB-style CDC exports) is a naming convention, not evidence of a relationship, so these never reached --verify",
+      "value-overlap join inference not run; pass --infer-by-overlap to probe key-shaped columns whose names matched nothing for measured value containment",
+      "22 eligible object(s) are not described here: the map payload is capped at 25 objects, kept by rank. Name one with `explore profile` to read it in full",
+      "105 column(s) are not described. The default keeps grain, key, join and PII-flagged columns, at most 12 per object; --detail widens the selection to every column, and the per-object cap still binds",
+      "3 relationship(s) are not listed: 3 because at least one endpoint is not described here"
+    ]
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "the exploration cache was written by dex 1.15.2 and this engine is 1.16.1; a profile this run reuses rather than re-scans was computed by that engine, and `explore profile <object> --refresh` recomputes it with this one"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

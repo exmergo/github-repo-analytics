@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "data": {
+    "ready": true,
+    "reason": null,
+    "built_at": "2026-10-26T07:51:49.959633+00:00",
+    "checked_at": "2026-10-26T07:56:09.847672+00:00",
+    "code_digest": "a170e6f2c14a19366a9df20549a6eb89eae3f6259573bca9e68eea056add7d67",
+    "synced_at": "2026-10-24T20:55:03.759708+00:00",
+    "warnings": [
+      "exmergo/github-repo-analytics: stargazers.csv unavailable",
+      "exmergo/github-repo-analytics: forks.csv unavailable"
+    ],
+    "expected_unavailable_fields": {
+      "main.annotations.url": "Annotation URLs are optional and none were supplied",
+      "main.fct_release_downloads.downloads_net_change": "No release asset has consecutive daily captures yet"
+    },
+    "repositories": [
+      {
+        "repository": "exmergo/dex",
+        "source_revision": "1a20f6af7b844e7d23c8c36ebbc6568f6a61f49f",
+        "source_data_repository": "exmergo/dex",
+        "first_traffic_date": "2026-06-23",
+        "last_traffic_date": "2026-10-22",
+        "latest_eligible_date": "2026-10-22",
+        "missing_traffic_dates": [],
+        "observed_traffic_days": 122,
+        "traffic_lag_days": 4,
+        "last_observed_totals_at": "2026-10-24 20:55:05.498072+00:00",
+        "latest_snapshots": {
+          "paths": "2026-10-24 04:34:41+00:00",
+          "referrers": "2026-10-24 04:34:41+00:00"
+        },
+        "endpoint_age_hours": {
+          "paths": 51.36,
+          "referrers": 51.36,
+          "repository_totals": 35.02,
+          "signal:forks": 35.02,
+          "signal:issues": 35.02,
+          "signal:pypi:exmergo-dex-core": 35.02,
+          "signal:stargazers": 35.02
+        },
+        "signals": {
+          "forks": {
+            "captured_at": "2026-10-24 20:55:05.498072+00:00",
+            "complete": true
+          },
+          "issues": {
+            "captured_at": "2026-10-24 20:55:05.498072+00:00",
+            "complete": true
+          },
+          "pypi:exmergo-dex-core": {
+            "captured_at": "2026-10-24 20:55:05.498072+00:00",
+            "complete": true
+          },
+          "stargazers": {
+            "captured_at": "2026-10-24 20:55:05.498072+00:00",
+            "complete": true
+          }
+        },
+        "freshness": "warning",
+        "collection_age_hours": 51.36
+      },
+      {
+        "repository": "exmergo/github-repo-analytics",
+        "source_revision": "f10f5b44b6fe70b0138e7103f61b30aa62ca2275",
+        "source_data_repository": "exmergo/github-repo-analytics",
+        "first_traffic_date": "2026-10-08",
+        "last_traffic_date": "2026-10-22",
+        "latest_eligible_date": "2026-10-22",
+        "missing_traffic_dates": [],
+        "observed_traffic_days": 15,
+        "traffic_lag_days": 4,
+        "last_observed_totals_at": "2026-10-24 20:55:13.117834+00:00",
+        "latest_snapshots": {
+          "paths": "2026-10-24 04:36:01+00:00"
+        },
+        "endpoint_age_hours": {
+          "paths": 51.34,
+          "repository_totals": 35.02,
+          "signal:forks": 35.02,
+          "signal:issues": 35.02,
+          "signal:stargazers": 35.02
+        },
+        "signals": {
+          "forks": {
+            "captured_at": "2026-10-24 20:55:13.117834+00:00",
+            "complete": true
+          },
+          "issues": {
+            "captured_at": "2026-10-24 20:55:13.117834+00:00",
+            "complete": true
+          },
+          "stargazers": {
+            "captured_at": "2026-10-24 20:55:13.117834+00:00",
+            "complete": true
+          }
+        },
+        "freshness": "warning",
+        "collection_age_hours": 51.34
+      }
+    ]
+  }
+}

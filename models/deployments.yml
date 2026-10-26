@@ -1,0 +1,359 @@
+version: 2
+models:
+  - name: stg_deployments
+    description: Observed successful non-transient deployments in the explicitly configured production environment. One row per repository and deployment ID.
+    config:
+      meta:
+        dex:
+          grain:
+            - deployment_key
+          population:
+            rule: Observed successful non-transient deployments in the explicitly configured production environment. One row per repository and deployment ID.
+          assumptions:
+            - decision: Production and lead-time population
+              chosen: Configured environment only, successful non-transient deployment IDs; retain raw capture-day events for staging.
+              evidence: default
+    columns:
+      - name: deployment_key
+        description: Stable key for repository and GitHub deployment ID.
+        data_tests:
+          - unique
+          - not_null
+        config:
+          meta:
+            dex:
+              role: key
+              null_rule: never
+      - name: repository
+        description: GitHub owner/repository name; part of every cross-project grain.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_repository')
+                field: repository
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: dim_repository.repository
+      - name: deployment_id
+        description: GitHub deployment ID; a new redeployment ID counts as another deployment.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: environment
+        description: Exact configured production environment name.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: sha
+        description: Immutable commit SHA requested by the deployment.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: succeeded_at
+        description: Earliest observed successful status timestamp for the deployment, in UTC.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+  - name: stg_deployment_changes
+    description: Verified merge-SHA containment evidence. One row per repository, deployment ID and pull request number; multiple candidate deployments per PR are intentional.
+    config:
+      meta:
+        dex:
+          grain:
+            - deployment_change_key
+          population:
+            rule: Verified merge-SHA containment evidence. One row per repository, deployment ID and pull request number; multiple candidate deployments per PR are intentional.
+          assumptions:
+            - decision: Production and lead-time population
+              chosen: PRs merged into the current default branch with verified merge SHA containment; raw candidate pairs retained.
+              evidence: default
+    columns:
+      - name: deployment_change_key
+        description: Stable key for repository, deployment ID and PR number.
+        data_tests:
+          - unique
+          - not_null
+        config:
+          meta:
+            dex:
+              role: key
+              null_rule: never
+      - name: deployment_key
+        description: Stable key for repository and GitHub deployment ID.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_deployments')
+                field: deployment_key
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: stg_deployments.deployment_key
+      - name: repository
+        description: GitHub owner/repository name; part of every cross-project grain.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_repository')
+                field: repository
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: dim_repository.repository
+      - name: deployment_id
+        description: GitHub deployment ID; a new redeployment ID counts as another deployment.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: number
+        description: Repository-local merged pull request number.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: merged_at
+        description: GitHub pull request merge timestamp, normalized to UTC.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: merge_sha
+        description: Immutable GitHub merge_commit_sha verified as contained by the deployment.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+  - name: fct_deployments
+    description: Successful production deployments before the capture UTC day. Each deployment ID counts once, including redeployments; no missing dates are imputed.
+    config:
+      meta:
+        dex:
+          grain:
+            - deployment_key
+          population:
+            rule: Successful production deployments before the capture UTC day. Each deployment ID counts once, including redeployments; no missing dates are imputed.
+          assumptions:
+            - decision: Production and lead-time population
+              chosen: Count successful production deployment IDs once, including redeployments; exclude capture UTC day.
+              evidence: default
+    columns:
+      - name: deployment_key
+        description: Stable key for repository and GitHub deployment ID.
+        data_tests:
+          - unique
+          - not_null
+        config:
+          meta:
+            dex:
+              role: key
+              null_rule: never
+      - name: repository
+        description: GitHub owner/repository name; part of every cross-project grain.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_repository')
+                field: repository
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: dim_repository.repository
+      - name: deployment_id
+        description: GitHub deployment ID; a new redeployment ID counts as another deployment.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: environment
+        description: Exact configured production environment name.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: succeeded_at
+        description: Earliest observed successful status timestamp for the deployment, in UTC.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: date
+        description: UTC success date used as the metric shipping time axis.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: deployment_count
+        description: One per successful deployment ID; additive across dates and repositories.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: measure
+              null_rule: never
+              aggregation: sum
+              additivity: additive
+              unit: count
+  - name: fct_deployment_lead_times
+    description: One row per repository and shipped PR, assigned to its earliest observed successful production deployment containing the merge SHA. Merge-to-success hours are non-additive.
+    config:
+      meta:
+        dex:
+          grain:
+            - shipped_pr_key
+          population:
+            rule: One row per repository and shipped PR, assigned to its earliest observed successful production deployment containing the merge SHA. Merge-to-success hours are non-additive.
+          assumptions:
+            - decision: Production and lead-time population
+              chosen: Assign each merged PR to its earliest observed successful containing deployment; measure merge-to-success hours and exclude capture UTC day.
+              evidence: default
+    columns:
+      - name: shipped_pr_key
+        description: Stable key for repository and PR number; one lead-time observation per PR.
+        data_tests:
+          - unique
+          - not_null
+        config:
+          meta:
+            dex:
+              role: key
+              null_rule: never
+      - name: repository
+        description: GitHub owner/repository name; part of every cross-project grain.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_repository')
+                field: repository
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: dim_repository.repository
+      - name: number
+        description: Repository-local merged pull request number.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: deployment_key
+        description: Stable key for repository and GitHub deployment ID.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_deployments')
+                field: deployment_key
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: fct_deployments.deployment_key
+      - name: environment
+        description: Exact configured production environment name.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+      - name: merged_at
+        description: GitHub pull request merge timestamp, normalized to UTC.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: succeeded_at
+        description: Earliest observed successful status timestamp for the deployment, in UTC.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: date
+        description: UTC success date used as the metric shipping time axis.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+      - name: hours_lead_time
+        description: Merge-to-success elapsed hours for one shipped PR; median must aggregate individual observations.
+        data_tests:
+          - not_null
+        config:
+          meta:
+            dex:
+              role: measure
+              null_rule: never
+              aggregation: percentile
+              additivity: non_additive
+              unit: hours

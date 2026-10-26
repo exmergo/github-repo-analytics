@@ -1,0 +1,157 @@
+{
+  "status": "ok",
+  "data": {
+    "plan_id": "pd7bc1272cf",
+    "intent": "Add governed production deployment frequency and merge-to-deploy facts for issue 11",
+    "edit_count": 9,
+    "paths": [
+      "models/staging/stg_deployments.sql",
+      "models/staging/stg_deployment_changes.sql",
+      "models/marts/fct_deployments.sql",
+      "models/marts/fct_deployment_lead_times.sql",
+      "models/sources.yml",
+      "models/marts/metricflow_time_spine.sql",
+      "models/deployments.yml",
+      "data_tests/deployment_contract.sql",
+      "models/schema.yml"
+    ],
+    "plan_path": "./.dex/plans/pd7bc1272cf.json",
+    "decisions": [
+      {
+        "model": "stg_deployments",
+        "decision": "Production and lead-time basis",
+        "chosen": "Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day",
+        "evidence": "request"
+      },
+      {
+        "model": "stg_deployment_changes",
+        "decision": "Production and lead-time basis",
+        "chosen": "Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day",
+        "evidence": "request"
+      },
+      {
+        "model": "fct_deployments",
+        "decision": "Production and lead-time basis",
+        "chosen": "Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day",
+        "evidence": "request"
+      },
+      {
+        "model": "fct_deployment_lead_times",
+        "decision": "Production and lead-time basis",
+        "chosen": "Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day",
+        "evidence": "request"
+      },
+      {
+        "model": "metricflow_time_spine",
+        "decision": "Include shipping events in bounds",
+        "chosen": "Add production deployment dates to existing source bounds",
+        "evidence": "request"
+      }
+    ],
+    "row_attribution": [
+      {
+        "path": "models/marts/metricflow_time_spine.sql",
+        "changes": [
+          {
+            "scope": "bounds",
+            "kind": "source_changed",
+            "detail": "the driving relation changed from `(SELECT date FROM fct_traffic UNION ALL SELECT date FROM fct_observations UNION ALL SELECT date FROM fct_legacy UNION ALL SELECT date FROM fct_snapshot_status UNION ALL SELECT event_date FROM dim_event UNION ALL SELECT date FROM fct_star_history UNION ALL SELECT date FROM fct_fork_history UNION ALL SELECT created_date FROM fct_issues UNION ALL SELECT date FROM fct_release_downloads UNION ALL SELECT date FROM fct_package_downloads)` to `(SELECT date FROM fct_traffic UNION ALL SELECT date FROM fct_observations UNION ALL SELECT date FROM fct_legacy UNION ALL SELECT date FROM fct_snapshot_status UNION ALL SELECT event_date FROM dim_event UNION ALL SELECT date FROM fct_star_history UNION ALL SELECT date FROM fct_fork_history UNION ALL SELECT created_date FROM fct_issues UNION ALL SELECT date FROM fct_release_downloads UNION ALL SELECT date FROM fct_package_downloads UNION ALL SELECT date FROM fct_deployments)`",
+            "prior": "(SELECT date FROM fct_traffic UNION ALL SELECT date FROM fct_observations UNION ALL SELECT date FROM fct_legacy UNION ALL SELECT date FROM fct_snapshot_status UNION ALL SELECT event_date FROM dim_event UNION ALL SELECT date FROM fct_star_history UNION ALL SELECT date FROM fct_fork_history UNION ALL SELECT created_date FROM fct_issues UNION ALL SELECT date FROM fct_release_downloads UNION ALL SELECT date FROM fct_package_downloads)",
+            "authored": "(SELECT date FROM fct_traffic UNION ALL SELECT date FROM fct_observations UNION ALL SELECT date FROM fct_legacy UNION ALL SELECT date FROM fct_snapshot_status UNION ALL SELECT event_date FROM dim_event UNION ALL SELECT date FROM fct_star_history UNION ALL SELECT date FROM fct_fork_history UNION ALL SELECT created_date FROM fct_issues UNION ALL SELECT date FROM fct_release_downloads UNION ALL SELECT date FROM fct_package_downloads UNION ALL SELECT date FROM fct_deployments)",
+            "rows": null,
+            "delta": null,
+            "attributed": false,
+            "reason": "'fct_deployments' is not in the exploration cache, so the rows it contributes cannot be counted; run `explore profile fct_deployments` first"
+          }
+        ],
+        "baseline_rows": null,
+        "authored_rows": null,
+        "net_delta": null,
+        "interacts": false
+      }
+    ],
+    "next": "review the diffs, then `transform apply pd7bc1272cf`"
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [
+    {
+      "path": "models/staging/stg_deployments.sql",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/staging/stg_deployments.sql\n@@ -0,0 +1,3 @@\n+select md5(repository || '|' || cast(deployment_id as varchar)) as deployment_key,\n+       repository, deployment_id, environment, sha, succeeded_at\n+from {{ source('raw', 'deployments') }}\n",
+      "additions": 3,
+      "deletions": 0
+    },
+    {
+      "path": "models/staging/stg_deployment_changes.sql",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/staging/stg_deployment_changes.sql\n@@ -0,0 +1,4 @@\n+select md5(repository || '|' || cast(deployment_id as varchar) || '|' || cast(number as varchar)) as deployment_change_key,\n+       md5(repository || '|' || cast(deployment_id as varchar)) as deployment_key,\n+       repository, deployment_id, number, merged_at, merge_sha\n+from {{ source('raw', 'deployment_changes') }}\n",
+      "additions": 4,
+      "deletions": 0
+    },
+    {
+      "path": "models/marts/fct_deployments.sql",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/marts/fct_deployments.sql\n@@ -0,0 +1,8 @@\n+select d.deployment_key, d.repository, d.deployment_id, d.environment,\n+       d.succeeded_at, cast(d.succeeded_at at time zone 'UTC' as date) as date,\n+       1 as deployment_count\n+from {{ ref('stg_deployments') }} d\n+join {{ ref('stg_signal_captures') }} c\n+  on d.repository = c.repository and c.signal = 'deployments'\n+where cast(d.succeeded_at at time zone 'UTC' as date)\n+    < cast(c.captured_at at time zone 'UTC' as date)\n",
+      "additions": 8,
+      "deletions": 0
+    },
+    {
+      "path": "models/marts/fct_deployment_lead_times.sql",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/marts/fct_deployment_lead_times.sql\n@@ -0,0 +1,16 @@\n+with ranked as (\n+    select c.repository, c.number, c.merged_at, d.deployment_key, d.environment,\n+           d.succeeded_at, d.date,\n+           row_number() over (\n+               partition by c.repository, c.number\n+               order by d.succeeded_at, d.deployment_id\n+           ) as shipping_order\n+    from {{ ref('stg_deployment_changes') }} c\n+    join {{ ref('fct_deployments') }} d on c.deployment_key = d.deployment_key\n+    where c.merged_at <= d.succeeded_at\n+)\n+select md5(repository || '|' || cast(number as varchar)) as shipped_pr_key,\n+       repository, number, deployment_key, environment, merged_at, succeeded_at, date,\n+       date_diff('microsecond', merged_at, succeeded_at) / 3600000000.0 as hours_lead_time\n+from ranked\n+where shipping_order = 1\n",
+      "additions": 16,
+      "deletions": 0
+    },
+    {
+      "path": "models/sources.yml",
+      "op": "update",
+      "unified": "--- a/models/sources.yml\n+++ b/models/sources.yml\n@@ -16,3 +16,5 @@\n   - name: fork_days\n   - name: issues\n   - name: package_downloads\n+  - name: deployments\n+  - name: deployment_changes\n",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "path": "models/marts/metricflow_time_spine.sql",
+      "op": "update",
+      "unified": "--- a/models/marts/metricflow_time_spine.sql\n+++ b/models/marts/metricflow_time_spine.sql\n@@ -11,6 +11,7 @@\n         union all select created_date from {{ ref('fct_issues') }}\n         union all select date from {{ ref('fct_release_downloads') }}\n         union all select date from {{ ref('fct_package_downloads') }}\n+        union all select date from {{ ref('fct_deployments') }}\n     )\n )\n select cast(d as date) as date_day\n",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "models/deployments.yml",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/deployments.yml\n@@ -0,0 +1,353 @@\n+version: 2\n+models:\n+  - name: stg_deployments\n+    description: Observed successful non-transient deployments in the explicitly configured production environment. One row per repository and deployment ID.\n+    config:\n+      meta:\n+        dex:\n+          grain:\n+            - deployment_key\n+          population:\n+            rule: Observed successful non-transient deployments in the explicitly configured production environment. One row per repository and deployment ID.\n+          assumptions:\n+            - decision: Production and lead-time basis\n+              chosen: Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day\n+              evidence: request\n+    columns:\n+      - name: deployment_key\n+        description: deployment key\n+        data_tests:\n+          - unique\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: key\n+              null_rule: never\n+      - name: repository\n+        description: repository\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('dim_repository')\n+                field: repository\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: deployment_id\n+        description: deployment id\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: environment\n+        description: environment\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: sha\n+        description: sha\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: succeeded_at\n+        description: succeeded at\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+  - name: stg_deployment_changes\n+    description: Verified merge-SHA containment evidence. One row per repository, deployment ID and pull request number; multiple candidate deployments per PR are intentional.\n+    config:\n+      meta:\n+        dex:\n+          grain:\n+            - deployment_change_key\n+          population:\n+            rule: Verified merge-SHA containment evidence. One row per repository, deployment ID and pull request number; multiple candidate deployments per PR are intentional.\n+          assumptions:\n+            - decision: Production and lead-time basis\n+              chosen: Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day\n+              evidence: request\n+    columns:\n+      - name: deployment_change_key\n+        description: deployment change key\n+        data_tests:\n+          - unique\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: key\n+              null_rule: never\n+      - name: deployment_key\n+        description: deployment key\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('stg_deployments')\n+                field: deployment_key\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: repository\n+        description: repository\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('dim_repository')\n+                field: repository\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: deployment_id\n+        description: deployment id\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: number\n+        description: number\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: merged_at\n+        description: merged at\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: merge_sha\n+        description: merge sha\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+  - name: fct_deployments\n+    description: Successful production deployments before the capture UTC day. Each deployment ID counts once, including redeployments; no missing dates are imputed.\n+    config:\n+      meta:\n+        dex:\n+          grain:\n+            - deployment_key\n+          population:\n+            rule: Successful production deployments before the capture UTC day. Each deployment ID counts once, including redeployments; no missing dates are imputed.\n+          assumptions:\n+            - decision: Production and lead-time basis\n+              chosen: Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day\n+              evidence: request\n+    columns:\n+      - name: deployment_key\n+        description: deployment key\n+        data_tests:\n+          - unique\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: key\n+              null_rule: never\n+      - name: repository\n+        description: repository\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('dim_repository')\n+                field: repository\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: deployment_id\n+        description: deployment id\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: environment\n+        description: environment\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: succeeded_at\n+        description: succeeded at\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: date\n+        description: date\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: deployment_count\n+        description: deployment count\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: measure\n+              null_rule: never\n+              aggregation: sum\n+              additivity: additive\n+              unit: count\n+  - name: fct_deployment_lead_times\n+    description: One row per repository and shipped PR, assigned to its earliest observed successful production deployment containing the merge SHA. Merge-to-success hours are non-additive.\n+    config:\n+      meta:\n+        dex:\n+          grain:\n+            - shipped_pr_key\n+          population:\n+            rule: One row per repository and shipped PR, assigned to its earliest observed successful production deployment containing the merge SHA. Merge-to-success hours are non-additive.\n+          assumptions:\n+            - decision: Production and lead-time basis\n+              chosen: Explicit environment, successful status, verified merge SHA ancestry, earliest observed shipping, exclude capture UTC day\n+              evidence: request\n+    columns:\n+      - name: shipped_pr_key\n+        description: shipped pr key\n+        data_tests:\n+          - unique\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: key\n+              null_rule: never\n+      - name: repository\n+        description: repository\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('dim_repository')\n+                field: repository\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: number\n+        description: number\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: deployment_key\n+        description: deployment key\n+        data_tests:\n+          - not_null\n+          - relationships:\n+              arguments:\n+                to: ref('fct_deployments')\n+                field: deployment_key\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: environment\n+        description: environment\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: dimension\n+              null_rule: never\n+      - name: merged_at\n+        description: merged at\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: succeeded_at\n+        description: succeeded at\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: date\n+        description: date\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: time\n+              null_rule: never\n+      - name: hours_lead_time\n+        description: hours lead time\n+        data_tests:\n+          - not_null\n+        config:\n+          meta:\n+            dex:\n+              role: measure\n+              null_rule: never\n+              aggregation: percentile\n+              additivity: non_additive\n+              unit: hours\n",
+      "additions": 353,
+      "deletions": 0
+    },
+    {
+      "path": "data_tests/deployment_contract.sql",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/data_tests/deployment_contract.sql\n@@ -0,0 +1,7 @@\n+select deployment_key as invalid_key\n+from {{ ref('fct_deployments') }}\n+where deployment_count <> 1\n+union all\n+select shipped_pr_key as invalid_key\n+from {{ ref('fct_deployment_lead_times') }}\n+where hours_lead_time < 0 or succeeded_at < merged_at\n",
+      "additions": 7,
+      "deletions": 0
+    },
+    {
+      "path": "models/schema.yml",
+      "op": "update",
+      "unified": "--- a/models/schema.yml\n+++ b/models/schema.yml\n@@ -220,6 +220,17 @@\n - name: metricflow_time_spine\n   time_spine:\n     standard_granularity_column: date_day\n+  config:\n+    meta:\n+      dex:\n+        grain:\n+          - date_day\n+        population:\n+          rule: Every UTC date between observed event bounds with 28-day padding and through today.\n+        assumptions:\n+          - decision: Include shipping events in bounds\n+            chosen: Add production deployment dates to existing source bounds\n+            evidence: request\n   columns:\n   - name: date_day\n     granularity: day\n@@ -227,7 +238,12 @@\n     - unique\n     - not_null\n     description: Continuous UTC day used by MetricFlow as its day-grain time spine.\n-  description: Continuous UTC calendar spanning the observed sources and a 28-day margin.\n+    config:\n+      meta:\n+        dex:\n+          role: time\n+          null_rule: never\n+  description: Daily spine spanning observed source events, including production deployments, with existing padding.\n - name: stg_releases\n   columns:\n   - name: release_source_key\n",
+      "additions": 17,
+      "deletions": 1
+    }
+  ],
+  "errors": [],
+  "reason": null
+}

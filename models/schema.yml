@@ -220,6 +220,17 @@ models:
 - name: metricflow_time_spine
   time_spine:
     standard_granularity_column: date_day
+  config:
+    meta:
+      dex:
+        grain:
+          - date_day
+        population:
+          rule: Every UTC date between observed event bounds with 28-day padding and through today.
+        assumptions:
+          - decision: Include shipping events in bounds
+            chosen: Add production deployment dates to existing source bounds
+            evidence: request
   columns:
   - name: date_day
     granularity: day
@@ -227,7 +238,12 @@ models:
     - unique
     - not_null
     description: Continuous UTC day used by MetricFlow as its day-grain time spine.
-  description: Continuous UTC calendar spanning the observed sources and a 28-day margin.
+    config:
+      meta:
+        dex:
+          role: time
+          null_rule: never
+  description: Daily spine spanning observed source events, including production deployments, with existing padding.
 - name: stg_releases
   columns:
   - name: release_source_key

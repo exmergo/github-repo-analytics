@@ -1,6 +1,6 @@
 # Metric contract
 
-All timestamps and calendar dates are UTC. Weeks begin Monday. Queries distinguish absent observations from explicit observed zeros. `models/semantic.yml` is the executable definition; this page explains its interpretation.
+All timestamps and calendar dates are UTC. Weeks begin Monday. Queries distinguish absent observations from explicit observed zeros. The YAML under `models/` contains the executable definitions; this page explains its interpretation.
 
 | Metric | Aggregation | Meaning |
 |---|---|---|
@@ -27,6 +27,8 @@ All timestamps and calendar dates are UTC. Weeks begin Monday. Queries distingui
 | `release_downloads` | Last capture per repository/time bucket, summed over assets | Cumulative GitHub release asset downloads |
 | `release_downloads_net_change` | Sum valid consecutive-date changes | Asset downloads between consecutive daily captures; gaps are null |
 | `package_downloads`, `pypi_downloads`, `npm_downloads` | Sum of reported days | Registry downloads for configured packages |
+| `deployments` | Sum deployment IDs by UTC success date | Successful non-transient deployments in the configured production environment; redeployments count |
+| `median_hours_lead_time` | Continuous median across shipped PRs by deployment date | Hours from merge to the first observed successful deployment containing the merge SHA |
 | `events` | Count | Releases and annotations dated in the period |
 
 Every metric supports `repository__name`; time-dependent metrics support `metric_time`. Referrer and path metrics additionally support `referrer_row__referrer` and `path_row__path`. Release metrics and `events` support `event__title`, `event__kind`, and `event__prerelease`. Package metrics support `package_download__registry` and `package_download__package`. Issue metrics support `issue__kind` and `issue__author_association`. Discover the complete supported groupings through Dex instead of constructing arbitrary fact joins.
@@ -76,3 +78,9 @@ Avoid pre-filtering `is_reported = true` in an unbounded latest-period query: fi
 Release/campaign recipes compare `[event date - N days, event date)` with `[event date + 1 day, event date + N + 1 days)` for N = 7 or 28. The event day is excluded. Incomplete windows remain pending, and other events in that range are disclosed. Percentage change is null when the earlier value is zero.
 
 These comparisons show association. None of these sources establish active users, installations, user conversion, revenue, bot-free audience size, contributor sentiment, or causal campaign effects. Downloads are available only for uploaded release assets and configured PyPI/npm packages.
+
+## Production deployments and lead time
+
+These metrics require the opt-in [GitHub deployment source](setup.md#track-production-deployments-optional). `deployments` counts successful deployment IDs by UTC success date, including redeployments with no new PRs. `median_hours_lead_time` uses a separate one-row-per-shipped-PR fact: merge-to-success hours assigned to the earliest observed containing deployment. A deployment shipping multiple PRs still counts once, and redeployments cannot ship the same PR twice for lead time. The median is computed over individual PRs for the requested bucket, never averaged from daily medians. It is measured in hours; it does not include pre-merge development time.
+
+Both metrics use shipping date for `metric_time` and exclude the capture UTC day. Repository keys are included in deployment and PR grains. A missing capture means unavailable. A successful deployment with no mapped PRs can supply a count while its lead-time median stays null. No deployment rows in a window remain absent evidence, never an inferred zero series. Incomplete API listings, old status retention and deleted records limit historical completeness; observed lead time can overstate actual time if an earlier deployment was never observed. This implements two shipping indicators associated with DORA; it does not measure change failure rate or recovery time.

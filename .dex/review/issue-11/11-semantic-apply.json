@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "data": {
+    "plan_id": "pf0d416b63f",
+    "written": [
+      "models/deployment_semantic.yml"
+    ],
+    "conflicts_overridden": [],
+    "decisions": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [
+    {
+      "path": "models/deployment_semantic.yml",
+      "op": "create",
+      "unified": "--- /dev/null\n+++ b/models/deployment_semantic.yml\n@@ -0,0 +1,74 @@\n+semantic_models:\n+  - name: fct_deployments\n+    description: Successful deployment IDs in the explicitly configured production\n+      environment, before the partial capture day.\n+    model: ref('fct_deployments')\n+    defaults:\n+      agg_time_dimension: date\n+    entities:\n+      - name: production_deployment\n+        type: primary\n+        expr: deployment_key\n+      - name: repository\n+        type: foreign\n+        expr: repository\n+    dimensions:\n+      - name: date\n+        type: time\n+        type_params:\n+          time_granularity: day\n+      - name: environment\n+        type: categorical\n+    measures:\n+      - name: deployments_measure\n+        agg: sum\n+        expr: deployment_count\n+        description: Successful deployment IDs in the explicitly configured production\n+          environment, before the partial capture day.\n+  - name: fct_deployment_lead_times\n+    description: Per-PR merge-to-success hours at the earliest observed successful\n+      production deployment containing its merge SHA. Unmapped PRs are absent.\n+    model: ref('fct_deployment_lead_times')\n+    defaults:\n+      agg_time_dimension: date\n+    entities:\n+      - name: shipped_pr\n+        type: primary\n+        expr: shipped_pr_key\n+      - name: repository\n+        type: foreign\n+        expr: repository\n+    dimensions:\n+      - name: date\n+        type: time\n+        type_params:\n+          time_granularity: day\n+      - name: environment\n+        type: categorical\n+    measures:\n+      - name: hours_lead_time_measure\n+        agg: percentile\n+        expr: hours_lead_time\n+        description: Per-PR merge-to-success hours at the earliest observed successful\n+          production deployment containing its merge SHA. Unmapped PRs are absent.\n+        agg_params:\n+          percentile: 0.5\n+          use_discrete_percentile: false\n+metrics:\n+  - name: deployments\n+    label: Deployments\n+    description: Count of successful non-transient production deployment IDs by UTC\n+      success date. Redeployments count; capture day excluded. Requires configured\n+      GitHub Deployments evidence.\n+    type: simple\n+    type_params:\n+      measure: deployments_measure\n+  - name: median_hours_lead_time\n+    label: Median Hours Lead Time\n+    description: Continuous median merge-to-deployment hours per PR, assigned once\n+      to the earliest observed successful production deployment whose SHA contains\n+      its merge SHA. Grouped by shipping date; unmapped PRs excluded. Not first-commit\n+      lead time.\n+    type: simple\n+    type_params:\n+      measure: hours_lead_time_measure\n",
+      "additions": 74,
+      "deletions": 0
+    }
+  ],
+  "errors": [],
+  "reason": null
+}

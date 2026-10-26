@@ -1,0 +1,165 @@
+{
+  "status": "ok",
+  "data": {
+    "completeness": "complete",
+    "limits": [],
+    "indeterminate": [],
+    "targets": [
+      {
+        "name": "metricflow_time_spine",
+        "kind": "model",
+        "found": true,
+        "scope": "exact",
+        "occurrence_count": 2,
+        "files": [
+          {
+            "path": "models/marts/metricflow_time_spine.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 1,
+                "form": "definition",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/schema.yml",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 220,
+                "form": "yaml_model_entry",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "stg_signal_captures",
+        "kind": "model",
+        "found": true,
+        "scope": "exact",
+        "occurrence_count": 4,
+        "files": [
+          {
+            "path": "models/marts/fct_fork_history.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 6,
+                "form": "ref_call",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/marts/fct_star_history.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 6,
+                "form": "ref_call",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/schema.yml",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 396,
+                "form": "yaml_model_entry",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/staging/stg_signal_captures.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 1,
+                "form": "definition",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "dim_repository",
+        "kind": "model",
+        "found": true,
+        "scope": "exact",
+        "occurrence_count": 3,
+        "files": [
+          {
+            "path": "models/marts/dim_repository.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 1,
+                "form": "definition",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/schema.yml",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 3,
+                "form": "yaml_model_entry",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          },
+          {
+            "path": "models/semantic.yml",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 5,
+                "form": "semantic_model_ref",
+                "resolution": "resolved",
+                "note": null
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "next": "propose the edits with `transform plan \"<intent>\"`",
+    "notes": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

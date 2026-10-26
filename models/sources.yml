@@ -16,3 +16,5 @@ sources:
   - name: fork_days
   - name: issues
   - name: package_downloads
+  - name: deployments
+  - name: deployment_changes

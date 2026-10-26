@@ -11,6 +11,7 @@ with bounds as (
         union all select created_date from {{ ref('fct_issues') }}
         union all select date from {{ ref('fct_release_downloads') }}
         union all select date from {{ ref('fct_package_downloads') }}
+        union all select date from {{ ref('fct_deployments') }}
     )
 )
 select cast(d as date) as date_day

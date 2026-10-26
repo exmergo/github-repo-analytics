@@ -34,6 +34,9 @@ class Source:
     # Optional add-on: {"pypi": [...], "npm": [...]}. Most projects publish to one or neither.
     packages: dict = field(default_factory=dict)
 
+    # Opt-in GitHub deployment evidence; environment must be explicit.
+    deployments: dict = field(default_factory=dict)
+
     def package_list(self) -> list[tuple[str, str]]:
         return [
             (registry, name) for registry in PACKAGE for name in self.packages.get(registry, [])
@@ -72,6 +75,18 @@ def load_sources(root: Path) -> list[Source]:
                 raise ValueError(f"invalid {registry} package list for {source.repository}")
             if len({n.lower() for n in names}) != len(names):
                 raise ValueError(f"duplicate {registry} package for {source.repository}")
+        if not isinstance(source.deployments, dict):
+            raise ValueError("deployments must be a mapping")
+        if source.deployments:
+            if set(source.deployments) != {"source", "environment"}:
+                raise ValueError("deployments requires source and environment only")
+            if source.deployments["source"] != "github":
+                raise ValueError(
+                    "deployments supports only source: github; workflows/releases unsupported"
+                )
+            environment = source.deployments["environment"]
+            if not isinstance(environment, str) or not environment.strip():
+                raise ValueError("deployments environment must be a nonempty exact name")
         seen.add(source.repository.lower())
         result.append(source)
     return result

@@ -30,7 +30,7 @@ classifiers = [
   "Topic :: Software Development :: Version Control :: Git",
 ]
 dependencies = [
-  "exmergo-dex-core[duckdb,semantic]==1.15.2",
+  "exmergo-dex-core[duckdb,semantic]==1.16.1",
   "pyyaml>=6,<7",
 ]
 

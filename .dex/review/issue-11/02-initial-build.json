@@ -1,0 +1,2517 @@
+{
+  "status": "ok",
+  "data": {
+    "outcome": "validated",
+    "target": "dev",
+    "success": true,
+    "returncode": 0,
+    "nodes": [
+      {
+        "name": "stg_discovery",
+        "unique_id": "model.oss_analytics.stg_discovery",
+        "status": "success",
+        "execution_time": 0.022856950759887695
+      },
+      {
+        "name": "stg_fork_days",
+        "unique_id": "model.oss_analytics.stg_fork_days",
+        "status": "success",
+        "execution_time": 0.008183717727661133
+      },
+      {
+        "name": "stg_issues",
+        "unique_id": "model.oss_analytics.stg_issues",
+        "status": "success",
+        "execution_time": 0.007244110107421875
+      },
+      {
+        "name": "stg_legacy",
+        "unique_id": "model.oss_analytics.stg_legacy",
+        "status": "success",
+        "execution_time": 0.007732868194580078
+      },
+      {
+        "name": "stg_observations",
+        "unique_id": "model.oss_analytics.stg_observations",
+        "status": "success",
+        "execution_time": 0.007132291793823242
+      },
+      {
+        "name": "stg_package_downloads",
+        "unique_id": "model.oss_analytics.stg_package_downloads",
+        "status": "success",
+        "execution_time": 0.007050037384033203
+      },
+      {
+        "name": "stg_release_assets",
+        "unique_id": "model.oss_analytics.stg_release_assets",
+        "status": "success",
+        "execution_time": 0.007848978042602539
+      },
+      {
+        "name": "stg_releases",
+        "unique_id": "model.oss_analytics.stg_releases",
+        "status": "success",
+        "execution_time": 0.0071260929107666016
+      },
+      {
+        "name": "stg_repositories",
+        "unique_id": "model.oss_analytics.stg_repositories",
+        "status": "success",
+        "execution_time": 0.0076808929443359375
+      },
+      {
+        "name": "stg_signal_captures",
+        "unique_id": "model.oss_analytics.stg_signal_captures",
+        "status": "success",
+        "execution_time": 0.007050991058349609
+      },
+      {
+        "name": "stg_snapshots",
+        "unique_id": "model.oss_analytics.stg_snapshots",
+        "status": "success",
+        "execution_time": 0.007098674774169922
+      },
+      {
+        "name": "stg_stargazer_days",
+        "unique_id": "model.oss_analytics.stg_stargazer_days",
+        "status": "success",
+        "execution_time": 0.007987022399902344
+      },
+      {
+        "name": "stg_traffic",
+        "unique_id": "model.oss_analytics.stg_traffic",
+        "status": "success",
+        "execution_time": 0.007139921188354492
+      },
+      {
+        "name": "annotations",
+        "unique_id": "seed.oss_analytics.annotations",
+        "status": "success",
+        "execution_time": 0.016897916793823242
+      },
+      {
+        "name": "not_null_stg_discovery_discovery_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_discovery_discovery_source_key.0504574b78",
+        "status": "pass",
+        "execution_time": 0.013274908065795898
+      },
+      {
+        "name": "unique_stg_discovery_discovery_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_discovery_discovery_source_key.9f79150df6",
+        "status": "pass",
+        "execution_time": 0.007352113723754883
+      },
+      {
+        "name": "not_null_stg_fork_days_date",
+        "unique_id": "test.oss_analytics.not_null_stg_fork_days_date.fdcf363bad",
+        "status": "pass",
+        "execution_time": 0.004940032958984375
+      },
+      {
+        "name": "not_null_stg_fork_days_fork_day_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_fork_days_fork_day_source_key.e0e714b38d",
+        "status": "pass",
+        "execution_time": 0.004580020904541016
+      },
+      {
+        "name": "not_null_stg_fork_days_forks",
+        "unique_id": "test.oss_analytics.not_null_stg_fork_days_forks.b1614ffb71",
+        "status": "pass",
+        "execution_time": 0.00530695915222168
+      },
+      {
+        "name": "not_null_stg_fork_days_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_fork_days_repository.b67fb53c6b",
+        "status": "pass",
+        "execution_time": 0.0046160221099853516
+      },
+      {
+        "name": "unique_stg_fork_days_fork_day_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_fork_days_fork_day_source_key.6590d07581",
+        "status": "pass",
+        "execution_time": 0.004915952682495117
+      },
+      {
+        "name": "accepted_values_stg_issues_kind__issue__pull_request",
+        "unique_id": "test.oss_analytics.accepted_values_stg_issues_kind__issue__pull_request.98f91a3eda",
+        "status": "pass",
+        "execution_time": 0.004696846008300781
+      },
+      {
+        "name": "not_null_stg_issues_author_association",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_author_association.84ae3911df",
+        "status": "pass",
+        "execution_time": 0.0043981075286865234
+      },
+      {
+        "name": "not_null_stg_issues_created_at",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_created_at.7d514cf302",
+        "status": "pass",
+        "execution_time": 0.004538059234619141
+      },
+      {
+        "name": "not_null_stg_issues_issue_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_issue_source_key.4a0330ca14",
+        "status": "pass",
+        "execution_time": 0.006173133850097656
+      },
+      {
+        "name": "not_null_stg_issues_kind",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_kind.52d7ec1b69",
+        "status": "pass",
+        "execution_time": 0.004631757736206055
+      },
+      {
+        "name": "not_null_stg_issues_number",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_number.a7027bb67d",
+        "status": "pass",
+        "execution_time": 0.004579067230224609
+      },
+      {
+        "name": "not_null_stg_issues_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_issues_repository.c838ba6fa5",
+        "status": "pass",
+        "execution_time": 0.00436091423034668
+      },
+      {
+        "name": "unique_stg_issues_issue_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_issues_issue_source_key.1af90e5856",
+        "status": "pass",
+        "execution_time": 0.005034923553466797
+      },
+      {
+        "name": "not_null_stg_legacy_legacy_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_legacy_legacy_source_key.4005af8564",
+        "status": "pass",
+        "execution_time": 0.005591154098510742
+      },
+      {
+        "name": "unique_stg_legacy_legacy_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_legacy_legacy_source_key.5c9878946a",
+        "status": "pass",
+        "execution_time": 0.0049800872802734375
+      },
+      {
+        "name": "not_null_stg_observations_observation_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_observations_observation_source_key.0a9b5efec2",
+        "status": "pass",
+        "execution_time": 0.013616085052490234
+      },
+      {
+        "name": "unique_stg_observations_observation_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_observations_observation_source_key.71d4525f0e",
+        "status": "pass",
+        "execution_time": 0.009135007858276367
+      },
+      {
+        "name": "accepted_values_stg_package_downloads_registry__pypi__npm",
+        "unique_id": "test.oss_analytics.accepted_values_stg_package_downloads_registry__pypi__npm.dae8c00706",
+        "status": "pass",
+        "execution_time": 0.005210161209106445
+      },
+      {
+        "name": "not_null_stg_package_downloads_date",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_date.381dd62fa8",
+        "status": "pass",
+        "execution_time": 0.0053179264068603516
+      },
+      {
+        "name": "not_null_stg_package_downloads_downloads",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_downloads.c883d9d9bf",
+        "status": "pass",
+        "execution_time": 0.004511833190917969
+      },
+      {
+        "name": "not_null_stg_package_downloads_package",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_package.7cf877ba93",
+        "status": "pass",
+        "execution_time": 0.004549980163574219
+      },
+      {
+        "name": "not_null_stg_package_downloads_package_download_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_package_download_source_key.195168bf48",
+        "status": "pass",
+        "execution_time": 0.004613161087036133
+      },
+      {
+        "name": "not_null_stg_package_downloads_registry",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_registry.abd0c86e28",
+        "status": "pass",
+        "execution_time": 0.00440216064453125
+      },
+      {
+        "name": "not_null_stg_package_downloads_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_package_downloads_repository.fb2fb2bce0",
+        "status": "pass",
+        "execution_time": 0.005157947540283203
+      },
+      {
+        "name": "unique_stg_package_downloads_package_download_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_package_downloads_package_download_source_key.5de48b3948",
+        "status": "pass",
+        "execution_time": 0.0051229000091552734
+      },
+      {
+        "name": "not_null_stg_release_assets_asset_id",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_asset_id.eedcd01779",
+        "status": "pass",
+        "execution_time": 0.0047109127044677734
+      },
+      {
+        "name": "not_null_stg_release_assets_captured_at",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_captured_at.f3946165f6",
+        "status": "pass",
+        "execution_time": 0.004357814788818359
+      },
+      {
+        "name": "not_null_stg_release_assets_download_count",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_download_count.96016190c6",
+        "status": "pass",
+        "execution_time": 0.004486083984375
+      },
+      {
+        "name": "not_null_stg_release_assets_event_id",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_event_id.630d7c87e3",
+        "status": "pass",
+        "execution_time": 0.005383968353271484
+      },
+      {
+        "name": "not_null_stg_release_assets_release_asset_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_release_asset_source_key.84ce0d938e",
+        "status": "pass",
+        "execution_time": 0.0045740604400634766
+      },
+      {
+        "name": "not_null_stg_release_assets_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_release_assets_repository.f99fed7b57",
+        "status": "pass",
+        "execution_time": 0.004494667053222656
+      },
+      {
+        "name": "unique_stg_release_assets_release_asset_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_release_assets_release_asset_source_key.b377becda4",
+        "status": "pass",
+        "execution_time": 0.004467010498046875
+      },
+      {
+        "name": "not_null_stg_releases_release_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_releases_release_source_key.561fb2c05f",
+        "status": "pass",
+        "execution_time": 0.004440784454345703
+      },
+      {
+        "name": "unique_stg_releases_release_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_releases_release_source_key.c705203b11",
+        "status": "pass",
+        "execution_time": 0.004562854766845703
+      },
+      {
+        "name": "not_null_stg_repositories_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_repositories_repository.7004f81c82",
+        "status": "pass",
+        "execution_time": 0.005115985870361328
+      },
+      {
+        "name": "unique_stg_repositories_repository",
+        "unique_id": "test.oss_analytics.unique_stg_repositories_repository.69d0beee76",
+        "status": "pass",
+        "execution_time": 0.0044651031494140625
+      },
+      {
+        "name": "not_null_stg_signal_captures_captured_at",
+        "unique_id": "test.oss_analytics.not_null_stg_signal_captures_captured_at.a275285be2",
+        "status": "pass",
+        "execution_time": 0.0044748783111572266
+      },
+      {
+        "name": "not_null_stg_signal_captures_complete",
+        "unique_id": "test.oss_analytics.not_null_stg_signal_captures_complete.c392ee26cb",
+        "status": "pass",
+        "execution_time": 0.004400968551635742
+      },
+      {
+        "name": "not_null_stg_signal_captures_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_signal_captures_repository.f9807f898c",
+        "status": "pass",
+        "execution_time": 0.00426483154296875
+      },
+      {
+        "name": "not_null_stg_signal_captures_signal",
+        "unique_id": "test.oss_analytics.not_null_stg_signal_captures_signal.95a8425dc5",
+        "status": "pass",
+        "execution_time": 0.005192756652832031
+      },
+      {
+        "name": "not_null_stg_signal_captures_signal_capture_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_signal_captures_signal_capture_source_key.64f7b73d77",
+        "status": "pass",
+        "execution_time": 0.004399776458740234
+      },
+      {
+        "name": "unique_stg_signal_captures_signal_capture_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_signal_captures_signal_capture_source_key.92bcb8289e",
+        "status": "pass",
+        "execution_time": 0.0044629573822021484
+      },
+      {
+        "name": "not_null_stg_snapshots_snapshot_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_snapshots_snapshot_source_key.964042a59e",
+        "status": "pass",
+        "execution_time": 0.004481077194213867
+      },
+      {
+        "name": "unique_stg_snapshots_snapshot_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_snapshots_snapshot_source_key.0ca883b0c1",
+        "status": "pass",
+        "execution_time": 0.005109071731567383
+      },
+      {
+        "name": "not_null_stg_stargazer_days_date",
+        "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_date.486b7aa6b6",
+        "status": "pass",
+        "execution_time": 0.005881071090698242
+      },
+      {
+        "name": "not_null_stg_stargazer_days_repository",
+        "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_repository.66f2b27dac",
+        "status": "pass",
+        "execution_time": 0.0044422149658203125
+      },
+      {
+        "name": "not_null_stg_stargazer_days_stargazer_day_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_stargazer_day_source_key.94947c3b39",
+        "status": "pass",
+        "execution_time": 0.004497051239013672
+      },
+      {
+        "name": "not_null_stg_stargazer_days_stars",
+        "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_stars.c769a04107",
+        "status": "pass",
+        "execution_time": 0.004354000091552734
+      },
+      {
+        "name": "unique_stg_stargazer_days_stargazer_day_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_stargazer_days_stargazer_day_source_key.cb969a2375",
+        "status": "pass",
+        "execution_time": 0.004506826400756836
+      },
+      {
+        "name": "not_null_stg_traffic_traffic_source_key",
+        "unique_id": "test.oss_analytics.not_null_stg_traffic_traffic_source_key.f8f3ee00fc",
+        "status": "pass",
+        "execution_time": 0.005413055419921875
+      },
+      {
+        "name": "unique_stg_traffic_traffic_source_key",
+        "unique_id": "test.oss_analytics.unique_stg_traffic_traffic_source_key.71f63f903e",
+        "status": "pass",
+        "execution_time": 0.004669189453125
+      },
+      {
+        "name": "fct_issues",
+        "unique_id": "model.oss_analytics.fct_issues",
+        "status": "success",
+        "execution_time": 0.019259929656982422
+      },
+      {
+        "name": "fct_legacy",
+        "unique_id": "model.oss_analytics.fct_legacy",
+        "status": "success",
+        "execution_time": 0.01009988784790039
+      },
+      {
+        "name": "fct_observations",
+        "unique_id": "model.oss_analytics.fct_observations",
+        "status": "success",
+        "execution_time": 0.00925302505493164
+      },
+      {
+        "name": "fct_package_downloads",
+        "unique_id": "model.oss_analytics.fct_package_downloads",
+        "status": "success",
+        "execution_time": 0.00740814208984375
+      },
+      {
+        "name": "fct_release_downloads",
+        "unique_id": "model.oss_analytics.fct_release_downloads",
+        "status": "success",
+        "execution_time": 0.00855398178100586
+      },
+      {
+        "name": "dim_event",
+        "unique_id": "model.oss_analytics.dim_event",
+        "status": "success",
+        "execution_time": 0.008014917373657227
+      },
+      {
+        "name": "dim_repository",
+        "unique_id": "model.oss_analytics.dim_repository",
+        "status": "success",
+        "execution_time": 0.00803518295288086
+      },
+      {
+        "name": "fct_fork_history",
+        "unique_id": "model.oss_analytics.fct_fork_history",
+        "status": "success",
+        "execution_time": 0.010341882705688477
+      },
+      {
+        "name": "fct_snapshot_status",
+        "unique_id": "model.oss_analytics.fct_snapshot_status",
+        "status": "success",
+        "execution_time": 0.009882926940917969
+      },
+      {
+        "name": "fct_star_history",
+        "unique_id": "model.oss_analytics.fct_star_history",
+        "status": "success",
+        "execution_time": 0.009152889251708984
+      },
+      {
+        "name": "fct_traffic",
+        "unique_id": "model.oss_analytics.fct_traffic",
+        "status": "success",
+        "execution_time": 0.00746607780456543
+      },
+      {
+        "name": "accepted_values_fct_issues_kind__issue__pull_request",
+        "unique_id": "test.oss_analytics.accepted_values_fct_issues_kind__issue__pull_request.0f1a5b10eb",
+        "status": "pass",
+        "execution_time": 0.005452156066894531
+      },
+      {
+        "name": "not_null_fct_issues_author_association",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_author_association.f99c2d2e30",
+        "status": "pass",
+        "execution_time": 0.004473209381103516
+      },
+      {
+        "name": "not_null_fct_issues_created_date",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_created_date.bf6ea871da",
+        "status": "pass",
+        "execution_time": 0.004525184631347656
+      },
+      {
+        "name": "not_null_fct_issues_is_first_time_contributor",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_is_first_time_contributor.0cfb0749b9",
+        "status": "pass",
+        "execution_time": 0.004570960998535156
+      },
+      {
+        "name": "not_null_fct_issues_issue_key",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_issue_key.833efe8f9b",
+        "status": "pass",
+        "execution_time": 0.004345893859863281
+      },
+      {
+        "name": "not_null_fct_issues_kind",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_kind.a1eb140ddb",
+        "status": "pass",
+        "execution_time": 0.005045890808105469
+      },
+      {
+        "name": "not_null_fct_issues_number",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_number.724a36190d",
+        "status": "pass",
+        "execution_time": 0.004292964935302734
+      },
+      {
+        "name": "not_null_fct_issues_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_issues_repository.4217058e4d",
+        "status": "pass",
+        "execution_time": 0.004287242889404297
+      },
+      {
+        "name": "unique_fct_issues_issue_key",
+        "unique_id": "test.oss_analytics.unique_fct_issues_issue_key.b9d54031de",
+        "status": "pass",
+        "execution_time": 0.004939079284667969
+      },
+      {
+        "name": "not_null_fct_legacy_legacy_key",
+        "unique_id": "test.oss_analytics.not_null_fct_legacy_legacy_key.cd1a8ddfd7",
+        "status": "pass",
+        "execution_time": 0.00438690185546875
+      },
+      {
+        "name": "not_null_fct_legacy_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_legacy_repository.eefeff28f0",
+        "status": "pass",
+        "execution_time": 0.005033254623413086
+      },
+      {
+        "name": "unique_fct_legacy_legacy_key",
+        "unique_id": "test.oss_analytics.unique_fct_legacy_legacy_key.0c547999b1",
+        "status": "pass",
+        "execution_time": 0.00455021858215332
+      },
+      {
+        "name": "not_null_fct_observations_observation_key",
+        "unique_id": "test.oss_analytics.not_null_fct_observations_observation_key.674964e9d4",
+        "status": "pass",
+        "execution_time": 0.004395008087158203
+      },
+      {
+        "name": "not_null_fct_observations_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_observations_repository.bfc9386302",
+        "status": "pass",
+        "execution_time": 0.0042841434478759766
+      },
+      {
+        "name": "unique_fct_observations_observation_key",
+        "unique_id": "test.oss_analytics.unique_fct_observations_observation_key.67f8c65d58",
+        "status": "pass",
+        "execution_time": 0.004559993743896484
+      },
+      {
+        "name": "accepted_values_fct_package_downloads_registry__pypi__npm",
+        "unique_id": "test.oss_analytics.accepted_values_fct_package_downloads_registry__pypi__npm.eb983cbbae",
+        "status": "pass",
+        "execution_time": 0.004408121109008789
+      },
+      {
+        "name": "not_null_fct_package_downloads_date",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_date.bd551c7761",
+        "status": "pass",
+        "execution_time": 0.004997730255126953
+      },
+      {
+        "name": "not_null_fct_package_downloads_downloads",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_downloads.5ea90c5032",
+        "status": "pass",
+        "execution_time": 0.00424504280090332
+      },
+      {
+        "name": "not_null_fct_package_downloads_package",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_package.488ed0eaa9",
+        "status": "pass",
+        "execution_time": 0.004209280014038086
+      },
+      {
+        "name": "not_null_fct_package_downloads_package_download_key",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_package_download_key.db1299f708",
+        "status": "pass",
+        "execution_time": 0.004235982894897461
+      },
+      {
+        "name": "not_null_fct_package_downloads_registry",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_registry.742c33c27b",
+        "status": "pass",
+        "execution_time": 0.004220008850097656
+      },
+      {
+        "name": "not_null_fct_package_downloads_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_package_downloads_repository.947079d211",
+        "status": "pass",
+        "execution_time": 0.00528407096862793
+      },
+      {
+        "name": "unique_fct_package_downloads_package_download_key",
+        "unique_id": "test.oss_analytics.unique_fct_package_downloads_package_download_key.923aaed4d5",
+        "status": "pass",
+        "execution_time": 0.0045778751373291016
+      },
+      {
+        "name": "not_null_fct_release_downloads_asset_id",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_asset_id.1b15a87a92",
+        "status": "pass",
+        "execution_time": 0.004240989685058594
+      },
+      {
+        "name": "not_null_fct_release_downloads_captured_at",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_captured_at.82f761a807",
+        "status": "pass",
+        "execution_time": 0.004349231719970703
+      },
+      {
+        "name": "not_null_fct_release_downloads_date",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_date.dd419d91c9",
+        "status": "pass",
+        "execution_time": 0.004273176193237305
+      },
+      {
+        "name": "not_null_fct_release_downloads_download_count",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_download_count.006b963c4b",
+        "status": "pass",
+        "execution_time": 0.0050890445709228516
+      },
+      {
+        "name": "not_null_fct_release_downloads_event_id",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_event_id.8a971381fc",
+        "status": "pass",
+        "execution_time": 0.004389762878417969
+      },
+      {
+        "name": "not_null_fct_release_downloads_release_download_key",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_release_download_key.bc14de6f71",
+        "status": "pass",
+        "execution_time": 0.004724979400634766
+      },
+      {
+        "name": "not_null_fct_release_downloads_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_release_downloads_repository.c209a3b69a",
+        "status": "pass",
+        "execution_time": 0.004362821578979492
+      },
+      {
+        "name": "unique_fct_release_downloads_release_download_key",
+        "unique_id": "test.oss_analytics.unique_fct_release_downloads_release_download_key.b4f7519958",
+        "status": "pass",
+        "execution_time": 0.004483938217163086
+      },
+      {
+        "name": "not_null_dim_event_event_id",
+        "unique_id": "test.oss_analytics.not_null_dim_event_event_id.0c6d51b179",
+        "status": "pass",
+        "execution_time": 0.005079030990600586
+      },
+      {
+        "name": "not_null_dim_event_repository",
+        "unique_id": "test.oss_analytics.not_null_dim_event_repository.08cc61bfe8",
+        "status": "pass",
+        "execution_time": 0.004241943359375
+      },
+      {
+        "name": "unique_dim_event_event_id",
+        "unique_id": "test.oss_analytics.unique_dim_event_event_id.2b7d146c7c",
+        "status": "pass",
+        "execution_time": 0.0046138763427734375
+      },
+      {
+        "name": "not_null_dim_repository_repository",
+        "unique_id": "test.oss_analytics.not_null_dim_repository_repository.54eee3ce05",
+        "status": "pass",
+        "execution_time": 0.004419803619384766
+      },
+      {
+        "name": "relationships_dim_event_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_dim_event_repository__repository__ref_dim_repository_.412f2fb58c",
+        "status": "pass",
+        "execution_time": 0.004930019378662109
+      },
+      {
+        "name": "relationships_fct_issues_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_issues_repository__repository__ref_dim_repository_.a4778cabaa",
+        "status": "pass",
+        "execution_time": 0.004826068878173828
+      },
+      {
+        "name": "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_legacy_repository__repository__ref_dim_repository_.f12a19ab61",
+        "status": "pass",
+        "execution_time": 0.005700111389160156
+      },
+      {
+        "name": "relationships_fct_observations_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_observations_repository__repository__ref_dim_repository_.c08f4ee287",
+        "status": "pass",
+        "execution_time": 0.00471806526184082
+      },
+      {
+        "name": "relationships_fct_package_downloads_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_package_downloads_repository__repository__ref_dim_repository_.ee0ed67aac",
+        "status": "pass",
+        "execution_time": 0.004691123962402344
+      },
+      {
+        "name": "relationships_fct_release_downloads_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_release_downloads_repository__repository__ref_dim_repository_.755c944b5d",
+        "status": "pass",
+        "execution_time": 0.004830837249755859
+      },
+      {
+        "name": "unique_dim_repository_repository",
+        "unique_id": "test.oss_analytics.unique_dim_repository_repository.3bad728b11",
+        "status": "pass",
+        "execution_time": 0.00437474250793457
+      },
+      {
+        "name": "not_null_fct_fork_history_date",
+        "unique_id": "test.oss_analytics.not_null_fct_fork_history_date.446b07d447",
+        "status": "pass",
+        "execution_time": 0.005095958709716797
+      },
+      {
+        "name": "not_null_fct_fork_history_fork_history_key",
+        "unique_id": "test.oss_analytics.not_null_fct_fork_history_fork_history_key.46bbb99f09",
+        "status": "pass",
+        "execution_time": 0.004328012466430664
+      },
+      {
+        "name": "not_null_fct_fork_history_forks_created",
+        "unique_id": "test.oss_analytics.not_null_fct_fork_history_forks_created.95184d89de",
+        "status": "pass",
+        "execution_time": 0.0045549869537353516
+      },
+      {
+        "name": "not_null_fct_fork_history_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_fork_history_repository.c61c38f9f6",
+        "status": "pass",
+        "execution_time": 0.004601955413818359
+      },
+      {
+        "name": "relationships_fct_fork_history_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_fork_history_repository__repository__ref_dim_repository_.481a978c31",
+        "status": "pass",
+        "execution_time": 0.005168914794921875
+      },
+      {
+        "name": "unique_fct_fork_history_fork_history_key",
+        "unique_id": "test.oss_analytics.unique_fct_fork_history_fork_history_key.07e4fdd622",
+        "status": "pass",
+        "execution_time": 0.00585484504699707
+      },
+      {
+        "name": "not_null_fct_snapshot_status_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_repository.d3b7cbbc68",
+        "status": "pass",
+        "execution_time": 0.004456043243408203
+      },
+      {
+        "name": "not_null_fct_snapshot_status_snapshot_key",
+        "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_snapshot_key.5dc1b3bcc0",
+        "status": "pass",
+        "execution_time": 0.0043261051177978516
+      },
+      {
+        "name": "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_snapshot_status_repository__repository__ref_dim_repository_.f42b2ac446",
+        "status": "pass",
+        "execution_time": 0.004854917526245117
+      },
+      {
+        "name": "unique_fct_snapshot_status_snapshot_key",
+        "unique_id": "test.oss_analytics.unique_fct_snapshot_status_snapshot_key.d1bf4a46f8",
+        "status": "pass",
+        "execution_time": 0.004691123962402344
+      },
+      {
+        "name": "not_null_fct_star_history_date",
+        "unique_id": "test.oss_analytics.not_null_fct_star_history_date.f762691af0",
+        "status": "pass",
+        "execution_time": 0.004998922348022461
+      },
+      {
+        "name": "not_null_fct_star_history_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_star_history_repository.9b4c55ea10",
+        "status": "pass",
+        "execution_time": 0.0045850276947021484
+      },
+      {
+        "name": "not_null_fct_star_history_star_history_key",
+        "unique_id": "test.oss_analytics.not_null_fct_star_history_star_history_key.d260317681",
+        "status": "pass",
+        "execution_time": 0.0043430328369140625
+      },
+      {
+        "name": "not_null_fct_star_history_stars_gained",
+        "unique_id": "test.oss_analytics.not_null_fct_star_history_stars_gained.93da2b7f30",
+        "status": "pass",
+        "execution_time": 0.004291057586669922
+      },
+      {
+        "name": "relationships_fct_star_history_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_star_history_repository__repository__ref_dim_repository_.81cc5e6414",
+        "status": "pass",
+        "execution_time": 0.004715681076049805
+      },
+      {
+        "name": "unique_fct_star_history_star_history_key",
+        "unique_id": "test.oss_analytics.unique_fct_star_history_star_history_key.f01ce6f817",
+        "status": "pass",
+        "execution_time": 0.005260944366455078
+      },
+      {
+        "name": "not_null_fct_traffic_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_traffic_repository.df3e944ebf",
+        "status": "pass",
+        "execution_time": 0.0042629241943359375
+      },
+      {
+        "name": "not_null_fct_traffic_traffic_key",
+        "unique_id": "test.oss_analytics.not_null_fct_traffic_traffic_key.4d87115ef7",
+        "status": "pass",
+        "execution_time": 0.0043659210205078125
+      },
+      {
+        "name": "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_traffic_repository__repository__ref_dim_repository_.c515931e45",
+        "status": "pass",
+        "execution_time": 0.004892826080322266
+      },
+      {
+        "name": "traffic_source_contract",
+        "unique_id": "test.oss_analytics.traffic_source_contract",
+        "status": "pass",
+        "execution_time": 0.0045032501220703125
+      },
+      {
+        "name": "unique_fct_traffic_traffic_key",
+        "unique_id": "test.oss_analytics.unique_fct_traffic_traffic_key.731ee52571",
+        "status": "pass",
+        "execution_time": 0.0044820308685302734
+      },
+      {
+        "name": "fct_path",
+        "unique_id": "model.oss_analytics.fct_path",
+        "status": "success",
+        "execution_time": 0.014690160751342773
+      },
+      {
+        "name": "fct_referrer",
+        "unique_id": "model.oss_analytics.fct_referrer",
+        "status": "success",
+        "execution_time": 0.01162862777709961
+      },
+      {
+        "name": "metricflow_time_spine",
+        "unique_id": "model.oss_analytics.metricflow_time_spine",
+        "status": "success",
+        "execution_time": 0.0405428409576416
+      },
+      {
+        "name": "not_null_fct_path_path_key",
+        "unique_id": "test.oss_analytics.not_null_fct_path_path_key.450c1416ad",
+        "status": "pass",
+        "execution_time": 0.004912853240966797
+      },
+      {
+        "name": "not_null_fct_path_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_path_repository.dec0a98de0",
+        "status": "pass",
+        "execution_time": 0.004539966583251953
+      },
+      {
+        "name": "relationships_fct_path_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_path_repository__repository__ref_dim_repository_.c202ee9a6e",
+        "status": "pass",
+        "execution_time": 0.005291938781738281
+      },
+      {
+        "name": "unique_fct_path_path_key",
+        "unique_id": "test.oss_analytics.unique_fct_path_path_key.dad82dccb7",
+        "status": "pass",
+        "execution_time": 0.0052642822265625
+      },
+      {
+        "name": "discovery_grid",
+        "unique_id": "test.oss_analytics.discovery_grid",
+        "status": "pass",
+        "execution_time": 0.00909733772277832
+      },
+      {
+        "name": "not_null_fct_referrer_referrer_key",
+        "unique_id": "test.oss_analytics.not_null_fct_referrer_referrer_key.0af57f67a0",
+        "status": "pass",
+        "execution_time": 0.0055103302001953125
+      },
+      {
+        "name": "not_null_fct_referrer_repository",
+        "unique_id": "test.oss_analytics.not_null_fct_referrer_repository.59dbd5981d",
+        "status": "pass",
+        "execution_time": 0.005177736282348633
+      },
+      {
+        "name": "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+        "unique_id": "test.oss_analytics.relationships_fct_referrer_repository__repository__ref_dim_repository_.ef981f0ab1",
+        "status": "pass",
+        "execution_time": 0.006345272064208984
+      },
+      {
+        "name": "unique_fct_referrer_referrer_key",
+        "unique_id": "test.oss_analytics.unique_fct_referrer_referrer_key.6f0d6b0846",
+        "status": "pass",
+        "execution_time": 0.005560159683227539
+      },
+      {
+        "name": "not_null_metricflow_time_spine_date_day",
+        "unique_id": "test.oss_analytics.not_null_metricflow_time_spine_date_day.54acf49e8d",
+        "status": "pass",
+        "execution_time": 0.005935192108154297
+      },
+      {
+        "name": "unique_metricflow_time_spine_date_day",
+        "unique_id": "test.oss_analytics.unique_metricflow_time_spine_date_day.ddb41ceac8",
+        "status": "pass",
+        "execution_time": 0.005269050598144531
+      }
+    ],
+    "counts": {
+      "success": 28,
+      "pass": 127
+    },
+    "evidence": {
+      "outcome": "validated",
+      "invocation": {
+        "invocation_id": "b4009647-cd28-4a5a-ad1a-1c0a55f479b1",
+        "generated_at": "2026-10-25T22:59:36.340800Z",
+        "started_at": "2026-10-25T22:59:34.146901Z",
+        "dbt_version": "1.11.14",
+        "command": "build",
+        "target": "dev",
+        "select": null,
+        "elapsed_seconds": 1.1036369800567627
+      },
+      "selection": {
+        "requested": null,
+        "matched": [
+          "stg_discovery",
+          "stg_fork_days",
+          "stg_issues",
+          "stg_legacy",
+          "stg_observations",
+          "stg_package_downloads",
+          "stg_release_assets",
+          "stg_releases",
+          "stg_repositories",
+          "stg_signal_captures",
+          "stg_snapshots",
+          "stg_stargazer_days",
+          "stg_traffic",
+          "annotations",
+          "not_null_stg_discovery_discovery_source_key",
+          "unique_stg_discovery_discovery_source_key",
+          "not_null_stg_fork_days_date",
+          "not_null_stg_fork_days_fork_day_source_key",
+          "not_null_stg_fork_days_forks",
+          "not_null_stg_fork_days_repository",
+          "unique_stg_fork_days_fork_day_source_key",
+          "accepted_values_stg_issues_kind__issue__pull_request",
+          "not_null_stg_issues_author_association",
+          "not_null_stg_issues_created_at",
+          "not_null_stg_issues_issue_source_key",
+          "not_null_stg_issues_kind",
+          "not_null_stg_issues_number",
+          "not_null_stg_issues_repository",
+          "unique_stg_issues_issue_source_key",
+          "not_null_stg_legacy_legacy_source_key",
+          "unique_stg_legacy_legacy_source_key",
+          "not_null_stg_observations_observation_source_key",
+          "unique_stg_observations_observation_source_key",
+          "accepted_values_stg_package_downloads_registry__pypi__npm",
+          "not_null_stg_package_downloads_date",
+          "not_null_stg_package_downloads_downloads",
+          "not_null_stg_package_downloads_package",
+          "not_null_stg_package_downloads_package_download_source_key",
+          "not_null_stg_package_downloads_registry",
+          "not_null_stg_package_downloads_repository",
+          "unique_stg_package_downloads_package_download_source_key",
+          "not_null_stg_release_assets_asset_id",
+          "not_null_stg_release_assets_captured_at",
+          "not_null_stg_release_assets_download_count",
+          "not_null_stg_release_assets_event_id",
+          "not_null_stg_release_assets_release_asset_source_key",
+          "not_null_stg_release_assets_repository",
+          "unique_stg_release_assets_release_asset_source_key",
+          "not_null_stg_releases_release_source_key",
+          "unique_stg_releases_release_source_key",
+          "not_null_stg_repositories_repository",
+          "unique_stg_repositories_repository",
+          "not_null_stg_signal_captures_captured_at",
+          "not_null_stg_signal_captures_complete",
+          "not_null_stg_signal_captures_repository",
+          "not_null_stg_signal_captures_signal",
+          "not_null_stg_signal_captures_signal_capture_source_key",
+          "unique_stg_signal_captures_signal_capture_source_key",
+          "not_null_stg_snapshots_snapshot_source_key",
+          "unique_stg_snapshots_snapshot_source_key",
+          "not_null_stg_stargazer_days_date",
+          "not_null_stg_stargazer_days_repository",
+          "not_null_stg_stargazer_days_stargazer_day_source_key",
+          "not_null_stg_stargazer_days_stars",
+          "unique_stg_stargazer_days_stargazer_day_source_key",
+          "not_null_stg_traffic_traffic_source_key",
+          "unique_stg_traffic_traffic_source_key",
+          "fct_issues",
+          "fct_legacy",
+          "fct_observations",
+          "fct_package_downloads",
+          "fct_release_downloads",
+          "dim_event",
+          "dim_repository",
+          "fct_fork_history",
+          "fct_snapshot_status",
+          "fct_star_history",
+          "fct_traffic",
+          "accepted_values_fct_issues_kind__issue__pull_request",
+          "not_null_fct_issues_author_association",
+          "not_null_fct_issues_created_date",
+          "not_null_fct_issues_is_first_time_contributor",
+          "not_null_fct_issues_issue_key",
+          "not_null_fct_issues_kind",
+          "not_null_fct_issues_number",
+          "not_null_fct_issues_repository",
+          "unique_fct_issues_issue_key",
+          "not_null_fct_legacy_legacy_key",
+          "not_null_fct_legacy_repository",
+          "unique_fct_legacy_legacy_key",
+          "not_null_fct_observations_observation_key",
+          "not_null_fct_observations_repository",
+          "unique_fct_observations_observation_key",
+          "accepted_values_fct_package_downloads_registry__pypi__npm",
+          "not_null_fct_package_downloads_date",
+          "not_null_fct_package_downloads_downloads",
+          "not_null_fct_package_downloads_package",
+          "not_null_fct_package_downloads_package_download_key",
+          "not_null_fct_package_downloads_registry",
+          "not_null_fct_package_downloads_repository",
+          "unique_fct_package_downloads_package_download_key",
+          "not_null_fct_release_downloads_asset_id",
+          "not_null_fct_release_downloads_captured_at",
+          "not_null_fct_release_downloads_date",
+          "not_null_fct_release_downloads_download_count",
+          "not_null_fct_release_downloads_event_id",
+          "not_null_fct_release_downloads_release_download_key",
+          "not_null_fct_release_downloads_repository",
+          "unique_fct_release_downloads_release_download_key",
+          "not_null_dim_event_event_id",
+          "not_null_dim_event_repository",
+          "unique_dim_event_event_id",
+          "not_null_dim_repository_repository",
+          "relationships_dim_event_repository__repository__ref_dim_repository_",
+          "relationships_fct_issues_repository__repository__ref_dim_repository_",
+          "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+          "relationships_fct_observations_repository__repository__ref_dim_repository_",
+          "relationships_fct_package_downloads_repository__repository__ref_dim_repository_",
+          "relationships_fct_release_downloads_repository__repository__ref_dim_repository_",
+          "unique_dim_repository_repository",
+          "not_null_fct_fork_history_date",
+          "not_null_fct_fork_history_fork_history_key",
+          "not_null_fct_fork_history_forks_created",
+          "not_null_fct_fork_history_repository",
+          "relationships_fct_fork_history_repository__repository__ref_dim_repository_",
+          "unique_fct_fork_history_fork_history_key",
+          "not_null_fct_snapshot_status_repository",
+          "not_null_fct_snapshot_status_snapshot_key",
+          "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+          "unique_fct_snapshot_status_snapshot_key",
+          "not_null_fct_star_history_date",
+          "not_null_fct_star_history_repository",
+          "not_null_fct_star_history_star_history_key",
+          "not_null_fct_star_history_stars_gained",
+          "relationships_fct_star_history_repository__repository__ref_dim_repository_",
+          "unique_fct_star_history_star_history_key",
+          "not_null_fct_traffic_repository",
+          "not_null_fct_traffic_traffic_key",
+          "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+          "traffic_source_contract",
+          "unique_fct_traffic_traffic_key",
+          "fct_path",
+          "fct_referrer",
+          "metricflow_time_spine",
+          "not_null_fct_path_path_key",
+          "not_null_fct_path_repository",
+          "relationships_fct_path_repository__repository__ref_dim_repository_",
+          "unique_fct_path_path_key",
+          "discovery_grid",
+          "not_null_fct_referrer_referrer_key",
+          "not_null_fct_referrer_repository",
+          "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+          "unique_fct_referrer_referrer_key",
+          "not_null_metricflow_time_spine_date_day",
+          "unique_metricflow_time_spine_date_day"
+        ],
+        "empty": false,
+        "complete": true,
+        "unmatched": []
+      },
+      "digests": {
+        "manifest_sha256": "sha256:0475ea8b77e54b8a451f1487d6bc7de5c8e1f9473beb4271b4c097f55486265a",
+        "run_results_sha256": "sha256:fbe84155d98f382ddca762a758dd6c2746be87c6dca2ad62ba9048d828ae7fca",
+        "source_digest": "sha256:e68309928efcf4ac1b4a95fb645101de7bbb5025843f4ddf7e3e7605e8f93689",
+        "plan_digest": null
+      },
+      "generated": [
+        "analytics.main.annotations",
+        "analytics.main.dim_event",
+        "analytics.main.dim_repository",
+        "analytics.main.fct_fork_history",
+        "analytics.main.fct_issues",
+        "analytics.main.fct_legacy",
+        "analytics.main.fct_observations",
+        "analytics.main.fct_package_downloads",
+        "analytics.main.fct_path",
+        "analytics.main.fct_referrer",
+        "analytics.main.fct_release_downloads",
+        "analytics.main.fct_snapshot_status",
+        "analytics.main.fct_star_history",
+        "analytics.main.fct_traffic",
+        "analytics.main.metricflow_time_spine",
+        "analytics.main.stg_discovery",
+        "analytics.main.stg_fork_days",
+        "analytics.main.stg_issues",
+        "analytics.main.stg_legacy",
+        "analytics.main.stg_observations",
+        "analytics.main.stg_package_downloads",
+        "analytics.main.stg_release_assets",
+        "analytics.main.stg_releases",
+        "analytics.main.stg_repositories",
+        "analytics.main.stg_signal_captures",
+        "analytics.main.stg_snapshots",
+        "analytics.main.stg_stargazer_days",
+        "analytics.main.stg_traffic"
+      ],
+      "errors": [],
+      "stale_artifacts": false,
+      "plan_drift": [],
+      "nodes": [
+        {
+          "unique_id": "model.oss_analytics.stg_discovery",
+          "name": "stg_discovery",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.022856950759887695,
+          "materialization": "view",
+          "relation": "analytics.main.stg_discovery",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_fork_days",
+          "name": "stg_fork_days",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.008183717727661133,
+          "materialization": "view",
+          "relation": "analytics.main.stg_fork_days",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_issues",
+          "name": "stg_issues",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007244110107421875,
+          "materialization": "view",
+          "relation": "analytics.main.stg_issues",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_legacy",
+          "name": "stg_legacy",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007732868194580078,
+          "materialization": "view",
+          "relation": "analytics.main.stg_legacy",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_observations",
+          "name": "stg_observations",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007132291793823242,
+          "materialization": "view",
+          "relation": "analytics.main.stg_observations",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_package_downloads",
+          "name": "stg_package_downloads",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007050037384033203,
+          "materialization": "view",
+          "relation": "analytics.main.stg_package_downloads",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_release_assets",
+          "name": "stg_release_assets",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007848978042602539,
+          "materialization": "view",
+          "relation": "analytics.main.stg_release_assets",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_releases",
+          "name": "stg_releases",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.0071260929107666016,
+          "materialization": "view",
+          "relation": "analytics.main.stg_releases",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_repositories",
+          "name": "stg_repositories",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.0076808929443359375,
+          "materialization": "view",
+          "relation": "analytics.main.stg_repositories",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_signal_captures",
+          "name": "stg_signal_captures",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007050991058349609,
+          "materialization": "view",
+          "relation": "analytics.main.stg_signal_captures",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_snapshots",
+          "name": "stg_snapshots",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007098674774169922,
+          "materialization": "view",
+          "relation": "analytics.main.stg_snapshots",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_stargazer_days",
+          "name": "stg_stargazer_days",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007987022399902344,
+          "materialization": "view",
+          "relation": "analytics.main.stg_stargazer_days",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.stg_traffic",
+          "name": "stg_traffic",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.007139921188354492,
+          "materialization": "view",
+          "relation": "analytics.main.stg_traffic",
+          "message": "OK"
+        },
+        {
+          "unique_id": "seed.oss_analytics.annotations",
+          "name": "annotations",
+          "resource_type": "seed",
+          "status": "success",
+          "execution_time": 0.016897916793823242,
+          "materialization": "seed",
+          "relation": "analytics.main.annotations",
+          "message": "INSERT 0"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_discovery_discovery_source_key.0504574b78",
+          "name": "not_null_stg_discovery_discovery_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.013274908065795898,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_discovery_discovery_source_key.9f79150df6",
+          "name": "unique_stg_discovery_discovery_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.007352113723754883,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_fork_days_date.fdcf363bad",
+          "name": "not_null_stg_fork_days_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004940032958984375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_fork_days_fork_day_source_key.e0e714b38d",
+          "name": "not_null_stg_fork_days_fork_day_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004580020904541016,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_fork_days_forks.b1614ffb71",
+          "name": "not_null_stg_fork_days_forks",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00530695915222168,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_fork_days_repository.b67fb53c6b",
+          "name": "not_null_stg_fork_days_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0046160221099853516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_fork_days_fork_day_source_key.6590d07581",
+          "name": "unique_stg_fork_days_fork_day_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004915952682495117,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.accepted_values_stg_issues_kind__issue__pull_request.98f91a3eda",
+          "name": "accepted_values_stg_issues_kind__issue__pull_request",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004696846008300781,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_author_association.84ae3911df",
+          "name": "not_null_stg_issues_author_association",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0043981075286865234,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_created_at.7d514cf302",
+          "name": "not_null_stg_issues_created_at",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004538059234619141,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_issue_source_key.4a0330ca14",
+          "name": "not_null_stg_issues_issue_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.006173133850097656,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_kind.52d7ec1b69",
+          "name": "not_null_stg_issues_kind",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004631757736206055,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_number.a7027bb67d",
+          "name": "not_null_stg_issues_number",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004579067230224609,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_issues_repository.c838ba6fa5",
+          "name": "not_null_stg_issues_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00436091423034668,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_issues_issue_source_key.1af90e5856",
+          "name": "unique_stg_issues_issue_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005034923553466797,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_legacy_legacy_source_key.4005af8564",
+          "name": "not_null_stg_legacy_legacy_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005591154098510742,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_legacy_legacy_source_key.5c9878946a",
+          "name": "unique_stg_legacy_legacy_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0049800872802734375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_observations_observation_source_key.0a9b5efec2",
+          "name": "not_null_stg_observations_observation_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.013616085052490234,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_observations_observation_source_key.71d4525f0e",
+          "name": "unique_stg_observations_observation_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.009135007858276367,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.accepted_values_stg_package_downloads_registry__pypi__npm.dae8c00706",
+          "name": "accepted_values_stg_package_downloads_registry__pypi__npm",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005210161209106445,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_date.381dd62fa8",
+          "name": "not_null_stg_package_downloads_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0053179264068603516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_downloads.c883d9d9bf",
+          "name": "not_null_stg_package_downloads_downloads",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004511833190917969,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_package.7cf877ba93",
+          "name": "not_null_stg_package_downloads_package",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004549980163574219,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_package_download_source_key.195168bf48",
+          "name": "not_null_stg_package_downloads_package_download_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004613161087036133,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_registry.abd0c86e28",
+          "name": "not_null_stg_package_downloads_registry",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00440216064453125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_package_downloads_repository.fb2fb2bce0",
+          "name": "not_null_stg_package_downloads_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005157947540283203,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_package_downloads_package_download_source_key.5de48b3948",
+          "name": "unique_stg_package_downloads_package_download_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0051229000091552734,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_asset_id.eedcd01779",
+          "name": "not_null_stg_release_assets_asset_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0047109127044677734,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_captured_at.f3946165f6",
+          "name": "not_null_stg_release_assets_captured_at",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004357814788818359,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_download_count.96016190c6",
+          "name": "not_null_stg_release_assets_download_count",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004486083984375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_event_id.630d7c87e3",
+          "name": "not_null_stg_release_assets_event_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005383968353271484,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_release_asset_source_key.84ce0d938e",
+          "name": "not_null_stg_release_assets_release_asset_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0045740604400634766,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_release_assets_repository.f99fed7b57",
+          "name": "not_null_stg_release_assets_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004494667053222656,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_release_assets_release_asset_source_key.b377becda4",
+          "name": "unique_stg_release_assets_release_asset_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004467010498046875,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_releases_release_source_key.561fb2c05f",
+          "name": "not_null_stg_releases_release_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004440784454345703,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_releases_release_source_key.c705203b11",
+          "name": "unique_stg_releases_release_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004562854766845703,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_repositories_repository.7004f81c82",
+          "name": "not_null_stg_repositories_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005115985870361328,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_repositories_repository.69d0beee76",
+          "name": "unique_stg_repositories_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0044651031494140625,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_signal_captures_captured_at.a275285be2",
+          "name": "not_null_stg_signal_captures_captured_at",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0044748783111572266,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_signal_captures_complete.c392ee26cb",
+          "name": "not_null_stg_signal_captures_complete",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004400968551635742,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_signal_captures_repository.f9807f898c",
+          "name": "not_null_stg_signal_captures_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00426483154296875,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_signal_captures_signal.95a8425dc5",
+          "name": "not_null_stg_signal_captures_signal",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005192756652832031,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_signal_captures_signal_capture_source_key.64f7b73d77",
+          "name": "not_null_stg_signal_captures_signal_capture_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004399776458740234,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_signal_captures_signal_capture_source_key.92bcb8289e",
+          "name": "unique_stg_signal_captures_signal_capture_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0044629573822021484,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_snapshots_snapshot_source_key.964042a59e",
+          "name": "not_null_stg_snapshots_snapshot_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004481077194213867,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_snapshots_snapshot_source_key.0ca883b0c1",
+          "name": "unique_stg_snapshots_snapshot_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005109071731567383,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_date.486b7aa6b6",
+          "name": "not_null_stg_stargazer_days_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005881071090698242,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_repository.66f2b27dac",
+          "name": "not_null_stg_stargazer_days_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0044422149658203125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_stargazer_day_source_key.94947c3b39",
+          "name": "not_null_stg_stargazer_days_stargazer_day_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004497051239013672,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_stargazer_days_stars.c769a04107",
+          "name": "not_null_stg_stargazer_days_stars",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004354000091552734,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_stargazer_days_stargazer_day_source_key.cb969a2375",
+          "name": "unique_stg_stargazer_days_stargazer_day_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004506826400756836,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_stg_traffic_traffic_source_key.f8f3ee00fc",
+          "name": "not_null_stg_traffic_traffic_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005413055419921875,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_stg_traffic_traffic_source_key.71f63f903e",
+          "name": "unique_stg_traffic_traffic_source_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004669189453125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_issues",
+          "name": "fct_issues",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.019259929656982422,
+          "materialization": "table",
+          "relation": "analytics.main.fct_issues",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_legacy",
+          "name": "fct_legacy",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.01009988784790039,
+          "materialization": "table",
+          "relation": "analytics.main.fct_legacy",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_observations",
+          "name": "fct_observations",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.00925302505493164,
+          "materialization": "table",
+          "relation": "analytics.main.fct_observations",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_package_downloads",
+          "name": "fct_package_downloads",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.00740814208984375,
+          "materialization": "table",
+          "relation": "analytics.main.fct_package_downloads",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_release_downloads",
+          "name": "fct_release_downloads",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.00855398178100586,
+          "materialization": "table",
+          "relation": "analytics.main.fct_release_downloads",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.dim_event",
+          "name": "dim_event",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.008014917373657227,
+          "materialization": "table",
+          "relation": "analytics.main.dim_event",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.dim_repository",
+          "name": "dim_repository",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.00803518295288086,
+          "materialization": "table",
+          "relation": "analytics.main.dim_repository",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_fork_history",
+          "name": "fct_fork_history",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.010341882705688477,
+          "materialization": "table",
+          "relation": "analytics.main.fct_fork_history",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_snapshot_status",
+          "name": "fct_snapshot_status",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.009882926940917969,
+          "materialization": "table",
+          "relation": "analytics.main.fct_snapshot_status",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_star_history",
+          "name": "fct_star_history",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.009152889251708984,
+          "materialization": "table",
+          "relation": "analytics.main.fct_star_history",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_traffic",
+          "name": "fct_traffic",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.00746607780456543,
+          "materialization": "table",
+          "relation": "analytics.main.fct_traffic",
+          "message": "OK"
+        },
+        {
+          "unique_id": "test.oss_analytics.accepted_values_fct_issues_kind__issue__pull_request.0f1a5b10eb",
+          "name": "accepted_values_fct_issues_kind__issue__pull_request",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005452156066894531,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_author_association.f99c2d2e30",
+          "name": "not_null_fct_issues_author_association",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004473209381103516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_created_date.bf6ea871da",
+          "name": "not_null_fct_issues_created_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004525184631347656,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_is_first_time_contributor.0cfb0749b9",
+          "name": "not_null_fct_issues_is_first_time_contributor",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004570960998535156,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_issue_key.833efe8f9b",
+          "name": "not_null_fct_issues_issue_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004345893859863281,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_kind.a1eb140ddb",
+          "name": "not_null_fct_issues_kind",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005045890808105469,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_number.724a36190d",
+          "name": "not_null_fct_issues_number",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004292964935302734,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_issues_repository.4217058e4d",
+          "name": "not_null_fct_issues_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004287242889404297,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_issues_issue_key.b9d54031de",
+          "name": "unique_fct_issues_issue_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004939079284667969,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_legacy_legacy_key.cd1a8ddfd7",
+          "name": "not_null_fct_legacy_legacy_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00438690185546875,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_legacy_repository.eefeff28f0",
+          "name": "not_null_fct_legacy_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005033254623413086,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_legacy_legacy_key.0c547999b1",
+          "name": "unique_fct_legacy_legacy_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00455021858215332,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_observations_observation_key.674964e9d4",
+          "name": "not_null_fct_observations_observation_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004395008087158203,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_observations_repository.bfc9386302",
+          "name": "not_null_fct_observations_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0042841434478759766,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_observations_observation_key.67f8c65d58",
+          "name": "unique_fct_observations_observation_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004559993743896484,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.accepted_values_fct_package_downloads_registry__pypi__npm.eb983cbbae",
+          "name": "accepted_values_fct_package_downloads_registry__pypi__npm",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004408121109008789,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_date.bd551c7761",
+          "name": "not_null_fct_package_downloads_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004997730255126953,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_downloads.5ea90c5032",
+          "name": "not_null_fct_package_downloads_downloads",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00424504280090332,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_package.488ed0eaa9",
+          "name": "not_null_fct_package_downloads_package",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004209280014038086,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_package_download_key.db1299f708",
+          "name": "not_null_fct_package_downloads_package_download_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004235982894897461,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_registry.742c33c27b",
+          "name": "not_null_fct_package_downloads_registry",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004220008850097656,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_package_downloads_repository.947079d211",
+          "name": "not_null_fct_package_downloads_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00528407096862793,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_package_downloads_package_download_key.923aaed4d5",
+          "name": "unique_fct_package_downloads_package_download_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0045778751373291016,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_asset_id.1b15a87a92",
+          "name": "not_null_fct_release_downloads_asset_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004240989685058594,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_captured_at.82f761a807",
+          "name": "not_null_fct_release_downloads_captured_at",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004349231719970703,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_date.dd419d91c9",
+          "name": "not_null_fct_release_downloads_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004273176193237305,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_download_count.006b963c4b",
+          "name": "not_null_fct_release_downloads_download_count",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0050890445709228516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_event_id.8a971381fc",
+          "name": "not_null_fct_release_downloads_event_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004389762878417969,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_release_download_key.bc14de6f71",
+          "name": "not_null_fct_release_downloads_release_download_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004724979400634766,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_release_downloads_repository.c209a3b69a",
+          "name": "not_null_fct_release_downloads_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004362821578979492,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_release_downloads_release_download_key.b4f7519958",
+          "name": "unique_fct_release_downloads_release_download_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004483938217163086,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_dim_event_event_id.0c6d51b179",
+          "name": "not_null_dim_event_event_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005079030990600586,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_dim_event_repository.08cc61bfe8",
+          "name": "not_null_dim_event_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004241943359375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_dim_event_event_id.2b7d146c7c",
+          "name": "unique_dim_event_event_id",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0046138763427734375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_dim_repository_repository.54eee3ce05",
+          "name": "not_null_dim_repository_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004419803619384766,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_dim_event_repository__repository__ref_dim_repository_.412f2fb58c",
+          "name": "relationships_dim_event_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004930019378662109,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_issues_repository__repository__ref_dim_repository_.a4778cabaa",
+          "name": "relationships_fct_issues_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004826068878173828,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_legacy_repository__repository__ref_dim_repository_.f12a19ab61",
+          "name": "relationships_fct_legacy_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005700111389160156,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_observations_repository__repository__ref_dim_repository_.c08f4ee287",
+          "name": "relationships_fct_observations_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00471806526184082,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_package_downloads_repository__repository__ref_dim_repository_.ee0ed67aac",
+          "name": "relationships_fct_package_downloads_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004691123962402344,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_release_downloads_repository__repository__ref_dim_repository_.755c944b5d",
+          "name": "relationships_fct_release_downloads_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004830837249755859,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_dim_repository_repository.3bad728b11",
+          "name": "unique_dim_repository_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00437474250793457,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_fork_history_date.446b07d447",
+          "name": "not_null_fct_fork_history_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005095958709716797,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_fork_history_fork_history_key.46bbb99f09",
+          "name": "not_null_fct_fork_history_fork_history_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004328012466430664,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_fork_history_forks_created.95184d89de",
+          "name": "not_null_fct_fork_history_forks_created",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0045549869537353516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_fork_history_repository.c61c38f9f6",
+          "name": "not_null_fct_fork_history_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004601955413818359,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_fork_history_repository__repository__ref_dim_repository_.481a978c31",
+          "name": "relationships_fct_fork_history_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005168914794921875,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_fork_history_fork_history_key.07e4fdd622",
+          "name": "unique_fct_fork_history_fork_history_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00585484504699707,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_repository.d3b7cbbc68",
+          "name": "not_null_fct_snapshot_status_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004456043243408203,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_snapshot_status_snapshot_key.5dc1b3bcc0",
+          "name": "not_null_fct_snapshot_status_snapshot_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0043261051177978516,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_snapshot_status_repository__repository__ref_dim_repository_.f42b2ac446",
+          "name": "relationships_fct_snapshot_status_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004854917526245117,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_snapshot_status_snapshot_key.d1bf4a46f8",
+          "name": "unique_fct_snapshot_status_snapshot_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004691123962402344,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_star_history_date.f762691af0",
+          "name": "not_null_fct_star_history_date",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004998922348022461,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_star_history_repository.9b4c55ea10",
+          "name": "not_null_fct_star_history_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0045850276947021484,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_star_history_star_history_key.d260317681",
+          "name": "not_null_fct_star_history_star_history_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0043430328369140625,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_star_history_stars_gained.93da2b7f30",
+          "name": "not_null_fct_star_history_stars_gained",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004291057586669922,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_star_history_repository__repository__ref_dim_repository_.81cc5e6414",
+          "name": "relationships_fct_star_history_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004715681076049805,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_star_history_star_history_key.f01ce6f817",
+          "name": "unique_fct_star_history_star_history_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005260944366455078,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_traffic_repository.df3e944ebf",
+          "name": "not_null_fct_traffic_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0042629241943359375,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_traffic_traffic_key.4d87115ef7",
+          "name": "not_null_fct_traffic_traffic_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0043659210205078125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_traffic_repository__repository__ref_dim_repository_.c515931e45",
+          "name": "relationships_fct_traffic_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004892826080322266,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.traffic_source_contract",
+          "name": "traffic_source_contract",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0045032501220703125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_traffic_traffic_key.731ee52571",
+          "name": "unique_fct_traffic_traffic_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0044820308685302734,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_path",
+          "name": "fct_path",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.014690160751342773,
+          "materialization": "table",
+          "relation": "analytics.main.fct_path",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.fct_referrer",
+          "name": "fct_referrer",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.01162862777709961,
+          "materialization": "table",
+          "relation": "analytics.main.fct_referrer",
+          "message": "OK"
+        },
+        {
+          "unique_id": "model.oss_analytics.metricflow_time_spine",
+          "name": "metricflow_time_spine",
+          "resource_type": "model",
+          "status": "success",
+          "execution_time": 0.0405428409576416,
+          "materialization": "table",
+          "relation": "analytics.main.metricflow_time_spine",
+          "message": "OK"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_path_path_key.450c1416ad",
+          "name": "not_null_fct_path_path_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004912853240966797,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_path_repository.dec0a98de0",
+          "name": "not_null_fct_path_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.004539966583251953,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_path_repository__repository__ref_dim_repository_.c202ee9a6e",
+          "name": "relationships_fct_path_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005291938781738281,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_path_path_key.dad82dccb7",
+          "name": "unique_fct_path_path_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0052642822265625,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.discovery_grid",
+          "name": "discovery_grid",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.00909733772277832,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_referrer_referrer_key.0af57f67a0",
+          "name": "not_null_fct_referrer_referrer_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.0055103302001953125,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_fct_referrer_repository.59dbd5981d",
+          "name": "not_null_fct_referrer_repository",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005177736282348633,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.relationships_fct_referrer_repository__repository__ref_dim_repository_.ef981f0ab1",
+          "name": "relationships_fct_referrer_repository__repository__ref_dim_repository_",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.006345272064208984,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_fct_referrer_referrer_key.6f0d6b0846",
+          "name": "unique_fct_referrer_referrer_key",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005560159683227539,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.not_null_metricflow_time_spine_date_day.54acf49e8d",
+          "name": "not_null_metricflow_time_spine_date_day",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005935192108154297,
+          "materialization": "test"
+        },
+        {
+          "unique_id": "test.oss_analytics.unique_metricflow_time_spine_date_day.ddb41ceac8",
+          "name": "unique_metricflow_time_spine_date_day",
+          "resource_type": "test",
+          "status": "pass",
+          "execution_time": 0.005269050598144531,
+          "materialization": "test"
+        }
+      ]
+    },
+    "verification": {
+      "ran": true,
+      "scope": [
+        "dim_event",
+        "dim_repository",
+        "fct_fork_history",
+        "fct_issues",
+        "fct_legacy",
+        "fct_observations",
+        "fct_package_downloads",
+        "fct_path",
+        "fct_referrer",
+        "fct_release_downloads",
+        "fct_snapshot_status",
+        "fct_star_history",
+        "fct_traffic",
+        "metricflow_time_spine",
+        "stg_discovery",
+        "stg_fork_days",
+        "stg_issues",
+        "stg_legacy",
+        "stg_observations",
+        "stg_package_downloads",
+        "stg_release_assets",
+        "stg_releases",
+        "stg_repositories",
+        "stg_signal_captures",
+        "stg_snapshots",
+        "stg_stargazer_days",
+        "stg_traffic"
+      ],
+      "findings": [],
+      "finding_count": 0,
+      "suppressed": {
+        "no_relation": "dbt's run results are authoritative for the nodes this build ran"
+      }
+    },
+    "decisions": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./.data/workspaces/d12a0be6ddb64f529edfe07200576fc6/warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": 0.0,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [
+    "no confirm handshake: this connector cannot bill, so there was nothing to confirm and the command ran without asking",
+    "no single driving parent could be identified for dim_event (it is a set operation, so it has no single parent), metricflow_time_spine (it is driven by a set operation, so it has no single parent)"
+  ],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}

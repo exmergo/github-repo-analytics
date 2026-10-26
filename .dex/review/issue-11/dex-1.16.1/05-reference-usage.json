@@ -1,0 +1,186 @@
+{
+  "status": "ok",
+  "data": {
+    "completeness": "incomplete",
+    "limits": [
+      "5 reference(s) could not be resolved statically and are listed under `indeterminate`; each one may or may not name what you asked about"
+    ],
+    "indeterminate": [
+      {
+        "path": "models/semantic.yml",
+        "line": 355,
+        "form": "semantic_expr",
+        "kind": "column",
+        "resolution": "indeterminate",
+        "note": "computed expr on 'issues_opened_measure'",
+        "owner": "fct_issues"
+      },
+      {
+        "path": "models/semantic.yml",
+        "line": 359,
+        "form": "semantic_expr",
+        "kind": "column",
+        "resolution": "indeterminate",
+        "note": "computed expr on 'issues_closed_measure'",
+        "owner": "fct_issues"
+      },
+      {
+        "path": "models/semantic.yml",
+        "line": 364,
+        "form": "semantic_expr",
+        "kind": "column",
+        "resolution": "indeterminate",
+        "note": "computed expr on 'prs_opened_measure'",
+        "owner": "fct_issues"
+      },
+      {
+        "path": "models/semantic.yml",
+        "line": 368,
+        "form": "semantic_expr",
+        "kind": "column",
+        "resolution": "indeterminate",
+        "note": "computed expr on 'prs_merged_measure'",
+        "owner": "fct_issues"
+      },
+      {
+        "path": "models/semantic.yml",
+        "line": 373,
+        "form": "semantic_expr",
+        "kind": "column",
+        "resolution": "indeterminate",
+        "note": "computed expr on 'first_time_contributor_prs_measure'",
+        "owner": "fct_issues"
+      }
+    ],
+    "targets": [
+      {
+        "name": "stg_signal_captures.signal",
+        "kind": "column",
+        "found": true,
+        "scope": "lineage_resolved",
+        "occurrence_count": 6,
+        "files": [
+          {
+            "path": "models/marts/fct_deployments.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 6,
+                "form": "select_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              }
+            ]
+          },
+          {
+            "path": "models/marts/fct_fork_history.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 7,
+                "form": "select_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              }
+            ]
+          },
+          {
+            "path": "models/marts/fct_star_history.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 7,
+                "form": "select_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              }
+            ]
+          },
+          {
+            "path": "models/schema.yml",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 423,
+                "form": "yaml_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              }
+            ]
+          },
+          {
+            "path": "models/staging/stg_signal_captures.sql",
+            "package": null,
+            "occurrences": [
+              {
+                "line": 1,
+                "form": "select_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              },
+              {
+                "line": 2,
+                "form": "select_column",
+                "resolution": "resolved",
+                "note": "lineage_resolved"
+              }
+            ]
+          }
+        ],
+        "usage": {
+          "column": "stg_signal_captures.signal",
+          "readers": 3,
+          "groups": [
+            {
+              "usage": "where",
+              "expression": "signal = 'forks'",
+              "count": 1,
+              "models": [
+                "fct_fork_history"
+              ],
+              "elided_models": 0
+            },
+            {
+              "usage": "where",
+              "expression": "signal = 'stargazers'",
+              "count": 1,
+              "models": [
+                "fct_star_history"
+              ],
+              "elided_models": 0
+            },
+            {
+              "usage": "none",
+              "count": 1,
+              "models": [
+                "fct_deployments"
+              ],
+              "elided_models": 0
+            }
+          ],
+          "elided_groups": 0
+        }
+      }
+    ],
+    "next": "propose the edits with `transform plan \"<intent>\"`",
+    "notes": []
+  },
+  "connection": {
+    "connector": "duckdb",
+    "target": {
+      "path": "./warehouse/analytics.duckdb"
+    },
+    "source": ".dex/config.yml"
+  },
+  "cost": {
+    "paradigm": "free_local",
+    "estimate": null,
+    "ceiling": null,
+    "estimate_quality": null,
+    "unit": null
+  },
+  "warnings": [],
+  "diffs": [],
+  "errors": [],
+  "reason": null
+}
