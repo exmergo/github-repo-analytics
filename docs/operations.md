@@ -33,6 +33,10 @@ If collection stops:
 3. Manually dispatch collection. Data still in GitHub's traffic window may be recovered by the upstream collector. Older missed traffic cannot be recreated; keep those gaps visible.
 4. Build and check. Review structural/semantic changes before accepting a new baseline.
 
+Publication provenance stores the immediate approved data/code revisions, lockfile identity and validation time. It does not embed earlier publications' source manifests. This keeps repeated imports of your own data branch bounded while retaining the current sources and their file checksums.
+
+If an older installation reports `source file exceeds 32 MiB` while reading `published.json`, update to v1.1.0 or later and manually run collection/publication. CI imports its explicitly pinned raw candidate without reading the old publication pointer, then builds and checks before writing a compact replacement. For a single configured source, local `sync --revision <full-raw-commit-sha>` provides the same recovery entry point; follow it with build and check. Review any intended baseline change before accepting it. Ordinary imports continue using the approved pointer, and the download-size guard remains enforced.
+
 Raw inputs survive a failed analytics check. A malformed new input cannot replace a previous sync candidate; an interrupted/failed build cannot replace the previous DuckDB file. The last published candidate remains available even if newer raw commits have failures. Remove unused local `.data/inputs/` generations only after confirming they are not referenced by `.data/sync.json` or `.data/build.json`.
 
 ### Adding a repository

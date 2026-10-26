@@ -27,6 +27,19 @@ def read_json(path: Path, default=None):
     return json.loads(path.read_text()) if path.exists() else default
 
 
+def publication_provenance(value: dict | None) -> dict | None:
+    """Keep the approved revision's identity, without copying its source manifests."""
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError("publication metadata must be a mapping")
+    fields = ("version", "data_commit", "code_commit", "lockfile", "lock_sha256", "validated_at")
+    result = {key: value[key] for key in fields if key in value}
+    if any(isinstance(item, (dict, list)) for item in result.values()):
+        raise ValueError("publication provenance fields must be scalar")
+    return result
+
+
 def retry_delay(headers, attempt: int) -> float:
     """Seconds to wait from Retry-After (seconds or HTTP-date) or a rate-limit reset."""
     value = (headers or {}).get("Retry-After")

@@ -47,6 +47,29 @@ def test_publication_manifest_and_state(project, tmp_path):
     assert read_json(tmp_path / "published.json") == result
 
 
+def test_repeated_publications_do_not_embed_prior_source_manifests(workspace, tmp_path):
+    import json
+    from oss_analytics.io import write_json
+
+    built = read_json(workspace / ".data/build.json")
+    prior = {"version": 1, "data_commit": "a" * 40, "code_commit": "b" * 40}
+    sizes = []
+    for _ in range(12):
+        # Simulate importing our own previous data branch, including a legacy full manifest.
+        built["inputs"]["sources"][0]["publication"] = prior
+        write_json(workspace / ".data/build.json", built)
+        result = publish(workspace, tmp_path, "a" * 40, "b" * 40)
+        retained = result["sources"][0]["publication"]
+        assert retained["data_commit"] == prior["data_commit"]
+        assert retained["code_commit"] == prior["code_commit"]
+        assert "sources" not in retained
+        assert result["sources"][0]["files"] == built["inputs"]["sources"][0]["files"]
+        sizes.append(len(json.dumps(result)))
+        prior = result
+    assert len(set(sizes[2:])) == 1
+    assert max(sizes) < 32 * 1024  # Fixture history stays bounded across collection cycles.
+
+
 def test_dependency_lock_change_invalidates_answers_and_publication(workspace):
     lock = workspace / "uv.lock"
     lock.write_text(lock.read_text() + "\n# dependency resolution changed\n")
