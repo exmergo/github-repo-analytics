@@ -1,0 +1,61 @@
+{
+  "captured_at": "2026-10-27T09:32:21.932959+00:00",
+  "forks": 0,
+  "github_id": 1424862326,
+  "open_issues_and_prs": 11,
+  "releases": [
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.1.0",
+      "id": 424028101,
+      "name": "v1.1.0: production deployment metrics and reliable publication",
+      "prerelease": false,
+      "published_at": "2026-10-26T09:22:50Z",
+      "tag_name": "v1.1.0"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.3",
+      "id": 423003752,
+      "name": "v1.0.3: green checks on your own projects, and Dex setup for contributors",
+      "prerelease": false,
+      "published_at": "2026-10-24T21:56:04Z",
+      "tag_name": "v1.0.3"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.2",
+      "id": 422992430,
+      "name": "v1.0.2: track private repositories",
+      "prerelease": false,
+      "published_at": "2026-10-24T21:29:04Z",
+      "tag_name": "v1.0.2"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.1",
+      "id": 421207059,
+      "name": "v1.0.1: template fixes and Dex 1.15.2",
+      "prerelease": false,
+      "published_at": "2026-10-22T21:10:52Z",
+      "tag_name": "v1.0.1"
+    },
+    {
+      "assets": [],
+      "draft": false,
+      "html_url": "https://github.com/exmergo/github-repo-analytics/releases/tag/v1.0.0",
+      "id": 420797383,
+      "name": "v1.0.0: GitHub repo analytics for open-source maintainers",
+      "prerelease": false,
+      "published_at": "2026-10-22T14:02:20Z",
+      "tag_name": "v1.0.0"
+    }
+  ],
+  "repository": "exmergo/github-repo-analytics",
+  "stars": 7,
+  "watchers": 0
+}
