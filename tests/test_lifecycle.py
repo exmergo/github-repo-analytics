@@ -9,6 +9,7 @@ from oss_analytics.lifecycle import (
     assert_findings,
     build,
     check,
+    findings,
     publish,
     require_verified_build,
 )
@@ -99,6 +100,20 @@ def test_dex_findings_and_skips_cannot_pass_silently():
         assert_findings(result)
     volume = {"data": {"findings": [{"severity": "high", "axis": "volume"}]}}
     assert_findings(volume, structural_only=True)
+
+
+def test_reviewed_definition_drift_blocks_once_with_acceptance_guidance():
+    added = {"axis": "semantic", "code": "definition_added", "severity": "low"}
+    # Maintain repeats each finding under its axis.
+    result = {"data": {"findings": [added], "axes": {"semantic": {"findings": [added]}}}}
+    assert findings(result) == [added]
+    with pytest.raises(ValidationError, match="accept_baseline=true") as error:
+        assert_findings(result, structural_only=True)
+    assert str(error.value).count("definition_added") == 1
+    grain = {"axis": "grain", "code": "grain_broken", "severity": "high"}
+    with pytest.raises(ValidationError) as error:
+        assert_findings({"data": {"findings": [added, grain]}})
+    assert "accept_baseline" not in str(error.value)
 
 
 @pytest.mark.parametrize("verification", [None, {}, {"ran": False}])

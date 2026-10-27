@@ -6,7 +6,7 @@ Enable `ANALYTICS_ENABLED=true` after setup. The workflow runs at 04:25 UTC or b
 
 The workflow persists traffic and supplemental raw observations before validation. It then imports one immutable candidate across all configured projects, restores the accepted baseline, builds through Dex, checks the metrics and maintenance findings, and enforces freshness before publishing. `published.json` names the successful input/code commits and dependency-lock hash. A failure keeps the preceding publication pointer.
 
-The very first successful build establishes a baseline. For a reviewed structural/metric change, manually dispatch with `accept_baseline=true`. The new baseline is generated only after the candidate builds and metric execution checks succeed. Normal scheduled runs never replace a baseline to hide drift.
+The very first successful build establishes a baseline. For a reviewed structural/metric change, manually dispatch with `accept_baseline=true` (see [Accepting a reviewed change](#accepting-a-reviewed-change)). The new baseline is generated only after the candidate builds and metric execution checks succeed. Normal scheduled runs never replace a baseline to hide drift.
 
 For an optional real external-source smoke test, dispatch with `live_smoke=true`. Pull-request checks use synthetic inputs and do not receive collection secrets.
 
@@ -38,6 +38,16 @@ Publication provenance stores the immediate approved data/code revisions, lockfi
 If an older installation reports `source file exceeds 32 MiB` while reading `published.json`, update to v1.1.0 or later and manually run collection/publication. CI imports its explicitly pinned raw candidate without reading the old publication pointer, then builds and checks before writing a compact replacement. For a single configured source, local `sync --revision <full-raw-commit-sha>` provides the same recovery entry point; follow it with build and check. Review any intended baseline change before accepting it. Ordinary imports continue using the approved pointer, and the download-size guard remains enforced.
 
 Raw inputs survive a failed analytics check. A malformed new input cannot replace a previous sync candidate; an interrupted/failed build cannot replace the previous DuckDB file. The last published candidate remains available even if newer raw commits have failures. Remove unused local `.data/inputs/` generations only after confirming they are not referenced by `.data/sync.json` or `.data/build.json`.
+
+### Accepting a reviewed change
+
+CI compares each run against the baseline it last published on the data branch, not against the `.dex/snapshot.json` committed with the code. Merging a pull request that adds or changes metrics or semantic models therefore makes the next run stop at *Check model and metric contracts* with `definition_added` or `definition_changed` findings until someone accepts the change. The raw data is already saved.
+
+1. Confirm the findings name only the definitions the merged pull request reviewed, and that the other findings in the Maintain output (new tables and models, volume, cardinality) are explained.
+2. Run **Collect and validate repository analytics** manually from the default branch with **accept_baseline** checked. The new baseline is taken only after the build and metric queries succeed, and the run then checks and publishes against it.
+3. Close the failure issue once that run succeeds.
+
+Dispatch right after merging such a change, so no scheduled run fails in between. An unexplained definition finding is a real regression: investigate it rather than accepting it.
 
 ### Adding a repository
 
