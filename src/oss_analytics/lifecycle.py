@@ -43,13 +43,16 @@ def dex(root: Path, *arguments: str, database: Path | None = None) -> dict:
 
 def findings(result: dict) -> list[dict]:
     """Dex nests findings by axis; inspect all of them, including verification."""
-    found = []
+    found = {}
 
     def walk(value):
         if isinstance(value, dict):
             for key, child in value.items():
                 if key == "findings" and isinstance(child, list):
-                    found.extend(x for x in child if isinstance(x, dict))
+                    # Maintain lists each finding both in total and under its axis.
+                    for x in child:
+                        if isinstance(x, dict):
+                            found.setdefault(json.dumps(x, sort_keys=True, default=str), x)
                 else:
                     walk(child)
         elif isinstance(value, list):
@@ -57,7 +60,7 @@ def findings(result: dict) -> list[dict]:
                 walk(child)
 
     walk(result.get("data", {}))
-    return found
+    return list(found.values())
 
 
 def assert_findings(result: dict, *, structural_only=False, expected_nulls=None):
@@ -79,7 +82,17 @@ def assert_findings(result: dict, *, structural_only=False, expected_nulls=None)
         ):
             bad.append(finding)
     if bad:
-        raise ValidationError("Dex reported blocking findings: " + json.dumps(bad))
+        message = "Dex reported blocking findings: " + json.dumps(bad)
+        if all(
+            f.get("axis") == "semantic" and f.get("code", "").startswith("definition_") for f in bad
+        ):
+            # A merged definition change needs an explicit acceptance, never an automatic one.
+            message += (
+                ". Metric definitions differ from the accepted baseline. If they match a"
+                " reviewed change, accept it with `oss-analytics baseline` (CI: dispatch"
+                " with accept_baseline=true); see docs/operations.md#accepting-a-reviewed-change"
+            )
+        raise ValidationError(message)
 
 
 def require_verified_build(result: dict):
