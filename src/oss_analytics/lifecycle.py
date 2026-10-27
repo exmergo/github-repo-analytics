@@ -86,13 +86,84 @@ def assert_findings(result: dict, *, structural_only=False, expected_nulls=None)
         if all(
             f.get("axis") == "semantic" and f.get("code", "").startswith("definition_") for f in bad
         ):
-            # A merged definition change needs an explicit acceptance, never an automatic one.
+            # A definition change is accepted by committing its snapshot, never automatically.
             message += (
-                ". Metric definitions differ from the accepted baseline. If they match a"
-                " reviewed change, accept it with `oss-analytics baseline` (CI: dispatch"
-                " with accept_baseline=true); see docs/operations.md#accepting-a-reviewed-change"
+                ". Metric definitions differ from the accepted baseline. If this is a reviewed"
+                " change, accept it with `oss-analytics baseline` and commit .dex/snapshot.json"
+                " with it; see docs/lifecycle.md#the-committed-and-published-baselines"
             )
         raise ValidationError(message)
+
+
+# Findings about the project itself rather than the warehouse it was built into.
+PROJECT_FINDINGS = (
+    "definition_",
+    "declaration_",
+    "model_",
+    "semantic_vendor_changed",
+    "semantic_format_changed",
+)
+
+
+def check_definitions(root: Path) -> dict:
+    """Hold this commit's models and definitions to the committed `.dex/snapshot.json`.
+
+    The committed snapshot is the reviewed acceptance of the project. Anything it would
+    block here was changed without its accepted snapshot being committed.
+    """
+    built = _current_build(root, "checking definitions")
+    snapshot = root / ".dex/snapshot.json"
+    if not snapshot.exists():
+        raise ValidationError("no committed .dex/snapshot.json to check definitions against")
+    project = []
+    for command in ["schema", "semantic"]:
+        result = dex(root, "maintain", command)
+        project.extend(
+            f for f in findings(result) if f.get("code", "").startswith(PROJECT_FINDINGS)
+        )
+    # The same policy as `check`, applied to the project half alone.
+    assert_findings({"data": {"findings": project}}, structural_only=True)
+    record = {
+        "checked_at": now_iso(),
+        "code_digest": code_digest(root),
+        "input_directory": built["inputs"]["directory"],
+        "snapshot_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
+        "reported": project,
+    }
+    write_json(root / ".data/definitions.json", record)
+    return record
+
+
+def adopt_definitions(root: Path, published: Path) -> dict:
+    """Combine the reviewed definitions with the last published warehouse state.
+
+    Replaces `.dex/snapshot.json` with the published baseline, then lets Dex re-pin only
+    the project layers. Warehouse drift is still measured against what was last validated.
+    """
+    _current_build(root, "adopting definitions")
+    checked = read_json(root / ".data/definitions.json")
+    snapshot = root / ".dex/snapshot.json"
+    if (
+        not checked
+        or checked["code_digest"] != code_digest(root)
+        or not snapshot.exists()
+        or checked["snapshot_sha256"] != hashlib.sha256(snapshot.read_bytes()).hexdigest()
+    ):
+        raise ValidationError(
+            "run check-definitions against the committed snapshot before adopting them"
+        )
+    warehouse = json.loads(published.read_text())
+    shutil.copy2(published, snapshot)
+    result = dex(root, "maintain", "snapshot", "--project-only")
+    # Dex reports carried_forward as false even here (exmergo/dex#877), so confirm
+    # the warehouse evidence directly.
+    pinned = result.get("data", {}).get("baseline", {})
+    if (pinned.get("from"), pinned.get("cache_updated_at")) != (
+        warehouse.get("warehouse_from"),
+        warehouse.get("cache_updated_at"),
+    ):
+        raise ValidationError("Dex did not carry the published warehouse baseline forward")
+    return result
 
 
 def require_verified_build(result: dict):
@@ -190,14 +261,20 @@ def smoke_metrics(root: Path, *, database=None) -> list[str]:
     return tested
 
 
-def check(root: Path) -> dict:
+def _current_build(root: Path, action: str) -> dict:
+    """The last build, refusing one that no longer matches the definitions or inputs."""
     built = read_json(root / ".data/build.json")
     if not built:
-        raise ValidationError("build the dataset before checking it")
+        raise ValidationError(f"build the dataset before {action}")
     if built.get("code_digest") != code_digest(root):
-        raise ValidationError("definitions changed since the last build; rebuild before checking")
+        raise ValidationError(f"definitions changed since the last build; rebuild before {action}")
     if read_json(root / ".data/sync.json", {}).get("directory") != built["inputs"]["directory"]:
-        raise ValidationError("new inputs have not been built; build before checking")
+        raise ValidationError(f"new inputs have not been built; build before {action}")
+    return built
+
+
+def check(root: Path) -> dict:
+    built = _current_build(root, "checking")
     built["validated"] = False
     write_json(root / ".data/build.json", built)
     if not (root / ".dex/snapshot.json").exists():
@@ -232,14 +309,8 @@ def check(root: Path) -> dict:
 
 
 def baseline(root: Path) -> dict:
-    built = read_json(root / ".data/build.json")
-    if not built:
-        raise ValidationError("build before accepting a baseline")
+    built = _current_build(root, "accepting a baseline")
     require_verified_build(built.get("build", {}))
-    if built.get("code_digest") != code_digest(root):
-        raise ValidationError("definitions changed since the last build; rebuild before baselining")
-    if read_json(root / ".data/sync.json", {}).get("directory") != built["inputs"]["directory"]:
-        raise ValidationError("new inputs have not been built; build before baselining")
     return dex(root, "maintain", "snapshot")
 
 

@@ -74,9 +74,25 @@ uv run --frozen oss-analytics baseline
 uv run --frozen oss-analytics check
 ```
 
-Commit the source SQL/YAML edits through your normal review process. The scheduled publication retains the generated baseline and map on the data branch; new agents can recover that evidence. Do not refresh a baseline simply to conceal an unexplained failure.
+Commit the source SQL/YAML edits and the accepted `.dex/snapshot.json` together, through your normal review process. The scheduled workflow adopts those definitions once they reach the default branch (see [the committed and published baselines](#the-committed-and-published-baselines)). Do not refresh a baseline simply to conceal an unexplained failure.
 
 Review and commit `.dex/snapshot.json` like a lockfile, along with the plan and evidence for an intentional change. Keep the comparison against the previous baseline. `.dex/cache.json`, `.dex/drift.json`, `.dex/plans/`, and `.dex/review/` are visible to Git; local query ledgers and warehouse files are ignored. Use `dex transform plans` to list plans, rather than treating their internal JSON format as a command interface.
+
+## The committed and published baselines
+
+The scheduled workflow checks production data, not the warehouse you built locally, so it keeps two Dex baselines:
+
+- **Committed** `.dex/snapshot.json`: your accepted project definitions (models, semantic models, metrics, declarations). A pull request that changes them commits the snapshot accepting them.
+- **Published** `analytics-state/snapshot.json` on the data branch: the last validated warehouse state. CI writes it; nobody edits it.
+
+Each scheduled run, after the build:
+
+1. `oss-analytics check-definitions` runs `dex maintain schema` and `dex maintain semantic` against the committed snapshot. Any change that `check` would block is a change committed without its accepted snapshot, so the run stops. Smaller project changes, such as a new annotation, are reported in its output.
+2. `oss-analytics adopt-definitions` installs the published baseline and runs `dex maintain snapshot --project-only`. Dex re-pins the definitions you committed and carries the published warehouse evidence forward unchanged.
+3. `oss-analytics check` runs every Maintain axis. Definition drift is now zero by construction, so every finding is about the data.
+4. Only after the check passes does `oss-analytics baseline` advance the published baseline, which is then published with the run.
+
+Never copy the published snapshot over the committed one: that throws away definitions a pull request already accepted. The integration suite holds this commit's models to the committed snapshot, so a pull request that changes them without committing its accepted snapshot fails before merge.
 
 ## Deliberate regression checks
 

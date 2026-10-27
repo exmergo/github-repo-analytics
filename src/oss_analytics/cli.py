@@ -47,6 +47,13 @@ def main():
     candidate.add_argument("--data-repository", required=True)
     for name in ["build", "check", "baseline", "questions", "events"]:
         sub.add_parser(name)
+    sub.add_parser(
+        "check-definitions", help="hold models and definitions to the committed snapshot"
+    )
+    adopt = sub.add_parser(
+        "adopt-definitions", help="CI: pair the checked definitions with a published baseline"
+    )
+    adopt.add_argument("--published", required=True, type=Path)
     status = sub.add_parser("status")
     status.add_argument("--json", action="store_true", help="JSON is the default output")
     status.add_argument("--require-fresh", action="store_true")
@@ -111,6 +118,10 @@ def dispatch(root, args):
         )
     if args.command in {"build", "check", "baseline"}:
         return getattr(lifecycle, args.command)(root)
+    if args.command == "check-definitions":
+        return lifecycle.check_definitions(root)
+    if args.command == "adopt-definitions":
+        return lifecycle.adopt_definitions(root, args.published.resolve())
     if args.command == "status":
         from .status import status
 
