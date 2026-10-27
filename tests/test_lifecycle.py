@@ -1,20 +1,28 @@
 import hashlib
+import json
+import shutil
 from datetime import datetime, timezone
+from pathlib import Path
 
 import pytest
 
 from oss_analytics.io import read_json
 from oss_analytics.lifecycle import (
     ValidationError,
+    adopt_definitions,
     assert_findings,
+    baseline,
     build,
     check,
+    check_definitions,
     findings,
     publish,
     require_verified_build,
 )
 from oss_analytics.questions import answer
 from oss_analytics.status import status
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_failed_build_retains_database_and_previous_checks(workspace):
@@ -92,6 +100,62 @@ def test_maintenance_surfaces_structural_and_semantic_drift(workspace):
         check(workspace)
 
 
+def test_reviewed_definitions_are_adopted_over_a_stale_published_baseline(workspace):
+    # The committed snapshot accepts the current definitions; the published one predates them.
+    snapshot = workspace / ".dex/snapshot.json"
+    committed = snapshot.read_bytes()
+    semantic = workspace / "models/semantic.yml"
+    text = semantic.read_text()
+    semantic.write_text(text.replace("expr: views_total", "expr: clones_total", 1))
+    build(workspace)
+    baseline(workspace)
+    published = workspace / ".data/published-snapshot.json"
+    shutil.copy2(snapshot, published)
+    semantic.write_text(text)
+    snapshot.write_bytes(committed)
+    build(workspace)
+
+    check_definitions(workspace)
+    adopt_definitions(workspace, published)
+    check(workspace)
+    # Warehouse drift is still measured against the published evidence.
+    pinned = json.loads(snapshot.read_text())["cache_updated_at"]
+    assert pinned == json.loads(published.read_text())["cache_updated_at"]
+
+    # Restoring the published baseline over the committed one discards reviewed definitions.
+    shutil.copy2(published, snapshot)
+    with pytest.raises(ValidationError, match="definition_changed"):
+        check(workspace)
+
+
+def test_committed_snapshot_accepts_this_commits_definitions(workspace):
+    # A pull request that changes models or metrics must commit the snapshot accepting them.
+    shutil.copy2(ROOT / ".dex/snapshot.json", workspace / ".dex/snapshot.json")
+    check_definitions(workspace)
+
+
+def test_definitions_changed_without_their_snapshot_are_refused(workspace):
+    semantic = workspace / "models/semantic.yml"
+    text = semantic.read_text()
+    semantic.write_text(text.replace("expr: views_total", "expr: clones_total", 1))
+    build(workspace)
+    with pytest.raises(ValidationError, match="commit .dex/snapshot.json"):
+        check_definitions(workspace)
+    with pytest.raises(ValidationError, match="run check-definitions"):
+        adopt_definitions(workspace, workspace / ".data/published-snapshot.json")
+
+
+def test_an_annotation_is_reported_but_not_blocked_as_a_definition(workspace):
+    seed = workspace / "seeds/annotations.csv"
+    seed.write_text(
+        seed.read_text()
+        + "release,exmergo/dex,2026-07-28,release,Release post,https://example.com/release\n"
+    )
+    build(workspace)
+    reported = check_definitions(workspace)["reported"]
+    assert any(f["code"] == "model_changed" for f in reported)
+
+
 def test_dex_findings_and_skips_cannot_pass_silently():
     result = {
         "data": {"verification": {"findings": [{"severity": "high", "code": "grain_broken"}]}}
@@ -107,13 +171,13 @@ def test_reviewed_definition_drift_blocks_once_with_acceptance_guidance():
     # Maintain repeats each finding under its axis.
     result = {"data": {"findings": [added], "axes": {"semantic": {"findings": [added]}}}}
     assert findings(result) == [added]
-    with pytest.raises(ValidationError, match="accept_baseline=true") as error:
+    with pytest.raises(ValidationError, match="commit .dex/snapshot.json") as error:
         assert_findings(result, structural_only=True)
     assert str(error.value).count("definition_added") == 1
     grain = {"axis": "grain", "code": "grain_broken", "severity": "high"}
     with pytest.raises(ValidationError) as error:
         assert_findings({"data": {"findings": [added, grain]}})
-    assert "accept_baseline" not in str(error.value)
+    assert "commit .dex/snapshot.json" not in str(error.value)
 
 
 @pytest.mark.parametrize("verification", [None, {}, {"ran": False}])

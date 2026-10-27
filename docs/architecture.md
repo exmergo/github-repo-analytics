@@ -33,7 +33,7 @@ Local artifacts:
 
 - `.dex/config.yml`: committed non-secret connector/project configuration.
 - `.dex/cache.json`: generated exploration evidence, visible to Git for review.
-- `.dex/snapshot.json`: accepted maintenance baseline; commit it like a lockfile. CI also preserves its evolving publication baseline on the data branch.
+- `.dex/snapshot.json`: the accepted project definitions; commit it like a lockfile, in the same pull request as the models and metrics it accepts. The data branch keeps the separate published baseline (`analytics-state/snapshot.json`), the last validated warehouse state. CI combines the two; see [the committed and published baselines](lifecycle.md#the-committed-and-published-baselines).
 - `.dex/drift.json`, `.dex/plans/`: generated drift evidence and reviewable change plans, visible to Git.
 - `.dex/review/`: saved command envelopes and the audit index; includes limitations and superseded/refused attempts.
 - `.dex/*.jsonl`: local query ledgers, ignored.

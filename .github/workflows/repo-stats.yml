@@ -117,15 +117,17 @@ jobs:
           version: "0.13.1"
           enable-cache: true
       - run: bash scripts/bootstrap.sh
-      - name: Pin raw candidate and restore previous baseline
+      - name: Pin raw candidate and set aside the published baseline
         id: candidate
         run: |
           git fetch origin github-repo-stats
           candidate=$(git rev-parse FETCH_HEAD)
           echo "sha=$candidate" >> "$GITHUB_OUTPUT"
           git worktree add .data-branch "$candidate"
+          # The committed .dex/snapshot.json holds the reviewed definitions; never overwrite it.
           if test -f .data-branch/analytics-state/snapshot.json; then
-            cp .data-branch/analytics-state/snapshot.json .dex/snapshot.json
+            mkdir -p .data
+            cp .data-branch/analytics-state/snapshot.json .data/published-snapshot.json
           fi
       - name: Import pinned candidate
         env:
@@ -135,17 +137,25 @@ jobs:
         # An internal candidate can contain multiple projects; each uses this same commit.
         run: uv run --frozen oss-analytics sync-candidate --revision "$CANDIDATE_SHA" --data-repository "$DATA_REPOSITORY"
       - run: uv run --frozen oss-analytics build
-      - name: Establish or explicitly accept maintenance baseline
+      - name: Check definitions against the committed baseline
+        run: uv run --frozen oss-analytics check-definitions
+      # Reviewed definitions come from the commit; warehouse drift is measured against the
+      # last published state, unless a reviewed data change is explicitly accepted.
+      - name: Adopt reviewed definitions, or establish or accept a baseline
         env:
           ACCEPT_BASELINE: ${{ inputs.accept_baseline || false }}
         run: |
-          if ! test -f .dex/snapshot.json || test "$ACCEPT_BASELINE" = true; then
+          if ! test -f .data/published-snapshot.json || test "$ACCEPT_BASELINE" = true; then
             uv run --frozen oss-analytics baseline
+          else
+            uv run --frozen oss-analytics adopt-definitions --published .data/published-snapshot.json
           fi
       - name: Check model and metric contracts
         run: |
           uv run --frozen oss-analytics check
           uv run --frozen oss-analytics status --require-fresh
+      - name: Advance the published baseline to the validated state
+        run: uv run --frozen oss-analytics baseline
       - name: Optional external example smoke test
         if: inputs.live_smoke
         env:
