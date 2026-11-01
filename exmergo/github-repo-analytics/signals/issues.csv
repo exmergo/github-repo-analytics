@@ -27,3 +27,5 @@ number,kind,created_at,closed_at,merged_at,author_association
 26,pull_request,2026-10-27T09:21:45Z,2026-10-27T09:30:36Z,2026-10-27T09:30:36Z,MEMBER
 27,pull_request,2026-10-27T11:41:32Z,2026-10-27T11:53:41Z,2026-10-27T11:53:41Z,MEMBER
 28,pull_request,2026-10-27T21:15:25Z,,,NONE
+29,issue,2026-10-31T16:53:35Z,,,MEMBER
+30,issue,2026-10-31T16:55:45Z,,,MEMBER
