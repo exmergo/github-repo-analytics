@@ -2,7 +2,7 @@
   "data_repository": "exmergo/dex",
   "expected_refresh_hours": 24,
   "files": {
-    "exmergo/dex/ghrs-data/forks.csv": "73d74391913a3a37c6a79de88302a28081aded8a918dfa60002d18569024483d",
+    "exmergo/dex/ghrs-data/forks.csv": "14a4980687df3ec608c6d0e851ec92bb7052faa1d12cc86cdc9aecf282a726ae",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
     "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
@@ -243,11 +243,13 @@
     "exmergo/dex/ghrs-data/snapshots/2026-10-31_042738_top_referrers_snapshot.csv": "be9e84b4cb69eb5ecd0cf726606c332590581f484e487905352d016cfc54ab69",
     "exmergo/dex/ghrs-data/snapshots/2026-11-01_042734_top_paths_snapshot.csv": "3f4b20e03c9d05e9760cb314f9038bb57cad3cd0afec45fde80cec1b47e9a229",
     "exmergo/dex/ghrs-data/snapshots/2026-11-01_042734_top_referrers_snapshot.csv": "67ad439fa3b826849d105428b101da37e3cfa458bf7927e9ab3ec46fce596a94",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-02_042841_top_paths_snapshot.csv": "500cebec3310a98e1a0be4130b29d0f5a813000293c271abbcdb292fc0fcb5a8",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-02_042841_top_referrers_snapshot.csv": "4638136b659b2f307bddd78a2222245e507a819e2a97778decc36222e14f0d6d",
     "exmergo/dex/ghrs-data/stargazers.csv": "3b680227d89b732329d6832bf31befa97872dd9493658c55c1d2c7cfa8288534",
-    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "6f1a0f7ff7bf864940d2a0a5bb3c40e61141b80383a913d14b136a3f1e2b6d9a"
+    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "5021a9240ad23963860a026ec9b209189551615f3ca1c4951440976f463e5ca8"
   },
   "publication": null,
   "repository": "exmergo/dex",
-  "source_head": "9e743d03573995f0ec35d155fa378ea70597f4ca",
-  "source_revision": "9e743d03573995f0ec35d155fa378ea70597f4ca"
+  "source_head": "e50d52a8ea9ef7140e53fa3371636d4cdf12fb5e",
+  "source_revision": "e50d52a8ea9ef7140e53fa3371636d4cdf12fb5e"
 }
