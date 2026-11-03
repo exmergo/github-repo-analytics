@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools==79.0.1"]
+requires = ["setuptools==84.2.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -30,7 +30,7 @@ classifiers = [
   "Topic :: Software Development :: Version Control :: Git",
 ]
 dependencies = [
-  "exmergo-dex-core[duckdb,semantic]==1.16.1",
+  "exmergo-dex-core[duckdb,semantic]==1.16.6",
   "pyyaml>=6,<7",
 ]
 
