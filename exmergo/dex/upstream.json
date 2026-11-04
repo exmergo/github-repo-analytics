@@ -2,7 +2,7 @@
   "data_repository": "exmergo/dex",
   "expected_refresh_hours": 24,
   "files": {
-    "exmergo/dex/ghrs-data/forks.csv": "14a4980687df3ec608c6d0e851ec92bb7052faa1d12cc86cdc9aecf282a726ae",
+    "exmergo/dex/ghrs-data/forks.csv": "ad2712a6866cd4f123f472c712077731e3c70c83120feb64e1726a3a6e88e835",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
     "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
@@ -245,11 +245,15 @@
     "exmergo/dex/ghrs-data/snapshots/2026-11-01_042734_top_referrers_snapshot.csv": "67ad439fa3b826849d105428b101da37e3cfa458bf7927e9ab3ec46fce596a94",
     "exmergo/dex/ghrs-data/snapshots/2026-11-02_042841_top_paths_snapshot.csv": "500cebec3310a98e1a0be4130b29d0f5a813000293c271abbcdb292fc0fcb5a8",
     "exmergo/dex/ghrs-data/snapshots/2026-11-02_042841_top_referrers_snapshot.csv": "4638136b659b2f307bddd78a2222245e507a819e2a97778decc36222e14f0d6d",
-    "exmergo/dex/ghrs-data/stargazers.csv": "3b680227d89b732329d6832bf31befa97872dd9493658c55c1d2c7cfa8288534",
-    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "5021a9240ad23963860a026ec9b209189551615f3ca1c4951440976f463e5ca8"
+    "exmergo/dex/ghrs-data/snapshots/2026-11-03_042802_top_paths_snapshot.csv": "a0ee95a8ef519af63120ef697fb154fb68c140b4471b321c82b540f5e0179695",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-03_042802_top_referrers_snapshot.csv": "d30a5efa4ad0966b206bb4d22006d363e02fafc4abcfa30f4e1af79787a69951",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-04_042753_top_paths_snapshot.csv": "1791e3cfc3644c0892dc80db2b9cd9abe2568706d080daef4e9f270be369c147",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-04_042753_top_referrers_snapshot.csv": "c776e0234717e129cbe08d2fa04b37c2c03b16ed804ee0393ad170d5ea84c5ad",
+    "exmergo/dex/ghrs-data/stargazers.csv": "b473dd7516650ec2c31fafc7ecfd3cfff8b12e3bc8bcfd8be09cc88587cde56e",
+    "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "850c20e4f18d339456105d6c1be59abfaebbbb4b283e5032eb5654a09f4a8325"
   },
   "publication": null,
   "repository": "exmergo/dex",
-  "source_head": "e50d52a8ea9ef7140e53fa3371636d4cdf12fb5e",
-  "source_revision": "e50d52a8ea9ef7140e53fa3371636d4cdf12fb5e"
+  "source_head": "74884c7e8263b4f54105ec7b01027ce14bf81655",
+  "source_revision": "74884c7e8263b4f54105ec7b01027ce14bf81655"
 }
