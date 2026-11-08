@@ -19,6 +19,7 @@ Comparison arithmetic on returned governed metrics is allowed. Do not recreate m
 - `stars_observed`/`forks_observed` select the last capture, including decreases. Initial captures and gaps do not establish daily net change.
 - `legacy_*_cumulative` are upstream historical reconstructions at one source revision. They are separate from observed repository totals.
 - Referrer/path metrics describe one reported rolling top-10 window. Null indicates unreported. Period grouping selects the latest snapshot; it does not sum windows.
+- Inspect `quarantined_snapshots` and `latest_snapshot_availability` in status. A discovery snapshot with uniques greater than total views retains its capture as a null selection barrier. Its counts are unavailable, not zero or a license to substitute an older capture; other endpoints and repositories can remain available.
 - Never filter `is_reported` before selecting the latest time bucket: that can select an older reported observation. Exact-date recipes already handle unreported items.
 - Event comparisons show association. Disclose other events and incomplete windows.
 - `stars_gained`/`stars_from_history` date current stargazers by when they starred. Unstars and deleted forks are invisible, so past totals are lower bounds; use `stars_observed` for the current total. Coverage ends the day before capture; `signals.*.complete` false means GitHub truncated the listing.

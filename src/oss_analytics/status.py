@@ -8,7 +8,7 @@ from pathlib import Path
 
 from .io import read_json
 from .lifecycle import code_digest
-from .warehouse import read as read_warehouse
+from .warehouse import read as read_warehouse, timestamp
 
 
 def status(root: Path, *, at: datetime | None = None) -> dict:
@@ -29,6 +29,7 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
         and checked.get("input_directory") == built["inputs"]["directory"]
     )
     sources = {s["repository"]: s for s in built["inputs"]["sources"]}
+    quarantines = built.get("quarantined_snapshots", [])
     result = []
     with read_warehouse(root) as connection:
         for repo, source in sources.items():
@@ -95,6 +96,15 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
                     "traffic_lag_days": (at.date() - dates[-1]).days if dates else None,
                     "last_observed_totals_at": captures,
                     "latest_snapshots": dict(snapshots),
+                    "latest_snapshot_availability": {
+                        endpoint: not any(
+                            q["repository"] == repo
+                            and q["endpoint"] == endpoint
+                            and timestamp(q["captured_at"]) == stamp
+                            for q in quarantines
+                        )
+                        for endpoint, stamp in snapshots
+                    },
                     "endpoint_age_hours": {
                         name: round(max(0, (at - stamp).total_seconds() / 3600), 2)
                         for name, stamp in endpoint_captures.items()
@@ -115,6 +125,7 @@ def status(root: Path, *, at: datetime | None = None) -> dict:
         "code_digest": digest,
         "synced_at": built["inputs"]["synced_at"],
         "warnings": built.get("warnings", []),
+        "quarantined_snapshots": quarantines,
         "expected_unavailable_fields": checked.get("expected_nullable_fields", {}),
         "repositories": result,
     }

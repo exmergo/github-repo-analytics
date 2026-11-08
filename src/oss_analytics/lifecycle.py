@@ -197,7 +197,8 @@ def build(root: Path) -> dict:
                 shutil.copytree(root / folder, work / folder)
         (work / ".dex").mkdir()
         shutil.copy2(root / ".dex/config.yml", work / ".dex/config.yml")
-        warnings = load(root, manifest, candidate)
+        quarantined_snapshots = []
+        warnings = load(root, manifest, candidate, quarantined_snapshots=quarantined_snapshots)
         result = dex(work, "transform", "build", "--target", "dev", "--verify")
         require_verified_build(result)
         dex(work, "explore", "map", "--use-project", "--verify")
@@ -214,6 +215,7 @@ def build(root: Path) -> dict:
             "code_digest": code_digest(root),
             "inputs": manifest,
             "warnings": warnings,
+            "quarantined_snapshots": quarantined_snapshots,
             "build": result,
             "validated": False,
         }
@@ -378,6 +380,8 @@ def publish(root: Path, destination: Path, data_commit: str, code_commit: str) -
             for source in built["inputs"]["sources"]
         ],
         "metrics_tested": checked["metrics"],
+        "warnings": built.get("warnings", []),
+        "quarantined_snapshots": built.get("quarantined_snapshots", []),
     }
     destination.mkdir(parents=True, exist_ok=True)
     state = destination / "analytics-state"

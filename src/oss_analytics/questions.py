@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from .lifecycle import ValidationError, dex
-from .warehouse import read as read_warehouse
+from .warehouse import read as read_warehouse, timestamp
 
 METRICS = [
     "views",
@@ -370,6 +370,19 @@ def result_values(envelope: dict) -> dict:
     raise ValidationError("unexpected Dex result shape")
 
 
+def snapshot_quarantine(response, repository, endpoint, captured_at):
+    return next(
+        (
+            q
+            for q in response["evidence"].get("quarantined_snapshots", [])
+            if q["repository"] == repository
+            and q["endpoint"] == endpoint
+            and timestamp(q["captured_at"]) == captured_at
+        ),
+        None,
+    )
+
+
 def discovery_answer(root, response, repository, kind, endpoint, selected):
     """Use source item names as vocabulary, and MetricFlow for every reported count."""
 
@@ -388,6 +401,14 @@ def discovery_answer(root, response, repository, kind, endpoint, selected):
                     "reason": f"No successful {endpoint} snapshot on {day}; no neighboring date was substituted.",
                 }
             captures.append(row[0])
+            quarantine = snapshot_quarantine(response, repository, endpoint, row[0])
+            if quarantine:
+                return {
+                    **response,
+                    "available": False,
+                    "reason": f"Quarantined {endpoint} snapshot on {day}: {quarantine['reason']}; no older capture was substituted.",
+                    "quarantine": quarantine,
+                }
         placeholders = ",".join("?" for _ in days)
         # Limit vocabulary to the union of these top-10 snapshots, keeping result sets bounded.
         items = [
@@ -579,6 +600,10 @@ def referrer_trend(root, response, repository, start, end):
             return {**response, "available": False, "reason": "No referrer snapshots"}
         end = end or str(bounds[1] + timedelta(days=1))
         start = start or str(date.fromisoformat(end) - timedelta(days=42))
+        captures = c.execute(
+            "select date, captured_at from fct_snapshot_status where repository = ? and endpoint = 'referrers' and date >= ? and date < ? order by date",
+            [repository, start, end],
+        ).fetchall()
         # Follow the latest reported top 10 back in time. The dense grid keeps every snapshot
         # date for every item, so naming items cannot change which snapshot is latest.
         items = [
@@ -597,6 +622,25 @@ def referrer_trend(root, response, repository, start, end):
     window_end = date.fromisoformat(end)
     while window_end > date.fromisoformat(start):
         window_start = max(window_end - timedelta(days=7), date.fromisoformat(start))
+        selected = [stamp for day, stamp in captures if window_start <= day < window_end]
+        quarantine = (
+            snapshot_quarantine(response, repository, "referrers", selected[-1])
+            if selected
+            else None
+        )
+        if quarantine:
+            windows.append(
+                {
+                    "start": str(window_start),
+                    "end_exclusive": str(window_end),
+                    "available": False,
+                    "reason": f"Latest referrer snapshot is quarantined: {quarantine['reason']}",
+                    "quarantine": quarantine,
+                    "views_14d": {item: None for item in items},
+                }
+            )
+            window_end = window_start
+            continue
         envelope = query(
             root,
             "referrer_views_14d",
@@ -618,7 +662,7 @@ def referrer_trend(root, response, repository, start, end):
         window_end = window_start
     return {
         **response,
-        "available": bool(items),
+        "available": bool(items) and any(w.get("available", True) for w in windows),
         "period": {"start": start, "end_exclusive": end},
         "referrers": items,
         "windows": windows[::-1],
