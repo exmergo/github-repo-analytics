@@ -30,3 +30,5 @@ number,kind,created_at,closed_at,merged_at,author_association
 29,issue,2026-10-31T16:53:35Z,,,MEMBER
 30,issue,2026-10-31T16:55:45Z,,,MEMBER
 31,pull_request,2026-11-03T21:16:06Z,,,NONE
+32,issue,2026-11-08T04:29:29Z,,,NONE
+33,pull_request,2026-11-08T14:49:45Z,2026-11-08T15:08:24Z,2026-11-08T15:08:24Z,MEMBER
