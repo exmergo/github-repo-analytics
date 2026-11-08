@@ -24,6 +24,8 @@ Each project is collected in its own matrix job. One failing project does not bl
 
 A failed scheduled run opens, or comments on, a single **Analytics collection is failing** issue that links the run. Close it once a run succeeds. Signal collection is independent: a package-registry outage is recorded in `signals/capture.json` and `status` warnings, keeps the previous download history, and never blocks GitHub data.
 
+An inconsistent discovery snapshot (uniques greater than total views) is quarantined with a warning instead of blocking unrelated analytics. Inspect `status --json` or `published.json` for `quarantined_snapshots`; the original CSV stays on the data branch. Its counts are unavailable, including in exact-date comparisons, until a later valid capture is selected. Historical quarantines remain visible and do not prevent subsequent updates. Do not delete the raw snapshot, clamp its counts, or refresh the baseline to hide it. See the [snapshot contract](metrics.md#rolling-discovery-snapshots).
+
 A green run therefore does not prove every signal was collected. After the first run, and after rotating the token, read the warnings in the *Check model and metric contracts* step's `status` output. Each one names the signal and GitHub's own reason, for example `stargazers: api.github.com HTTP 403 ("Resource not accessible by personal access token")`, which means the token does not include that repository.
 
 If collection stops:

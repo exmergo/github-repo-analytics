@@ -82,7 +82,9 @@ def csv_rows(path: Path, required: list[str], warnings: list[str]) -> list[dict]
     return result
 
 
-def parse_inputs(root: Path, manifest: dict) -> tuple[dict[str, list], list[str]]:
+def parse_inputs(
+    root: Path, manifest: dict, *, quarantined_snapshots: list[dict] | None = None
+) -> tuple[dict[str, list], list[str]]:
     base = (root / manifest["directory"]).resolve()
     if not base.is_relative_to(root.resolve() / ".data"):
         raise ValueError("input directory must be inside .data")
@@ -155,6 +157,8 @@ def parse_inputs(root: Path, manifest: dict) -> tuple[dict[str, list], list[str]
             seen = set()
             if len(rows) > 10:
                 raise ValueError(f"{path.name}: expected at most ten reported items")
+            snapshot_rows = []
+            invalid_rows = []
             for rank, r in enumerate(rows, 1):
                 item = r[field]
                 if item in seen:
@@ -162,8 +166,33 @@ def parse_inputs(root: Path, manifest: dict) -> tuple[dict[str, list], list[str]
                 seen.add(item)
                 views, uniques = count(r["views_total"]), count(r["views_unique"])
                 if uniques > views:
-                    raise ValueError(f"{path.name}: uniques exceed total views")
-                tables["discovery"].append((repo, endpoint, captured, item, views, uniques, rank))
+                    invalid_rows.append(
+                        {"row": rank + 1, "item": item, "views": views, "uniques": uniques}
+                    )
+                snapshot_rows.append((repo, endpoint, captured, item, views, uniques, rank))
+            if invalid_rows:
+                # Retain the capture as a selection barrier, but exclude the whole report.
+                # Dropping the capture would resurrect older counts; dropping just the bad
+                # item would present a partial top ten as a complete successful report.
+                reason = "uniques exceed total views"
+                warnings.append(
+                    f"{repo}: quarantined {endpoint} snapshot {path.name}: {reason}; "
+                    f"invalid rows: {invalid_rows}; raw CSV retained"
+                )
+                if quarantined_snapshots is not None:
+                    quarantined_snapshots.append(
+                        {
+                            "repository": repo,
+                            "endpoint": endpoint,
+                            "captured_at": captured.isoformat(),
+                            "source_file": path.name,
+                            "source_revision": source["source_revision"],
+                            "reason": reason,
+                            "invalid_rows": invalid_rows,
+                        }
+                    )
+            else:
+                tables["discovery"].extend(snapshot_rows)
         captures = set()
         releases = {}
         github_id = count(source["github_id"]) if source.get("github_id") is not None else None
@@ -349,8 +378,10 @@ def read(root: Path) -> duckdb.DuckDBPyConnection:
     )
 
 
-def load(root: Path, manifest: dict, database: Path) -> list[str]:
-    tables, warnings = parse_inputs(root, manifest)
+def load(
+    root: Path, manifest: dict, database: Path, *, quarantined_snapshots: list[dict] | None = None
+) -> list[str]:
+    tables, warnings = parse_inputs(root, manifest, quarantined_snapshots=quarantined_snapshots)
     database.parent.mkdir(parents=True, exist_ok=True)
     with duckdb.connect(str(database), config={"TimeZone": "UTC"}) as connection:
         connection.execute("begin transaction")

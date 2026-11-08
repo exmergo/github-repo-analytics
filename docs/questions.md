@@ -48,7 +48,11 @@ uv run --frozen dex explore query \
   "select repository, endpoint, date, captured_at from analytics.main.fct_snapshot_status order by date desc"
 ```
 
-This is snapshot metadata, not a second way to calculate metrics. Every count in a recipe is queried through MetricFlow. Example direct metric query:
+This is snapshot metadata, not a second way to calculate metrics. Every count in a recipe is queried through MetricFlow.
+
+Check `quarantined_snapshots` in status before interpreting discovery results. A capture with uniques greater than total views keeps its timestamp but has unavailable counts. Exact-date and comparison recipes return `available: false` with the reason and offending rows; they never substitute an earlier capture. A referrer trend marks each affected window unavailable when that window's latest snapshot is quarantined. Successful empty reports remain distinct from quarantines. Other endpoints and repositories can still be available.
+
+Example direct metric query:
 
 ```bash
 uv run --frozen dex explore semantic query views,clones --local \

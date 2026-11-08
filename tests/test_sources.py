@@ -111,6 +111,60 @@ def test_atomic_immutable_sync_and_repeat(tmp_path):
     assert read_json(root / ".data/sync.json") == second
 
 
+@pytest.mark.parametrize("endpoint,field", [("referrers", "referrer"), ("paths", "url_path")])
+def test_discovery_quarantine_retains_raw_and_discards_whole_snapshot(tmp_path, endpoint, field):
+    root = input_root(tmp_path)
+    files = upstream_files()
+    name = f"exmergo/dex/ghrs-data/snapshots/2026-07-01_042500_top_{endpoint}_snapshot.csv"
+    files[name] = (
+        f"{field},views_total,views_unique\nvalid.example,10,5\nbad.example,2,3\n".encode()
+    )
+    manifest = sync(root, client=FakeGitHub(files), supplement=False)
+    quarantines = []
+    tables, warnings = parse_inputs(root, manifest, quarantined_snapshots=quarantines)
+    assert tables["traffic"]
+    assert len(tables["snapshots"]) == 1
+    assert not tables["discovery"]  # Even the valid row belongs to an unavailable top ten.
+    assert (root / manifest["directory"] / name).read_bytes() == files[name]
+    assert manifest["sources"][0]["files"][name] == hashlib.sha256(files[name]).hexdigest()
+    assert quarantines == [
+        {
+            "repository": "exmergo/dex",
+            "endpoint": endpoint,
+            "captured_at": "2026-07-01T04:25:00+00:00",
+            "source_file": name.rsplit("/", 1)[1],
+            "source_revision": SHA,
+            "reason": "uniques exceed total views",
+            "invalid_rows": [{"row": 3, "item": "bad.example", "views": 2, "uniques": 3}],
+        }
+    ]
+    assert any("quarantined" in warning and "bad.example" in warning for warning in warnings)
+    # Historical anomalies must not poison subsequent syncs.
+    assert (
+        sync(root, client=FakeGitHub(files), supplement=False)["directory"] != manifest["directory"]
+    )
+
+
+@pytest.mark.parametrize(
+    "body,error",
+    [
+        ("bad.example,2,3\nbad.example,10,5\n", "duplicate item"),
+        ("bad.example,2,3\nother.example,-1,0\n", "non-negative integer"),
+        ("bad.example,2,3\nother.example,1,\n", "malformed row"),
+        ("bad.example,2,3\nother.example,1.5,1\n", "non-negative integer"),
+    ],
+)
+def test_discovery_quarantine_does_not_bypass_other_validation(tmp_path, body, error):
+    root = input_root(tmp_path)
+    files = upstream_files()
+    files["exmergo/dex/ghrs-data/snapshots/2026-07-01_042500_top_referrers_snapshot.csv"] = (
+        "referrer,views_total,views_unique\n" + body
+    ).encode()
+    with pytest.raises(ValueError, match=error):
+        sync(root, client=FakeGitHub(files), supplement=False)
+    assert not (root / ".data/sync.json").exists()
+
+
 def test_truncated_tree_does_not_activate(tmp_path):
     root = input_root(tmp_path)
     with pytest.raises(SourceError, match="truncated"):
