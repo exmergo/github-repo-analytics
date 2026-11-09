@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-11-08T15:12:47.046490+00:00",
+  "created_at": "2026-11-09T04:34:04.476086+00:00",
   "connector": "duckdb",
   "tool_version": "1.16.1",
   "warehouse": {
@@ -135,7 +135,7 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:06.375365+00:00",
+        "profiled_at": "2026-11-09T04:32:13.268829+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -345,7 +345,7 @@
             "reason": "url is unique and non-null on all 79 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.6082,
+        "rank_score": 0.6076,
         "data_quality": [],
         "findings": [
           {
@@ -355,7 +355,7 @@
             "detail": "event_id participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:06.541618+00:00",
+        "profiled_at": "2026-11-09T04:32:13.444717+00:00",
         "semantic_models": [
           "events"
         ],
@@ -432,8 +432,8 @@
             "distinct_count": 1,
             "distinct_count_exact": false,
             "is_unique": false,
-            "min_value": "2026-11-08T15:10:35.468546+00:00",
-            "max_value": "2026-11-08T15:10:35.468546+00:00",
+            "min_value": "2026-11-09T04:31:42.675456+00:00",
+            "max_value": "2026-11-09T04:31:42.675456+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -472,7 +472,7 @@
             "reason": "repository_identity is unique and non-null on all 2 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.6612,
+        "rank_score": 0.6611,
         "data_quality": [],
         "findings": [
           {
@@ -482,7 +482,7 @@
             "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:06.654806+00:00",
+        "profiled_at": "2026-11-09T04:32:13.564523+00:00",
         "semantic_models": [
           "repositories"
         ],
@@ -685,7 +685,7 @@
             "detail": "shipped_pr_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:06.842465+00:00",
+        "profiled_at": "2026-11-09T04:32:13.768544+00:00",
         "semantic_models": [
           "fct_deployment_lead_times"
         ],
@@ -850,7 +850,7 @@
             "detail": "deployment_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:06.984183+00:00",
+        "profiled_at": "2026-11-09T04:32:13.921474+00:00",
         "semantic_models": [
           "fct_deployments"
         ],
@@ -859,7 +859,7 @@
       {
         "identifier": "analytics.main.fct_fork_history",
         "object_type": "table",
-        "row_count": 114,
+        "row_count": 115,
         "byte_size": null,
         "columns": [
           {
@@ -867,7 +867,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 115,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -897,7 +897,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 114
+                  "count": 115
                 }
               ],
               "elided": 0
@@ -913,17 +913,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 115,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-17",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 114,
-            "temporal_distinct_periods": 114,
+            "temporal_span": 115,
+            "temporal_distinct_periods": 115,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -947,11 +947,11 @@
                 },
                 {
                   "value": 1,
-                  "count": 11
+                  "count": 13
                 },
                 {
                   "value": 2,
-                  "count": 9
+                  "count": 8
                 },
                 {
                   "value": 3,
@@ -989,17 +989,17 @@
               "fork_history_key"
             ],
             "status": "reported",
-            "reason": "fork_history_key is unique and non-null on all 114 rows, proven by an exact distinct count"
+            "reason": "fork_history_key is unique and non-null on all 115 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 114 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 115 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5468,
+        "rank_score": 0.5465,
         "data_quality": [],
         "findings": [
           {
@@ -1009,7 +1009,7 @@
             "detail": "fork_history_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.068765+00:00",
+        "profiled_at": "2026-11-09T04:32:14.012483+00:00",
         "semantic_models": [
           "fct_fork_history"
         ],
@@ -1018,7 +1018,7 @@
       {
         "identifier": "analytics.main.fct_issues",
         "object_type": "table",
-        "row_count": 1236,
+        "row_count": 1250,
         "byte_size": null,
         "columns": [
           {
@@ -1026,7 +1026,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1236,
+            "distinct_count": 1250,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -1056,7 +1056,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 1203
+                  "count": 1217
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
@@ -1076,11 +1076,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1203,
+            "distinct_count": 1217,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 1212,
+            "max_value": 1226,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -1106,11 +1106,11 @@
               "values": [
                 {
                   "value": "issue",
-                  "count": 682
+                  "count": 684
                 },
                 {
                   "value": "pull_request",
-                  "count": 554
+                  "count": 566
                 }
               ],
               "elided": 0
@@ -1126,17 +1126,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 120,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-06-25",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 137,
-            "temporal_distinct_periods": 114,
+            "temporal_span": 138,
+            "temporal_distinct_periods": 115,
             "temporal_missing_periods": 23,
             "temporal_largest_gap": 5
           },
@@ -1144,18 +1144,18 @@
             "name": "closed_date",
             "data_type": "DATE",
             "nullable": true,
-            "null_fraction": 0.15614886731391586,
-            "distinct_count": 100,
+            "null_fraction": 0.1592,
+            "distinct_count": 105,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-06-26",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 136,
-            "temporal_distinct_periods": 89,
+            "temporal_span": 137,
+            "temporal_distinct_periods": 90,
             "temporal_missing_periods": 47,
             "temporal_largest_gap": 13
           },
@@ -1163,18 +1163,18 @@
             "name": "merged_date",
             "data_type": "DATE",
             "nullable": true,
-            "null_fraction": 0.5841423948220065,
-            "distinct_count": 99,
+            "null_fraction": 0.5864,
+            "distinct_count": 104,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-06-26",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 136,
-            "temporal_distinct_periods": 88,
+            "temporal_span": 137,
+            "temporal_distinct_periods": 89,
             "temporal_missing_periods": 48,
             "temporal_largest_gap": 13
           },
@@ -1194,11 +1194,11 @@
               "values": [
                 {
                   "value": "MEMBER",
-                  "count": 816
+                  "count": 817
                 },
                 {
                   "value": "CONTRIBUTOR",
-                  "count": 308
+                  "count": 320
                 },
                 {
                   "value": "COLLABORATOR",
@@ -1206,7 +1206,7 @@
                 },
                 {
                   "value": "FIRST_TIME_CONTRIBUTOR",
-                  "count": 19
+                  "count": 20
                 },
                 {
                   "value": "NONE",
@@ -1241,11 +1241,11 @@
               "values": [
                 {
                   "value": false,
-                  "count": 1216
+                  "count": 1229
                 },
                 {
                   "value": true,
-                  "count": 20
+                  "count": 21
                 }
               ],
               "elided": 0
@@ -1260,8 +1260,8 @@
             "name": "hours_to_merge",
             "data_type": "DOUBLE",
             "nullable": true,
-            "null_fraction": 0.5841423948220065,
-            "distinct_count": 508,
+            "null_fraction": 0.5864,
+            "distinct_count": 511,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 0.0044444444444444444,
@@ -1291,10 +1291,10 @@
               "issue_key"
             ],
             "status": "reported",
-            "reason": "issue_key is unique and non-null on all 1236 rows, proven by an exact distinct count"
+            "reason": "issue_key is unique and non-null on all 1250 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.6359,
+        "rank_score": 0.6354,
         "data_quality": [],
         "findings": [
           {
@@ -1304,7 +1304,7 @@
             "detail": "issue_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.279327+00:00",
+        "profiled_at": "2026-11-09T04:32:14.246837+00:00",
         "semantic_models": [
           "fct_issues"
         ],
@@ -1313,7 +1313,7 @@
       {
         "identifier": "analytics.main.fct_legacy",
         "object_type": "table",
-        "row_count": 53,
+        "row_count": 54,
         "byte_size": null,
         "columns": [
           {
@@ -1321,7 +1321,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 54,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -1351,7 +1351,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 53
+                  "count": 54
                 }
               ],
               "elided": 0
@@ -1367,17 +1367,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 54,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-03",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 128,
-            "temporal_distinct_periods": 53,
+            "temporal_span": 129,
+            "temporal_distinct_periods": 54,
             "temporal_missing_periods": 75,
             "temporal_largest_gap": 28
           },
@@ -1386,11 +1386,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 42,
-            "distinct_count_exact": true,
+            "distinct_count": 40,
+            "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 115,
+            "max_value": 116,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -1404,8 +1404,8 @@
             "name": "forks",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.07547169811320753,
-            "distinct_count": 27,
+            "null_fraction": 0.07407407407407407,
+            "distinct_count": 29,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
@@ -1423,7 +1423,7 @@
             "name": "stars_change",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.018867924528301883,
+            "null_fraction": 0.01851851851851849,
             "distinct_count": 10,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -1442,7 +1442,7 @@
             "name": "forks_change",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.09433962264150941,
+            "null_fraction": 0.09259259259259256,
             "distinct_count": 5,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -1476,17 +1476,17 @@
               "legacy_key"
             ],
             "status": "reported",
-            "reason": "legacy_key is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "legacy_key is unique and non-null on all 54 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 54 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5184,
+        "rank_score": 0.5186,
         "data_quality": [],
         "findings": [
           {
@@ -1496,7 +1496,7 @@
             "detail": "legacy_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.376177+00:00",
+        "profiled_at": "2026-11-09T04:32:14.352339+00:00",
         "semantic_models": [
           "fct_legacy"
         ],
@@ -1505,7 +1505,7 @@
       {
         "identifier": "analytics.main.fct_observations",
         "object_type": "table",
-        "row_count": 36,
+        "row_count": 38,
         "byte_size": null,
         "columns": [
           {
@@ -1513,7 +1513,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 36,
+            "distinct_count": 38,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -1543,11 +1543,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 18
+                  "count": 19
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 18
+                  "count": 19
                 }
               ],
               "elided": 0
@@ -1563,17 +1563,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 20,
+            "distinct_count": 21,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-10-22",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 18,
-            "temporal_distinct_periods": 18,
+            "temporal_span": 19,
+            "temporal_distinct_periods": 19,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -1582,18 +1582,18 @@
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 36,
+            "distinct_count": 38,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-10-22T21:07:20.216270+00:00",
-            "max_value": "2026-11-08T15:10:16.860732+00:00",
+            "max_value": "2026-11-09T04:31:25.839217+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 403,
-            "temporal_distinct_periods": 18,
-            "temporal_missing_periods": 385,
+            "temporal_span": 416,
+            "temporal_distinct_periods": 19,
+            "temporal_missing_periods": 397,
             "temporal_largest_gap": 34
           },
           {
@@ -1650,7 +1650,7 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 26
+                  "count": 28
                 },
                 {
                   "value": 0,
@@ -1674,7 +1674,7 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 178,
+            "max_value": 184,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -1688,7 +1688,7 @@
             "name": "observation_gap_days",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.05555555555555558,
+            "null_fraction": 0.052631578947368474,
             "distinct_count": 1,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -1700,7 +1700,7 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 34
+                  "count": 36
                 }
               ],
               "elided": 0
@@ -1715,7 +1715,7 @@
             "name": "stars_net_change",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.05555555555555558,
+            "null_fraction": 0.052631578947368474,
             "distinct_count": 5,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -1734,7 +1734,7 @@
             "name": "forks_net_change",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.05555555555555558,
+            "null_fraction": 0.052631578947368474,
             "distinct_count": 5,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -1768,17 +1768,17 @@
               "observation_key"
             ],
             "status": "reported",
-            "reason": "observation_key is unique and non-null on all 36 rows, proven by an exact distinct count"
+            "reason": "observation_key is unique and non-null on all 38 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "captured_at"
             ],
             "status": "reported",
-            "reason": "captured_at is unique and non-null on all 36 rows, proven by an exact distinct count"
+            "reason": "captured_at is unique and non-null on all 38 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5042,
+        "rank_score": 0.5057,
         "data_quality": [],
         "findings": [
           {
@@ -1788,7 +1788,7 @@
             "detail": "observation_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.535649+00:00",
+        "profiled_at": "2026-11-09T04:32:14.527521+00:00",
         "semantic_models": [
           "fct_observations"
         ],
@@ -1797,7 +1797,7 @@
       {
         "identifier": "analytics.main.fct_package_downloads",
         "object_type": "table",
-        "row_count": 131,
+        "row_count": 132,
         "byte_size": null,
         "columns": [
           {
@@ -1805,7 +1805,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 131,
+            "distinct_count": 132,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -1835,7 +1835,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -1862,7 +1862,7 @@
               "values": [
                 {
                   "value": "pypi",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -1889,7 +1889,7 @@
               "values": [
                 {
                   "value": "exmergo-dex-core",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -1905,17 +1905,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 131,
+            "distinct_count": 132,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-06-30",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 131,
-            "temporal_distinct_periods": 131,
+            "temporal_span": 132,
+            "temporal_distinct_periods": 132,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -1957,17 +1957,17 @@
               "package_download_key"
             ],
             "status": "reported",
-            "reason": "package_download_key is unique and non-null on all 131 rows, proven by an exact distinct count"
+            "reason": "package_download_key is unique and non-null on all 132 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 131 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 132 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.552,
+        "rank_score": 0.5516,
         "data_quality": [],
         "findings": [
           {
@@ -1977,7 +1977,7 @@
             "detail": "package_download_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.675392+00:00",
+        "profiled_at": "2026-11-09T04:32:14.676175+00:00",
         "semantic_models": [
           "fct_package_downloads"
         ],
@@ -1986,7 +1986,7 @@
       {
         "identifier": "analytics.main.fct_path",
         "object_type": "table",
-        "row_count": 11253,
+        "row_count": 11613,
         "byte_size": null,
         "columns": [
           {
@@ -1994,7 +1994,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 11253,
+            "distinct_count": 11613,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -2024,11 +2024,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 10875
+                  "count": 11214
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 378
+                  "count": 399
                 }
               ],
               "elided": 0
@@ -2044,17 +2044,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 128,
+            "distinct_count": 135,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 125,
-            "temporal_distinct_periods": 125,
+            "temporal_span": 126,
+            "temporal_distinct_periods": 126,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -2067,14 +2067,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 128,
-            "temporal_missing_periods": 2845,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 129,
+            "temporal_missing_periods": 2857,
             "temporal_largest_gap": 40
           },
           {
@@ -2100,7 +2100,7 @@
             "name": "views",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.8731893717230961,
+            "null_fraction": 0.8753982605700508,
             "distinct_count": 307,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -2119,8 +2119,8 @@
             "name": "uniques",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.8731893717230961,
-            "distinct_count": 116,
+            "null_fraction": 0.8753982605700508,
+            "distinct_count": 118,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
@@ -2138,7 +2138,7 @@
             "name": "reported_rank",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.8731893717230961,
+            "null_fraction": 0.8753982605700508,
             "distinct_count": 11,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -2150,43 +2150,43 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 2,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 3,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 4,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 5,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 6,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 7,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 8,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 9,
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": 10,
-                  "count": 140
+                  "count": 142
                 }
               ],
               "elided": 0
@@ -2213,11 +2213,11 @@
               "values": [
                 {
                   "value": false,
-                  "count": 9826
+                  "count": 10166
                 },
                 {
                   "value": true,
-                  "count": 1427
+                  "count": 1447
                 }
               ],
               "elided": 0
@@ -2244,7 +2244,7 @@
               "path_key"
             ],
             "status": "reported",
-            "reason": "path_key is unique and non-null on all 11253 rows, proven by an exact distinct count"
+            "reason": "path_key is unique and non-null on all 11613 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.7188,
@@ -2257,7 +2257,7 @@
             "detail": "path_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:07.904031+00:00",
+        "profiled_at": "2026-11-09T04:32:14.924281+00:00",
         "semantic_models": [
           "fct_path"
         ],
@@ -2266,7 +2266,7 @@
       {
         "identifier": "analytics.main.fct_referrer",
         "object_type": "table",
-        "row_count": 3715,
+        "row_count": 3750,
         "byte_size": null,
         "columns": [
           {
@@ -2274,7 +2274,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 3715,
+            "distinct_count": 3750,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -2304,11 +2304,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 3625
+                  "count": 3654
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 90
+                  "count": 96
                 }
               ],
               "elided": 0
@@ -2324,17 +2324,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 128,
+            "distinct_count": 135,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 125,
-            "temporal_distinct_periods": 125,
+            "temporal_span": 126,
+            "temporal_distinct_periods": 126,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -2347,14 +2347,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 127,
-            "temporal_missing_periods": 2846,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 128,
+            "temporal_missing_periods": 2858,
             "temporal_largest_gap": 40
           },
           {
@@ -2380,7 +2380,7 @@
             "name": "views",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.6958277254374159,
+            "null_fraction": 0.6978666666666666,
             "distinct_count": 145,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -2399,7 +2399,7 @@
             "name": "uniques",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.6958277254374159,
+            "null_fraction": 0.6978666666666666,
             "distinct_count": 64,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -2418,7 +2418,7 @@
             "name": "reported_rank",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.6958277254374159,
+            "null_fraction": 0.6978666666666666,
             "distinct_count": 11,
             "distinct_count_exact": false,
             "is_unique": false,
@@ -2430,15 +2430,15 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 138
+                  "count": 139
                 },
                 {
                   "value": 2,
-                  "count": 137
+                  "count": 138
                 },
                 {
                   "value": 3,
-                  "count": 136
+                  "count": 137
                 },
                 {
                   "value": 4,
@@ -2493,11 +2493,11 @@
               "values": [
                 {
                   "value": false,
-                  "count": 2585
+                  "count": 2617
                 },
                 {
                   "value": true,
-                  "count": 1130
+                  "count": 1133
                 }
               ],
               "elided": 0
@@ -2524,10 +2524,10 @@
               "referrer_key"
             ],
             "status": "reported",
-            "reason": "referrer_key is unique and non-null on all 3715 rows, proven by an exact distinct count"
+            "reason": "referrer_key is unique and non-null on all 3750 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.6772,
+        "rank_score": 0.6765,
         "data_quality": [],
         "findings": [
           {
@@ -2537,7 +2537,7 @@
             "detail": "referrer_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.081780+00:00",
+        "profiled_at": "2026-11-09T04:32:15.112979+00:00",
         "semantic_models": [
           "fct_referrer"
         ],
@@ -2721,7 +2721,7 @@
             "detail": "release_download_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.252953+00:00",
+        "profiled_at": "2026-11-09T04:32:15.292064+00:00",
         "semantic_models": [
           "fct_release_downloads"
         ],
@@ -2730,7 +2730,7 @@
       {
         "identifier": "analytics.main.fct_snapshot_status",
         "object_type": "table",
-        "row_count": 283,
+        "row_count": 287,
         "byte_size": null,
         "columns": [
           {
@@ -2738,7 +2738,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 283,
+            "distinct_count": 287,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -2768,11 +2768,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 250
+                  "count": 252
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 33
+                  "count": 35
                 }
               ],
               "elided": 0
@@ -2799,11 +2799,11 @@
               "values": [
                 {
                   "value": "paths",
-                  "count": 143
+                  "count": 145
                 },
                 {
                   "value": "referrers",
-                  "count": 140
+                  "count": 142
                 }
               ],
               "elided": 0
@@ -2823,14 +2823,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 128,
-            "temporal_missing_periods": 2845,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 129,
+            "temporal_missing_periods": 2857,
             "temporal_largest_gap": 40
           },
           {
@@ -2838,17 +2838,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 128,
+            "distinct_count": 135,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07",
-            "max_value": "2026-11-08",
+            "max_value": "2026-11-09",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 125,
-            "temporal_distinct_periods": 125,
+            "temporal_span": 126,
+            "temporal_distinct_periods": 126,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -2857,7 +2857,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 283,
+            "distinct_count": 287,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -2890,17 +2890,17 @@
               "snapshot_key"
             ],
             "status": "reported",
-            "reason": "snapshot_key is unique and non-null on all 283 rows, proven by an exact distinct count"
+            "reason": "snapshot_key is unique and non-null on all 287 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "source_file"
             ],
             "status": "reported",
-            "reason": "source_file is unique and non-null on all 283 rows, proven by an exact distinct count"
+            "reason": "source_file is unique and non-null on all 287 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5507,
+        "rank_score": 0.5505,
         "data_quality": [],
         "findings": [
           {
@@ -2910,14 +2910,14 @@
             "detail": "snapshot_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.424904+00:00",
+        "profiled_at": "2026-11-09T04:32:15.476072+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.fct_star_history",
         "object_type": "table",
-        "row_count": 148,
+        "row_count": 150,
         "byte_size": null,
         "columns": [
           {
@@ -2925,7 +2925,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 148,
+            "distinct_count": 150,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -2955,11 +2955,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 128
+                  "count": 129
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 20
+                  "count": 21
                 }
               ],
               "elided": 0
@@ -2975,17 +2975,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 128,
+            "distinct_count": 129,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": "2026-07-03",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 128,
-            "temporal_distinct_periods": 128,
+            "temporal_span": 129,
+            "temporal_distinct_periods": 129,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -3005,11 +3005,11 @@
               "values": [
                 {
                   "value": 0,
-                  "count": 101
+                  "count": 102
                 },
                 {
                   "value": 1,
-                  "count": 27
+                  "count": 28
                 },
                 {
                   "value": 3,
@@ -3064,10 +3064,10 @@
               "star_history_key"
             ],
             "status": "reported",
-            "reason": "star_history_key is unique and non-null on all 148 rows, proven by an exact distinct count"
+            "reason": "star_history_key is unique and non-null on all 150 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5565,
+        "rank_score": 0.5564,
         "data_quality": [],
         "findings": [
           {
@@ -3077,7 +3077,7 @@
             "detail": "star_history_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.545778+00:00",
+        "profiled_at": "2026-11-09T04:32:15.615189+00:00",
         "semantic_models": [
           "fct_star_history"
         ],
@@ -3086,7 +3086,7 @@
       {
         "identifier": "analytics.main.fct_traffic",
         "object_type": "table",
-        "row_count": 168,
+        "row_count": 169,
         "byte_size": null,
         "columns": [
           {
@@ -3094,7 +3094,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 168,
+            "distinct_count": 169,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -3124,7 +3124,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 137
+                  "count": 138
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
@@ -3163,11 +3163,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 116,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 0,
-            "max_value": 4690,
+            "max_value": 5835,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -3250,7 +3250,7 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 168
+                  "count": 169
                 }
               ],
               "elided": 0
@@ -3277,10 +3277,10 @@
               "traffic_key"
             ],
             "status": "reported",
-            "reason": "traffic_key is unique and non-null on all 168 rows, proven by an exact distinct count"
+            "reason": "traffic_key is unique and non-null on all 169 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5612,
+        "rank_score": 0.5608,
         "data_quality": [],
         "findings": [
           {
@@ -3290,7 +3290,7 @@
             "detail": "traffic_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.649722+00:00",
+        "profiled_at": "2026-11-09T04:32:15.730981+00:00",
         "semantic_models": [
           "fct_traffic"
         ],
@@ -3299,7 +3299,7 @@
       {
         "identifier": "analytics.main.metricflow_time_spine",
         "object_type": "table",
-        "row_count": 195,
+        "row_count": 196,
         "byte_size": null,
         "columns": [
           {
@@ -3307,17 +3307,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 195,
+            "distinct_count": 196,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-05-26",
-            "max_value": "2026-12-06",
+            "max_value": "2026-12-07",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 195,
-            "temporal_distinct_periods": 195,
+            "temporal_span": 196,
+            "temporal_distinct_periods": 196,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           }
@@ -3337,10 +3337,10 @@
               "date_day"
             ],
             "status": "reported",
-            "reason": "date_day is unique and non-null on all 195 rows, proven by an exact distinct count"
+            "reason": "date_day is unique and non-null on all 196 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.358,
+        "rank_score": 0.3576,
         "data_quality": [],
         "findings": [
           {
@@ -3350,7 +3350,7 @@
             "detail": "date_day participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:08.670326+00:00",
+        "profiled_at": "2026-11-09T04:32:15.753275+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -3503,7 +3503,7 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:08.806112+00:00",
+        "profiled_at": "2026-11-09T04:32:15.897063+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -3637,14 +3637,14 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:08.936664+00:00",
+        "profiled_at": "2026-11-09T04:32:16.037199+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_discovery",
         "object_type": "table",
-        "row_count": 2681,
+        "row_count": 2704,
         "byte_size": null,
         "columns": [
           {
@@ -3652,7 +3652,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 2681,
+            "distinct_count": 2704,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -3682,11 +3682,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 2338
+                  "count": 2348
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 343
+                  "count": 356
                 }
               ],
               "elided": 0
@@ -3713,11 +3713,11 @@
               "values": [
                 {
                   "value": "paths",
-                  "count": 1513
+                  "count": 1533
                 },
                 {
                   "value": "referrers",
-                  "count": 1168
+                  "count": 1171
                 }
               ],
               "elided": 0
@@ -3737,14 +3737,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 133,
-            "temporal_missing_periods": 2840,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 134,
+            "temporal_missing_periods": 2852,
             "temporal_largest_gap": 40
           },
           {
@@ -3820,43 +3820,43 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 295
+                  "count": 298
                 },
                 {
                   "value": 2,
-                  "count": 294
+                  "count": 297
                 },
                 {
                   "value": 3,
-                  "count": 293
+                  "count": 296
                 },
                 {
                   "value": 4,
-                  "count": 292
+                  "count": 294
                 },
                 {
                   "value": 5,
-                  "count": 290
+                  "count": 292
                 },
                 {
                   "value": 6,
-                  "count": 289
+                  "count": 291
                 },
                 {
                   "value": 7,
-                  "count": 267
+                  "count": 269
                 },
                 {
                   "value": 8,
-                  "count": 236
+                  "count": 238
                 },
                 {
                   "value": 9,
-                  "count": 221
+                  "count": 223
                 },
                 {
                   "value": 10,
-                  "count": 204
+                  "count": 206
                 }
               ],
               "elided": 0
@@ -3883,7 +3883,7 @@
               "discovery_source_key"
             ],
             "status": "reported",
-            "reason": "discovery_source_key is unique and non-null on all 2681 rows, proven by an exact distinct count"
+            "reason": "discovery_source_key is unique and non-null on all 2704 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -3896,14 +3896,14 @@
             "detail": "discovery_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.134891+00:00",
+        "profiled_at": "2026-11-09T04:32:16.250802+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_fork_days",
         "object_type": "table",
-        "row_count": 28,
+        "row_count": 29,
         "byte_size": null,
         "columns": [
           {
@@ -3911,7 +3911,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 28,
+            "distinct_count": 29,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -3941,7 +3941,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 28
+                  "count": 29
                 }
               ],
               "elided": 0
@@ -3957,17 +3957,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 28,
+            "distinct_count": 29,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-17",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 114,
-            "temporal_distinct_periods": 28,
+            "temporal_span": 115,
+            "temporal_distinct_periods": 29,
             "temporal_missing_periods": 86,
             "temporal_largest_gap": 58
           },
@@ -4009,14 +4009,14 @@
               "fork_day_source_key"
             ],
             "status": "reported",
-            "reason": "fork_day_source_key is unique and non-null on all 28 rows, proven by an exact distinct count"
+            "reason": "fork_day_source_key is unique and non-null on all 29 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 28 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 29 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -4029,14 +4029,14 @@
             "detail": "fork_day_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.217500+00:00",
+        "profiled_at": "2026-11-09T04:32:16.343639+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_issues",
         "object_type": "table",
-        "row_count": 1236,
+        "row_count": 1250,
         "byte_size": null,
         "columns": [
           {
@@ -4044,7 +4044,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1236,
+            "distinct_count": 1250,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -4074,7 +4074,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 1203
+                  "count": 1217
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
@@ -4094,11 +4094,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1203,
+            "distinct_count": 1217,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 1212,
+            "max_value": 1226,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -4124,11 +4124,11 @@
               "values": [
                 {
                   "value": "issue",
-                  "count": 682
+                  "count": 684
                 },
                 {
                   "value": "pull_request",
-                  "count": 554
+                  "count": 566
                 }
               ],
               "elided": 0
@@ -4144,56 +4144,56 @@
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1236,
+            "distinct_count": 1250,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-06-25T14:13:53+00:00",
-            "max_value": "2026-11-08T14:49:45+00:00",
+            "max_value": "2026-11-09T00:47:41+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3265,
-            "temporal_distinct_periods": 510,
-            "temporal_missing_periods": 2755,
+            "temporal_span": 3275,
+            "temporal_distinct_periods": 517,
+            "temporal_missing_periods": 2758,
             "temporal_largest_gap": 148
           },
           {
             "name": "closed_at",
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
-            "null_fraction": 0.15614886731391586,
-            "distinct_count": 986,
+            "null_fraction": 0.1592,
+            "distinct_count": 994,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": "2026-06-26T19:58:31+00:00",
-            "max_value": "2026-11-08T15:08:24+00:00",
+            "max_value": "2026-11-09T01:47:05+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3236,
-            "temporal_distinct_periods": 299,
-            "temporal_missing_periods": 2937,
+            "temporal_span": 3246,
+            "temporal_distinct_periods": 300,
+            "temporal_missing_periods": 2946,
             "temporal_largest_gap": 328
           },
           {
             "name": "merged_at",
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
-            "null_fraction": 0.5841423948220065,
-            "distinct_count": 514,
+            "null_fraction": 0.5864,
+            "distinct_count": 517,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": "2026-06-26T19:58:31+00:00",
-            "max_value": "2026-11-08T15:08:24+00:00",
+            "max_value": "2026-11-09T01:39:09+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3236,
-            "temporal_distinct_periods": 286,
-            "temporal_missing_periods": 2950,
+            "temporal_span": 3246,
+            "temporal_distinct_periods": 287,
+            "temporal_missing_periods": 2959,
             "temporal_largest_gap": 328
           },
           {
@@ -4212,11 +4212,11 @@
               "values": [
                 {
                   "value": "MEMBER",
-                  "count": 816
+                  "count": 817
                 },
                 {
                   "value": "CONTRIBUTOR",
-                  "count": 308
+                  "count": 320
                 },
                 {
                   "value": "COLLABORATOR",
@@ -4224,7 +4224,7 @@
                 },
                 {
                   "value": "FIRST_TIME_CONTRIBUTOR",
-                  "count": 19
+                  "count": 20
                 },
                 {
                   "value": "NONE",
@@ -4262,14 +4262,14 @@
               "issue_source_key"
             ],
             "status": "reported",
-            "reason": "issue_source_key is unique and non-null on all 1236 rows, proven by an exact distinct count"
+            "reason": "issue_source_key is unique and non-null on all 1250 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "created_at"
             ],
             "status": "reported",
-            "reason": "created_at is unique and non-null on all 1236 rows, proven by an exact distinct count"
+            "reason": "created_at is unique and non-null on all 1250 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -4282,14 +4282,14 @@
             "detail": "issue_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.403490+00:00",
+        "profiled_at": "2026-11-09T04:32:16.540420+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_legacy",
         "object_type": "table",
-        "row_count": 53,
+        "row_count": 54,
         "byte_size": null,
         "columns": [
           {
@@ -4297,7 +4297,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 54,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -4327,7 +4327,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 53
+                  "count": 54
                 }
               ],
               "elided": 0
@@ -4343,17 +4343,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 54,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-03",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 128,
-            "temporal_distinct_periods": 53,
+            "temporal_span": 129,
+            "temporal_distinct_periods": 54,
             "temporal_missing_periods": 75,
             "temporal_largest_gap": 28
           },
@@ -4361,12 +4361,12 @@
             "name": "stars",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.2075471698113207,
-            "distinct_count": 42,
+            "null_fraction": 0.20370370370370372,
+            "distinct_count": 43,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 115,
+            "max_value": 116,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -4380,8 +4380,8 @@
             "name": "forks",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.4716981132075472,
-            "distinct_count": 28,
+            "null_fraction": 0.4629629629629629,
+            "distinct_count": 29,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
@@ -4414,14 +4414,14 @@
               "legacy_source_key"
             ],
             "status": "reported",
-            "reason": "legacy_source_key is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "legacy_source_key is unique and non-null on all 54 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 54 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -4434,14 +4434,14 @@
             "detail": "legacy_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.491165+00:00",
+        "profiled_at": "2026-11-09T04:32:16.636958+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_observations",
         "object_type": "table",
-        "row_count": 53,
+        "row_count": 55,
         "byte_size": null,
         "columns": [
           {
@@ -4449,7 +4449,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 55,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -4479,11 +4479,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 28
+                  "count": 29
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 25
+                  "count": 26
                 }
               ],
               "elided": 0
@@ -4499,18 +4499,18 @@
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 55,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-10-22T12:39:57.608880+00:00",
-            "max_value": "2026-11-08T15:10:16.860732+00:00",
+            "max_value": "2026-11-09T04:31:25.839217+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 411,
-            "temporal_distinct_periods": 24,
-            "temporal_missing_periods": 387,
+            "temporal_span": 424,
+            "temporal_distinct_periods": 25,
+            "temporal_missing_periods": 399,
             "temporal_largest_gap": 23
           },
           {
@@ -4567,7 +4567,7 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 37
+                  "count": 39
                 },
                 {
                   "value": 0,
@@ -4591,7 +4591,7 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 178,
+            "max_value": 184,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -4620,14 +4620,14 @@
               "observation_source_key"
             ],
             "status": "reported",
-            "reason": "observation_source_key is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "observation_source_key is unique and non-null on all 55 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "captured_at"
             ],
             "status": "reported",
-            "reason": "captured_at is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "captured_at is unique and non-null on all 55 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -4640,14 +4640,14 @@
             "detail": "observation_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.634993+00:00",
+        "profiled_at": "2026-11-09T04:32:16.798397+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_package_downloads",
         "object_type": "table",
-        "row_count": 131,
+        "row_count": 132,
         "byte_size": null,
         "columns": [
           {
@@ -4655,7 +4655,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 131,
+            "distinct_count": 132,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -4685,7 +4685,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -4712,7 +4712,7 @@
               "values": [
                 {
                   "value": "pypi",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -4739,7 +4739,7 @@
               "values": [
                 {
                   "value": "exmergo-dex-core",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -4755,17 +4755,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 131,
+            "distinct_count": 132,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-06-30",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 131,
-            "temporal_distinct_periods": 131,
+            "temporal_span": 132,
+            "temporal_distinct_periods": 132,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -4807,14 +4807,14 @@
               "package_download_source_key"
             ],
             "status": "reported",
-            "reason": "package_download_source_key is unique and non-null on all 131 rows, proven by an exact distinct count"
+            "reason": "package_download_source_key is unique and non-null on all 132 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 131 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 132 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -4827,7 +4827,7 @@
             "detail": "package_download_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:09.775771+00:00",
+        "profiled_at": "2026-11-09T04:32:16.948050+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -4961,7 +4961,7 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:09.907529+00:00",
+        "profiled_at": "2026-11-09T04:32:17.091924+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -5210,7 +5210,7 @@
             "detail": "release_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.132560+00:00",
+        "profiled_at": "2026-11-09T04:32:17.340338+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -5285,8 +5285,8 @@
             "distinct_count": 1,
             "distinct_count_exact": false,
             "is_unique": false,
-            "min_value": "2026-11-08T15:10:35.468546+00:00",
-            "max_value": "2026-11-08T15:10:35.468546+00:00",
+            "min_value": "2026-11-09T04:31:42.675456+00:00",
+            "max_value": "2026-11-09T04:31:42.675456+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -5335,7 +5335,7 @@
             "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.234590+00:00",
+        "profiled_at": "2026-11-09T04:32:17.447512+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -5410,8 +5410,8 @@
             "distinct_count": 2,
             "distinct_count_exact": false,
             "is_unique": false,
-            "min_value": "2026-11-08T15:09:28.245554+00:00",
-            "max_value": "2026-11-08T15:10:16.860732+00:00",
+            "min_value": "2026-11-09T04:30:39.698937+00:00",
+            "max_value": "2026-11-09T04:31:25.839217+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -5469,14 +5469,14 @@
             "detail": "signal_capture_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.337533+00:00",
+        "profiled_at": "2026-11-09T04:32:17.557089+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_snapshots",
         "object_type": "table",
-        "row_count": 297,
+        "row_count": 301,
         "byte_size": null,
         "columns": [
           {
@@ -5484,7 +5484,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 297,
+            "distinct_count": 301,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -5514,11 +5514,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 254
+                  "count": 256
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 43
+                  "count": 45
                 }
               ],
               "elided": 0
@@ -5545,11 +5545,11 @@
               "values": [
                 {
                   "value": "paths",
-                  "count": 152
+                  "count": 154
                 },
                 {
                   "value": "referrers",
-                  "count": 145
+                  "count": 147
                 }
               ],
               "elided": 0
@@ -5569,14 +5569,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 133,
-            "temporal_missing_periods": 2840,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 134,
+            "temporal_missing_periods": 2852,
             "temporal_largest_gap": 40
           },
           {
@@ -5584,7 +5584,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 297,
+            "distinct_count": 301,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -5617,14 +5617,14 @@
               "snapshot_source_key"
             ],
             "status": "reported",
-            "reason": "snapshot_source_key is unique and non-null on all 297 rows, proven by an exact distinct count"
+            "reason": "snapshot_source_key is unique and non-null on all 301 rows, proven by an exact distinct count"
           },
           {
             "columns": [
               "source_file"
             ],
             "status": "reported",
-            "reason": "source_file is unique and non-null on all 297 rows, proven by an exact distinct count"
+            "reason": "source_file is unique and non-null on all 301 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -5637,7 +5637,7 @@
             "detail": "snapshot_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.478143+00:00",
+        "profiled_at": "2026-11-09T04:32:17.711896+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -5764,14 +5764,14 @@
             "detail": "stargazer_day_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.560626+00:00",
+        "profiled_at": "2026-11-09T04:32:17.798646+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.main.stg_traffic",
         "object_type": "table",
-        "row_count": 168,
+        "row_count": 169,
         "byte_size": null,
         "columns": [
           {
@@ -5779,7 +5779,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 168,
+            "distinct_count": 169,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -5809,7 +5809,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 137
+                  "count": 138
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
@@ -5848,11 +5848,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 116,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 0,
-            "max_value": 4690,
+            "max_value": 5835,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -5935,7 +5935,7 @@
               "traffic_source_key"
             ],
             "status": "reported",
-            "reason": "traffic_source_key is unique and non-null on all 168 rows, proven by an exact distinct count"
+            "reason": "traffic_source_key is unique and non-null on all 169 rows, proven by an exact distinct count"
           }
         ],
         "rank_score": 0.32,
@@ -5948,7 +5948,7 @@
             "detail": "traffic_source_key participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:10.693927+00:00",
+        "profiled_at": "2026-11-09T04:32:17.946033+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -6063,7 +6063,7 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:10.779529+00:00",
+        "profiled_at": "2026-11-09T04:32:18.036901+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -6178,14 +6178,14 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:10.887811+00:00",
+        "profiled_at": "2026-11-09T04:32:18.155527+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.discovery",
         "object_type": "table",
-        "row_count": 2681,
+        "row_count": 2704,
         "byte_size": null,
         "columns": [
           {
@@ -6204,11 +6204,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 2338
+                  "count": 2348
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 343
+                  "count": 356
                 }
               ],
               "elided": 0
@@ -6235,11 +6235,11 @@
               "values": [
                 {
                   "value": "paths",
-                  "count": 1513
+                  "count": 1533
                 },
                 {
                   "value": "referrers",
-                  "count": 1168
+                  "count": 1171
                 }
               ],
               "elided": 0
@@ -6259,14 +6259,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 133,
-            "temporal_missing_periods": 2840,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 134,
+            "temporal_missing_periods": 2852,
             "temporal_largest_gap": 40
           },
           {
@@ -6342,43 +6342,43 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 295
+                  "count": 298
                 },
                 {
                   "value": 2,
-                  "count": 294
+                  "count": 297
                 },
                 {
                   "value": 3,
-                  "count": 293
+                  "count": 296
                 },
                 {
                   "value": 4,
-                  "count": 292
+                  "count": 294
                 },
                 {
                   "value": 5,
-                  "count": 290
+                  "count": 292
                 },
                 {
                   "value": 6,
-                  "count": 289
+                  "count": 291
                 },
                 {
                   "value": 7,
-                  "count": 267
+                  "count": 269
                 },
                 {
                   "value": 8,
-                  "count": 236
+                  "count": 238
                 },
                 {
                   "value": 9,
-                  "count": 221
+                  "count": 223
                 },
                 {
                   "value": 10,
-                  "count": 204
+                  "count": 206
                 }
               ],
               "elided": 0
@@ -6413,10 +6413,10 @@
               "item"
             ],
             "status": "reported",
-            "reason": "captured_at, item is unique as a combination on all 2681 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
+            "reason": "captured_at, item is unique as a combination on all 2704 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
           }
         ],
-        "rank_score": 0.5462,
+        "rank_score": 0.5455,
         "data_quality": [],
         "findings": [
           {
@@ -6432,14 +6432,14 @@
             "detail": "item participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.027571+00:00",
+        "profiled_at": "2026-11-09T04:32:18.312346+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.fork_days",
         "object_type": "table",
-        "row_count": 28,
+        "row_count": 29,
         "byte_size": null,
         "columns": [
           {
@@ -6458,7 +6458,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 28
+                  "count": 29
                 }
               ],
               "elided": 0
@@ -6474,17 +6474,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 28,
+            "distinct_count": 29,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-17",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 114,
-            "temporal_distinct_periods": 28,
+            "temporal_span": 115,
+            "temporal_distinct_periods": 29,
             "temporal_missing_periods": 86,
             "temporal_largest_gap": 58
           },
@@ -6523,10 +6523,10 @@
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 28 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 29 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.3763,
+        "rank_score": 0.3772,
         "data_quality": [],
         "findings": [
           {
@@ -6536,14 +6536,14 @@
             "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.082086+00:00",
+        "profiled_at": "2026-11-09T04:32:18.370714+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.issues",
         "object_type": "table",
-        "row_count": 1236,
+        "row_count": 1250,
         "byte_size": null,
         "columns": [
           {
@@ -6562,7 +6562,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 1203
+                  "count": 1217
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
@@ -6582,11 +6582,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1203,
+            "distinct_count": 1217,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 1212,
+            "max_value": 1226,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -6612,11 +6612,11 @@
               "values": [
                 {
                   "value": "issue",
-                  "count": 682
+                  "count": 684
                 },
                 {
                   "value": "pull_request",
-                  "count": 554
+                  "count": 566
                 }
               ],
               "elided": 0
@@ -6632,56 +6632,56 @@
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 1236,
+            "distinct_count": 1250,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-06-25T14:13:53+00:00",
-            "max_value": "2026-11-08T14:49:45+00:00",
+            "max_value": "2026-11-09T00:47:41+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3265,
-            "temporal_distinct_periods": 510,
-            "temporal_missing_periods": 2755,
+            "temporal_span": 3275,
+            "temporal_distinct_periods": 517,
+            "temporal_missing_periods": 2758,
             "temporal_largest_gap": 148
           },
           {
             "name": "closed_at",
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
-            "null_fraction": 0.15614886731391586,
-            "distinct_count": 986,
+            "null_fraction": 0.1592,
+            "distinct_count": 994,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": "2026-06-26T19:58:31+00:00",
-            "max_value": "2026-11-08T15:08:24+00:00",
+            "max_value": "2026-11-09T01:47:05+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3236,
-            "temporal_distinct_periods": 299,
-            "temporal_missing_periods": 2937,
+            "temporal_span": 3246,
+            "temporal_distinct_periods": 300,
+            "temporal_missing_periods": 2946,
             "temporal_largest_gap": 328
           },
           {
             "name": "merged_at",
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
-            "null_fraction": 0.5841423948220065,
-            "distinct_count": 514,
+            "null_fraction": 0.5864,
+            "distinct_count": 517,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": "2026-06-26T19:58:31+00:00",
-            "max_value": "2026-11-08T15:08:24+00:00",
+            "max_value": "2026-11-09T01:39:09+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 3236,
-            "temporal_distinct_periods": 286,
-            "temporal_missing_periods": 2950,
+            "temporal_span": 3246,
+            "temporal_distinct_periods": 287,
+            "temporal_missing_periods": 2959,
             "temporal_largest_gap": 328
           },
           {
@@ -6700,11 +6700,11 @@
               "values": [
                 {
                   "value": "MEMBER",
-                  "count": 816
+                  "count": 817
                 },
                 {
                   "value": "CONTRIBUTOR",
-                  "count": 308
+                  "count": 320
                 },
                 {
                   "value": "COLLABORATOR",
@@ -6712,7 +6712,7 @@
                 },
                 {
                   "value": "FIRST_TIME_CONTRIBUTOR",
-                  "count": 19
+                  "count": 20
                 },
                 {
                   "value": "NONE",
@@ -6747,10 +6747,10 @@
               "created_at"
             ],
             "status": "reported",
-            "reason": "created_at is unique and non-null on all 1236 rows, proven by an exact distinct count"
+            "reason": "created_at is unique and non-null on all 1250 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.5172,
+        "rank_score": 0.5167,
         "data_quality": [],
         "findings": [
           {
@@ -6760,14 +6760,14 @@
             "detail": "created_at participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.272273+00:00",
+        "profiled_at": "2026-11-09T04:32:18.571396+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.legacy",
         "object_type": "table",
-        "row_count": 53,
+        "row_count": 54,
         "byte_size": null,
         "columns": [
           {
@@ -6786,7 +6786,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 53
+                  "count": 54
                 }
               ],
               "elided": 0
@@ -6802,17 +6802,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 54,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-07-03",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 128,
-            "temporal_distinct_periods": 53,
+            "temporal_span": 129,
+            "temporal_distinct_periods": 54,
             "temporal_missing_periods": 75,
             "temporal_largest_gap": 28
           },
@@ -6820,12 +6820,12 @@
             "name": "stars",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.2075471698113207,
-            "distinct_count": 42,
+            "null_fraction": 0.20370370370370372,
+            "distinct_count": 43,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 115,
+            "max_value": 116,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -6839,8 +6839,8 @@
             "name": "forks",
             "data_type": "BIGINT",
             "nullable": true,
-            "null_fraction": 0.4716981132075472,
-            "distinct_count": 28,
+            "null_fraction": 0.4629629629629629,
+            "distinct_count": 29,
             "distinct_count_exact": true,
             "is_unique": false,
             "min_value": 1,
@@ -6870,10 +6870,10 @@
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 54 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.3997,
+        "rank_score": 0.3998,
         "data_quality": [],
         "findings": [
           {
@@ -6883,14 +6883,14 @@
             "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.333116+00:00",
+        "profiled_at": "2026-11-09T04:32:18.637020+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.observations",
         "object_type": "table",
-        "row_count": 53,
+        "row_count": 55,
         "byte_size": null,
         "columns": [
           {
@@ -6909,11 +6909,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 28
+                  "count": 29
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 25
+                  "count": 26
                 }
               ],
               "elided": 0
@@ -6929,18 +6929,18 @@
             "data_type": "TIMESTAMP WITH TIME ZONE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 53,
+            "distinct_count": 55,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-10-22T12:39:57.608880+00:00",
-            "max_value": "2026-11-08T15:10:16.860732+00:00",
+            "max_value": "2026-11-09T04:31:25.839217+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 411,
-            "temporal_distinct_periods": 24,
-            "temporal_missing_periods": 387,
+            "temporal_span": 424,
+            "temporal_distinct_periods": 25,
+            "temporal_missing_periods": 399,
             "temporal_largest_gap": 23
           },
           {
@@ -6997,7 +6997,7 @@
               "values": [
                 {
                   "value": 1,
-                  "count": 37
+                  "count": 39
                 },
                 {
                   "value": 0,
@@ -7021,7 +7021,7 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 1,
-            "max_value": 178,
+            "max_value": 184,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -7047,10 +7047,10 @@
               "captured_at"
             ],
             "status": "reported",
-            "reason": "captured_at is unique and non-null on all 53 rows, proven by an exact distinct count"
+            "reason": "captured_at is unique and non-null on all 55 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.3997,
+        "rank_score": 0.4005,
         "data_quality": [],
         "findings": [
           {
@@ -7060,14 +7060,14 @@
             "detail": "captured_at participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.412629+00:00",
+        "profiled_at": "2026-11-09T04:32:18.720202+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.package_downloads",
         "object_type": "table",
-        "row_count": 131,
+        "row_count": 132,
         "byte_size": null,
         "columns": [
           {
@@ -7086,7 +7086,7 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -7113,7 +7113,7 @@
               "values": [
                 {
                   "value": "pypi",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -7140,7 +7140,7 @@
               "values": [
                 {
                   "value": "exmergo-dex-core",
-                  "count": 131
+                  "count": 132
                 }
               ],
               "elided": 0
@@ -7156,17 +7156,17 @@
             "data_type": "DATE",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 131,
+            "distinct_count": 132,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": "2026-06-30",
-            "max_value": "2026-11-07",
+            "max_value": "2026-11-08",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "day",
-            "temporal_span": 131,
-            "temporal_distinct_periods": 131,
+            "temporal_span": 132,
+            "temporal_distinct_periods": 132,
             "temporal_missing_periods": 0,
             "temporal_largest_gap": 0
           },
@@ -7205,10 +7205,10 @@
               "date"
             ],
             "status": "reported",
-            "reason": "date is unique and non-null on all 131 rows, proven by an exact distinct count"
+            "reason": "date is unique and non-null on all 132 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.4332,
+        "rank_score": 0.4329,
         "data_quality": [],
         "findings": [
           {
@@ -7218,7 +7218,7 @@
             "detail": "date participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.525630+00:00",
+        "profiled_at": "2026-11-09T04:32:18.840078+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -7333,7 +7333,7 @@
           "empty table (no rows)"
         ],
         "findings": [],
-        "profiled_at": "2026-11-08T15:11:11.630370+00:00",
+        "profiled_at": "2026-11-09T04:32:18.954952+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -7543,7 +7543,7 @@
             "reason": "url is unique and non-null on all 79 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.4144,
+        "rank_score": 0.4139,
         "data_quality": [],
         "findings": [
           {
@@ -7553,7 +7553,7 @@
             "detail": "event_id participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.821738+00:00",
+        "profiled_at": "2026-11-09T04:32:19.161276+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -7628,8 +7628,8 @@
             "distinct_count": 1,
             "distinct_count_exact": false,
             "is_unique": false,
-            "min_value": "2026-11-08T15:10:35.468546+00:00",
-            "max_value": "2026-11-08T15:10:35.468546+00:00",
+            "min_value": "2026-11-09T04:31:42.675456+00:00",
+            "max_value": "2026-11-09T04:31:42.675456+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -7668,7 +7668,7 @@
             "reason": "repository_identity is unique and non-null on all 2 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.2912,
+        "rank_score": 0.2911,
         "data_quality": [],
         "findings": [
           {
@@ -7678,7 +7678,7 @@
             "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:11.925713+00:00",
+        "profiled_at": "2026-11-09T04:32:19.274559+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -7734,8 +7734,8 @@
             "distinct_count": 2,
             "distinct_count_exact": false,
             "is_unique": false,
-            "min_value": "2026-11-08T15:09:28.245554+00:00",
-            "max_value": "2026-11-08T15:10:16.860732+00:00",
+            "min_value": "2026-11-09T04:30:39.698937+00:00",
+            "max_value": "2026-11-09T04:31:25.839217+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -7807,7 +7807,7 @@
             "reason": "signal, repository is unique as a combination on all 7 rows, proven by an exact distinct-combination probe, and ranks behind signal, captured_at, which is proven at a smaller cardinality"
           }
         ],
-        "rank_score": 0.328,
+        "rank_score": 0.3278,
         "data_quality": [],
         "findings": [
           {
@@ -7823,14 +7823,14 @@
             "detail": "captured_at participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:12.005143+00:00",
+        "profiled_at": "2026-11-09T04:32:19.364226+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.snapshots",
         "object_type": "table",
-        "row_count": 297,
+        "row_count": 301,
         "byte_size": null,
         "columns": [
           {
@@ -7849,11 +7849,11 @@
               "values": [
                 {
                   "value": "exmergo/dex",
-                  "count": 254
+                  "count": 256
                 },
                 {
                   "value": "exmergo/github-repo-analytics",
-                  "count": 43
+                  "count": 45
                 }
               ],
               "elided": 0
@@ -7880,11 +7880,11 @@
               "values": [
                 {
                   "value": "paths",
-                  "count": 152
+                  "count": 154
                 },
                 {
                   "value": "referrers",
-                  "count": 145
+                  "count": 147
                 }
               ],
               "elided": 0
@@ -7904,14 +7904,14 @@
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": "2026-07-07T18:55:16+00:00",
-            "max_value": "2026-11-08T15:10:04+00:00",
+            "max_value": "2026-11-09T04:31:13+00:00",
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
             "temporal_granularity": "hour",
-            "temporal_span": 2973,
-            "temporal_distinct_periods": 133,
-            "temporal_missing_periods": 2840,
+            "temporal_span": 2986,
+            "temporal_distinct_periods": 134,
+            "temporal_missing_periods": 2852,
             "temporal_largest_gap": 40
           },
           {
@@ -7919,7 +7919,7 @@
             "data_type": "VARCHAR",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 297,
+            "distinct_count": 301,
             "distinct_count_exact": true,
             "is_unique": true,
             "min_value": null,
@@ -7949,10 +7949,10 @@
               "source_file"
             ],
             "status": "reported",
-            "reason": "source_file is unique and non-null on all 297 rows, proven by an exact distinct count"
+            "reason": "source_file is unique and non-null on all 301 rows, proven by an exact distinct count"
           }
         ],
-        "rank_score": 0.4638,
+        "rank_score": 0.4635,
         "data_quality": [],
         "findings": [
           {
@@ -7962,7 +7962,7 @@
             "detail": "source_file participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:12.115137+00:00",
+        "profiled_at": "2026-11-09T04:32:19.490704+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
@@ -8056,7 +8056,7 @@
             "reason": "date, repository is unique as a combination on all 48 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
           }
         ],
-        "rank_score": 0.396,
+        "rank_score": 0.3955,
         "data_quality": [],
         "findings": [
           {
@@ -8072,14 +8072,14 @@
             "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:12.167989+00:00",
+        "profiled_at": "2026-11-09T04:32:19.553526+00:00",
         "semantic_models": [],
         "values_withheld": false
       },
       {
         "identifier": "analytics.raw.traffic",
         "object_type": "table",
-        "row_count": 168,
+        "row_count": 169,
         "byte_size": null,
         "columns": [
           {
@@ -8125,11 +8125,11 @@
             "data_type": "BIGINT",
             "nullable": true,
             "null_fraction": 0.0,
-            "distinct_count": 114,
+            "distinct_count": 116,
             "distinct_count_exact": false,
             "is_unique": false,
             "min_value": 0,
-            "max_value": 4690,
+            "max_value": 5835,
             "pii": null,
             "pii_overridden": null,
             "value_domain": null,
@@ -8236,7 +8236,7 @@
               "repository"
             ],
             "status": "reported",
-            "reason": "date, repository is unique as a combination on all 168 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
+            "reason": "date, repository is unique as a combination on all 169 rows, proven by an exact distinct-combination probe; it is the smallest proven combination, so it is the grain"
           },
           {
             "columns": [
@@ -8244,7 +8244,7 @@
               "views_unique"
             ],
             "status": "reported",
-            "reason": "date, views_unique is unique as a combination on all 168 rows, proven by an exact distinct-combination probe, and ranks behind date, repository, which is proven at a smaller cardinality"
+            "reason": "date, views_unique is unique as a combination on all 169 rows, proven by an exact distinct-combination probe, and ranks behind date, repository, which is proven at a smaller cardinality"
           },
           {
             "columns": [
@@ -8252,10 +8252,10 @@
               "clones_unique"
             ],
             "status": "reported",
-            "reason": "date, clones_unique is unique as a combination on all 168 rows, proven by an exact distinct-combination probe, and ranks behind date, repository, which is proven at a smaller cardinality"
+            "reason": "date, clones_unique is unique as a combination on all 169 rows, proven by an exact distinct-combination probe, and ranks behind date, repository, which is proven at a smaller cardinality"
           }
         ],
-        "rank_score": 0.4425,
+        "rank_score": 0.442,
         "data_quality": [],
         "findings": [
           {
@@ -8271,7 +8271,7 @@
             "detail": "repository participates in the detected grain but the warehouse still allows it to be NULL"
           }
         ],
-        "profiled_at": "2026-11-08T15:11:12.239192+00:00",
+        "profiled_at": "2026-11-09T04:32:19.634535+00:00",
         "semantic_models": [],
         "values_withheld": false
       }
@@ -8764,7 +8764,7 @@
     ]
   },
   "warehouse_from": "cache",
-  "cache_updated_at": "2026-11-08T15:11:06.193257+00:00",
+  "cache_updated_at": "2026-11-09T04:32:13.079070+00:00",
   "transform_layer": {
     "files": {
       "models/deployment_semantic.yml": "25265a48a987c9f4d0f393928b2e475ca51365abcec561fd630a7a82a6baeb3d",
@@ -8807,8 +8807,8 @@
       "data_tests/deployment_contract.sql": "580cf3470a1cc0b77a9511dd239082d97c27925a6312780646b9d7c21898211f",
       "data_tests/discovery_grid.sql": "144de9d69f149a2b2e307348d44b5e33725f4c93d53a2ed14f6a9f3441c5d13e",
       "data_tests/traffic_source_contract.sql": "12fa162a51c7a58919eee739acde625415e5e7ccb78e7b883822e80bb44e3a46",
-      "profiles.yml": "f8ea97e622d1814d64ceb5377465298ce267e5a937379087f6932269c387ccd5",
-      "dbt_project.yml": "8de8ebfac102654eca28ca21eedf3a29dea5bcd6c0eb31610b0b51282dd070cf"
+      "dbt_project.yml": "8de8ebfac102654eca28ca21eedf3a29dea5bcd6c0eb31610b0b51282dd070cf",
+      "profiles.yml": "f8ea97e622d1814d64ceb5377465298ce267e5a937379087f6932269c387ccd5"
     },
     "models": [
       "annotations",
