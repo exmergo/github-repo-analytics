@@ -1,26 +1,26 @@
 {
-  "captured_at": "2026-11-09T04:30:39.698937+00:00",
+  "captured_at": "2026-11-10T04:28:14.004265+00:00",
   "errors": [],
   "forks": {
-    "captured_at": "2026-11-09T04:30:39.698937+00:00",
+    "captured_at": "2026-11-10T04:28:14.004265+00:00",
     "complete": true,
     "listed": 54
   },
   "issues": {
-    "captured_at": "2026-11-09T04:30:39.698937+00:00",
+    "captured_at": "2026-11-10T04:28:14.004265+00:00",
     "complete": true,
-    "items": 1217,
-    "through": "2026-11-09T01:47:05Z"
+    "items": 1232,
+    "through": "2026-11-10T01:56:33Z"
   },
   "packages": {
     "pypi:exmergo-dex-core": {
-      "captured_at": "2026-11-09T04:30:39.698937+00:00",
-      "days": 132,
-      "latest": "2026-11-08"
+      "captured_at": "2026-11-10T04:28:14.004265+00:00",
+      "days": 133,
+      "latest": "2026-11-09"
     }
   },
   "stargazers": {
-    "captured_at": "2026-11-09T04:30:39.698937+00:00",
+    "captured_at": "2026-11-10T04:28:14.004265+00:00",
     "complete": true,
     "listed": 116
   }
