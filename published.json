@@ -1,6 +1,6 @@
 {
   "code_commit": "2ae23d2beff74e39e6a9f5006cbd0540aa64c6f7",
-  "data_commit": "05d703d27a5690336f31845c35ad559a605e0460",
+  "data_commit": "e7a1dde6dd448f8c479f515fe828709b276ec279",
   "lock_sha256": "7afb8d127ed8120bc119bfd6c0488743aa60acd92e2308d14abea96904be34a2",
   "lockfile": "uv.lock",
   "metrics_tested": [
@@ -61,7 +61,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-07_042733_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-08T04:27:40+00:00",
@@ -77,7 +77,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-08_042740_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-09T04:29:56+00:00",
@@ -93,7 +93,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-09_042956_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-10T04:27:33+00:00",
@@ -109,7 +109,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-10_042733_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-11T04:28:03+00:00",
@@ -125,7 +125,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-11_042803_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-12T04:28:20+00:00",
@@ -141,7 +141,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-12_042820_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "captured_at": "2026-11-13T04:28:03+00:00",
@@ -157,7 +157,7 @@
       "reason": "uniques exceed total views",
       "repository": "exmergo/dex",
       "source_file": "2026-11-13_042803_top_referrers_snapshot.csv",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     }
   ],
   "sources": [
@@ -165,7 +165,7 @@
       "data_repository": "exmergo/github-repo-analytics",
       "expected_refresh_hours": 24,
       "files": {
-        "exmergo/dex/ghrs-data/forks.csv": "2969707b0bc9f44f365ccbac530654c542a1f0f3d3e628291b207433b6fcaae3",
+        "exmergo/dex/ghrs-data/forks.csv": "27ffe5caf982b0679bee48c357bc2cc72eb4b84b7d7a81fd25accf5571ae12f2",
         "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
         "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
         "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
@@ -434,8 +434,10 @@
         "exmergo/dex/ghrs-data/snapshots/2026-11-14_042730_top_referrers_snapshot.csv": "585154de7bd983a8586c4649bbfb0b15fd11a619d626edef94c278b36964a0dc",
         "exmergo/dex/ghrs-data/snapshots/2026-11-15_042737_top_paths_snapshot.csv": "42711b9cc72f666bd1eb2d3880fbb8e1697e75427ee495046ddcd2a538dbb8bb",
         "exmergo/dex/ghrs-data/snapshots/2026-11-15_042737_top_referrers_snapshot.csv": "86ba505eaea81a52a6d4ece5a60fb834d9c6efb18ce688b943599d5499611718",
-        "exmergo/dex/ghrs-data/stargazers.csv": "afb729d1c05a525bebbb4ad463ce559c30533a9d44516b1192b6de78fb5aff1e",
-        "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "7f5df7861e89a4ac861bf5dab3a629be434668f501841545eb3a5d5e0de60b0b",
+        "exmergo/dex/ghrs-data/snapshots/2026-11-16_043703_top_paths_snapshot.csv": "5f0335fd41f345991cd5de9d7c371aab96f647394aff9e3d59cd7dc7e3593bdb",
+        "exmergo/dex/ghrs-data/snapshots/2026-11-16_043703_top_referrers_snapshot.csv": "0b31ef48348ee65a65516793d66dd18762feac71ea9503ceaf6129e0b789549d",
+        "exmergo/dex/ghrs-data/stargazers.csv": "370b49f3da8b559175aaeb5b32133432d71c95e50183af09102b6775bca64c75",
+        "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "865fdebdbeac6a639309496fb9f87e87dfb50962880b111a49f537f059cee568",
         "exmergo/dex/metadata/2026-10-22_123957_608880.json": "5b79d2269a4e3ba8d848a7cf2cbb2cdd39e9e89b01e417194bd47d6e8ea226cb",
         "exmergo/dex/metadata/2026-10-22_124942_062616.json": "783134a20d209f34e004c453f00c072bff1434023f31490ba70a7924834a4590",
         "exmergo/dex/metadata/2026-10-22_125654_208878.json": "5d7c4b08654354917d08755681d4c8023deece40754ee3ce34949da008df1224",
@@ -472,16 +474,17 @@
         "exmergo/dex/metadata/2026-11-14_042824_008102.json": "6b19fb0b23cd03520d2f4b7326eef5087957163ca75df1920eb75eb8f9c68575",
         "exmergo/dex/metadata/2026-11-15_042827_487602.json": "049d77e085e4d17008c083a608079319f2ab736413a28553e66b895b44572cb2",
         "exmergo/dex/metadata/2026-11-16_043634_377085.json": "7dd3d8be835bbaffd459691b1913e450eec0ea3f0167e302faf38917160efc32",
-        "exmergo/dex/signals/capture.json": "0bdfe0dcbc05e5e73caeba4dc1778f0043dde24386239086dd245c5ad5124db7",
-        "exmergo/dex/signals/downloads/pypi/exmergo-dex-core.csv": "0f05aeaa1a22173a523145dda59a9f0eb98153bbcf15bb3b34b69bdd1c0b0f69",
-        "exmergo/dex/signals/forks.csv": "b5a3ba8744d4b13efdd68b778ed37be2ea8c808f576b0575c235d303989a1558",
-        "exmergo/dex/signals/issues.csv": "d73f5ec21398b4425ff05dd1b89896c376d00659c752076ad4d7c7f5f0bc4e33",
-        "exmergo/dex/signals/stargazers.csv": "d5e31dd3e1023b2ec6a7496610c7b4fbaee33a9d18b18f6ce7918a0ea8d838fb"
+        "exmergo/dex/metadata/2026-11-17_042843_161343.json": "4393d910dfaadab4b699b8d31877e65f664143758f0128820477759b81065d73",
+        "exmergo/dex/signals/capture.json": "0faeaa8073f13820b4da31862c5bb49a0cd11aaeac6c823bb3f8fb0f1e6c3912",
+        "exmergo/dex/signals/downloads/pypi/exmergo-dex-core.csv": "711efcfdd2962c02fd15207a226d4c959d04ae5114f119828b02c3b0323fd90a",
+        "exmergo/dex/signals/forks.csv": "77ac0d1ba3f45141e88168020e9debe6b1f342bc3b102ba22918ccd294b2e5d1",
+        "exmergo/dex/signals/issues.csv": "d87805db7e5300ec77f37e1337e9199b7a7177e37f8f508af13be719037c1002",
+        "exmergo/dex/signals/stargazers.csv": "3beb369a7e466352173bf9821cd0fb03225cb1398b36091ccc67c3d486232a9f"
       },
       "publication": null,
       "repository": "exmergo/dex",
-      "source_head": "05d703d27a5690336f31845c35ad559a605e0460",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_head": "e7a1dde6dd448f8c479f515fe828709b276ec279",
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     },
     {
       "data_repository": "exmergo/github-repo-analytics",
@@ -546,6 +549,8 @@
         "exmergo/github-repo-analytics/ghrs-data/snapshots/2026-11-15_042907_top_referrers_snapshot.csv": "af5438a11220a85e01a3f910598644c0b86cf74fad5a4f4d7ef9a53be345755b",
         "exmergo/github-repo-analytics/ghrs-data/snapshots/2026-11-16_043711_top_paths_snapshot.csv": "97875fa0be9ac9ffcd912436a4f52492a9421ee8380da9a5bd7383aa9448018a",
         "exmergo/github-repo-analytics/ghrs-data/snapshots/2026-11-16_043711_top_referrers_snapshot.csv": "0fcdbc4f29e3077a56ec033d05362eecb8fb64a2da20b859db8e98f856cfb947",
+        "exmergo/github-repo-analytics/ghrs-data/snapshots/2026-11-17_042938_top_paths_snapshot.csv": "97875fa0be9ac9ffcd912436a4f52492a9421ee8380da9a5bd7383aa9448018a",
+        "exmergo/github-repo-analytics/ghrs-data/snapshots/2026-11-17_042938_top_referrers_snapshot.csv": "0fcdbc4f29e3077a56ec033d05362eecb8fb64a2da20b859db8e98f856cfb947",
         "exmergo/github-repo-analytics/ghrs-data/views_clones_aggregate.csv": "dc9ec09314eb02a0d243a3777f503931d812ec71def9240bcd9d81ca42e1fdec",
         "exmergo/github-repo-analytics/metadata/2026-10-22_133520_082537.json": "a1270290055bfc538a3015278c28052f293481b1bc185aa24474cdf383c62bdc",
         "exmergo/github-repo-analytics/metadata/2026-10-22_135811_158334.json": "809f45cfb13ab18a36db8385bb8f8e5e394d48d677d389827d8c35c21ab5fe14",
@@ -580,18 +585,19 @@
         "exmergo/github-repo-analytics/metadata/2026-11-14_042915_392782.json": "29e14ce0ab636f9e22e8d81e4978cf016cbf330d70719e94b7408481638a208d",
         "exmergo/github-repo-analytics/metadata/2026-11-15_042919_276695.json": "247acfe3d8a4c440cc70a3a3c9319682a609a7f5ec1a8aa1a33e0ae8ba12845b",
         "exmergo/github-repo-analytics/metadata/2026-11-16_043722_903132.json": "814f6c4355e75a1786249f753eadbc0eb0ccaa312ba8dd18072f403cb9f5b270",
-        "exmergo/github-repo-analytics/signals/capture.json": "3cb2765969e3e69d97929b0d9b7b944fd4b25e9601dc646b43402adbc6b4b556",
+        "exmergo/github-repo-analytics/metadata/2026-11-17_042949_261078.json": "74dd004bc4db12c37def585ae0fc2a5e2ba98ab3b547cc853b70828b6de53514",
+        "exmergo/github-repo-analytics/signals/capture.json": "2c138870925a5827d92aecffdc39bb3168d9ba116f877f8b0ce5baad5fb3e196",
         "exmergo/github-repo-analytics/signals/forks.csv": "e34636e6b99d0791ed89c500dc8bd887c90e86366398ba41b28c4232ffb9ae2d",
         "exmergo/github-repo-analytics/signals/issues.csv": "2b421d56fe0a635735ce70b94d8a82d0ba9a5e29273a883e51cd69ad945c3d8a",
         "exmergo/github-repo-analytics/signals/stargazers.csv": "b32c0af3ed26df2243128e4eb7ccf8f7bc54052edcbc52a791da2b065f4ba88d"
       },
       "publication": null,
       "repository": "exmergo/github-repo-analytics",
-      "source_head": "05d703d27a5690336f31845c35ad559a605e0460",
-      "source_revision": "05d703d27a5690336f31845c35ad559a605e0460"
+      "source_head": "e7a1dde6dd448f8c479f515fe828709b276ec279",
+      "source_revision": "e7a1dde6dd448f8c479f515fe828709b276ec279"
     }
   ],
-  "validated_at": "2026-11-16T04:39:14.545227+00:00",
+  "validated_at": "2026-11-17T04:32:05.135958+00:00",
   "version": 1,
   "warnings": [
     "exmergo/dex: quarantined referrers snapshot 2026-11-07_042733_top_referrers_snapshot.csv: uniques exceed total views; invalid rows: [{'row': 3, 'item': 'aocr.org', 'views': 289, 'uniques': 294}]; raw CSV retained",
