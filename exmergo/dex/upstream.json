@@ -2,7 +2,7 @@
   "data_repository": "exmergo/dex",
   "expected_refresh_hours": 24,
   "files": {
-    "exmergo/dex/ghrs-data/forks.csv": "27ffe5caf982b0679bee48c357bc2cc72eb4b84b7d7a81fd25accf5571ae12f2",
+    "exmergo/dex/ghrs-data/forks.csv": "9cea532617d3f791b3d5f2f1998c8cf21346dc771a475fe55bd34bfa5ff8e955",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_paths_snapshot.csv": "fcf6ecc0ea2b701b1e651d15fd7a228a623007482d30f1a4c8a94abcc6f8f1c9",
     "exmergo/dex/ghrs-data/snapshots/2026-07-07_185516_top_referrers_snapshot.csv": "f6e3ae37787573b7445cbd06a269a9b91a07ff006005dec714f5861c1bf6b524",
     "exmergo/dex/ghrs-data/snapshots/2026-07-08_053153_top_paths_snapshot.csv": "938c7d5faac3a7add8360266422f6d734f71fd75e8f9b2c40affaeb1b0509ff0",
@@ -273,11 +273,13 @@
     "exmergo/dex/ghrs-data/snapshots/2026-11-15_042737_top_referrers_snapshot.csv": "86ba505eaea81a52a6d4ece5a60fb834d9c6efb18ce688b943599d5499611718",
     "exmergo/dex/ghrs-data/snapshots/2026-11-16_043703_top_paths_snapshot.csv": "5f0335fd41f345991cd5de9d7c371aab96f647394aff9e3d59cd7dc7e3593bdb",
     "exmergo/dex/ghrs-data/snapshots/2026-11-16_043703_top_referrers_snapshot.csv": "0b31ef48348ee65a65516793d66dd18762feac71ea9503ceaf6129e0b789549d",
-    "exmergo/dex/ghrs-data/stargazers.csv": "370b49f3da8b559175aaeb5b32133432d71c95e50183af09102b6775bca64c75",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-17_042823_top_paths_snapshot.csv": "5f0335fd41f345991cd5de9d7c371aab96f647394aff9e3d59cd7dc7e3593bdb",
+    "exmergo/dex/ghrs-data/snapshots/2026-11-17_042823_top_referrers_snapshot.csv": "0b31ef48348ee65a65516793d66dd18762feac71ea9503ceaf6129e0b789549d",
+    "exmergo/dex/ghrs-data/stargazers.csv": "138e1a96450a636abd1f4d557ea60689413fd5e33190fa95bb280b5a5678055f",
     "exmergo/dex/ghrs-data/views_clones_aggregate.csv": "865fdebdbeac6a639309496fb9f87e87dfb50962880b111a49f537f059cee568"
   },
   "publication": null,
   "repository": "exmergo/dex",
-  "source_head": "a7a7baaba7c10257a9ad2cac7dda9ac20f75f13f",
-  "source_revision": "a7a7baaba7c10257a9ad2cac7dda9ac20f75f13f"
+  "source_head": "5a18df7b34ebbe8558c51d7d7ab7ec52fae14894",
+  "source_revision": "5a18df7b34ebbe8558c51d7d7ab7ec52fae14894"
 }
