@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_open_backlog
+    description: One row per open issue or pull request when the latest issue capture for its repository is complete.
+    config:
+      meta:
+        dex:
+          grain:
+            - issue_key
+          population:
+            rule: Items with neither a close nor a merge date, opened by the UTC date of the latest issue capture, for repositories with a complete capture.
+          assumptions:
+            - decision: As-of date
+              chosen: Latest issue capture UTC date
+              evidence: request
+            - decision: Partial listing
+              chosen: Treat the backlog as unavailable
+              evidence: contract
+    columns:
+      - name: issue_key
+        description: Stable issue or pull request key from fct_issues.
+        config:
+          meta:
+            dex:
+              role: key
+              null_rule: never
+        data_tests:
+          - unique
+          - not_null
+      - name: repository
+        description: GitHub owner/repository name.
+        config:
+          meta:
+            dex:
+              role: foreign_key
+              null_rule: never
+              references: dim_repository.repository
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_repository')
+                field: repository
+      - name: kind
+        description: Issue or pull request.
+        config:
+          meta:
+            dex:
+              role: dimension
+              null_rule: never
+        data_tests:
+          - not_null
+      - name: capture_date
+        description: UTC date of the latest issue capture.
+        config:
+          meta:
+            dex:
+              role: time
+              null_rule: never
+        data_tests:
+          - not_null
+      - name: age_days
+        description: Number of UTC date boundaries from creation to capture.
+        config:
+          meta:
+            dex:
+              role: measure
+              null_rule: never
+              aggregation: median
+              additivity: non_additive
+              unit: days
+        data_tests:
+          - not_null

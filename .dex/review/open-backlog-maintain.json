@@ -1,0 +1,51 @@
+{
+  "plan_id": "p0bbfcbd3e7",
+  "command": "dex maintain check",
+  "input": "The synthetic integration fixture compared against the previous committed baseline.",
+  "axes_run": [
+    "grain",
+    "schema",
+    "semantic",
+    "volume"
+  ],
+  "accepted_findings": [
+    {
+      "axis": "schema",
+      "code": "model_added",
+      "detail": "model 'fct_open_backlog' is new since the baseline"
+    },
+    {
+      "axis": "semantic",
+      "code": "definition_added",
+      "detail": "metric 'open_backlog_items' is new since the baseline"
+    },
+    {
+      "axis": "semantic",
+      "code": "definition_added",
+      "detail": "metric 'open_backlog_median_age_days' is new since the baseline"
+    },
+    {
+      "axis": "semantic",
+      "code": "definition_added",
+      "detail": "metric 'open_backlog_over_30_days' is new since the baseline"
+    },
+    {
+      "axis": "semantic",
+      "code": "definition_added",
+      "detail": "metric 'open_backlog_over_90_days' is new since the baseline"
+    },
+    {
+      "axis": "semantic",
+      "code": "definition_added",
+      "detail": "semantic model 'fct_open_backlog' is new since the baseline"
+    }
+  ],
+  "warehouse_findings": {
+    "dimension_cardinality_changed": 5,
+    "key_lost_uniqueness": 15,
+    "no_rows": 1,
+    "row_count_changed": 41
+  },
+  "baseline_update": "dex maintain snapshot --project-only; the previous warehouse evidence was preserved.",
+  "after_update": "dex maintain schema and dex maintain semantic found no project definition drift."
+}

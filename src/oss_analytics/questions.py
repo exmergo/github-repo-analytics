@@ -8,6 +8,13 @@ from pathlib import Path
 from .lifecycle import ValidationError, dex
 from .warehouse import read as read_warehouse, timestamp
 
+OPEN_BACKLOG_METRICS = (
+    "open_backlog_items",
+    "open_backlog_over_30_days",
+    "open_backlog_over_90_days",
+    "open_backlog_median_age_days",
+)
+
 METRICS = [
     "views",
     "clones",
@@ -40,6 +47,7 @@ METRICS = [
     "prs_merged",
     "first_time_contributor_prs",
     "median_hours_to_merge",
+    *OPEN_BACKLOG_METRICS,
     "deployments",
     "median_hours_lead_time",
     "release_downloads",
@@ -135,6 +143,7 @@ RECIPES = {
     "event-impact": "Complete 7- or 28-day windows before and after a release or annotation",
     "star-history": "Stars and forks gained per day/week/month from current stargazers",
     "community": "Issues and PRs opened, closed, merged; first-time contributors; time to merge",
+    "open-backlog": "Age of open issues and pull requests at the latest capture",
     "release-downloads": "GitHub release asset downloads by release",
     "package-downloads": "PyPI/npm downloads for configured packages (optional add-on)",
     "compare": "One window across every tracked repository",
@@ -237,6 +246,8 @@ def answer(
 
     if question == "deployments":
         return deployment_answer(root, response, repository, record, start, end, days, grain)
+    if question == "open-backlog":
+        return open_backlog_answer(root, response, repository, record)
 
     if question in {"star-history", "community", "release-downloads", "package-downloads"}:
         return signal_answer(root, response, question, repository, record, start, end, days, grain)
@@ -471,6 +482,39 @@ def discovery_answer(root, response, repository, kind, endpoint, selected):
         if len(captures) > 1
         else None,
         "interpretation": "Each capture reports GitHub's rolling top 10. Missing entries are unreported, not zero. Ranks are computed from returned counts; a negative rank change is an improvement. Overlapping rolling windows are not additive.",
+    }
+
+
+def open_backlog_answer(root, response, repository, record):
+    capture = record["signals"].get("issues")
+    if not capture or not capture["complete"]:
+        return {
+            **response,
+            "available": False,
+            "capture": capture,
+            "reason": "Open backlog age requires a complete issue and pull request capture.",
+        }
+
+    result = query(root, ",".join(OPEN_BACKLOG_METRICS), repository, group_by="backlog_item__kind")
+    items = {row["backlog_item__kind"]: row for row in rows(result)}
+    return {
+        **response,
+        "available": True,
+        "capture": capture,
+        "backlog": {
+            group: {
+                "count": row.get("open_backlog_items") or 0,
+                "over_30_days": row.get("open_backlog_over_30_days") or 0,
+                "over_90_days": row.get("open_backlog_over_90_days") or 0,
+                "median_age_days": row.get("open_backlog_median_age_days"),
+            }
+            for group, row in (
+                ("issues", items.get("issue", {})),
+                ("pull_requests", items.get("pull_request", {})),
+            )
+        },
+        "result": result,
+        "interpretation": "Age is the number of UTC calendar days from opening to the latest capture.",
     }
 
 

@@ -20,6 +20,7 @@ All commands begin with `uv run --frozen oss-analytics question`. Add `--reposit
 | `deployments` | `--start … --end … --grain week` | Successful production deployment IDs and per-PR median merge-to-deploy hours; opt-in source, complete listings, capture UTC day excluded |
 | `package-downloads` | `--days 28 --grain week` | PyPI/npm downloads per package; unavailable when no packages are configured |
 | `compare` | `--days 28` (no `--repository`) | Views, clones, visitor-days, stars gained, PRs merged, package downloads for every tracked repository, with per-repository coverage |
+| `open-backlog` | No extra arguments | Issue and pull request counts, counts older than 30 and 90 UTC calendar days, and median age at the latest issue capture, if complete |
 | `referrer-trend` | No extra arguments, or `--start … --end …` | The latest reported top 10, followed back through one latest snapshot per 7-day window |
 | `weekly-report` | No extra arguments | Traffic growth, star history, community, release and package downloads; each section states its own window or why it is unavailable |
 | `referrers` | `--snapshot-date 2026-07-02` | Referrer, reported views/unique observations; exact successful snapshot required |

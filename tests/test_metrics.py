@@ -283,6 +283,40 @@ def test_community_activity_by_event_date(project):
     assert not beyond["available"] and "2026-08-30" in beyond["reason"]
 
 
+def test_open_backlog_age_at_capture(project):
+    result = answer(project, "open-backlog", "exmergo/dex")
+    assert result["available"]
+    assert result["capture"]["captured_at"].isoformat() == "2026-08-31T04:25:00+00:00"
+    assert result["backlog"] == {
+        "issues": {"count": 2, "over_30_days": 2, "over_90_days": 0, "median_age_days": 66.0},
+        "pull_requests": {
+            "count": 2,
+            "over_30_days": 1,
+            "over_90_days": 1,
+            "median_age_days": 60.5,
+        },
+    }
+    empty = answer(project, "open-backlog", "example/other")
+    assert empty["available"]
+    zero = {"count": 0, "over_30_days": 0, "over_90_days": 0, "median_age_days": None}
+    assert empty["backlog"] == {"issues": zero, "pull_requests": zero}
+
+
+def test_open_backlog_requires_complete_capture(project, monkeypatch):
+    from oss_analytics.status import status
+
+    evidence = status(project)
+    record = next(r for r in evidence["repositories"] if r["repository"] == "exmergo/dex")
+    capture = record["signals"].pop("issues")
+    monkeypatch.setattr("oss_analytics.status.status", lambda _: evidence)
+    missing = answer(project, "open-backlog", "exmergo/dex")
+    assert not missing["available"] and missing["capture"] is None
+
+    record["signals"]["issues"] = {**capture, "complete": False}
+    incomplete = answer(project, "open-backlog", "exmergo/dex")
+    assert not incomplete["available"] and incomplete["capture"]["complete"] is False
+
+
 def test_downloads_vitals_and_events(project):
     assert result_values(query(project, "pypi_downloads,npm_downloads", "exmergo/dex")) == {
         "pypi_downloads": 140,
