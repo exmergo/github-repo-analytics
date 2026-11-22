@@ -24,6 +24,8 @@ All timestamps and calendar dates are UTC. Weeks begin Monday. Queries distingui
 | `prs_merged` | Count by merge date | Merged pull requests |
 | `first_time_contributor_prs` | Count by creation date | Pull requests GitHub marked first-time-contributor when first collected |
 | `median_hours_to_merge` | Median over merged pull requests, by merge date | Hours from opening to merge |
+| `open_backlog_items`, `open_backlog_over_30_days`, `open_backlog_over_90_days` | Counts at the latest issue capture, when complete | All open items and those strictly older than 30 or 90 UTC calendar days |
+| `open_backlog_median_age_days` | Continuous median across open items at capture | UTC calendar days from opening to capture |
 | `release_downloads` | Last capture per repository/time bucket, summed over assets | Cumulative GitHub release asset downloads |
 | `release_downloads_net_change` | Sum valid consecutive-date changes | Asset downloads between consecutive daily captures; gaps are null |
 | `package_downloads`, `pypi_downloads`, `npm_downloads` | Sum of reported days | Registry downloads for configured packages |
@@ -54,6 +56,8 @@ A new installation has no observed history yet. The upstream reconstructed serie
 ## Issues, pull requests, and contributors
 
 Counts are dated by the event they measure: opened by creation date, closed by close date, merged by merge date. `issues_*` excludes pull requests. No titles, bodies, labels, or author identities are stored.
+
+`open-backlog` groups the backlog metrics by `backlog_item__kind` for one repository. Age is measured at the latest issue capture, so it does not increase between captures. The recipe requires a complete capture. An empty issue or pull request group has zero counts and a null median. Only the recorded open state is available; these metrics do not reconstruct historical backlogs.
 
 GitHub recomputes `author_association` over time: a first-time contributor's pull request reads `CONTRIBUTOR` once merged. Collection keeps the association it first observed, so `first_time_contributor_prs` is accurate from the start of daily collection; backfilled history undercounts. It counts pull requests, not distinct people.
 

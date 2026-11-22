@@ -135,6 +135,9 @@ def make_fixture(root: Path) -> dict:
                     "2026-07-22T12:00:00Z",
                     "CONTRIBUTOR",
                 ],
+                [6, "issue", "2026-06-02T00:00:00Z", "", "", "NONE"],
+                [7, "pull_request", "2026-06-01T00:00:00Z", "", "", "CONTRIBUTOR"],
+                [8, "pull_request", "2026-08-01T00:00:00Z", "", "", "CONTRIBUTOR"],
             ]
             if index == 0
             else [],
@@ -196,7 +199,11 @@ def make_fixture(root: Path) -> dict:
                 "errors": [],
                 "stargazers": {"complete": True, "listed": 6 if index == 0 else 1},
                 "forks": {"complete": True, "listed": 2 if index == 0 else 0},
-                "issues": {"complete": True, "through": "2026-08-31T04:00:00Z", "items": 5},
+                "issues": {
+                    "complete": True,
+                    "through": "2026-08-31T04:00:00Z",
+                    "items": 8 if index == 0 else 0,
+                },
                 "packages": packages,
                 "deployments": {
                     "complete": True,

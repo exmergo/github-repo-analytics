@@ -446,6 +446,41 @@ semantic_models:
     expr: downloads
     description: Registry downloads reported for the period; includes CI and bots, PyPI
       excludes mirrors. Not installations or users.
+- name: fct_open_backlog
+  description: Age of open issues and pull requests when the latest issue capture is complete.
+  model: ref('fct_open_backlog')
+  defaults:
+    agg_time_dimension: capture_date
+  entities:
+  - name: backlog_item
+    type: primary
+    expr: issue_key
+  - name: repository
+    type: foreign
+    expr: repository
+  dimensions:
+  - name: capture_date
+    type: time
+    type_params:
+      time_granularity: day
+  - name: kind
+    type: categorical
+  measures:
+  - name: open_backlog_items_measure
+    agg: count
+    expr: issue_key
+  - name: open_backlog_over_30_days_measure
+    agg: sum
+    expr: case when age_days > 30 then 1 else 0 end
+  - name: open_backlog_over_90_days_measure
+    agg: sum
+    expr: case when age_days > 90 then 1 else 0 end
+  - name: open_backlog_median_age_days_measure
+    agg: percentile
+    expr: age_days
+    agg_params:
+      percentile: 0.5
+      use_discrete_percentile: false
 metrics:
 - name: views
   label: Views
@@ -717,3 +752,27 @@ metrics:
     - name: stars_gained
       offset_window: 1 week
       alias: stars_gained_prior_week
+- name: open_backlog_items
+  label: Open Backlog Items
+  description: "Open issues and pull requests at capture."
+  type: simple
+  type_params:
+    measure: open_backlog_items_measure
+- name: open_backlog_over_30_days
+  label: Open Backlog Older Than 30 Days
+  description: "Open items older than 30 UTC calendar days at capture."
+  type: simple
+  type_params:
+    measure: open_backlog_over_30_days_measure
+- name: open_backlog_over_90_days
+  label: Open Backlog Older Than 90 Days
+  description: "Open items older than 90 UTC calendar days at capture."
+  type: simple
+  type_params:
+    measure: open_backlog_over_90_days_measure
+- name: open_backlog_median_age_days
+  label: Median Open Backlog Age
+  description: "Continuous median age in UTC calendar days of open items at capture."
+  type: simple
+  type_params:
+    measure: open_backlog_median_age_days_measure

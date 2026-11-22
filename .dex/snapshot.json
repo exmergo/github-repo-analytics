@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-10-26T07:55:49.724083+00:00",
+  "created_at": "2026-11-22T18:28:47.934539+00:00",
   "connector": "duckdb",
   "tool_version": "1.16.1",
   "warehouse": {
@@ -8790,6 +8790,8 @@
       "models/marts/fct_issues.sql": "e929c63c896409be70c229adadf225a2982e51cf071cabb2914135d1412aa46b",
       "models/marts/fct_legacy.sql": "67b1fc5ee76979603b9502460a19c8305d4f0ac7062aeaa9a29ea21f5097bb77",
       "models/marts/fct_observations.sql": "003c0f204c1ee8f475d85551b7fa7d6781ef87861774b5288a6de2a6e4a3bdb5",
+      "models/marts/fct_open_backlog.sql": "e50de598698f08b26eb2bf08dbd717ce1801ef947fa40b2b92e6b262357597d9",
+      "models/marts/fct_open_backlog.yml": "465a98f240ad744468577b691f54893da36911df1194379937da433e650a8274",
       "models/marts/fct_package_downloads.sql": "2f5f7ad8d82cd557aff7500d6c94318b763349165006f34758cf88ab43572678",
       "models/marts/fct_path.sql": "430d8d969c948d04307d7296fee8af38699ab97a30a169a481b0e92d87dc4400",
       "models/marts/fct_referrer.sql": "aeb3814b0f9462b7f59c213ec2cf06ce92a1b0814768dd6e2d5d79b5cd084428",
@@ -8799,7 +8801,7 @@
       "models/marts/fct_traffic.sql": "9ab10eecc98b5ff78fb385391662850f071a9cd6a73f3c264d478bc3474c4c0b",
       "models/marts/metricflow_time_spine.sql": "3333a75a770c0ae62f89b98ec62395036fe623c1c697cbbeb41d0e7cc7dee14d",
       "models/schema.yml": "3f7b69a252c6fc009c85423deeff2971f8713a4643f98d2118ce5308af8a4095",
-      "models/semantic.yml": "92696dfbc23c646606f25812cfed4836ebb81ff7e2cf4018f24248586e9a63de",
+      "models/semantic.yml": "7ecf40cb128132a34a26a2d32e27061aded1230e36fcb5d1c6f241119b77d0c9",
       "models/sources.yml": "532e9c5a4ee1e151779afb6275c59ed624925c8a53c972ff50ec3146fb619b0b",
       "models/staging/stg_deployment_changes.sql": "8cb4f2b25a5dd6136cc8cf84533ea88dc76812f9889f1cb29d3728911889d6a8",
       "models/staging/stg_deployments.sql": "df517c9076707a3174eff4a5c5ab02e6f5f640f31280d932cd6f70b1a6ff2aee",
@@ -8820,8 +8822,8 @@
       "data_tests/deployment_contract.sql": "580cf3470a1cc0b77a9511dd239082d97c27925a6312780646b9d7c21898211f",
       "data_tests/discovery_grid.sql": "144de9d69f149a2b2e307348d44b5e33725f4c93d53a2ed14f6a9f3441c5d13e",
       "data_tests/traffic_source_contract.sql": "12fa162a51c7a58919eee739acde625415e5e7ccb78e7b883822e80bb44e3a46",
-      "dbt_project.yml": "8de8ebfac102654eca28ca21eedf3a29dea5bcd6c0eb31610b0b51282dd070cf",
-      "profiles.yml": "f8ea97e622d1814d64ceb5377465298ce267e5a937379087f6932269c387ccd5"
+      "profiles.yml": "f8ea97e622d1814d64ceb5377465298ce267e5a937379087f6932269c387ccd5",
+      "dbt_project.yml": "8de8ebfac102654eca28ca21eedf3a29dea5bcd6c0eb31610b0b51282dd070cf"
     },
     "models": [
       "annotations",
@@ -8833,6 +8835,7 @@
       "fct_issues",
       "fct_legacy",
       "fct_observations",
+      "fct_open_backlog",
       "fct_package_downloads",
       "fct_path",
       "fct_referrer",
@@ -8866,6 +8869,7 @@
       "fct_issues": "models/marts/fct_issues.sql",
       "fct_legacy": "models/marts/fct_legacy.sql",
       "fct_observations": "models/marts/fct_observations.sql",
+      "fct_open_backlog": "models/marts/fct_open_backlog.sql",
       "fct_package_downloads": "models/marts/fct_package_downloads.sql",
       "fct_path": "models/marts/fct_path.sql",
       "fct_referrer": "models/marts/fct_referrer.sql",
@@ -9073,6 +9077,10 @@
       ],
       "fct_observations": [
         "stg_observations"
+      ],
+      "fct_open_backlog": [
+        "fct_issues",
+        "stg_signal_captures"
       ],
       "fct_package_downloads": [
         "stg_package_downloads"
@@ -9433,6 +9441,31 @@
         },
         "measures": {
           "package_downloads_measure": "downloads"
+        },
+        "keys": []
+      },
+      {
+        "name": "fct_open_backlog",
+        "path": "models/semantic.yml",
+        "content_sha256": "45cd3951a666671c8a51e3c23b6362288c41739146d437e095dbbe8cf84cc4b1",
+        "model_ref": "fct_open_backlog",
+        "relation": null,
+        "entities": {
+          "backlog_item": "issue_key",
+          "repository": "repository"
+        },
+        "dimensions": {
+          "capture_date": "capture_date",
+          "kind": "kind"
+        },
+        "categorical_dimensions": {
+          "kind": "kind"
+        },
+        "measures": {
+          "open_backlog_items_measure": "issue_key",
+          "open_backlog_over_30_days_measure": null,
+          "open_backlog_over_90_days_measure": null,
+          "open_backlog_median_age_days_measure": "age_days"
         },
         "keys": []
       }
@@ -9810,6 +9843,42 @@
           "stars_gained",
           "stars_gained"
         ]
+      },
+      {
+        "name": "open_backlog_items",
+        "path": "models/semantic.yml",
+        "content_sha256": "958cd1fd68b1db3e6302f65f82653dd3cc0672661bfb49c49273db8c1583d4d8",
+        "input_measures": [
+          "open_backlog_items_measure"
+        ],
+        "input_metrics": []
+      },
+      {
+        "name": "open_backlog_over_30_days",
+        "path": "models/semantic.yml",
+        "content_sha256": "80eb2655c3d516d60d17aafd42b905aaeca7e673e95b0bddc5f1d1c746470bba",
+        "input_measures": [
+          "open_backlog_over_30_days_measure"
+        ],
+        "input_metrics": []
+      },
+      {
+        "name": "open_backlog_over_90_days",
+        "path": "models/semantic.yml",
+        "content_sha256": "b772383db7d323dcaee3d2d2edd219caecf70fec7bbc2011d71078d212fc3416",
+        "input_measures": [
+          "open_backlog_over_90_days_measure"
+        ],
+        "input_metrics": []
+      },
+      {
+        "name": "open_backlog_median_age_days",
+        "path": "models/semantic.yml",
+        "content_sha256": "6797e9e031b81683ccd8122dcef407222dec79b75c207847ca9e8d3493198bec",
+        "input_measures": [
+          "open_backlog_median_age_days_measure"
+        ],
+        "input_metrics": []
       }
     ],
     "relationships": [],
